@@ -4,7 +4,11 @@
   "description": "Travel services aggregation platform",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node backend/server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/TangoRomeo80/Vromon/issues"
   },
-  "homepage": "https://github.com/TangoRomeo80/Vromon#readme"
+  "homepage": "https://github.com/TangoRomeo80/Vromon#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.2.2",
+    "nodemon": "^2.0.19"
+  }
 }
