@@ -1,0 +1,19 @@
+{
+  "name": "vromon",
+  "version": "1.0.0",
+  "description": "Travel services aggregation platform",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TangoRomeo80/Vromon.git"
+  },
+  "author": "Md Tanzeem Rahat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TangoRomeo80/Vromon/issues"
+  },
+  "homepage": "https://github.com/TangoRomeo80/Vromon#readme"
+}
