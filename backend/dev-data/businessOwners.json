@@ -1,0 +1,13 @@
+[
+  {
+    "_id": "1",
+    "userId": "3",
+    "nid": "",
+    "passport": "",
+    "paymentStatus": "due",
+    "paymentAmount": 0,
+    "PaymentDate": "2022-06-20",
+    "paymentDueAmount": 1000,
+    "paymentDueDate": "2022-07-01"
+  }
+]
