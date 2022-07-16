@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "5c8a1d5b0190b214360dc057",
+    "userName": "tanzeemRahat",
+    "name": "Tanzeem Rahat",
+    "email": "tanzeemrahat@vromon.com",
+    "mobile": "01010112233",
+    "userType": "admin",
+    "image": "",
+    "password": "123456"
+  },
+  {
+    "_id": "5c8a1dfa2f8fb814b56fa181",
+    "userName": "sakibPatwary",
+    "name": "Sakib Patwary",
+    "email": "sakibPatwary@vromon.com",
+    "mobile": "01010123456",
+    "userType": "businessOwner",
+    "image": "",
+    "password": "123456"
+  },
+  {
+    "_id": "5c8a1e1a2f8fb814b56fa182",
+    "userName": "mahediHasan",
+    "name": "Mahedi Hasan",
+    "email": "mahediHasan@vromon.com",
+    "mobile": "01010132435",
+    "userType": "tourist",
+    "image": "",
+    "password": "123456"
+  }
+]
