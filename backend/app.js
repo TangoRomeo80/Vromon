@@ -7,6 +7,8 @@ const express = require('express') //import express from express
 
 const app = express() //create an instance of express
 
+app.use(express.json()) //use json parser
+
 //route for the root path
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'API is running...', app: 'Vromon' })

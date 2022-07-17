@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/TangoRomeo80/Vromon#readme",
   "dependencies": {
+    "dotenv": "^16.0.1",
     "express": "^4.18.1"
   },
   "devDependencies": {
