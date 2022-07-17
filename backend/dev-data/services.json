@@ -8,6 +8,7 @@
     "BusinessId": "1",
     "ServiceMobileNumber": "01010123456",
     "serviceType": "Accommodation",
+    "price": 2000,
     "ratingAverage": 4.8,
     "ratingQuantity": 6
   }
