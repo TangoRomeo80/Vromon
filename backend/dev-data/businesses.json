@@ -1,0 +1,12 @@
+[
+  {
+    "_id": "1",
+    "businessOwnerId": "1",
+    "businessName": "Business 1",
+    "businessAddress": "Kemal Ataturk Avenue, Dhaka",
+    "businessPhone": "01787878787",
+    "businessEmail": "dsadas@asdfsdaf.com",
+    "businessWebsite": "www.asdfasdf.com",
+    "businessTIN": "1234567"
+  }
+]
