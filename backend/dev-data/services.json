@@ -2,6 +2,13 @@
   {
     "_id": "2",
     "destinationId": "1",
-    ""
+    "serviceName": "Sarina Hotel Service",
+    "summary": "UngaBunga",
+    "description": "UngaBunga asfdasdf asdf asf hgfd s asfg asdf asf hsdf hgdsf hjsd jsdfh sdhrewt qert.",
+    "BusinessId": "1",
+    "ServiceMobileNumber": "01010123456",
+    "serviceType": "Accommodation",
+    "ratingAverage": 4.8,
+    "ratingQuantity": 6
   }
 ]
