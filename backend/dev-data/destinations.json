@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "1",
+    "name": "Sajek Valley",
+    "district": "Rangamati",
+    "division": "Chattagram",
+    "image": "",
+    "description": "Sajek is beautiful",
+    "lat": "",
+    "long": ""
+  },
+  {
+    "_id": "2",
+    "name": "Sundarbans",
+    "district": "Bagerhat",
+    "division": "Khulna",
+    "image": "",
+    "description": "Sundarbans is beautiful",
+    "lat": "",
+    "long": ""
+  },
+  {
+    "_id": "3",
+    "name": "Srimangal",
+    "district": "Sylhet",
+    "division": "Sylhet",
+    "image": "",
+    "description": "Srimangal is beautiful",
+    "lat": "",
+    "long": ""
+  },
+  {
+    "_id": "4",
+    "name": "St. Martins",
+    "district": "Cox's Bazar",
+    "division": "Cox's Bazar",
+    "image": "",
+    "description": "St. Martins is beautiful",
+    "lat": "",
+    "long": ""
+  },
+  {
+    "_id": "5",
+    "name": "Paharpur",
+    "district": "Dinajpur",
+    "division": "Rangpur",
+    "image": "",
+    "description": "Paharpur is beautiful",
+    "lat": "",
+    "long": ""
+  }
+]
