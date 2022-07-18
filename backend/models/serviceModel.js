@@ -5,42 +5,45 @@ const serviceSchema = new mongoose.Schema(
   {
     destinationID: {
       type: mongoose.Schema.Types.ObjectId,
+      required: [true, 'service destination ID is required'],
     },
     serviceName: {
       type: String,
-      required: true,
+      required: [true, 'Service name is required'],
     },
     summary: {
       type: String,
-      required: true,
+      required: [true, 'Service summary is required'],
     },
     description: {
       type: String,
-      required: true,
+      required: [true, 'Service description is required'],
     },
     businessId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      required: [true, 'service business ID is required'],
     },
     serviceMobileNumber: {
       type: String,
-      required: true,
+      required: [true, 'service mobile number is required'],
     },
     serviceType: {
       type: String,
-      required: true,
+      required: [true, 'service type is required'],
     },
     price: {
       type: Number,
-      required: true,
+      required: [true, 'service price is required'],
     },
     rating: {
       type: Number,
-      required: false,
+      default: 4.5,
+      min: [1, 'rating must be above 1.0'],
+      max: [5, 'rating must be below 5.0'],
     },
     ratingQuantity: {
       type: Number,
-      required: false,
+      default: 0,
     },
   },
   {
