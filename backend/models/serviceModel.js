@@ -1,4 +1,4 @@
-const mongoose = require('mongoose') //import mongoose from
+import mongoose from 'mongoose' //import mongoose from
 
 //create a services schema
 const serviceSchema = new mongoose.Schema(
@@ -50,4 +50,4 @@ const serviceSchema = new mongoose.Schema(
 
 const Service = mongoose.model('Service', serviceSchema) //create a model
 
-module.exports = Service //export the model
+export default Service //export the model

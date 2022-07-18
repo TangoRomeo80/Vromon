@@ -3,7 +3,7 @@
   and global middlewares.
 */
 
-const express = require('express') //import express from express
+import express from 'express' //import express from express
 
 const app = express() //create an instance of express
 
@@ -14,4 +14,4 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'API is running...', app: 'Vromon' })
 })
 
-module.exports = app //export ap for use in server.js
+export default app //export ap for use in server.js
