@@ -4,10 +4,18 @@
 */
 
 import express from 'express' //import express from express
+import cors from 'cors' //import cors for CROSS-ORIGIN-RESOURCE-SHARING
+
+//Route imports
+import serviceRouter from './routes/serviceRoutes.js' //import service routes
 
 const app = express() //create an instance of express
+app.use(cors()) //enable cors
 
 app.use(express.json()) //use json parser
+
+//use Routers
+app.use('/api/services', serviceRouter) //use service routes
 
 //route for the root path
 app.get('/', (req, res) => {
