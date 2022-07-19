@@ -4,7 +4,7 @@ import Service from '../models/serviceModel.js' //import service data model
 
 /*
   Request type: GET
-  Endpoint: /api/services
+  Endpoint: /api/services/
   Description: This endpoint returns all services
 */
 export const getAllServices = async (req, res) => {
@@ -27,9 +27,10 @@ export const getAllServices = async (req, res) => {
   Endpoint: /api/services/:id
   Description: This endpoint returns service with :id
 */
-export const getService = async (req, res) => { 
+export const getService = async (req, res) => {
   try {
-    const service = await Service.findById(req.params.id)
+    // Tour.findOne({ _id: req.params.id }) //method using mongodb findOne
+    const service = await Service.findById(req.params.id) //method using mongoose findById
     res.status(200).json({
       status: 'success',
       data: service,
@@ -44,12 +45,14 @@ export const getService = async (req, res) => {
 
 /*
   Request type: POST
-  Endpoint: /api/services
+  Endpoint: /api/services/
   Description: This endpoint creates a new service
 */
 export const createService = async (req, res) => {
   try {
-    const newService = await Service.create(req.body)
+    // const newService = new Service({})
+    // newService.save() // method using mongodb save
+    const newService = await Service.create(req.body) //method using mongoose create
     res.status(201).json({
       status: 'success',
       data: newService,
@@ -61,5 +64,3 @@ export const createService = async (req, res) => {
     })
   }
 }
-
-
