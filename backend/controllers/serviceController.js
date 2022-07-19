@@ -23,6 +23,26 @@ export const getAllServices = async (req, res) => {
 }
 
 /*
+  Request type: GET
+  Endpoint: /api/services/:id
+  Description: This endpoint returns service with :id
+*/
+export const getService = async (req, res) => { 
+  try {
+    const service = await Service.findById(req.params.id)
+    res.status(200).json({
+      status: 'success',
+      data: service,
+    })
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    })
+  }
+}
+
+/*
   Request type: POST
   Endpoint: /api/services
   Description: This endpoint creates a new service
@@ -41,3 +61,5 @@ export const createService = async (req, res) => {
     })
   }
 }
+
+
