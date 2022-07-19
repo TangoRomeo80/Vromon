@@ -1,11 +1,11 @@
 [
   {
-    "_id": "2",
-    "destinationID": "1",
+    "destinationID": "5c8a22c62f8fb814b56fa18b",
     "serviceName": "Sarina Hotel Service",
     "summary": "UngaBunga",
+    "coverImage": "service-1.jpg",
     "description": "UngaBunga asfdasdf asdf asf hgfd s asfg asdf asf hsdf hgdsf hjsd jsdfh sdhrewt qert.",
-    "businessId": "1",
+    "businessId": "5c8a22c62f8fb814b56fa18d",
     "serviceMobileNumber": "01010123456",
     "serviceType": "Accommodation",
     "price": 2000,

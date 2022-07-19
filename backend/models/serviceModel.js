@@ -11,14 +11,24 @@ const serviceSchema = new mongoose.Schema(
     },
     serviceName: {
       type: String,
+      trim: true,
       required: [true, 'Service name is required'],
     },
+    coverImage: {
+      type: String,
+      required: [true, 'Service cover image is required'],
+    },
+
+    images: [String],
+
     summary: {
       type: String,
+      trim: true,
       required: [true, 'Service summary is required'],
     },
     description: {
       type: String,
+      trim: true,
       required: [true, 'Service description is required'],
     },
     businessId: {
@@ -36,6 +46,10 @@ const serviceSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: [true, 'service price is required'],
+    },
+    priceDiscount: {
+      type: Number,
+      default: 0,
     },
     rating: {
       type: Number,
