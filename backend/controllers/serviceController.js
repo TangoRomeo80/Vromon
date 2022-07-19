@@ -21,3 +21,23 @@ export const getAllServices = async (req, res) => {
     })
   }
 }
+
+/*
+  Request type: POST
+  Endpoint: /api/services
+  Description: This endpoint creates a new service
+*/
+export const createService = async (req, res) => {
+  try {
+    const newService = await Service.create(req.body)
+    res.status(201).json({
+      status: 'success',
+      data: newService,
+    })
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err,
+    })
+  }
+}
