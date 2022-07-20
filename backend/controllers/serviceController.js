@@ -1,6 +1,7 @@
 /* This file contains the logic for handling requests and communicating with the data models*/
 
 import Service from '../models/serviceModel.js' //import service data model
+import APIFeatures from '../utils/apiFeatures.js' //import API feature utility
 
 /*
   Request type: GET
@@ -9,7 +10,12 @@ import Service from '../models/serviceModel.js' //import service data model
 */
 export const getAllServices = async (req, res) => {
   try {
-    const services = await Service.find()
+    const features = new APIFeatures(Service.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate()
+    const services = await features.query
     res.status(200).json({
       status: 'success',
       data: services,
