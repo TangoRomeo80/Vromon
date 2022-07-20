@@ -34,6 +34,7 @@ const Header = () => {
                   Transport
                 </Nav.Link>
               </LinkContainer>
+
               <LinkContainer to='/destinations'>
                 <Nav.Link>
                   <FaUmbrellaBeach />
@@ -41,11 +42,27 @@ const Header = () => {
                 </Nav.Link>
               </LinkContainer>
             </Nav>
+
             <Nav>
-              <NavDropdown title={<FaUser />} id='basic-nav-dropdown'>
-                <NavDropdown.Item>Sign In</NavDropdown.Item>
+                <NavDropdown title={<FaUser />} id='basic-nav-dropdown'>
+
+                <NavDropdown.Item>
+                <LinkContainer to='/login'>
+                <Nav.Link>Sign In</Nav.Link>
+                </LinkContainer>
+                </NavDropdown.Item>
+
+                <NavDropdown.Item>
+                <LinkContainer to='/logout'>
+                <Nav.Link>Sign Out</Nav.Link>
+                </LinkContainer>
+                
+                </NavDropdown.Item>
               </NavDropdown>
+              
+              
             </Nav>
+            
           </Navbar.Collapse>
         </Container>
       </Navbar>
