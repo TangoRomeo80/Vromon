@@ -13,6 +13,7 @@ const serviceSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: [true, 'Service name is required'],
+      maxlength: [50, 'Service name cannot be more than 50 characters'],
     },
     coverImage: {
       type: String,
@@ -42,6 +43,17 @@ const serviceSchema = new mongoose.Schema(
     serviceType: {
       type: String,
       required: [true, 'service type is required'],
+      enum: {
+        values: [
+          'Accomodation',
+          'Transportation',
+          'Food',
+          'TourGuide',
+          'Others',
+        ],
+        message:
+          'Service type needs to be Accomodation or Transportation or Food or TourGuide or Others',
+      },
     },
     price: {
       type: Number,
@@ -50,6 +62,7 @@ const serviceSchema = new mongoose.Schema(
     priceDiscount: {
       type: Number,
       default: 0,
+      max: [100, 'Service price discount cannot be more than 100%'],
     },
     rating: {
       type: Number,
