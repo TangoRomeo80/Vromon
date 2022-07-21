@@ -29,6 +29,16 @@ export const getAllServices = async (req, res) => {
 }
 
 /*
+ Alias middleware for getting most popular services
+*/
+
+export const getMostPopularServices = async (req, res, next) => {
+  req.query.limit = '10'
+  req.query.sort = '-rating'
+  next()
+}
+
+/*
   Request type: GET
   Endpoint: /api/services/:id
   Description: This endpoint returns service with :id
