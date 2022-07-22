@@ -4,6 +4,16 @@ import Service from '../models/serviceModel.js' //import service data model
 import APIFeatures from '../utils/apiFeatures.js' //import API feature utility
 
 /*
+ Alias middleware for getting most popular services
+*/
+
+export const getMostPopularServices = async (req, res, next) => {
+  req.query.limit = '10'
+  req.query.sort = '-rating'
+  next()
+}
+
+/*
   Request type: GET
   Endpoint: /api/services/
   Description: This endpoint returns all services
@@ -26,16 +36,6 @@ export const getAllServices = async (req, res) => {
       message: err,
     })
   }
-}
-
-/*
- Alias middleware for getting most popular services
-*/
-
-export const getMostPopularServices = async (req, res, next) => {
-  req.query.limit = '10'
-  req.query.sort = '-rating'
-  next()
 }
 
 /*

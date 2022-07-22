@@ -22,4 +22,11 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'API is running...', app: 'Vromon' })
 })
 
+app.all('*', (req, res, next) => {
+  res.status(404).json({
+    status: 'fail',
+    message: 'Route not found',
+  })
+})
+
 export default app //export ap for use in server.js
