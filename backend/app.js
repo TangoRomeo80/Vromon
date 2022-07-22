@@ -6,6 +6,9 @@
 import express from 'express' //import express from express
 import cors from 'cors' //import cors for CROSS-ORIGIN-RESOURCE-SHARING
 
+import AppError from './utils/appError.js' //import appError for error report creation
+import globalErrorHandler from './controllers/errorController.js' //import global error handler
+
 //Route imports
 import serviceRouter from './routes/serviceRoutes.js' //import service routes
 
@@ -23,10 +26,9 @@ app.get('/', (req, res) => {
 })
 
 app.all('*', (req, res, next) => {
-  res.status(404).json({
-    status: 'fail',
-    message: 'Route not found',
-  })
+  next(new AppError(`Can't find ${req.originalUrl} on this server`, 404))
 })
 
-export default app //export ap for use in server.js
+app.use(globalErrorHandler) //use global error handler
+
+export default app //export app for use in server.js
