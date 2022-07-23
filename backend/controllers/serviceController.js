@@ -21,23 +21,22 @@ export const getMostPopularServices = async (req, res, next) => {
   Description: This endpoint returns all services
 */
 export const getAllServices = catchAsync(async (req, res, next) => {
-  try {
-    const features = new APIFeatures(Service.find(), req.query)
-      .filter()
-      .sort()
-      .limitFields()
-      .paginate()
-    const services = await features.query
-    res.status(200).json({
-      status: 'success',
-      data: services,
-    })
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    })
+  const features = new APIFeatures(Service.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate()
+  const services = await features.query
+
+  if (services.length < 1) {
+    return next(new AppError('No services found', 404))
   }
+
+  res.status(200).json({
+    status: 'success',
+    results: services.length,
+    data: services,
+  })
 })
 
 /*
@@ -46,19 +45,17 @@ export const getAllServices = catchAsync(async (req, res, next) => {
   Description: This endpoint returns service with :id
 */
 export const getService = catchAsync(async (req, res, next) => {
-  try {
-    // Tour.findOne({ _id: req.params.id }) //method using mongodb findOne
-    const service = await Service.findById(req.params.id) //method using mongoose findById
-    res.status(200).json({
-      status: 'success',
-      data: service,
-    })
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    })
+  // Tour.findOne({ _id: req.params.id }) //method using mongodb findOne
+  const service = await Service.findById(req.params.id) //method using mongoose findById
+
+  if (!service) {
+    return next(new AppError('No service found with that ID', 404))
   }
+
+  res.status(200).json({
+    status: 'success',
+    data: service,
+  })
 })
 
 /*
@@ -67,20 +64,14 @@ export const getService = catchAsync(async (req, res, next) => {
   Description: This endpoint creates a new service
 */
 export const createService = catchAsync(async (req, res, next) => {
-  try {
-    // const newService = new Service({})
-    // newService.save() // method using mongodb save
-    const newService = await Service.create(req.body) //method using mongoose create
-    res.status(201).json({
-      status: 'success',
-      data: newService,
-    })
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    })
-  }
+  // const newService = new Service({})
+  // newService.save() // method using mongodb save
+  const newService = await Service.create(req.body) //method using mongoose create
+
+  res.status(201).json({
+    status: 'success',
+    data: newService,
+  })
 })
 
 /*
@@ -89,25 +80,23 @@ export const createService = catchAsync(async (req, res, next) => {
   Description: This endpoint updates a specific service
 */
 export const updateService = catchAsync(async (req, res, next) => {
-  try {
-    const updatedService = await Service.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    )
-    res.status(200).json({
-      status: 'success',
-      data: updatedService,
-    })
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    })
+  const updatedService = await Service.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    }
+  )
+
+  if (!updatedService) {
+    return next(new AppError('No service found with that ID', 404))
   }
+
+  res.status(200).json({
+    status: 'success',
+    data: updatedService,
+  })
 })
 
 /*
@@ -116,16 +105,14 @@ export const updateService = catchAsync(async (req, res, next) => {
   Description: This endpoint deletes a specific service
 */
 export const deleteService = catchAsync(async (req, res, next) => {
-  try {
-    await Service.findByIdAndDelete(req.params.id)
-    res.status(204).json({
-      status: 'success',
-      data: null,
-    })
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    })
+  const deletedService = await Service.findByIdAndDelete(req.params.id)
+
+  if (!deletedService) {
+    return next(new AppError('No service found with that ID', 404))
   }
+
+  res.status(204).json({
+    status: 'success',
+    data: null,
+  })
 })
