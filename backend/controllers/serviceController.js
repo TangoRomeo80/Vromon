@@ -2,6 +2,8 @@
 
 import Service from '../models/serviceModel.js' //import service data model
 import APIFeatures from '../utils/apiFeatures.js' //import API feature utility
+import catchAsync from '../utils/catchAsync.js'
+import AppError from '../utils/appError.js'
 
 /*
  Alias middleware for getting most popular services
@@ -18,7 +20,7 @@ export const getMostPopularServices = async (req, res, next) => {
   Endpoint: /api/services/
   Description: This endpoint returns all services
 */
-export const getAllServices = async (req, res) => {
+export const getAllServices = catchAsync(async (req, res, next) => {
   try {
     const features = new APIFeatures(Service.find(), req.query)
       .filter()
@@ -36,14 +38,14 @@ export const getAllServices = async (req, res) => {
       message: err,
     })
   }
-}
+})
 
 /*
   Request type: GET
   Endpoint: /api/services/:id
   Description: This endpoint returns service with :id
 */
-export const getService = async (req, res) => {
+export const getService = catchAsync(async (req, res, next) => {
   try {
     // Tour.findOne({ _id: req.params.id }) //method using mongodb findOne
     const service = await Service.findById(req.params.id) //method using mongoose findById
@@ -57,14 +59,14 @@ export const getService = async (req, res) => {
       message: err,
     })
   }
-}
+})
 
 /*
   Request type: POST
   Endpoint: /api/services/
   Description: This endpoint creates a new service
 */
-export const createService = async (req, res) => {
+export const createService = catchAsync(async (req, res, next) => {
   try {
     // const newService = new Service({})
     // newService.save() // method using mongodb save
@@ -79,14 +81,14 @@ export const createService = async (req, res) => {
       message: err,
     })
   }
-}
+})
 
 /*
   Request type: PATCH
   Endpoint: /api/services/:id
   Description: This endpoint updates a specific service
 */
-export const updateService = async (req, res) => {
+export const updateService = catchAsync(async (req, res, next) => {
   try {
     const updatedService = await Service.findByIdAndUpdate(
       req.params.id,
@@ -106,14 +108,14 @@ export const updateService = async (req, res) => {
       message: err,
     })
   }
-}
+})
 
 /*
   Request type: DELETE
   Endpoint: /api/services/:id
   Description: This endpoint deletes a specific service
 */
-export const deleteService = async (req, res) => {
+export const deleteService = catchAsync(async (req, res, next) => {
   try {
     await Service.findByIdAndDelete(req.params.id)
     res.status(204).json({
@@ -126,4 +128,4 @@ export const deleteService = async (req, res) => {
       message: err,
     })
   }
-}
+})
