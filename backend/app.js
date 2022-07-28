@@ -5,6 +5,7 @@
 
 import express from 'express' //import express from express
 import cors from 'cors' //import cors for CROSS-ORIGIN-RESOURCE-SHARING
+import passport from 'passport' //import passport for authentication
 
 import AppError from './utils/appError.js' //import appError for error report creation
 import globalErrorHandler from './controllers/errorController.js' //import global error handler
@@ -15,6 +16,7 @@ import userRouter from './routes/userRoutes.js' //import user routes
 
 const app = express() //create an instance of express
 app.use(cors()) //enable cors
+app.use(passport.initialize()) //initialize passport
 
 app.use(express.json()) //use json parser
 
