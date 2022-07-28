@@ -45,7 +45,7 @@ export const getAllServices = catchAsync(async (req, res, next) => {
   Description: This endpoint returns service with :id
 */
 export const getService = catchAsync(async (req, res, next) => {
-  // Tour.findOne({ _id: req.params.id }) //method using mongodb findOne
+  // Service.findOne({ _id: req.params.id }) //method using mongodb findOne
   const service = await Service.findById(req.params.id) //method using mongoose findById
 
   if (!service) {
