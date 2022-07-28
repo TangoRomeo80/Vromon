@@ -1,6 +1,7 @@
 /* This file contains the data modelling and data tier functionalities for users */
 
 import mongoose from 'mongoose' //import mongoose from
+import bcrypt from 'bcryptjs' //import bcrypt for password hashing
 import validator from 'validator' //imprt validator functionalities
 
 //create a user schema
@@ -89,6 +90,18 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 )
+
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password)
+}
+
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next()
+  }
+  const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1)
+  this.password = await bcrypt.hash(this.password, salt)
+})
 
 const User = mongoose.model('User', userSchema) //create a model
 

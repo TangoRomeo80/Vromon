@@ -55,6 +55,12 @@ export const getUser = catchAsync(async (req, res, next) => {
   Description: This endpoint creates a new user
 */
 export const createUser = catchAsync(async (req, res, next) => {
+  const mailCheckedUser = await User.findOne({ email: req.body.email })
+
+  if (mailCheckedUser) {
+    return next(new AppError('User with this email already exists', 400))
+  }
+
   if (req.body.userType !== 'admin') {
     return next(new AppError('Only admin user can be created manually', 429))
   }
@@ -78,6 +84,9 @@ export const createUser = catchAsync(async (req, res, next) => {
 export const updateUser = catchAsync(async (req, res, next) => {
   let user = req.body
   if (user.password) {
+    if (user.password.length < 6) { 
+      return next(new AppError('Password must be at least 6 characters', 400))
+    }
     const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1)
     user.password = await bcrypt.hash(user.password, salt)
   }
@@ -98,8 +107,8 @@ export const updateUser = catchAsync(async (req, res, next) => {
 
 /*
   Request type: DELETE
-  Endpoint: /api/services/:id
-  Description: This endpoint deletes a specific service
+  Endpoint: /api/users/:id
+  Description: This endpoint deletes a specific user
 */
 export const deleteUser = catchAsync(async (req, res, next) => {
   const deletedUser = await User.findByIdAndDelete(req.params.id)
