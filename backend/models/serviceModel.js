@@ -1,6 +1,6 @@
 /* This file contains the data modelling and data tier functionalities for services */
 
-import mongoose from 'mongoose' //import mongoose from
+import mongoose from 'mongoose' //import mongoose
 
 //create a services schema
 const serviceSchema = new mongoose.Schema(
