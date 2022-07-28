@@ -74,8 +74,10 @@ export const getUser = catchAsync(async (req, res, next) => {
 */
 export const updateUser = catchAsync(async (req, res, next) => {
   let user = req.body
-  const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS)
-  user.password = await bcrypt.hash(user.password, salt)
+  if (user.password) {
+    const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1)
+    user.password = await bcrypt.hash(user.password, salt)
+  }
   const upadtedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
