@@ -51,7 +51,7 @@ export const getUser = catchAsync(async (req, res, next) => {
 
 /*
   Request type: POST
-  Endpoint: /api/services/
+  Endpoint: /api/users/
   Description: This endpoint creates a new user
 */
 export const createUser = catchAsync(async (req, res, next) => {
@@ -84,7 +84,7 @@ export const createUser = catchAsync(async (req, res, next) => {
 export const updateUser = catchAsync(async (req, res, next) => {
   let user = req.body
   if (user.password) {
-    if (user.password.length < 6) { 
+    if (user.password.length < 6) {
       return next(new AppError('Password must be at least 6 characters', 400))
     }
     const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1)

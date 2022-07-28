@@ -10,11 +10,12 @@ import {
   deleteUser,
 } from '../controllers/userController.js' //import User controller
 
+import { signupLocal, signinLocal } from '../controllers/authController.js' //import authoriztion controller
+
 const router = express.Router() //create router instance
 
-router.route('/signup/local').post((req, res) => {
-  res.send('user will be registered')
-})
+router.route('/signup/local').post(signupLocal)
+router.route('/signin/local').post(signinLocal)
 
 router.route('/').get(getAllUsers).post(createUser)
 router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser)
