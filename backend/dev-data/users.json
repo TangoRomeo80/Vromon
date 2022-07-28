@@ -1,8 +1,7 @@
 [
   {
     "_id": "1",
-    "userName": "tanzeemRahat",
-    "name": "Tanzeem Rahat",
+    "userName": "Tanzeem Rahat",
     "email": "tanzeemrahat@vromon.com",
     "mobile": "01010112233",
     "userType": "admin",
@@ -11,18 +10,16 @@
   },
   {
     "_id": "2",
-    "userName": "sakibPatwary",
-    "name": "Sakib Patwary",
+    "userName": "Sakib Patwary",
     "email": "sakibPatwary@vromon.com",
     "mobile": "01010123456",
-    "userType": "businessOwner",
+    "userType": "businessowner",
     "image": "",
     "password": "123456"
   },
   {
     "_id": "3",
-    "userName": "mahediHasan",
-    "name": "Mahedi Hasan",
+    "userName": "Mahedi Hasan",
     "email": "mahediHasan@vromon.com",
     "mobile": "01010132435",
     "userType": "tourist",
