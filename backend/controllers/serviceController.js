@@ -68,6 +68,10 @@ export const createService = catchAsync(async (req, res, next) => {
   // newService.save() // method using mongodb save
   const newService = await Service.create(req.body) //method using mongoose create
 
+  if (!newService) {
+    return next(new AppError('No service could be created', 404))
+  }
+
   res.status(201).json({
     status: 'success',
     data: newService,

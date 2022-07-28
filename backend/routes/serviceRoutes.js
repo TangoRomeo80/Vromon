@@ -11,7 +11,7 @@ import {
   getMostPopularServices,
 } from '../controllers/serviceController.js' //import service controller
 
-const router = express.Router() //create router instanceof
+const router = express.Router() //create router instance
 
 router.route('/').get(getAllServices).post(createService)
 router.route('/most-popular').get(getMostPopularServices, getAllServices)

@@ -4,6 +4,7 @@ import User from '../models/userModel.js' //import service data model
 import APIFeatures from '../utils/apiFeatures.js' //import API feature utility
 import catchAsync from '../utils/catchAsync.js'
 import AppError from '../utils/appError.js'
+import bcrypt from 'bcryptjs' //import bcrypt for password hashing
 
 /*
   Request type: GET
@@ -31,13 +32,13 @@ export const getAllUsers = catchAsync(async (req, res, next) => {
 
 /*
   Request type: GET
-  Endpoint: /api/services/:id
+  Endpoint: /api/users/:id
   Description: This endpoint returns user with :id
 */
 export const getUser = catchAsync(async (req, res, next) => {
   // User.findOne({ _id: req.params.id }) //method using mongodb findOne
   const user = await User.findById(req.params.id) //method using mongoose findById
-  
+
   if (!user) {
     return next(new AppError('No user found with that ID', 404))
   }
@@ -48,4 +49,62 @@ export const getUser = catchAsync(async (req, res, next) => {
   })
 })
 
+/*
+  Request type: POST
+  Endpoint: /api/services/
+  Description: This endpoint creates a new user
+*/
+// export const createUser = catchAsync(async (req, res, next) => {
+//   const newUser = await User.create(req.body)
 
+//   if (!newUser) {
+//     return next(new AppError('No new user could be created', 404))
+//   }
+
+//   res.status(201).json({
+//     status: 'success',
+//     data: newUser,
+//   })
+// })
+
+/*
+  Request type: PATCH
+  Endpoint: /api/users/:id
+  Description: This endpoint updates a specific user
+*/
+export const updateUser = catchAsync(async (req, res, next) => {
+  let user = req.body
+  const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS)
+  user.password = await bcrypt.hash(user.password, salt)
+  const upadtedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  })
+
+  if (!upadtedUser) {
+    return next(new AppError('No user found with that ID', 404))
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: upadtedUser,
+  })
+})
+
+/*
+  Request type: DELETE
+  Endpoint: /api/services/:id
+  Description: This endpoint deletes a specific service
+*/
+export const deleteUser = catchAsync(async (req, res, next) => {
+  const deletedUser = await User.findByIdAndDelete(req.params.id)
+
+  if (!deletedUser) {
+    return next(new AppError('No user found with that ID', 404))
+  }
+
+  res.status(204).json({
+    status: 'success',
+    data: null,
+  })
+})
