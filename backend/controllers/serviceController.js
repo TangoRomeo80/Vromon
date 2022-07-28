@@ -69,7 +69,7 @@ export const createService = catchAsync(async (req, res, next) => {
   const newService = await Service.create(req.body) //method using mongoose create
 
   if (!newService) {
-    return next(new AppError('No service could be created', 404))
+    return next(new AppError('No service could be created', 429))
   }
 
   res.status(201).json({

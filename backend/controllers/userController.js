@@ -54,18 +54,21 @@ export const getUser = catchAsync(async (req, res, next) => {
   Endpoint: /api/services/
   Description: This endpoint creates a new user
 */
-// export const createUser = catchAsync(async (req, res, next) => {
-//   const newUser = await User.create(req.body)
+export const createUser = catchAsync(async (req, res, next) => {
+  if (req.body.userType !== 'admin') {
+    return next(new AppError('Only admin user can be created manually', 429))
+  }
+  const newUser = await User.create(req.body)
 
-//   if (!newUser) {
-//     return next(new AppError('No new user could be created', 404))
-//   }
+  if (!newUser) {
+    return next(new AppError('No new user could be created', 429))
+  }
 
-//   res.status(201).json({
-//     status: 'success',
-//     data: newUser,
-//   })
-// })
+  res.status(201).json({
+    status: 'success',
+    data: newUser,
+  })
+})
 
 /*
   Request type: PATCH

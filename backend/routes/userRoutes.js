@@ -12,6 +12,8 @@ import {
 
 const router = express.Router() //create router instance
 
+router.route('/register').get(getAllUsers)
+
 router.route('/').get(getAllUsers) /*.post(createUser)*/
 router.route('/most-popular').get(getAllUsers)
 router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser)

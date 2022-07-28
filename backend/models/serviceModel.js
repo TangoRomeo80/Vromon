@@ -45,14 +45,14 @@ const serviceSchema = new mongoose.Schema(
       required: [true, 'service type is required'],
       enum: {
         values: [
-          'Accomodation',
-          'Transportation',
-          'Food',
-          'TourGuide',
-          'Others',
+          'accomodation',
+          'transportation',
+          'food',
+          'tourGuide',
+          'others',
         ],
         message:
-          'Service type needs to be Accomodation or Transportation or Food or TourGuide or Others',
+          'Service type needs to be accomodation, transportation, food, tourGuide or others',
       },
     },
     price: {
