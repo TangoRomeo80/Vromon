@@ -26,6 +26,24 @@ const userSchema = new mongoose.Schema(
         message: 'User type needs to be local, google or facebook',
       },
     },
+    googleID: {
+      type: String,
+      required: [
+        function () {
+          return this.loginType === 'google'
+        },
+        'google ID is required',
+      ],
+    },
+    facebookID: {
+      type: String,
+      required: [
+        function () {
+          return this.loginType === 'facebook'
+        },
+        'google ID is required',
+      ],
+    },
     mobile: {
       type: String,
       default: '',
@@ -43,6 +61,20 @@ const userSchema = new mongoose.Schema(
           'Mobile number needs to be of 11 or 15 digits and can only contain numerics or + sign',
       },
     },
+    password: {
+      type: String,
+      required: [
+        function () {
+          return this.loginType === 'local'
+        },
+        'There needs to be a password for the user',
+      ],
+      minLength: 6,
+    },
+    image: {
+      type: String,
+      default: '',
+    },
     userType: {
       type: String,
       required: true,
@@ -57,3 +89,7 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 )
+
+const User = mongoose.model('User', userSchema) //create a model
+
+export default User //export the model
