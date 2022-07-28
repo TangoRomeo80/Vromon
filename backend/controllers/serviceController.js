@@ -1,4 +1,4 @@
-/* This file contains the logic for handling requests and communicating with the data models*/
+/* This file contains the logic for handling requests and communicating with the service data model*/
 
 import Service from '../models/serviceModel.js' //import service data model
 import APIFeatures from '../utils/apiFeatures.js' //import API feature utility
