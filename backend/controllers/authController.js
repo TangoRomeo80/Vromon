@@ -56,3 +56,21 @@ export const signinLocal = catchAsync(async (req, res, next) => {
     return next(new AppError('Invalid username or password', 401))
   }
 })
+
+export const googleAuthHandler = async (profile, done) => {
+  const { email } = profile
+  const user = await User.findOne({ email })
+
+  if (user) {
+    done(null, user)
+  } else {
+    const newUser = await User.create({
+      email: profile.email,
+      userName: profile.displayName,
+      loginType: 'google',
+      googleID: profile.id,
+      image: profile.picture,
+    })
+    done(null, newUser)
+  }
+}

@@ -78,7 +78,6 @@ const userSchema = new mongoose.Schema(
     },
     userType: {
       type: String,
-      required: true,
       default: 'tourist',
       enum: {
         values: ['admin', 'businessowner', 'tourist'],
