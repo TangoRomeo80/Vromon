@@ -6,11 +6,11 @@ import mongoose from 'mongoose' //import mongoose ODM library
 import app from './app.js' //import the express app
 
 //handling uncaught exceptions
-process.on('uncaughtException', (err) => {
-  console.log('UNCAUGHT EXCEPTION! Shutting down...')
-  console.log(err.name, err.message)
-  process.exit(1)
-})
+// process.on('uncaughtException', (err) => {
+//   console.log('UNCAUGHT EXCEPTION! Shutting down...')
+//   console.log(err.name, err.message)
+//   process.exit(1)
+// })
 
 //connect DB
 mongoose
@@ -30,10 +30,10 @@ app.listen(PORT, () => {
 })
 
 //handling unhandles rejection
-process.on('unhandledRejection', (err) => {
-  console.log('UNHANDLED REJECTION! Shutting down...')
-  console.log(err.name, err.message)
-  server.close(() => {
-    process.exit(1)
-  })
-})
+// process.on('unhandledRejection', (err) => {
+//   console.log('UNHANDLED REJECTION! Shutting down...')
+//   console.log(err.name, err.message)
+//   server.close(() => {
+//     process.exit(1)
+//   })
+// })

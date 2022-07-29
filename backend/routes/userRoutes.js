@@ -15,8 +15,7 @@ import {
   signinLocal,
   googleAuth,
   googleAuthRedirect,
-  googleAuthSuccess,
-  googleAuthFail,
+  googleAuthResponse,
 } from '../controllers/authController.js' //import authoriztion controller
 
 const router = express.Router() //create router instance
@@ -24,10 +23,9 @@ const router = express.Router() //create router instance
 router.route('/signup/local').post(signupLocal)
 router.route('/signin/local').post(signinLocal)
 router.route('/signin/google').get(googleAuth)
-router.route('/signin/google/redirect').get(googleAuthRedirect)
-router.route('/signin/google/success').get(googleAuthSuccess)
-router.route('/signin/google/fail').get(googleAuthFail)
-
+router
+  .route('/signin/google/redirect')
+  .get(googleAuthRedirect, googleAuthResponse)
 router.route('/').get(getAllUsers).post(createUser)
 router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser)
 

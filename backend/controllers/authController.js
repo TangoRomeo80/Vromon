@@ -64,7 +64,7 @@ export const signinLocal = catchAsync(async (req, res, next) => {
   Description: This endpoint gets authentication code from google
 */
 export const googleAuth = passport.authenticate('google', {
-  scope: ['profile'],
+  scope: ['profile', 'email'],
 })
 
 /*
@@ -74,13 +74,11 @@ export const googleAuth = passport.authenticate('google', {
 */
 export const googleAuthRedirect = passport.authenticate('google', {
   session: false,
-  successRedirect: '/api/users/signin/google/success',
-  failureRedirect: '/api/users/signin/google/fail',
 })
 
 //This is the google authentication callback function
 export const googleAuthCallback = async (profile, done) => {
-  const { email } = profile
+  const email = profile.emails[0].value
   //check if user exist with the email
   const user = await User.findOne({ email })
   //if user exist then send present user info
@@ -91,10 +89,10 @@ export const googleAuthCallback = async (profile, done) => {
   else {
     const newUser = await User.create({
       userName: profile.displayName,
-      email: profile.email,
+      email: profile.emails[0].value,
       loginType: 'google',
       googleID: profile.id,
-      image: profile.picture,
+      image: profile.photos[0].value,
     })
     done(null, newUser)
   }
@@ -102,25 +100,16 @@ export const googleAuthCallback = async (profile, done) => {
 
 /*
   Request type: GET
-  Endpoint: /api/users/signin/google/success
-  Description: This endpoint sends back response if google authentication succeded
+  Endpoint: /api/users/signin/google/redirect
+  Description: This endpoint sends back response if google authentication succeeded
 */
-export const googleAuthSuccess = (req, res, next) => {
+export const googleAuthResponse = (req, res) => {
   if (req.user) {
     res.status(200).json({
       status: 'success',
       data: { ...req.user._doc, token: generateToken(req.user._id) },
     })
   } else {
-    next(new AppError('No user found', 401))
+    next(new AppError('No user found or created', 401))
   }
-}
-
-/*
-  Request type: GET
-  Endpoint: /api/users/signin/google/fail
-  Description: This endpoint sends back response if google authentication failed
-*/
-export const googleAuthFail = (req, res, next) => {
-  return next(new AppError('Google authentication failed', 401))
 }
