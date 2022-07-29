@@ -2,7 +2,7 @@
 
 // import passport from 'passport' //import passport
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20' //import google oAuth
-import { googleAuthHandler } from './authController.js' //import google auth handler
+import { googleAuthCallback } from './authController.js' //import google auth handler
 
 const passportSetup = (passport) => {
   passport.use(
@@ -15,7 +15,7 @@ const passportSetup = (passport) => {
       },
       (accessToken, refreshToken, profile, done) => {
         // passport callback function
-        googleAuthHandler(profile, done)
+        googleAuthCallback(profile, done)
       }
     )
   )
