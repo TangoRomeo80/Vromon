@@ -1,8 +1,6 @@
 /* 
   This file contains all the server configurations and functionalities.
 */
-import dotenv from 'dotenv' //import dotenv
-dotenv.config() //load the .env file
 
 import mongoose from 'mongoose' //import mongoose ODM library
 import app from './app.js' //import the express app

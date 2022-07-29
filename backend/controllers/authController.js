@@ -57,13 +57,17 @@ export const signinLocal = catchAsync(async (req, res, next) => {
   }
 })
 
+//This request handles hoogle authentication
 export const googleAuthHandler = async (profile, done) => {
   const { email } = profile
+  //check if user exist with the email
   const user = await User.findOne({ email })
-
+  //if user exist then send present user info
   if (user) {
     done(null, user)
-  } else {
+  }
+  //otherside create a new user
+  else {
     const newUser = await User.create({
       email: profile.email,
       userName: profile.displayName,
