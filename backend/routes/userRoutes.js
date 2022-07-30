@@ -16,6 +16,7 @@ import {
   googleAuth,
   googleAuthRedirect,
   googleAuthResponse,
+  getAuthedUser,
 } from '../controllers/authController.js' //import authoriztion controller
 
 const router = express.Router() //create router instance
@@ -26,6 +27,7 @@ router.route('/signin/google').get(googleAuth)
 router
   .route('/signin/google/redirect')
   .get(googleAuthRedirect, googleAuthResponse)
+router.route('/auth/:id').get(getAuthedUser)
 router.route('/').get(getAllUsers).post(createUser)
 router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser)
 

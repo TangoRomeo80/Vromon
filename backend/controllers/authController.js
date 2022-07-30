@@ -60,6 +60,24 @@ export const signinLocal = catchAsync(async (req, res, next) => {
 
 /*
   Request type: GET
+  Endpoint: /api/users/auth/:id
+  Description: This endpoint authorizes the third party authorized user data and returns them with a a JWT token 
+*/
+export const getAuthedUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id) //method using mongoose findById
+
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404))
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: { ...user._doc, token: generateToken(user._id) },
+  })
+})
+
+/*
+  Request type: GET
   Endpoint: /api/users/signin/google
   Description: This endpoint gets authentication code from google
 */
@@ -103,12 +121,9 @@ export const googleAuthCallback = async (profile, done) => {
   Endpoint: /api/users/signin/google/redirect
   Description: This endpoint sends back response if google authentication succeeded
 */
-export const googleAuthResponse = (req, res) => {
+export const googleAuthResponse = (req, res, next) => {
   if (req.user) {
-    res.status(200).json({
-      status: 'success',
-      data: { ...req.user._doc, token: generateToken(req.user._id) },
-    })
+    res.redirect('http://localhost:3000?id=' + req.user._id)
   } else {
     next(new AppError('No user found or created', 401))
   }
