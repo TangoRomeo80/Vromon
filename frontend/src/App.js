@@ -12,12 +12,10 @@ const App = () => {
       <main>
         <Container fluid className='px-0'>
           <Routes>
-          <Route exact path='/' element={<HomeScreen />} />
-          <Route exact path='/login' element={<LoginScreen />} />
+            <Route exact path='/' element={<HomeScreen />} />
+            <Route exact path='/login' element={<LoginScreen />} />
           </Routes>
-          <Routes>
-            
-          </Routes>
+          <Routes></Routes>
         </Container>
       </main>
       <Footer />
