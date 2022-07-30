@@ -16,6 +16,8 @@ const HomeScreen = () => {
     }
   }, [])
 
+  console.log(user)
+
   return (
     <div className='h-25 d-inline-block w-100'>
       <h1>HomeScreen</h1>
