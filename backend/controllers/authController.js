@@ -126,5 +126,6 @@ export const googleAuthResponse = (req, res, next) => {
     res.redirect('http://localhost:3000?id=' + req.user._id)
   } else {
     next(new AppError('No user found or created', 401))
+    res.redirect('http://localhost:3000')
   }
 }
