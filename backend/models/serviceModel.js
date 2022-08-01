@@ -7,6 +7,7 @@ const serviceSchema = new mongoose.Schema(
   {
     destinationID: {
       type: mongoose.Schema.Types.ObjectId,
+      ref: 'Destination',
       required: [true, 'service destination ID is required'],
     },
     serviceName: {
