@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import Card from 'react-bootstrap/Card'
 import axios from 'axios'
 
 const HomeScreen = () => {
@@ -19,10 +20,14 @@ const HomeScreen = () => {
   console.log(user)
 
   return (
-    <div className='h-25 d-inline-block w-100'>
-      <h1>HomeScreen</h1>
-      {user && <p>{user.userName}</p>}
-    </div>
+    <>
+      <Card>
+        <Card.Img variant="top" src="https://www.workaway.info/gfx/2015/content/frontpage/header_frontpage_2.jpg" />
+        <Card.Body>
+          
+        </Card.Body>
+      </Card>
+    </>
   )
 }
 

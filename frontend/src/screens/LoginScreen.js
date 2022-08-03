@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, Row, Col } from 'react-bootstrap'
 import { FcGoogle } from 'react-icons/fc'
-import { BsFacebook } from 'react-icons/bs'
 import FormContainer from '../components/FormContainer'
 import { Link } from 'react-router-dom'
 
@@ -35,7 +34,7 @@ const LoginScreen = () => {
       </Form>
 
       <Row>
-        <h5 className='d-flex justify-content-center pt-5'>Or Continue With</h5>
+        <h6 className='d-flex justify-content-center pt-5'>Or Continue With</h6>
         <Col className='d-flex justify-content-center pt-2'>
           {/* <Link to='/'> */}
           <Button
@@ -47,17 +46,13 @@ const LoginScreen = () => {
           >
             <FcGoogle /> Google
           </Button>
-          <Button variant='primary' size='sm'>
-            <BsFacebook /> Facebook
-          </Button>
-          {/* </Link> */}
         </Col>
       </Row>
 
       <Row>
         <div className='d-flex justify-content-center py-3 mt-3 '>
           <p>
-            New User?<a href='#'> Sign Up</a>
+            New User?<a href='#'><b> Sign Up</b></a>
           </p>
         </div>
       </Row>
