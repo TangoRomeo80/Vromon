@@ -23,8 +23,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, 'there must be a login type for users'],
       enum: {
-        values: ['local', 'google', 'facebook'],
-        message: 'User type needs to be local, google or facebook',
+        values: ['local', 'google'],
+        message: 'User type needs to be local or google',
       },
     },
     googleID: {
@@ -36,15 +36,15 @@ const userSchema = new mongoose.Schema(
         'google ID is required',
       ],
     },
-    facebookID: {
-      type: String,
-      required: [
-        function () {
-          return this.loginType === 'facebook'
-        },
-        'google ID is required',
-      ],
-    },
+    // facebookID: {
+    //   type: String,
+    //   required: [
+    //     function () {
+    //       return this.loginType === 'facebook'
+    //     },
+    //     'google ID is required',
+    //   ],
+    // },
     mobile: {
       type: String,
       default: '',
@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema(
         validator: function (val) {
           if (val !== '') {
             return (
-              (val.length === 11 || val.length === 15) && validator.isNumeric
+              (val.length === 11 || val.length === 15) && validator.isNumeric //May need to change validator.isNumeric
             )
           } else {
             return true

@@ -7,7 +7,7 @@ const serviceSchema = new mongoose.Schema(
   {
     destinationID: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Destination',
+      ref: 'Destination', //like foreign key
       required: [true, 'service destination ID is required'],
     },
     serviceName: {
@@ -35,6 +35,7 @@ const serviceSchema = new mongoose.Schema(
     },
     businessId: {
       type: mongoose.Schema.Types.ObjectId,
+      ref: 'Business',
       required: [true, 'service business ID is required'],
     },
     serviceMobileNumber: {
