@@ -12,6 +12,7 @@ import {
 const router = express.Router() //create router instance
 
 router.route('/').get(getAllDestinations).post(createDestination)
+router.route('/most-popular').get(getAllDestinations)
 router.route('/:id').get(getDestination).patch(updateDestination).delete(deleteDestination)
 
 export default router
