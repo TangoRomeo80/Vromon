@@ -1,7 +1,7 @@
 /* This file contains the logic for handling requests and communicating with the destination data model*/
 
 import Destination from '../models/destinationModel.js' //import
-import apiFeatures from '../utils/apiFeatures'
+import APIFeatures from '../utils/apiFeatures.js'
 import catchAsync from '../utils/catchAsync.js'
 import AppError from '../utils/appError.js'
 
@@ -65,3 +65,49 @@ export const deleteDestination = catchAsync(async (req, res, next) => {
       data: null,
     })
   })
+
+
+
+
+  // Request type: GET
+  // Endpoint: /api/destinations/
+  // Description: This endpoint returns all destinations
+
+export const getAllDestinations = catchAsync(async (req, res, next) => {
+  const features = new APIFeatures(Destination.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate()
+  const destinations = await features.query
+
+  if (destinations.length < 1) {
+    return next(new AppError('No Destinations Found', 404))
+  }
+
+  res.status(200).json({
+    status: 'success',
+    results: destinations.length,
+    data: destinations,
+  })
+})
+
+
+
+
+  // Request type: GET
+  // Endpoint: /api/destinations/:id
+  // Description: This endpoint returns a destination with :id
+
+export const getDestination = catchAsync(async (req, res, next) => {
+  const destination = await Destination.findById(req.params.id) //method using mongoose findById
+
+  if (!destination) {
+    return next(new AppError('No Destination Has Been Found With That ID', 404))
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: destination,
+  })
+})
