@@ -30,7 +30,7 @@ app.use(express.json()) //use json parser
 //use Routers
 app.use('/api/services', serviceRouter) //use service routes
 app.use('/api/users', userRouter) //use user routes
-app.use('api/destinations', destinationRouter) //destination routes
+app.use('/api/destinations', destinationRouter) //destination routes
 
 //route for the root path
 app.get('/', (req, res) => {
