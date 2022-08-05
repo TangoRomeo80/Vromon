@@ -16,6 +16,7 @@ router
   .route('/:id')
   .get(getDestination)
   .patch(updateDestination)
+  .put(updateDestination)
   .delete(deleteDestination)
 
 export default router

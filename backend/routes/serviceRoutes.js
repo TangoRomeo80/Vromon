@@ -15,6 +15,11 @@ const router = express.Router() //create router instance
 
 router.route('/').get(getAllServices).post(createService)
 router.route('/most-popular').get(getMostPopularServices, getAllServices)
-router.route('/:id').get(getService).patch(updateService).delete(deleteService)
+router
+  .route('/:id')
+  .get(getService)
+  .patch(updateService)
+  .put(updateService)
+  .delete(deleteService)
 
 export default router

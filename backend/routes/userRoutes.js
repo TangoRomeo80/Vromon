@@ -29,6 +29,11 @@ router
   .get(googleAuthRedirect, googleAuthResponse)
 router.route('/auth/:id').get(getAuthedUser)
 router.route('/').get(getAllUsers).post(createUser)
-router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser)
+router
+  .route('/:id')
+  .get(getUser)
+  .patch(updateUser)
+  .put(updateUser)
+  .delete(deleteUser)
 
 export default router
