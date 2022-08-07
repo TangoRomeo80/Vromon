@@ -67,6 +67,9 @@ const businessShcema = new mongoose.Schema({
     required: [true, 'License Number is Required'],
     unique: true,
   },
+},
+{
+  timestamps: true
 })
 
 //Create Business Model
