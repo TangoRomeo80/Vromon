@@ -17,6 +17,7 @@ import globalErrorHandler from './controllers/errorController.js' //import globa
 import serviceRouter from './routes/serviceRoutes.js' //import service routes
 import userRouter from './routes/userRoutes.js' //import user routes
 import destinationRouter from './routes/destinationRoutes.js' //import destination routes
+import businessRouter from './routes/businessRoutes.js'
 
 const app = express() //create an instance of express
 
@@ -31,6 +32,7 @@ app.use(express.json()) //use json parser
 app.use('/api/services', serviceRouter) //use service routes
 app.use('/api/users', userRouter) //use user routes
 app.use('/api/destinations', destinationRouter) //destination routes
+app.use('/api/businesses', businessRouter) //use businesses routes
 
 //route for the root path
 app.get('/', (req, res) => {
