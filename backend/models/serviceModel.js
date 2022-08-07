@@ -2,6 +2,24 @@
 
 import mongoose from 'mongoose' //import mongoose
 
+// const serviceTest1Schema = new mongoose.Schema(
+//   {
+//     testField1:  {String},
+
+    
+//     testField2: {String}
+//   }
+// )
+// const serviceTest2Schema = new mongoose.Schema(
+//   {
+//     testField1: {type: String},
+
+    
+//     testField2: {type: String}
+//   }
+// )
+
+
 //create a services schema
 const serviceSchema = new mongoose.Schema(
   {
@@ -57,6 +75,16 @@ const serviceSchema = new mongoose.Schema(
           'Service type needs to be accomodation, transportation, food, tourGuide or others',
       },
     },
+    // serviceInfo:{
+    //   type: function(val){
+    //     if(this.serviceType === 'food'){
+    //       return serviceTest1Schema
+    //     }
+    //     else if(this.serviceType === 'food'){
+
+    //     }
+    //   },
+    // },
     price: {
       type: Number,
       required: [true, 'service price is required'],

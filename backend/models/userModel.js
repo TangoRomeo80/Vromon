@@ -59,7 +59,7 @@ const userSchema = new mongoose.Schema(
           }
         },
         message:
-          'Mobile number needs to be of 11 or 15 digits and can only contain numerics or + sign',
+          'Mobile number needs to be of 11 or 14 digits and can only contain numerics or + sign',
       },
     },
     password: {
@@ -72,7 +72,7 @@ const userSchema = new mongoose.Schema(
       ],
       minLength: 6,
     },
-    image: {
+    imageURL: {
       type: String,
       default: '',
     },

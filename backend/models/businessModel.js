@@ -39,7 +39,7 @@ const businessShcema = new mongoose.Schema({
         }
       },
       message:
-        'Phone Number should contain 11 or 15 digits & can contain only numerics & + sign',
+        'Phone Number should contain 11 or 14 digits & can contain only numerics & + sign',
     },
   },
 
