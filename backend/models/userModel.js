@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema(
         validator: function (val) {
           if (val !== '') {
             return (
-              (val.length === 11 || val.length === 15) && validator.isNumeric //May need to change validator.isNumeric
+              (val.length === 11 || val.length === 14) && validator.isNumeric //May need to change validator.isNumeric
             )
           } else {
             return true
