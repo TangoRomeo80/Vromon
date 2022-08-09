@@ -5,6 +5,7 @@ import APIFeatures from '../utils/apiFeatures.js' //import API feature utility
 import catchAsync from '../utils/catchAsync.js'
 import AppError from '../utils/appError.js'
 import bcrypt from 'bcryptjs' //import bcrypt for password hashing
+import { updateOne, deleteOne } from './handlerFactory.js' //import generic handler
 
 /*
   Request type: GET
@@ -110,15 +111,18 @@ export const updateUser = catchAsync(async (req, res, next) => {
   Endpoint: /api/users/:id
   Description: This endpoint deletes a specific user
 */
-export const deleteUser = catchAsync(async (req, res, next) => {
-  const deletedUser = await User.findByIdAndDelete(req.params.id)
 
-  if (!deletedUser) {
-    return next(new AppError('No user found with that ID', 404))
-  }
+export const deleteUser = deleteOne(User) 
 
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  })
-})
+// export const deleteUser = catchAsync(async (req, res, next) => {
+//   const deletedUser = await User.findByIdAndDelete(req.params.id)
+
+//   if (!deletedUser) {
+//     return next(new AppError('No user found with that ID', 404))
+//   }
+
+//   res.status(204).json({
+//     status: 'success',
+//     data: null,
+//   })
+// })

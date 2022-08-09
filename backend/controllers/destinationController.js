@@ -4,6 +4,7 @@ import Destination from '../models/destinationModel.js' //import
 import APIFeatures from '../utils/apiFeatures.js'
 import catchAsync from '../utils/catchAsync.js'
 import AppError from '../utils/appError.js'
+import { updateOne, deleteOne } from './handlerFactory.js' //import generic handler
 
 // Request type: POST
 // Endpoint: /api/destinations/
@@ -48,18 +49,20 @@ export const updateDestination = catchAsync(async (req, res, next) => {
 //   Endpoint: /api/destinations/:id
 //   Description: This endpoint deletes a specific destination
 
-export const deleteDestination = catchAsync(async (req, res, next) => {
-  const deletedDestination = await Destination.findByIdAndDelete(req.params.id)
+export const deleteDestination = deleteOne(Destination)
 
-  if (!deletedDestination) {
-    return next(new AppError('No Destination is found with that ID', 404))
-  }
+// export const deleteDestination = catchAsync(async (req, res, next) => {
+//   const deletedDestination = await Destination.findByIdAndDelete(req.params.id)
 
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  })
-})
+//   if (!deletedDestination) {
+//     return next(new AppError('No Destination is found with that ID', 404))
+//   }
+
+//   res.status(204).json({
+//     status: 'success',
+//     data: null,
+//   })
+// })
 
 // Request type: GET
 // Endpoint: /api/destinations/
