@@ -23,7 +23,7 @@ import mongoose from 'mongoose' //import mongoose
 //create a services schema
 const serviceSchema = new mongoose.Schema(
   {
-    destinationID: {
+    destination: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Destination', //like foreign key
       required: [true, 'service destination ID is required'],
@@ -51,7 +51,7 @@ const serviceSchema = new mongoose.Schema(
       trim: true,
       required: [true, 'Service description is required'],
     },
-    businessId: {
+    business: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Business',
       required: [true, 'service business ID is required'],

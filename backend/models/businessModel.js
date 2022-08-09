@@ -5,7 +5,7 @@ import validator from 'validator'
 
 //Create a Business schema
 const businessShcema = new mongoose.Schema({
-  businessOwnerID: {
+  businessOwner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: [true, 'Business Owner ID is required'],
