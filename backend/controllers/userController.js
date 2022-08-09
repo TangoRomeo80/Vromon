@@ -5,50 +5,62 @@ import APIFeatures from '../utils/apiFeatures.js' //import API feature utility
 import catchAsync from '../utils/catchAsync.js'
 import AppError from '../utils/appError.js'
 import bcrypt from 'bcryptjs' //import bcrypt for password hashing
-import { updateOne, deleteOne } from './handlerFactory.js' //import generic handler
+import {
+  getAll,
+  getOne,
+  createOne,
+  updateOne,
+  deleteOne,
+} from './handlerFactory.js' //import generic handler
 
 /*
   Request type: GET
   Endpoint: /api/users/
   Description: This endpoint returns all users
 */
-export const getAllUsers = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(User.find(), req.query)
-    .filter()
-    .sort()
-    .limitFields()
-    .paginate()
-  const users = await features.query
 
-  if (users.length < 1) {
-    return next(new AppError('No users found', 404))
-  }
+export const getAllUsers = getAll(User)
 
-  res.status(200).json({
-    status: 'success',
-    results: users.length,
-    data: users,
-  })
-})
+// export const getAllUsers = catchAsync(async (req, res, next) => {
+//   const features = new APIFeatures(User.find(), req.query)
+//     .filter()
+//     .sort()
+//     .limitFields()
+//     .paginate()
+//   const users = await features.query
+
+//   if (users.length < 1) {
+//     return next(new AppError('No users found', 404))
+//   }
+
+//   res.status(200).json({
+//     status: 'success',
+//     results: users.length,
+//     data: users,
+//   })
+// })
 
 /*
   Request type: GET
   Endpoint: /api/users/:id
   Description: This endpoint returns user with :id
 */
-export const getUser = catchAsync(async (req, res, next) => {
-  // User.findOne({ _id: req.params.id }) //method using mongodb findOne
-  const user = await User.findById(req.params.id) //method using mongoose findById
 
-  if (!user) {
-    return next(new AppError('No user found with that ID', 404))
-  }
+export const getUser = getOne(User)
 
-  res.status(200).json({
-    status: 'success',
-    data: user,
-  })
-})
+// export const getUser = catchAsync(async (req, res, next) => {
+//   // User.findOne({ _id: req.params.id }) //method using mongodb findOne
+//   const user = await User.findById(req.params.id) //method using mongoose findById
+
+//   if (!user) {
+//     return next(new AppError('No user found with that ID', 404))
+//   }
+
+//   res.status(200).json({
+//     status: 'success',
+//     data: user,
+//   })
+// })
 
 /*
   Request type: POST
@@ -112,7 +124,7 @@ export const updateUser = catchAsync(async (req, res, next) => {
   Description: This endpoint deletes a specific user
 */
 
-export const deleteUser = deleteOne(User) 
+export const deleteUser = deleteOne(User)
 
 // export const deleteUser = catchAsync(async (req, res, next) => {
 //   const deletedUser = await User.findByIdAndDelete(req.params.id)

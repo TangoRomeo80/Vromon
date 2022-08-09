@@ -1,10 +1,16 @@
 /* This file contains the logic for handling requests and communicating with the service data model*/
 
 import Service from '../models/serviceModel.js' //import service data model
-import APIFeatures from '../utils/apiFeatures.js' //import API feature utility
-import catchAsync from '../utils/catchAsync.js'
-import AppError from '../utils/appError.js'
-import { getAll, getOne, createOne, updateOne, deleteOne } from './handlerFactory.js' //import generic handler
+// import APIFeatures from '../utils/apiFeatures.js' //import API feature utility
+// import catchAsync from '../utils/catchAsync.js'
+// import AppError from '../utils/appError.js'
+import {
+  getAll,
+  getOne,
+  createOne,
+  updateOne,
+  deleteOne,
+} from './handlerFactory.js' //import generic handler
 
 /*
  Alias middleware for getting most popular services
@@ -49,7 +55,10 @@ export const getAllServices = getAll(Service)
   Description: This endpoint returns service with :id
 */
 
-export const getService = getOne(Service, [{ path: 'destination'}, { path: 'business' }])
+export const getService = getOne(Service, [
+  { path: 'destination' },
+  { path: 'business' },
+])
 
 // export const getService = catchAsync(async (req, res, next) => {
 //   // Service.findOne({ _id: req.params.id }) //method using mongodb findOne
