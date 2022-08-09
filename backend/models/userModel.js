@@ -5,96 +5,93 @@ import bcrypt from 'bcryptjs' //import bcrypt for password hashing
 import validator from 'validator' //imprt validator functionalities
 
 //Create Business Owners Schema
-const businessOwnersSchema = new mongoose.Schema({
-  userID: {
-    type: String,
-    unique: true,
-    trim: true,
-  },
-
-  NID: {
-    type: String,
-    default: '',
-    unique: true,
-    trim: true,
-  },
-
-  passport: {
-    type: String,
-    unique: true,
-    trim: true,
-  },
-
-  paymentStatus: {
-    type: String,
-    default: 'Due',
-    trim: true,
-  },
-
-  paymentAmount:{
-    type: Number,
-    required: [true, 'Payment Amount is Required'],
-    default: 0,
-    trim: true,
-  },
-
-  paymentDate:{
-    type: Date,
-  },
-
-  paymentDueAmount:{
-    type: Number,
-    // required: [true, 'Due Amount is Required'], //Should be Automatically Filled
-  },
-
-  paymentDueDate:{
-    type: Date,
-  }
-},
-{
-  timestamps: true
-})
-
-
-
-// Create tourists Schema
-const touristsSchema = new mongoose.Schema(
+const businessOwnerSchema = new mongoose.Schema(
   {
     userID: {
       type: String,
       unique: true,
       trim: true,
     },
-  
+
     NID: {
       type: String,
       default: '',
       unique: true,
       trim: true,
     },
-  
+
     passport: {
       type: String,
       unique: true,
       trim: true,
     },
 
-    subscription:{
-      type: Boolean,
-      default: false
+    paymentStatus: {
+      type: String,
+      default: 'Due',
+      trim: true,
     },
 
-    subscriptionDate: {
-      type: Date
-    }
+    paymentAmount: {
+      type: Number,
+      required: [true, 'Payment Amount is Required'],
+      default: 0,
+      trim: true,
+    },
+
+    paymentDate: {
+      type: Date,
+    },
+
+    paymentDueAmount: {
+      type: Number,
+      // required: [true, 'Due Amount is Required'], //Should be Automatically Filled
+    },
+
+    paymentDueDate: {
+      type: Date,
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 )
 
+// Create tourists Schema
+const touristSchema = new mongoose.Schema(
+  {
+    userID: {
+      type: String,
+      unique: true,
+      trim: true,
+    },
 
+    NID: {
+      type: String,
+      default: '',
+      unique: true,
+      trim: true,
+    },
 
+    passport: {
+      type: String,
+      unique: true,
+      trim: true,
+    },
+
+    subscription: {
+      type: Boolean,
+      default: false,
+    },
+
+    subscriptionDate: {
+      type: Date,
+    },
+  },
+  {
+    timestamps: true,
+  }
+)
 
 //create a user schema
 const userSchema = new mongoose.Schema(
@@ -176,15 +173,11 @@ const userSchema = new mongoose.Schema(
         message: 'User type needs to be tourist, businessowner or admin',
       },
     },
-    userInfo:{
-      type: function(info){
-        if(this.userType === 'businessowner'){
-          return businessOwnersSchema
-        }
-        else if(this.userType === 'tourist'){
-          return touristsSchema
-        }
-      },
+    touristInfo: {
+      type: touristSchema,
+    },
+    businessOwnerInfo: {
+      type: businessOwnerSchema,
     },
   },
   {
