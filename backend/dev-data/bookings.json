@@ -1,0 +1,11 @@
+[
+    {
+        "user": "1",
+        "service": "1",
+        "bookingDate": "2022-3-25",
+        "availedDate": "2022-4-2",
+        "paymentStatus": "Due",
+        "paymentAmount": 1500,
+        "bookingStatus": "Confirmed"
+    }
+]
