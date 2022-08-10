@@ -32,6 +32,7 @@ export const createBusiness = createOne(Business)
 //   })
 // })
 
+
 //   Request type: PATCH
 //   Endpoint: /api/businesses/:id
 //   Description: This endpoint updates specific business
