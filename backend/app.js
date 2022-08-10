@@ -18,6 +18,7 @@ import serviceRouter from './routes/serviceRoutes.js' //import service routes
 import userRouter from './routes/userRoutes.js' //import user routes
 import destinationRouter from './routes/destinationRoutes.js' //import destination routes
 import businessRouter from './routes/businessRoutes.js'
+import bookingRouter from './routes/bookingRoutes.js'
 
 const app = express() //create an instance of express
 
@@ -33,6 +34,7 @@ app.use('/api/services', serviceRouter) //use service routes
 app.use('/api/users', userRouter) //use user routes
 app.use('/api/destinations', destinationRouter) //destination routes
 app.use('/api/businesses', businessRouter) //use businesses routes
+app.use('/api/bookings', bookingRouter) //use booking routes
 
 //route for the root path
 app.get('/', (req, res) => {

@@ -13,3 +13,5 @@ const router = express.Router() //create router instance
 
 router.route('/').get(getAllBookings).post(createBooking)
 router.route('/:id').put(updateBooking).patch(updateBooking).delete(deleteBooking).get(getBooking)
+
+export default router
