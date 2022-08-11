@@ -4,6 +4,9 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
+import TransportScreen from './screens/TransportScreen'
+import DestinationScreen from './screens/DestinationScreen'
+import HolidayPackagesScreen from './screens/HolidayPackagesScreen'
 
 const App = () => {
   return (
@@ -14,6 +17,9 @@ const App = () => {
           <Routes>
             <Route exact path='/' element={<HomeScreen />} />
             <Route exact path='/login' element={<LoginScreen />} />
+            <Route exact path='/transports' element={<TransportScreen/>}/>
+            <Route exact path='/destinations' element={<DestinationScreen/>}/>
+            <Route exact path='/packages' element={<HolidayPackagesScreen/>}/>
           </Routes>
           <Routes></Routes>
         </Container>

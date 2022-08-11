@@ -35,7 +35,7 @@ const Header = () => {
                 </Nav.Link>
               </LinkContainer>
 
-              <LinkContainer to='/destinations'>
+              <LinkContainer to='/packages'>
                 <Nav.Link>
                   <FaUmbrellaBeach />
                   Holiday Packages
