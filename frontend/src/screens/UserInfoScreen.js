@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
-import {FaUser,FaPhone, FaUnlock, FaUsersCog } from 'react-icons/fa'
-import {MdEmail, MdLogin} from 'react-icons/md'
+import { FaUser, FaPhone, FaUnlock, FaUsersCog } from "react-icons/fa";
+import { MdEmail, MdLogin } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 
@@ -92,10 +92,8 @@ const UserInfoScreen = () => {
                 <Row className="mt-4">
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="userName">
-                    
-                    <FaUser/> &nbsp;
-                    <Form.Label>Name</Form.Label>
-                      
+                      <FaUser /> &nbsp;
+                      <Form.Label>Name</Form.Label>
                       <Form.Control
                         type="text"
                         placeholder={
@@ -122,7 +120,7 @@ const UserInfoScreen = () => {
                 <Row>
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="userEmail">
-                    <MdEmail/> &nbsp;
+                      <MdEmail /> &nbsp;
                       <Form.Label>Email</Form.Label>
                       <Form.Control
                         type="text"
@@ -139,7 +137,7 @@ const UserInfoScreen = () => {
                 <Row>
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="mobileNumber">
-                        <FaPhone/> &nbsp;
+                      <FaPhone /> &nbsp;
                       <Form.Label>Mobile Number</Form.Label>
                       <Form.Control
                         type="text"
@@ -158,7 +156,7 @@ const UserInfoScreen = () => {
                 <Row>
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="password">
-                        <FaUnlock/> &nbsp;
+                      <FaUnlock /> &nbsp;
                       <Form.Label>Password</Form.Label>
                       <Form.Control
                         type="text"
@@ -177,7 +175,7 @@ const UserInfoScreen = () => {
                 <Row>
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="loginType">
-                    <MdLogin/> &nbsp;
+                      <MdLogin /> &nbsp;
                       <Form.Label>Login Type</Form.Label>
                       <Form.Control
                         as="select"
@@ -197,10 +195,10 @@ const UserInfoScreen = () => {
                 <Row>
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="userType">
-                        <FaUsersCog/> &nbsp;
+                      <FaUsersCog /> &nbsp;
                       <Form.Label>User Type</Form.Label>
                       <Form.Control
-                      className='mb-3'
+                        className="mb-3"
                         as="select"
                         type="select"
                         placeholder="Select User Type"
@@ -213,6 +211,12 @@ const UserInfoScreen = () => {
                       </Form.Control>
                     </Form.Group>
                   </Col>
+                </Row>
+
+                <Row className="mt-5">
+                  <Button variant="primary" size="lg" type="submit">
+                    Submit
+                  </Button>
                 </Row>
               </Card.Body>
             </Card>
