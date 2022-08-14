@@ -3,11 +3,17 @@ import axios from "axios";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { FaUser, FaPhone, FaUnlock, FaUsersCog } from "react-icons/fa";
 import { MdEmail, MdLogin } from "react-icons/md";
+// import {useDispatch} from 'react-redux'
 
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 
 const UserInfoScreen = () => {
+  // const userID = params.id
+
+  // const dispatch = useDispatch()
+
+
   const [userName, setUserName] = useState();
   const [email, setEmail] = useState();
   const [loginType, setLoginType] = useState();
@@ -15,7 +21,6 @@ const UserInfoScreen = () => {
   const [mobile, setMobile] = useState();
   const [password, setPassword] = useState();
   const [userType, setUserType] = useState();
-  const [] = useState();
   const [imageUrl, setImageUrl] = useState(
     "http://bootdey.com/img/Content/avatar/avatar7.png"
   );
@@ -44,6 +49,27 @@ const UserInfoScreen = () => {
     }
   };
 
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   if (
+  //     userName !== "" &&
+  //     email !== "" &&
+  //     loginType !== "" &&
+  //     password !== ""
+  //   ) {
+  //     dispatch({
+  //       // _id: userID,
+  //       userName,
+  //       mobile,
+  //       password,
+  //       email,
+  //       loginType,
+  //       userType,
+  //       imageUrl,
+  //     });
+  //   }
+  // };
+
   return (
     <Container>
       <Form>
@@ -53,9 +79,13 @@ const UserInfoScreen = () => {
             {/* <Button variant="btn btn-primary btn-lg btn-block" size="lg">
               My Profile                 
             </Button> */}
-            <Link className="btn btn-primary my-3" style={{width:'15em'}} to="">
+            <Link
+              className="btn btn-primary my-3"
+              style={{ width: "15em" }}
+              to=""
+            >
               My Profile
-            </Link> 
+            </Link>
           </Col>
 
           {/* Details Information */}
