@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+import {FaUserAlt,FaPhone, FaUnlock } from 'react-icons/fa'
+import {MdEmail} from 'react-icons/md'
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 
@@ -14,7 +16,7 @@ const UserInfoScreen = () => {
   const [userType, setUserType] = useState();
   const [] = useState();
   const [imageUrl, setImageUrl] = useState(
-    "http://bootdey.com/img/Content/avatar/avatar1.png"
+    "http://bootdey.com/img/Content/avatar/avatar7.png"
   );
   const [uploading, setUploading] = useState("");
 
@@ -66,7 +68,7 @@ const UserInfoScreen = () => {
                       src={
                         imageUrl !== ""
                           ? imageUrl
-                          : "http://bootdey.com/img/Content/avatar/avatar1.png"
+                          : "http://bootdey.com/img/Content/avatar/avatar7.png"
                       }
                       alt="Employee Image"
                       style={{ height: "10rem", borderRadius: "50%" }}
@@ -90,7 +92,10 @@ const UserInfoScreen = () => {
                 <Row className="mt-4">
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="userName">
-                      <Form.Label>Name</Form.Label>
+                    
+                    <FaUserAlt/> &nbsp;
+                    <Form.Label>Name</Form.Label>
+                      
                       <Form.Control
                         type="text"
                         placeholder={
@@ -117,6 +122,7 @@ const UserInfoScreen = () => {
                 <Row>
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="userEmail">
+                    <MdEmail/> &nbsp;
                       <Form.Label>Email</Form.Label>
                       <Form.Control
                         type="text"
@@ -133,6 +139,7 @@ const UserInfoScreen = () => {
                 <Row>
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="mobileNumber">
+                        <FaPhone/> &nbsp;
                       <Form.Label>Mobile Number</Form.Label>
                       <Form.Control
                         type="text"
@@ -151,6 +158,7 @@ const UserInfoScreen = () => {
                 <Row>
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="password">
+                        <FaUnlock/> &nbsp;
                       <Form.Label>Password</Form.Label>
                       <Form.Control
                         type="text"
