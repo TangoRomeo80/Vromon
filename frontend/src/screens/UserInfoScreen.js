@@ -3,7 +3,7 @@ import axios from "axios";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { FaUser, FaPhone, FaUnlock, FaUsersCog } from "react-icons/fa";
 import { MdEmail, MdLogin } from "react-icons/md";
-import Sidebar from "../components/Sidebar";
+
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 
