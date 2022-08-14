@@ -1,11 +1,215 @@
-import React from 'react'
-import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap'
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const UserInfoScreen = () => {
-  return (
-    <div>UserInfoScreen</div>
-  )
-}
+  const [userName, setUserName] = useState();
+  const [email, setEmail] = useState();
+  const [loginType, setLoginType] = useState();
+  // const [googleID, setGoogleID] = useState()
+  const [mobile, setMobile] = useState();
+  const [password, setPassword] = useState();
+  const [userType, setUserType] = useState();
+  const [] = useState();
+  const [imageUrl, setImageUrl] = useState(
+    "http://bootdey.com/img/Content/avatar/avatar1.png"
+  );
+  const [uploading, setUploading] = useState("");
 
-export default UserInfoScreen
+  const uploadUserImageFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.post("/upload", formData, config);
+
+      setImageUrl(data);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
+  };
+
+  return (
+    <Container>
+      <Form>
+        <Row>
+          {/* Side Nav */}
+          <Col xs={12} md={4} xl={3}>
+            {/* <Link className='btn btn-primary my-3'>
+                        My Account
+                    </Link> */}
+          </Col>
+
+          {/* Details Information */}
+          <Col xs={12} md={8} xl={9}>
+            <Card className="mb-4 mt-4">
+              <Card.Header as="h3">User Information</Card.Header>
+              <Card.Body>
+                <Card.Header className="text-center">User Image</Card.Header>
+                <Row>
+                  {/* <Col lg={6} md={6} sm={12}> */}
+                  <Col lg={3} md={3} sm={6}>
+                    <img
+                      className="mb-2"
+                      src={
+                        imageUrl !== ""
+                          ? imageUrl
+                          : "http://bootdey.com/img/Content/avatar/avatar1.png"
+                      }
+                      alt="Employee Image"
+                      style={{ height: "10rem", borderRadius: "50%" }}
+                    />
+                  </Col>
+                  <Col lg={3} md={3} sm={6}>
+                    <Form.Group controlId="image 1">
+                      <Form.Label>Upload New Photo</Form.Label>
+                      <Form.Control
+                        className="mb-3"
+                        type="file"
+                        id="image-file"
+                        label="User Image"
+                        custom
+                        onChange={uploadUserImageFileHandler}
+                      ></Form.Control>
+                    </Form.Group>
+                  </Col>
+                </Row>
+
+                <Row className="mt-4">
+                  <Col lg={6} md={6} sm={12}>
+                    <Form.Group className="mb-3" controlId="userName">
+                      <Form.Label>Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder={
+                          userName === ""
+                            ? "User Name is required"
+                            : "Enter User Name"
+                        }
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                        style={
+                          userName === ""
+                            ? {
+                                borderColor: "red",
+                                color: "red",
+                                boxShadow: "5px 5px red",
+                              }
+                            : null
+                        }
+                      ></Form.Control>
+                    </Form.Group>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col lg={6} md={6} sm={12}>
+                    <Form.Group className="mb-3" controlId="userEmail">
+                      <Form.Label>Email</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder={
+                          email === "" ? "Email is required" : "Enter Email"
+                        }
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      ></Form.Control>
+                    </Form.Group>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col lg={6} md={6} sm={12}>
+                    <Form.Group className="mb-3" controlId="mobileNumber">
+                      <Form.Label>Mobile Number</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder={
+                          mobile === ""
+                            ? "Mobile Number is required"
+                            : "Enter Mobile Number"
+                        }
+                        value={mobile}
+                        onChange={(e) => setMobile(e.target.value)}
+                      ></Form.Control>
+                    </Form.Group>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col lg={6} md={6} sm={12}>
+                    <Form.Group className="mb-3" controlId="password">
+                      <Form.Label>Password</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder={
+                          password === ""
+                            ? "Password is required"
+                            : "Enter Password"
+                        }
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      ></Form.Control>
+                    </Form.Group>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col lg={6} md={6} sm={12}>
+                    <Form.Group className="mb-3" controlId="loginType">
+                      <Form.Label>Login Type</Form.Label>
+                      <Form.Control
+                        as="select"
+                        type="select"
+                        placeholder="Select Login Type"
+                        value={loginType}
+                        onChange={(e) => setLoginType(e.target.value)}
+                      >
+                        <option>{loginType}</option>
+                        <option value="Google">Log in with Google</option>
+                        <option value="Vromon">Log in with Vromon</option>
+                      </Form.Control>
+                    </Form.Group>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col lg={6} md={6} sm={12}>
+                    <Form.Group className="mb-3" controlId="userType">
+                      <Form.Label>User Type</Form.Label>
+                      <Form.Control
+                        as="select"
+                        type="select"
+                        placeholder="Select User Type"
+                        value={userType}
+                        onChange={(e) => setUserType(e.target.value)}
+                      >
+                        <option>{userType}</option>
+                        <option value="Tourist">Tourist</option>
+                        <option value="Business">Business Owner</option>
+                      </Form.Control>
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Form>
+    </Container>
+  );
+};
+
+export default UserInfoScreen;

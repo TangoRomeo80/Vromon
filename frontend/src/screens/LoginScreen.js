@@ -52,7 +52,7 @@ const LoginScreen = () => {
       <Row>
         <div className='d-flex justify-content-center py-3 mt-3 '>
           <p>
-            New User?<a href='#'><b> Sign Up</b></a>
+            New User?<a href='#'><b>Sign Up</b></a>
           </p>
         </div>
       </Row>
