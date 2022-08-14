@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
-import {FaUserAlt,FaPhone, FaUnlock } from 'react-icons/fa'
-import {MdEmail} from 'react-icons/md'
+import {FaUser,FaPhone, FaUnlock, FaUsersCog } from 'react-icons/fa'
+import {MdEmail, MdLogin} from 'react-icons/md'
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 
@@ -93,7 +93,7 @@ const UserInfoScreen = () => {
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="userName">
                     
-                    <FaUserAlt/> &nbsp;
+                    <FaUser/> &nbsp;
                     <Form.Label>Name</Form.Label>
                       
                       <Form.Control
@@ -177,6 +177,7 @@ const UserInfoScreen = () => {
                 <Row>
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="loginType">
+                    <MdLogin/> &nbsp;
                       <Form.Label>Login Type</Form.Label>
                       <Form.Control
                         as="select"
@@ -196,8 +197,10 @@ const UserInfoScreen = () => {
                 <Row>
                   <Col lg={6} md={6} sm={12}>
                     <Form.Group className="mb-3" controlId="userType">
+                        <FaUsersCog/> &nbsp;
                       <Form.Label>User Type</Form.Label>
                       <Form.Control
+                      className='mb-3'
                         as="select"
                         type="select"
                         placeholder="Select User Type"
