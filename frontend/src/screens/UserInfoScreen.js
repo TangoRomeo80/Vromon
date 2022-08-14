@@ -3,6 +3,7 @@ import axios from "axios";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { FaUser, FaPhone, FaUnlock, FaUsersCog } from "react-icons/fa";
 import { MdEmail, MdLogin } from "react-icons/md";
+import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 
@@ -46,12 +47,15 @@ const UserInfoScreen = () => {
   return (
     <Container>
       <Form>
-        <Row>
+        <Row className="my-5">
           {/* Side Nav */}
-          <Col xs={12} md={4} xl={3}>
-            {/* <Link className='btn btn-primary my-3'>
-                        My Account
-                    </Link> */}
+          <Col className="my-4" xs={12} md={4} xl={3}>
+            {/* <Button variant="btn btn-primary btn-lg btn-block" size="lg">
+              My Profile                 
+            </Button> */}
+            <Link className="btn btn-primary my-3" style={{width:'15em'}} to="">
+              My Profile
+            </Link> 
           </Col>
 
           {/* Details Information */}
