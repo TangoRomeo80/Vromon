@@ -133,7 +133,7 @@ const UserInfoScreen = () => {
             <Card className="mb-4 mt-4">
               <Card.Header as="h3">User Information</Card.Header>
               <Card.Body>
-                <Card.Header className="text-center">User Image</Card.Header>
+                {/* <Card.Header className="text-center">User Image</Card.Header> */}
                 <Row>
                   {/* <Col lg={6} md={6} sm={12}> */}
                   <Col lg={3} md={3} sm={6}>
