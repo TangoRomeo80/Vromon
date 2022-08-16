@@ -9,6 +9,7 @@ import DestinationScreen from './screens/DestinationScreen'
 import HolidayPackagesScreen from './screens/HolidayPackagesScreen'
 import UserInfoScreen from './screens/UserInfoScreen' 
 
+
 const App = () => {
   return (
     <Router>
