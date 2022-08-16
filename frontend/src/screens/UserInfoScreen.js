@@ -144,7 +144,7 @@ const UserInfoScreen = () => {
                           ? imageUrl
                           : "http://bootdey.com/img/Content/avatar/avatar7.png"
                       }
-                      alt="Employee Image"
+                      alt="User Image"
                       style={{ height: "10rem", borderRadius: "50%" }}
                     />
                   </Col>
