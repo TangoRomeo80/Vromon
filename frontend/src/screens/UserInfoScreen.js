@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
-import { FaUser, FaPhone, FaUnlock, FaUsersCog } from "react-icons/fa";
+import { FaUser, FaPhone, FaUnlock, FaUsersCog, FaBookmark, FaCoins, FaUsers, FaCreditCard } from "react-icons/fa";
 import { MdEmail, MdLogin } from "react-icons/md";
+
 // import {useDispatch} from 'react-redux'
 
 import { Link } from "react-router-dom";
@@ -79,13 +80,52 @@ const UserInfoScreen = () => {
             {/* <Button variant="btn btn-primary btn-lg btn-block" size="lg">
               My Profile                 
             </Button> */}
+            <Row>
             <Link
               className="btn btn-primary my-3"
               style={{ width: "15em" }}
               to=""
             >
+              <FaUser/> &nbsp;
               My Profile
-            </Link>
+            </Link></Row>
+
+            <Row><Link
+              className="btn btn-primary my-3"
+              style={{ width: "15em" }}
+              to=""
+            >
+              <FaBookmark/> &nbsp;
+              My Bookings
+            </Link></Row>
+
+            <Row><Link
+              className="btn btn-primary my-3"
+              style={{ width: "15em" }}
+              to=""
+            >
+              <FaCoins/> &nbsp;
+              Trip Coin
+            </Link></Row>
+
+            <Row><Link
+              className="btn btn-primary my-3"
+              style={{ width: "15em" }}
+              to=""
+            >
+              <FaUsers/> &nbsp;
+              Guest List
+            </Link></Row>
+
+            <Row><Link
+              className="btn btn-primary my-3"
+              style={{ width: "15em" }}
+              to=""
+            >
+              <FaCreditCard/> &nbsp;
+              Saved Cards
+            </Link></Row>
+            
           </Col>
 
           {/* Details Information */}
