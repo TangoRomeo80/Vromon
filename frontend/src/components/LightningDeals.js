@@ -7,7 +7,7 @@ const LightningDeals = () => {
   return (
     <div>
       <Container>
-        <h2 className="font-weight-bold text-center"> Lightning Deals </h2>
+        <h2 className="font-weight-bold text-center mb-4"> Lightning Deals </h2>
 
         <Row>
           <Col xs={12} md={3}>
