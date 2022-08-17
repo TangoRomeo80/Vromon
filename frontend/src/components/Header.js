@@ -12,7 +12,7 @@ import {
 const Header = () => {
   return (
     <header>
-      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect fixed='top'>
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>

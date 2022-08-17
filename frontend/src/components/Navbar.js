@@ -22,7 +22,6 @@ const Navbar = () => {
   return (
     <>
       <Card>
-        {/* <Card.Img variant="top" src="https://www.workaway.info/gfx/2015/content/frontpage/header_frontpage_2.jpg" /> */}
         <Card.Img variant="top" src="/Nav/test2.jpg" />
         <Card.Body>
           
