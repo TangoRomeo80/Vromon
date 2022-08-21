@@ -11,7 +11,7 @@ const PopularDestinations = () => {
           Popular Destinations
         </h2>
 
-        <Row>
+        <Row className="my-4">
           <Col xs={12} md={12} lg={12}>
             <LinkContainer to="">
               {/* <Card className='mb-3' style={{ width: '50%' }}>
@@ -37,7 +37,32 @@ const PopularDestinations = () => {
                   src="/LightningDeals/test.jpg"
                   style={{ height: "40vh", objectFit: "cover" }}
                 />
-                <Card.ImgOverlay className='my-auto'>
+                <Card.ImgOverlay className="d-flex flex-column justify-content-end">
+                  <Card.Title>Fly, Baby! Fly!</Card.Title>
+                  <Card.Text className="text-light">
+                    <MdDateRange /> &nbsp;4 day <br />
+                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
+                  </Card.Text>
+                  <Card.Text style={{ fontWeight: "bold", color: "white" }}>
+                    BDT 15,500/Person
+                  </Card.Text>
+                </Card.ImgOverlay>
+              </Card>
+            </LinkContainer>
+          </Col>
+        </Row>
+
+        <Row className="my-4">
+          <Col xs={12} md={3}>
+            <LinkContainer to="">
+              <Card>
+                <Card.Img
+                  cascade
+                  className="img-fluid"
+                  src="/LightningDeals/test.jpg"
+                />
+
+                <Card.Body cascade>
                   <Card.Title>Fly, Baby! Fly!</Card.Title>
                   <Card.Text>
                     <MdDateRange /> &nbsp;4 day <br />
@@ -46,7 +71,170 @@ const PopularDestinations = () => {
                   <Card.Text style={{ fontWeight: "bold" }}>
                     BDT 15,500/Person
                   </Card.Text>
-                </Card.ImgOverlay>
+                </Card.Body>
+              </Card>
+            </LinkContainer>
+          </Col>
+
+          <Col xs={12} md={3}>
+            <LinkContainer to="">
+              <Card>
+                <Card.Img
+                  cascade
+                  className="img-fluid"
+                  src="/LightningDeals/test.jpg"
+                />
+
+                <Card.Body cascade>
+                  <Card.Title>Fly, Baby! Fly!</Card.Title>
+                  <Card.Text>
+                    <MdDateRange /> &nbsp;4 day <br />
+                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
+                  </Card.Text>
+                  <Card.Text style={{ fontWeight: "bold" }}>
+                    BDT 15,500/Person
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </LinkContainer>
+          </Col>
+
+          <Col xs={12} md={3}>
+            <LinkContainer to="">
+              <Card>
+                <Card.Img
+                  cascade
+                  className="img-fluid"
+                  src="/LightningDeals/test.jpg"
+                />
+
+                <Card.Body cascade>
+                  <Card.Title>Fly, Baby! Fly!</Card.Title>
+                  <Card.Text>
+                    <MdDateRange /> &nbsp;4 day <br />
+                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
+                  </Card.Text>
+                  <Card.Text style={{ fontWeight: "bold" }}>
+                    BDT 15,500/Person
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </LinkContainer>
+          </Col>
+
+          <Col xs={12} md={3}>
+            <LinkContainer to="">
+              <Card>
+                <Card.Img
+                  cascade
+                  className="img-fluid"
+                  src="/LightningDeals/test.jpg"
+                />
+
+                <Card.Body cascade>
+                  <Card.Title>Fly, Baby! Fly!</Card.Title>
+                  <Card.Text>
+                    <MdDateRange /> &nbsp;4 day <br />
+                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
+                  </Card.Text>
+                  <Card.Text style={{ fontWeight: "bold" }}>
+                    BDT 15,500/Person
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </LinkContainer>
+          </Col>
+        </Row>
+
+        <Row className="my-4">
+          <Col xs={12} md={3}>
+            <LinkContainer to="">
+              <Card>
+                <Card.Img
+                  cascade
+                  className="img-fluid"
+                  src="/LightningDeals/test.jpg"
+                />
+
+                <Card.Body cascade>
+                  <Card.Title>Fly, Baby! Fly!</Card.Title>
+                  <Card.Text>
+                    <MdDateRange /> &nbsp;4 day <br />
+                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
+                  </Card.Text>
+                  <Card.Text style={{ fontWeight: "bold" }}>
+                    BDT 15,500/Person
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </LinkContainer>
+          </Col>
+
+          <Col xs={12} md={3}>
+            <LinkContainer to="">
+              <Card>
+                <Card.Img
+                  cascade
+                  className="img-fluid"
+                  src="/LightningDeals/test.jpg"
+                />
+
+                <Card.Body cascade>
+                  <Card.Title>Fly, Baby! Fly!</Card.Title>
+                  <Card.Text>
+                    <MdDateRange /> &nbsp;4 day <br />
+                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
+                  </Card.Text>
+                  <Card.Text style={{ fontWeight: "bold" }}>
+                    BDT 15,500/Person
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </LinkContainer>
+          </Col>
+
+          <Col xs={12} md={3}>
+            <LinkContainer to="">
+              <Card>
+                <Card.Img
+                  cascade
+                  className="img-fluid"
+                  src="/LightningDeals/test.jpg"
+                />
+
+                <Card.Body cascade>
+                  <Card.Title>Fly, Baby! Fly!</Card.Title>
+                  <Card.Text>
+                    <MdDateRange /> &nbsp;4 day <br />
+                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
+                  </Card.Text>
+                  <Card.Text style={{ fontWeight: "bold" }}>
+                    BDT 15,500/Person
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </LinkContainer>
+          </Col>
+
+          <Col xs={12} md={3}>
+            <LinkContainer to="">
+              <Card>
+                <Card.Img
+                  cascade
+                  className="img-fluid"
+                  src="/LightningDeals/test.jpg"
+                />
+
+                <Card.Body cascade>
+                  <Card.Title>Fly, Baby! Fly!</Card.Title>
+                  <Card.Text>
+                    <MdDateRange /> &nbsp;4 day <br />
+                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
+                  </Card.Text>
+                  <Card.Text style={{ fontWeight: "bold" }}>
+                    BDT 15,500/Person
+                  </Card.Text>
+                </Card.Body>
               </Card>
             </LinkContainer>
           </Col>
