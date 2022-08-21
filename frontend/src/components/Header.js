@@ -48,13 +48,13 @@ const Header = () => {
 
                 <NavDropdown.Item>
                 <LinkContainer to='/login'>
-                <Nav.Link>Sign In</Nav.Link>
+                <Nav.Link className='text-dark'>Sign In</Nav.Link>
                 </LinkContainer>
                 </NavDropdown.Item>
 
                 <NavDropdown.Item>
                 <LinkContainer to='/logout'>
-                <Nav.Link>Sign Out</Nav.Link>
+                <Nav.Link className='text-dark'>Sign Out</Nav.Link>
                 </LinkContainer>
                 
                 </NavDropdown.Item>
