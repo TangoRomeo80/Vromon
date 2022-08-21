@@ -32,9 +32,13 @@ const PopularDestinations = () => {
                 </Card.Body>
               </Card> */}
               <Card>
-        <Card.Img variant="top" src="/LightningDeals/test.jpg" style={{height: '50vh', objectFit: 'cover'}} />
-        <Card.ImgOverlay >
-        <Card.Title>Fly, Baby! Fly!</Card.Title>
+                <Card.Img
+                  variant="top"
+                  src="/LightningDeals/test.jpg"
+                  style={{ height: "40vh", objectFit: "cover" }}
+                />
+                <Card.ImgOverlay className='my-auto'>
+                  <Card.Title>Fly, Baby! Fly!</Card.Title>
                   <Card.Text>
                     <MdDateRange /> &nbsp;4 day <br />
                     <MdLocationOn /> &nbsp;Kathmundu, Nepal
@@ -42,8 +46,8 @@ const PopularDestinations = () => {
                   <Card.Text style={{ fontWeight: "bold" }}>
                     BDT 15,500/Person
                   </Card.Text>
-        </Card.ImgOverlay>
-      </Card>
+                </Card.ImgOverlay>
+              </Card>
             </LinkContainer>
           </Col>
         </Row>
