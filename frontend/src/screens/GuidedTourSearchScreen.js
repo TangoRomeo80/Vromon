@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Container, Card, Form } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
+import { GoSearch } from "react-icons/go";
 
 const GuidedTourSearchScreen = () => {
   const [minPrice, setMinPrice] = useState();
   const [maxPrice, setMaxPrice] = useState();
+  const [searchPackage, setSearchPackage] = useState();
+  const [duration, setDuration] = useState();
 
   return (
     <Container>
@@ -31,8 +34,8 @@ const GuidedTourSearchScreen = () => {
             </Link>
           </Row>
 
-            {/* Row For Price Range */}
-          <Row>
+          {/* Row For Price Range */}
+          <Row className="my-4">
             <Card>
               <Card.Header as="h5">Price Range</Card.Header>
             </Card>
@@ -47,7 +50,7 @@ const GuidedTourSearchScreen = () => {
                 ></Form.Control>
               </Form.Group>
             </Col>
-            <Col sm={6} md={2} lg={6}>
+            <Col sm={6} md={3} lg={6}>
               <Form.Group className="mb-3" controlId="">
                 <Form.Label className="small mb-1">Maximum Price</Form.Label>
                 <Form.Control
@@ -60,14 +63,56 @@ const GuidedTourSearchScreen = () => {
             <Col>For Slider</Col>
           </Row>
 
+          {/* Row For Package Search */}
+          <Row className="my-4">
+            <Card>
+              <Card.Header as="h5">Package Search</Card.Header>
+            </Card>
 
-            {/* Row For Filter Search */}
-            <Row>
-                <Card>
-                    <Card.Header>Package Search</Card.Header>
-                </Card>
-            </Row>
+            <Col className="mt-3">
+              <Form.Group className="mb-3" controlId="">
+                <Form.Control
+                  type="text"
+                  placeholder="Search For Packages"
+                  value={searchPackage}
+                  onChange={(e) => setSearchPackage(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+            </Col>
+          </Row>
 
+          {/* Row For Duration */}
+          <Row className="my-4">
+            <Card>
+              <Card.Header as="h5">Package Duration</Card.Header>
+            </Card>
+
+            <Col className="mt-3">
+              <Form.Group className="mb-3" controlId="">
+                <Form.Control
+                  as="select"
+                  type="select"
+                  placeholder="Select Duration"
+                  value={duration}
+                  onChange={(e) => setDuration(e.target.value)}
+                >
+                  <option>{duration}</option>
+                  <option value="2days">2 days</option>
+                  <option value="3days">3 days</option>
+                  <option value="4days">4 days</option>
+                  <option value="5days">5 days</option>
+                  <option value="6days">6 days</option>
+                  <option value="7days">7 days</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+          </Row>
+        </Col>
+
+
+        {/* Right Colomn/Package Images Card */}
+        <Col xs={12} md={8} xl={8}>
+          
         </Col>
       </Row>
     </Container>
