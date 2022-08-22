@@ -89,7 +89,7 @@ const GuidedTourSearchScreen = () => {
 
             <Col className="mt-3">
               <Form.Group className="mb-3" controlId="">
-                <Form.Control
+                <Form.Control className='form-select'
                   as="select"
                   type="select"
                   placeholder="Select Duration"
