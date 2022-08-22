@@ -8,6 +8,7 @@ import TransportScreen from './screens/TransportScreen'
 import DestinationScreen from './screens/DestinationScreen'
 import HolidayPackagesScreen from './screens/HolidayPackagesScreen'
 import UserInfoScreen from './screens/UserInfoScreen' 
+import GuidedTourSearchScreen from './screens/GuidedTourSearchScreen'
 
 
 const App = () => {
@@ -23,8 +24,8 @@ const App = () => {
             <Route exact path='/destinations' element={<DestinationScreen/>}/>
             <Route exact path='/packages' element={<HolidayPackagesScreen/>}/>
             <Route exact path='/userInfo' element={<UserInfoScreen/>}/>
+            <Route exact path='/tourSearch' element={<GuidedTourSearchScreen/>}/>
           </Routes>
-          <Routes></Routes>
         </Container>
       </main>
       <Footer />

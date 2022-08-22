@@ -12,7 +12,7 @@ import {
 const Header = () => {
   return (
     <header>
-      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect fixed='top'>
+      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>
@@ -53,7 +53,7 @@ const Header = () => {
                 </NavDropdown.Item>
 
                 <NavDropdown.Item>
-                <LinkContainer to='/logout'>
+                <LinkContainer to='/login'>
                 <Nav.Link className='text-dark'>Sign Out</Nav.Link>
                 </LinkContainer>
                 

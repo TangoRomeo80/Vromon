@@ -8,7 +8,7 @@ const LightningDeals = () => {
   return (
     <div>
       <Container>
-        <h2 className="font-weight-bold text-center mb-4"> Lightning Deals </h2>
+        <h2 className="font-weight-bold text-center mb-4 my-4"> Lightning Deals </h2>
 
         {/* <motion.div animate={{ x: 1 }} transition={{ delay: 1 }}>
           <Row>
@@ -106,7 +106,7 @@ const LightningDeals = () => {
           </Row>
         </motion.div> */}
 
-        <Row>
+        <Row className="my-4">
           <Col xs={12} md={3}>
             <LinkContainer to="">
               <Card>

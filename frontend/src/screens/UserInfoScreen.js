@@ -82,7 +82,7 @@ const UserInfoScreen = () => {
   return (
     <Container>
       <Form>
-        <Row className='my-5'>
+        <Row className='my-3'>
           {/* Side Nav */}
           <Col className='my-4' xs={12} md={4} xl={3}>
             {/* <Button variant="btn btn-primary btn-lg btn-block" size="lg">
