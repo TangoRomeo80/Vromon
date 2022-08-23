@@ -18,7 +18,7 @@ import { MdEmail, MdLogin } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import Loader from '../components/Loader'
 
-const UserInfoScreen = () => {
+const TouristInfoScreen = () => {
   // const userID = params.id
 
   // const dispatch = useDispatch()
@@ -312,4 +312,4 @@ const UserInfoScreen = () => {
   )
 }
 
-export default UserInfoScreen
+export default TouristInfoScreen
