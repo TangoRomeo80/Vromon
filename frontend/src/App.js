@@ -9,6 +9,7 @@ import DestinationScreen from './screens/DestinationScreen'
 import HolidayPackagesScreen from './screens/HolidayPackagesScreen'
 import TouristInfoScreen from './screens/TouristInfoScreen' 
 import GuidedTourSearchScreen from './screens/GuidedTourSearchScreen'
+import BusinessOwnerInfoScreen from './screens/BusinessOwnerInfoScreen'
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
             <Route exact path='/packages' element={<HolidayPackagesScreen/>}/>
             <Route exact path='/touristInfo' element={<TouristInfoScreen/>}/>
             <Route exact path='/tourSearch' element={<GuidedTourSearchScreen/>}/>
+            <Route exact path='/businessOwnerInfo' element={<BusinessOwnerInfoScreen/>}/>
           </Routes>
         </Container>
       </main>
