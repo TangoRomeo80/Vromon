@@ -7,34 +7,70 @@ import validator from 'validator' //imprt validator functionalities
 //Create Business Owners Schema
 const businessOwnerSchema = new mongoose.Schema(
   {
-    userID: {
-      type: String,
-      unique: true,
-      trim: true,
-    },
+    // userID: {
+    //   type: String,
+    //   unique: true,
+    //   trim: true,
+    // },
 
-    NID: {
+    nid: {
       type: String,
       default: '',
       unique: true,
       trim: true,
+      validate: {
+        validator: function (val) {
+          if (val === '') return true
+          return (val.length === 10 || val.length === 17) && validator.isNumeric
+        },
+        message: 'nid number needs to be of 10 or 17 digits',
+      },
     },
 
     passport: {
       type: String,
       unique: true,
+      default: '',
       trim: true,
+      validate: {
+        validator: function (val) {
+          if (val === '') return true
+          return val.length === 17 && validator.isNumeric
+        },
+        message: 'Passport number needs to be of 17 digits',
+      },
     },
 
     paymentStatus: {
       type: String,
-      default: 'Due',
+      default: 'due',
+      trim: true,
+      enum: {
+        values: ['due', 'paid'],
+        message: 'Payment Status need to bbe due or paid',
+      },
+    },
+
+    duePaymentAmount: {
+      type: Number,
+      required: [
+        function () {
+          return this.paymentStatus === 'due'
+        },
+        'Due payment status is required',
+      ],
+      default: 0,
       trim: true,
     },
 
-    paymentAmount: {
+    paidPaymentAmount: {
       type: Number,
-      required: [true, 'Payment Amount is Required'],
+      required: [
+        function () {
+          return this.paymentStatus === 'paid'
+        },
+        'Paid payment status is required',
+      ],
       default: 0,
       trim: true,
     },
@@ -60,23 +96,38 @@ const businessOwnerSchema = new mongoose.Schema(
 // Create tourists Schema
 const touristSchema = new mongoose.Schema(
   {
-    userID: {
-      type: String,
-      unique: true,
-      trim: true,
-    },
+    // userID: {
+    //   type: String,
+    //   unique: true,
+    //   trim: true,
+    // },
 
-    NID: {
+    nid: {
       type: String,
       default: '',
       unique: true,
       trim: true,
+      validate: {
+        validator: function (val) {
+          if (val === '') return true 
+          return (val.length === 10 || val.length === 17) && validator.isNumeric
+        },
+        message: 'nid number needs to be of 10 or 17 digits',
+      },
     },
 
     passport: {
       type: String,
+      default: '',
       unique: true,
       trim: true,
+      validate: {
+        validator: function (val) {
+          if (val === '') return true
+          return val.length === 17 && validator.isNumeric
+        },
+        message: 'Passport number needs to be of 17 digits',
+      },
     },
 
     subscription: {
@@ -175,9 +226,21 @@ const userSchema = new mongoose.Schema(
     },
     touristInfo: {
       type: touristSchema,
+      required: [
+        function () {
+          return this.userType === 'tourist'
+        },
+        'Tourist Info is required',
+      ],
     },
     businessOwnerInfo: {
       type: businessOwnerSchema,
+      required: [
+        function () {
+          return this.userType === 'businessowner'
+        },
+        'Business Owner Info is required',
+      ],
     },
   },
   {
