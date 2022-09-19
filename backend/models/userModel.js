@@ -7,6 +7,12 @@ import validator from 'validator' //imprt validator functionalities
 //Create Business Owners Schema
 const businessOwnerSchema = new mongoose.Schema(
   {
+    userID: {
+      type: String,
+      unique: true,
+      trim: true,
+    },
+
     NID: {
       type: String,
       default: '',
