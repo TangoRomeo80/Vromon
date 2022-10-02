@@ -67,6 +67,7 @@ export const getUser = getOne(User)
   Endpoint: /api/users/
   Description: This endpoint creates a new user
 */
+
 export const createUser = catchAsync(async (req, res, next) => {
   const mailCheckedUser = await User.findOne({ email: req.body.email })
 
@@ -77,6 +78,7 @@ export const createUser = catchAsync(async (req, res, next) => {
   if (req.body.userType !== 'admin') {
     return next(new AppError('Only admin user can be created manually', 429))
   }
+
   const newUser = await User.create(req.body)
 
   if (!newUser) {
@@ -94,29 +96,32 @@ export const createUser = catchAsync(async (req, res, next) => {
   Endpoint: /api/users/:id
   Description: This endpoint updates a specific user
 */
-export const updateUser = catchAsync(async (req, res, next) => {
-  let user = req.body
-  if (user.password) {
-    if (user.password.length < 6) {
-      return next(new AppError('Password must be at least 6 characters', 400))
-    }
-    const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1)
-    user.password = await bcrypt.hash(user.password, salt)
-  }
-  const upadtedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  })
 
-  if (!upadtedUser) {
-    return next(new AppError('No user found with that ID', 404))
-  }
+export const updateUser = updateOne(User)
 
-  res.status(200).json({
-    status: 'success',
-    data: upadtedUser,
-  })
-})
+// export const updateUser = catchAsync(async (req, res, next) => {
+//   let user = req.body
+//   if (user.password) {
+//     if (user.password.length < 6) {
+//       return next(new AppError('Password must be at least 6 characters', 400))
+//     }
+//     const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1)
+//     user.password = await bcrypt.hash(user.password, salt)
+//   }
+//   const upadtedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+//     new: true,
+//     runValidators: true,
+//   })
+
+//   if (!upadtedUser) {
+//     return next(new AppError('No user found with that ID', 404))
+//   }
+
+//   res.status(200).json({
+//     status: 'success',
+//     data: upadtedUser,
+//   })
+// })
 
 /*
   Request type: DELETE

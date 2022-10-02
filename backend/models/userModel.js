@@ -266,6 +266,14 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, salt)
 })
 
+userSchema.pre('findOneAndUpdate', async function (next) {
+  if (!this._update.password) {
+    next()
+  }
+  const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1)
+  this._update.password = await bcrypt.hash(this._update.password, salt)
+})
+
 const User = mongoose.model('User', userSchema) //create a model
 
 export default User //export the model
