@@ -109,7 +109,7 @@ const touristSchema = new mongoose.Schema(
       trim: true,
       validate: {
         validator: function (val) {
-          if (val === '') return true 
+          if (val === '') return true
           return (val.length === 10 || val.length === 17) && validator.isNumeric
         },
         message: 'nid number needs to be of 10 or 17 digits',
@@ -226,6 +226,9 @@ const userSchema = new mongoose.Schema(
     },
     touristInfo: {
       type: touristSchema,
+      default: function () {
+        return this.userType === 'tourist' ? {} : undefined
+      },
       required: [
         function () {
           return this.userType === 'tourist'
@@ -235,6 +238,9 @@ const userSchema = new mongoose.Schema(
     },
     businessOwnerInfo: {
       type: businessOwnerSchema,
+      default: function () {
+        return this.userType === 'businessowner' ? {} : undefined
+      },
       required: [
         function () {
           return this.userType === 'businessowner'
