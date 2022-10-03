@@ -17,6 +17,8 @@ import {
   googleAuthRedirect,
   googleAuthResponse,
   getAuthedUser,
+  protect,
+  restrictTo,
 } from '../controllers/authController.js' //import authoriztion controller
 
 const router = express.Router() //create router instance

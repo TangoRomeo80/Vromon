@@ -1,5 +1,5 @@
 /* This file contains the logic for handling requests for user authentication*/
-
+import jwt from 'jsonwebtoken'
 import User from '../models/userModel.js' //import service data model
 import catchAsync from '../utils/catchAsync.js'
 import AppError from '../utils/appError.js'
@@ -127,5 +127,53 @@ export const googleAuthResponse = (req, res, next) => {
   } else {
     next(new AppError('No user found or created', 401))
     res.redirect('http://localhost:3000')
+  }
+}
+
+//this is a middleware that checks if the user is authenticated
+export const protect = catchAsync(async (req, res, next) => {
+  let token
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1]
+  }
+
+  if (!token) {
+    return next(
+      new AppError('You are not logged in! Please log in to get access.', 401)
+    )
+  }
+
+  // 2) Verification token
+  const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+  // 3) Check if user still exists
+  const currentUser = await User.findById(decoded.id)
+  if (!currentUser) {
+    return next(
+      new AppError(
+        'The user belonging to this token does no longer exist.',
+        401
+      )
+    )
+  }
+
+  // GRANT ACCESS TO PROTECTED ROUTE
+  req.user = currentUser
+  next()
+})
+
+//this is a middleware that checks if the user is an allowed to perform the action
+export const restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (req.user && roles.includes(req.user.userType)) {
+      next()
+    } else {
+      return next(
+        new AppError('You do not have permission to perform this action', 403)
+      )
+    }
   }
 }
