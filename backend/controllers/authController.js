@@ -160,6 +160,13 @@ export const protect = catchAsync(async (req, res, next) => {
     )
   }
 
+  // 4) Check if user changed password after the token was issued
+  if (currentUser.changedPasswordAfter(decoded.iat)) {
+    return next(
+      new AppError('User recently changed password! Please log in again.', 401)
+    )
+  }
+
   // GRANT ACCESS TO PROTECTED ROUTE
   req.user = currentUser
   next()
@@ -177,3 +184,5 @@ export const restrictTo = (...roles) => {
     }
   }
 }
+
+//

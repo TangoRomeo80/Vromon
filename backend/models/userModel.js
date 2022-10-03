@@ -212,6 +212,7 @@ const userSchema = new mongoose.Schema(
       ],
       minLength: 6,
     },
+    passwordChangedAt: Date,
     imageURL: {
       type: String,
       default: '',
@@ -256,6 +257,20 @@ const userSchema = new mongoose.Schema(
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password)
+}
+
+userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = parseInt(
+      this.passwordChangedAt.getTime() / 1000,
+      10
+    )
+
+    return JWTTimestamp < changedTimestamp
+  }
+
+  // False means NOT changed
+  return false
 }
 
 userSchema.pre('save', async function (next) {
