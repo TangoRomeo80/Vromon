@@ -301,6 +301,8 @@ userSchema.pre('save', async function (next) {
   }
   const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1)
   this.password = await bcrypt.hash(this.password, salt)
+  this.passwordChangedAt = Date.now() - 1000
+  next()
 })
 
 //hashing password before document is updated
@@ -310,6 +312,8 @@ userSchema.pre('findOneAndUpdate', async function (next) {
   }
   const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1)
   this._update.password = await bcrypt.hash(this._update.password, salt)
+  this.passwordChangedAt = Date.now() - 1000
+  next()
 })
 
 const User = mongoose.model('User', userSchema) //create a model
