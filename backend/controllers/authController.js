@@ -6,6 +6,7 @@ import AppError from '../utils/appError.js'
 import generateToken from '../utils/generateToken.js' //import JWT token generator
 import passport from 'passport'
 import sendEmail from '../utils/emailHandler.js'
+import crypto from 'crypto' //imprt crypto library for token hashing
 
 /*
   Request type: POST
@@ -263,5 +264,8 @@ export const resetPassword = catchAsync(async (req, res, next) => {
 
   // 3) Update changedPasswordAt property for the user
   // 4) Log the user in, send JWT
-  createSendToken(user, 200, res)
+  res.status(200).json({
+    status: 'success',
+    data: { ...user._doc, token: generateToken(user._id) },
+  })
 })
