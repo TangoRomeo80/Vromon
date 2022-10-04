@@ -21,6 +21,7 @@ import {
   restrictTo,
   forgotPassword,
   resetPassword,
+  updatePassword,
 } from '../controllers/authController.js' //import authoriztion controller
 
 const router = express.Router() //create router instance
@@ -34,7 +35,8 @@ router
 router.route('/auth/:id').get(getAuthedUser) //route to get data from external source, i.e: google
 
 router.route('/forgotPassword').post(forgotPassword) //route to handle forgot password
-router.route('/resetPassword/:token').post(resetPassword)
+router.route('/resetPassword/:token').post(resetPassword) //route to handle reset password after forgetting password
+router.route('/updatePassword/:id').post(updatePassword) //route to handle update password
 
 //base CRUD functionality for admin only
 router.route('/').get(getAllUsers).post(createUser)

@@ -269,3 +269,25 @@ export const resetPassword = catchAsync(async (req, res, next) => {
     data: { ...user._doc, token: generateToken(user._id) },
   })
 })
+
+/*
+  Request type: POST
+  Endpoint: /api/users/updatePassword/:id
+  Description: This endpoint gives the functionality to handle reset password functionality
+*/
+export const updatePassword = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id)
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404))
+  }
+  const { prevPassword, newPassword } = req.body
+  if (!(await user.matchPassword(prevPassword))) {
+    return next(new AppError('Your current password is wrong.', 401))
+  }
+  user.password = newPassword
+  await user.save()
+  res.status(200).json({
+    status: 'success',
+    data: { ...user._doc, token: generateToken(user._id) },
+  })
+})
