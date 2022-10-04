@@ -3,6 +3,7 @@
 import mongoose from 'mongoose' //import mongoose from
 import bcrypt from 'bcryptjs' //import bcrypt for password hashing
 import validator from 'validator' //imprt validator functionalities
+import crypto from 'crypto' //imprt crypto library for token hashing
 
 //Create Business Owners Schema
 const businessOwnerSchema = new mongoose.Schema(
@@ -213,6 +214,8 @@ const userSchema = new mongoose.Schema(
       minLength: 6,
     },
     passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
     imageURL: {
       type: String,
       default: '',
@@ -255,10 +258,12 @@ const userSchema = new mongoose.Schema(
   }
 )
 
+//method to check if password matches
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password)
 }
 
+//method to check if password was changed after token was issued
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
@@ -273,6 +278,23 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   return false
 }
 
+//method to create password reset token
+userSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString('hex')
+
+  this.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex')
+
+  // console.log({ resetToken }, this.passwordResetToken)
+
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000
+
+  return resetToken
+}
+
+//hashing password before document is created
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next()
@@ -281,6 +303,7 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, salt)
 })
 
+//hashing password before document is updated
 userSchema.pre('findOneAndUpdate', async function (next) {
   if (!this._update.password) {
     next()
