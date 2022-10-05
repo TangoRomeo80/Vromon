@@ -8,6 +8,8 @@ import {
   createUser,
   updateUser,
   deleteUser,
+  updateMe,
+  deleteMe,
 } from '../controllers/userController.js' //import User controller
 
 import {
@@ -37,6 +39,8 @@ router.route('/auth/:id').get(getAuthedUser) //route to get data from external s
 router.route('/forgotPassword').post(forgotPassword) //route to handle forgot password
 router.route('/resetPassword/:token').post(resetPassword) //route to handle reset password after forgetting password
 router.route('/updatePassword/:id').post(updatePassword) //route to handle update password
+router.route('/updateMe').patch(updateMe) //route to handle profile information update by user
+router.route('/deleteMe').delete(deleteMe) //route to handle profile deletion by user
 
 //base CRUD functionality for admin only
 router.route('/').get(getAllUsers).post(createUser)
