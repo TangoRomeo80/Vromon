@@ -7,9 +7,18 @@ dotenv.config() //load the .env file
 
 import express from 'express' //import express from express
 import cors from 'cors' //import cors for CROSS-ORIGIN-RESOURCE-SHARING
+
+//security functionality
+import { rateLimit } from 'express-rate-limit' //for limiting requests from single IP
+import helmet from 'helmet' //for setting security HTTP headers
+import mongoSanitize from 'express-mongo-sanitize' //for data sanitization against NoSQL query injection
+import xss from 'xss-clean' //for data sanitization against XSS
+
+//authenticator functionalities
 import passport from 'passport' //import passport for authentication
 import passportSetup from './controllers/passport.js' //import passport setup
 
+//error handling functionalities
 import AppError from './utils/appError.js' //import appError for error report creation
 import globalErrorHandler from './controllers/errorController.js' //import global error handler
 
@@ -24,10 +33,23 @@ const app = express() //create an instance of express
 
 app.use(cors()) //enable cors
 
+//global middlewares
+
+app.use(helmet())
+app.use(mongoSanitize())
+app.use(xss())
+
+const limiter = rateLimit({
+  max: 300,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many requests from this IP, please try again in an hour!',
+})
+app.use('/api', limiter)
+
+app.use(express.json({ limit: '50kb' })) //use json parser with 50kb request limit
+
 app.use(passport.initialize()) //initialize passport
 passportSetup(passport) //setup passport
-
-app.use(express.json()) //use json parser
 
 //use Routers
 app.use('/api/services', serviceRouter) //use service routes
