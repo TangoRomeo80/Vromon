@@ -10,6 +10,11 @@ const serviceSchema = new mongoose.Schema(
       ref: 'Destination', //like foreign key
       required: [true, 'service destination ID is required'],
     },
+    business: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Business', //like foreign key
+      required: [true, 'service business ID is required'],
+    },
     serviceName: {
       type: String,
       trim: true,
@@ -33,11 +38,6 @@ const serviceSchema = new mongoose.Schema(
       trim: true,
       required: [true, 'Service description is required'],
     },
-    business: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Business',
-      required: [true, 'service business ID is required'],
-    },
     serviceMobileNumber: {
       type: String,
       required: [true, 'service mobile number is required'],
@@ -57,7 +57,7 @@ const serviceSchema = new mongoose.Schema(
           'Service type needs to be accomodation, transportation, food, tourGuide or others',
       },
     },
-  
+
     price: {
       type: Number,
       required: [true, 'service price is required'],

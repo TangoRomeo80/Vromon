@@ -39,7 +39,12 @@ const destinationSchema = new mongoose.Schema(
     imgCover: {
       type: String,
       default: '',
-      required: [true, 'A destination must have a cover image'],
+      required: [
+        function () {
+          return this.imgCover != ''
+        },
+        'A destination must have a cover image',
+      ],
     },
     images: [String],
   },
