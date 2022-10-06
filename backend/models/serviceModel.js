@@ -2,24 +2,6 @@
 
 import mongoose from 'mongoose' //import mongoose
 
-// const serviceTest1Schema = new mongoose.Schema(
-//   {
-//     testField1:  {String},
-
-    
-//     testField2: {String}
-//   }
-// )
-// const serviceTest2Schema = new mongoose.Schema(
-//   {
-//     testField1: {type: String},
-
-    
-//     testField2: {type: String}
-//   }
-// )
-
-
 //create a services schema
 const serviceSchema = new mongoose.Schema(
   {
