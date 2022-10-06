@@ -122,7 +122,7 @@ const serviceSchema = new mongoose.Schema(
   }
 )
 
-serviceSchema.pre(/^find/, function (next) {
+serviceSchema.pre('findOne', function (next) {
   this.populate({
     path: 'reviews',
     populate: {
