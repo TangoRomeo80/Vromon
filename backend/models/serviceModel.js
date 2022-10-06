@@ -1,6 +1,34 @@
 /* This file contains the data modelling and data tier functionalities for services */
 
 import mongoose from 'mongoose' //import mongoose
+import validator from 'validator' //imprt validator functionalities
+
+//create review schema
+const reviewSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: [true, 'Review must belong to a user'],
+    },
+    description: {
+      type: String,
+      trim: true,
+      maxlength: [500, 'Description cannot be more than 500 characters'],
+      required: [true, 'Review must have a description'],
+    },
+    rating: {
+      type: Number,
+      default: 4.5,
+      min: 1,
+      max: 5,
+      required: [true, 'Review must have a rating'],
+    },
+  },
+  {
+    timestamps: true,
+  }
+)
 
 //create a services schema
 const serviceSchema = new mongoose.Schema(
@@ -21,26 +49,46 @@ const serviceSchema = new mongoose.Schema(
       required: [true, 'Service name is required'],
       maxlength: [50, 'Service name cannot be more than 50 characters'],
     },
-    coverImage: {
+    coverImg: {
       type: String,
-      required: [true, 'Service cover image is required'],
+      required: [
+        function () {
+          return this.coverImg != ''
+        },
+        'A destination must have a cover image',
+      ],
     },
 
     images: [String],
 
-    summary: {
-      type: String,
-      trim: true,
-      required: [true, 'Service summary is required'],
-    },
     description: {
       type: String,
       trim: true,
       required: [true, 'Service description is required'],
     },
+
     serviceMobileNumber: {
       type: String,
-      required: [true, 'service mobile number is required'],
+      default: '',
+      required: [
+        function () {
+          return this.serviceMobileNumber != ''
+        },
+        'Service mobile number is required',
+      ],
+      validate: {
+        validator: function (val) {
+          if (val !== '') {
+            return (
+              (val.length === 11 || val.length === 14) && validator.isNumeric //May need to change validator.isNumeric
+            )
+          } else {
+            return true
+          }
+        },
+        message:
+          'Mobile number needs to be of 11 or 14 digits and can only contain numerics or + sign',
+      },
     },
     serviceType: {
       type: String,
@@ -67,21 +115,22 @@ const serviceSchema = new mongoose.Schema(
       default: 0,
       max: [100, 'Service price discount cannot be more than 100%'],
     },
-    rating: {
-      type: Number,
-      default: 4.5,
-      min: [1, 'rating must be above 1.0'],
-      max: [5, 'rating must be below 5.0'],
-    },
-    ratingQuantity: {
-      type: Number,
-      default: 0,
-    },
+    reviews: [reviewSchema],
   },
   {
     timestamps: true,
   }
 )
+
+serviceSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'reviews',
+    populate: {
+      path: 'user',
+    },
+  })
+  next()
+})
 
 const Service = mongoose.model('Service', serviceSchema) //create a model
 

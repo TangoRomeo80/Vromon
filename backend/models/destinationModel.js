@@ -36,12 +36,12 @@ const destinationSchema = new mongoose.Schema(
       default: 'No description for this destination',
       maxlength: [500, 'Description cannot be more than 500 characters'],
     },
-    imgCover: {
+    coverImg: {
       type: String,
       default: '',
       required: [
         function () {
-          return this.imgCover != ''
+          return this.coverImg != ''
         },
         'A destination must have a cover image',
       ],

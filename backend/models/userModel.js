@@ -312,7 +312,7 @@ userSchema.pre('findOneAndUpdate', async function (next) {
   }
   const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1)
   this._update.password = await bcrypt.hash(this._update.password, salt)
-  this.passwordChangedAt = Date.now() - 1000
+  this._update.passwordChangedAt = Date.now() - 1000
   next()
 })
 
