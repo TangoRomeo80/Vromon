@@ -119,8 +119,20 @@ const serviceSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 )
+
+serviceSchema.virtual('averageRating').get(function () {
+  if (this.reviews.length === 0) return 4.5
+  const sum = this.reviews.reduce((acc, curr) => acc + curr.rating, 0)
+  return sum / this.reviews.length
+})
+
+serviceSchema.virtual('numOfRatings').get(function () {
+  return this.reviews.length
+})
 
 serviceSchema.pre('findOne', function (next) {
   this.populate({
