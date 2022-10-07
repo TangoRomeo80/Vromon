@@ -108,10 +108,7 @@ export const getAllBusinesses = getAll(Business)
 // Endpoint: /api/businesses/:id
 // Description: This endpoint returns a businesses with :id
 
-export const getBusiness = getOne(Business, {
-  path: 'businessOwner',
-  select: '-password',
-})
+export const getBusiness = getOne(Business)
 
 // export const getBusiness = catchAsync(async (req, res, next) => {
 //   const business = await Business.findById(req.params.id) //method using mongoose findById

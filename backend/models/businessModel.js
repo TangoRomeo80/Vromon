@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import validator from 'validator'
 
 //Create a Business schema
-const businessShcema = new mongoose.Schema(
+const businessSchema = new mongoose.Schema(
   {
     businessOwner: {
       type: mongoose.Schema.Types.ObjectId,
@@ -76,7 +76,15 @@ const businessShcema = new mongoose.Schema(
   }
 )
 
+businessSchema.pre('findOne', function (next) {
+  this.populate({
+    path: 'businessOwner',
+    select: '-password',
+  })
+  next()
+})
+
 //Create Business Model
-const Business = mongoose.model('Business', businessShcema)
+const Business = mongoose.model('Business', businessSchema)
 
 export default Business

@@ -124,6 +124,7 @@ const serviceSchema = new mongoose.Schema(
   }
 )
 
+//creating virtual fields
 serviceSchema.virtual('averageRating').get(function () {
   if (this.reviews.length === 0) return 4.5
   const sum = this.reviews.reduce((acc, curr) => acc + curr.rating, 0)
@@ -134,13 +135,23 @@ serviceSchema.virtual('numOfRatings').get(function () {
   return this.reviews.length
 })
 
+//populating schema for specific id request
 serviceSchema.pre('findOne', function (next) {
-  this.populate({
-    path: 'reviews',
-    populate: {
-      path: 'user',
+  this.populate([
+    {
+      path: 'reviews',
+      populate: {
+        path: 'user',
+        select: '-password',
+      },
     },
-  })
+    {
+      path: 'destination',
+    },
+    {
+      path: 'business',
+    },
+  ])
   next()
 })
 

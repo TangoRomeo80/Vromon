@@ -55,10 +55,7 @@ export const getAllServices = getAll(Service)
   Description: This endpoint returns service with :id
 */
 
-export const getService = getOne(Service, [
-  { path: 'destination' },
-  { path: 'business' },
-])
+export const getService = getOne(Service)
 
 // export const getService = catchAsync(async (req, res, next) => {
 //   // Service.findOne({ _id: req.params.id }) //method using mongodb findOne

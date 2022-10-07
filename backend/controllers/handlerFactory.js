@@ -29,11 +29,9 @@ export const getAll = (Model) =>
   })
 
 //Get one instance
-export const getOne = (Model, populateOptions) =>
+export const getOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    let query = Model.findById(req.params.id)
-    if (populateOptions) query = query.populate(populateOptions)
-    const doc = await query
+    const doc = await Model.findById(req.params.id)
 
     if (!doc) {
       return next(
