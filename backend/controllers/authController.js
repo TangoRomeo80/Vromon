@@ -281,6 +281,9 @@ export const updatePassword = catchAsync(async (req, res, next) => {
     return next(new AppError('No user found with that ID', 404))
   }
   const { prevPassword, newPassword } = req.body
+  if(prevPassword === newPassword){
+    return next(new AppError('New password cannot be same as old password', 400))
+  }
   if (!(await user.matchPassword(prevPassword))) {
     return next(new AppError('Your current password is wrong.', 401))
   }
