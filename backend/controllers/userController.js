@@ -18,26 +18,6 @@ import {
 */
 
 export const getAllUsers = getAll(User)
-
-// export const getAllUsers = catchAsync(async (req, res, next) => {
-//   const features = new APIFeatures(User.find(), req.query)
-//     .filter()
-//     .sort()
-//     .limitFields()
-//     .paginate()
-//   const users = await features.query
-
-//   if (users.length < 1) {
-//     return next(new AppError('No users found', 404))
-//   }
-
-//   res.status(200).json({
-//     status: 'success',
-//     results: users.length,
-//     data: users,
-//   })
-// })
-
 /*
   Request type: GET
   Endpoint: /api/users/:id
@@ -45,20 +25,6 @@ export const getAllUsers = getAll(User)
 */
 
 export const getUser = getOne(User)
-
-// export const getUser = catchAsync(async (req, res, next) => {
-//   // User.findOne({ _id: req.params.id }) //method using mongodb findOne
-//   const user = await User.findById(req.params.id) //method using mongoose findById
-
-//   if (!user) {
-//     return next(new AppError('No user found with that ID', 404))
-//   }
-
-//   res.status(200).json({
-//     status: 'success',
-//     data: user,
-//   })
-// })
 
 /*
   Request type: POST
@@ -96,30 +62,6 @@ export const createUser = catchAsync(async (req, res, next) => {
 */
 
 export const updateUser = updateOne(User)
-
-// export const updateUser = catchAsync(async (req, res, next) => {
-//   let user = req.body
-//   if (user.password) {
-//     if (user.password.length < 6) {
-//       return next(new AppError('Password must be at least 6 characters', 400))
-//     }
-//     const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS * 1)
-//     user.password = await bcrypt.hash(user.password, salt)
-//   }
-//   const upadtedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-//     new: true,
-//     runValidators: true,
-//   })
-
-//   if (!upadtedUser) {
-//     return next(new AppError('No user found with that ID', 404))
-//   }
-
-//   res.status(200).json({
-//     status: 'success',
-//     data: upadtedUser,
-//   })
-// })
 
 /*
   Request type: PATCH
@@ -174,16 +116,3 @@ export const deleteMe = catchAsync(async (req, res, next) => {
 */
 
 export const deleteUser = deleteOne(User)
-
-// export const deleteUser = catchAsync(async (req, res, next) => {
-//   const deletedUser = await User.findByIdAndDelete(req.params.id)
-
-//   if (!deletedUser) {
-//     return next(new AppError('No user found with that ID', 404))
-//   }
-
-//   res.status(204).json({
-//     status: 'success',
-//     data: null,
-//   })
-// })

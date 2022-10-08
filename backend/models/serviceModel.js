@@ -142,7 +142,7 @@ serviceSchema.pre('findOne', function (next) {
       path: 'reviews',
       populate: {
         path: 'user',
-        select: '-password',
+        select: 'userName image',
       },
     },
     {
