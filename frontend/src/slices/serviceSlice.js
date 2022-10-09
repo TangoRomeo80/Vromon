@@ -6,7 +6,7 @@ export const serviceSlice = createSlice({
     name: 'services',
     initialState: initialServices,
     reducers: {
-        getServices: (state = [], action) => { 
+        getServicesReducer: (state = [], action) => { 
             state.services = action.payload
         }
     }
