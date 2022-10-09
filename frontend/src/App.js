@@ -10,6 +10,7 @@ import HolidayPackagesScreen from './screens/HolidayPackagesScreen'
 import TouristInfoScreen from './screens/TouristInfoScreen' 
 import GuidedTourSearchScreen from './screens/GuidedTourSearchScreen'
 import BusinessOwnerInfoScreen from './screens/BusinessOwnerInfoScreen'
+import ErrorScreen from './screens/ErrorScreen'
 
 
 const App = () => {
@@ -19,14 +20,15 @@ const App = () => {
       <main>
         <Container fluid className='px-0'>
           <Routes>
-            <Route exact path='/' element={<HomeScreen />} />
-            <Route exact path='/login' element={<LoginScreen />} />
-            <Route exact path='/transports' element={<TransportScreen/>}/>
-            <Route exact path='/destinations' element={<DestinationScreen/>}/>
-            <Route exact path='/packages' element={<HolidayPackagesScreen/>}/>
-            <Route exact path='/touristInfo' element={<TouristInfoScreen/>}/>
-            <Route exact path='/tourSearch' element={<GuidedTourSearchScreen/>}/>
-            <Route exact path='/businessOwnerInfo' element={<BusinessOwnerInfoScreen/>}/>
+            <Route path='/' element={<HomeScreen />} />
+            <Route path='/login' element={<LoginScreen />} />
+            <Route path='/transports' element={<TransportScreen/>}/>
+            <Route path='/destinations' element={<DestinationScreen/>}/>
+            <Route path='/packages' element={<HolidayPackagesScreen/>}/>
+            <Route path='/touristInfo' element={<TouristInfoScreen/>}/>
+            <Route path='/tourSearch' element={<GuidedTourSearchScreen/>}/>
+            <Route path='/businessOwnerInfo' element={<BusinessOwnerInfoScreen />} />
+            <Route path='/*' element={<ErrorScreen />} />
           </Routes>
         </Container>
       </main>
