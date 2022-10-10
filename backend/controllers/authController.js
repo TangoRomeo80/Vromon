@@ -34,7 +34,14 @@ export const signupLocal = catchAsync(async (req, res, next) => {
 
   res.status(201).json({
     status: 'success',
-    data: newUser,
+    data: {
+      _id: newUser._id,
+      userName: newUser.userName,
+      email: newUser.email,
+      loginType: newUser.loginType,
+      userType: newUser.userType,
+      token: generateToken(newUser._id),
+    },
   })
 })
 
