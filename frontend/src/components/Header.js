@@ -11,31 +11,31 @@ import {
 
 const Header = () => {
   return (
-    <header>
-      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
+    <header className="fixed-top">
+      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
         <Container>
-          <LinkContainer to='/'>
+          <LinkContainer to="/">
             <Navbar.Brand>
               <h3>VROMON</h3>
             </Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-          <Navbar.Collapse id='responsive-navbar-nav'>
-            <Nav className='me-auto'>
-              <LinkContainer to='/destinations'>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              <LinkContainer to="/destinations">
                 <Nav.Link>
                   <FaMapMarkerAlt />
                   Destinations
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to='/transports'>
+              <LinkContainer to="/transports">
                 <Nav.Link>
                   <FaCar />/<FaPlane />
                   Transport
                 </Nav.Link>
               </LinkContainer>
 
-              <LinkContainer to='/packages'>
+              <LinkContainer to="/packages">
                 <Nav.Link>
                   <FaUmbrellaBeach />
                   Holiday Packages
@@ -44,30 +44,25 @@ const Header = () => {
             </Nav>
 
             <Nav>
-                <NavDropdown title={<FaUser />} id='basic-nav-dropdown'>
-
+              <NavDropdown title={<FaUser />} id="basic-nav-dropdown">
                 <NavDropdown.Item>
-                <LinkContainer to='/login'>
-                <Nav.Link className='text-dark'>Sign In</Nav.Link>
-                </LinkContainer>
+                  <LinkContainer to="/login">
+                    <Nav.Link className="text-dark">Sign In</Nav.Link>
+                  </LinkContainer>
                 </NavDropdown.Item>
 
                 <NavDropdown.Item>
-                <LinkContainer to='/login'>
-                <Nav.Link className='text-dark'>Sign Out</Nav.Link>
-                </LinkContainer>
-                
+                  <LinkContainer to="/login">
+                    <Nav.Link className="text-dark">Sign Out</Nav.Link>
+                  </LinkContainer>
                 </NavDropdown.Item>
               </NavDropdown>
-              
-              
             </Nav>
-            
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </header>
-  )
+  );
 }
 
 export default Header
