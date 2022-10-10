@@ -9,10 +9,24 @@ const signupLocal = async (userData) => {
   return response.data.data
 }
 
+//signin user locally
+const signinLocal = async (userData) => {
+  const response = await axios.post('/api/users/signin/local', userData)
+  if (response.data.status === 'success') {
+    localStorage.setItem('user', JSON.stringify(response.data.data))
+  }
+  return response.data.data
+}
+
+//logout user
+const logout = async () => {
+  localStorage.removeItem('user')
+}
+
 const authService = {
   signupLocal,
-  // logout,
-  // login,
+  signinLocal,
+  logout,
 }
 
 export default authService

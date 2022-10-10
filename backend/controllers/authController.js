@@ -51,6 +51,7 @@ export const signupLocal = catchAsync(async (req, res, next) => {
   Description: This endpoint signs in a new user locally
 */
 export const signinLocal = catchAsync(async (req, res, next) => {
+  
   const { email, password } = req.body
 
   const authedUser = await User.findOne({
@@ -60,10 +61,17 @@ export const signinLocal = catchAsync(async (req, res, next) => {
   if (authedUser && (await authedUser.matchPassword(password))) {
     res.status(200).json({
       status: 'success',
-      data: { ...authedUser._doc, token: generateToken(authedUser._id) },
+      data: {
+        _id: authedUser._id,
+        userName: authedUser.userName,
+        email: authedUser.email,
+        loginType: authedUser.loginType,
+        userType: authedUser.userType,
+        token: generateToken(authedUser._id),
+      },
     })
   } else {
-    return next(new AppError('Invalid username or password', 401))
+    return next(new AppError('Invalid email or password', 401))
   }
 })
 

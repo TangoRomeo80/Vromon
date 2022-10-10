@@ -28,6 +28,27 @@ export const signupLocal = createAsyncThunk(
   }
 )
 
+//signin user locally
+export const signinLocal = createAsyncThunk(
+  'auth/signinLocal',
+  async (user, thunkAPI) => {
+    try {
+      return await authService.signinLocal(user)
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+//logout user
+export const logout = createAsyncThunk('auth/logout', async () => {
+  await authService.logout()
+})
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -54,6 +75,23 @@ export const authSlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.message = action.payload
+        state.user = null
+      })
+      .addCase(signinLocal.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(signinLocal.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.user = action.payload
+      })
+      .addCase(signinLocal.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.user = null
+      })
+      .addCase(logout.fulfilled, (state) => {
         state.user = null
       })
   },
