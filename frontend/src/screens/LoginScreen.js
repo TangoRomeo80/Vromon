@@ -35,7 +35,7 @@ const LoginScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(signinLocal(email, password))
+    dispatch(signinLocal({ email, password }))
   }
 
   const handleGoogle = () => {

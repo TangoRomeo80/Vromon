@@ -51,7 +51,6 @@ export const signupLocal = catchAsync(async (req, res, next) => {
   Description: This endpoint signs in a new user locally
 */
 export const signinLocal = catchAsync(async (req, res, next) => {
-  
   const { email, password } = req.body
 
   const authedUser = await User.findOne({
