@@ -10,14 +10,14 @@ const Navbar = () => {
   useEffect(() => {
     if (searchParams.get('id')) {
       axios
-        .get(`http://localhost:5000/api/users/auth/${searchParams.get('id')}`)
+        .get(`/api/users/auth/${searchParams.get('id')}`)
         .then((res) => {
           setUser(res.data.data)
+          localStorage.setItem('userInfo', JSON.stringify(res.data.data))
         })
     }
   }, [])
 
-  console.log(user)
 
   return (
     <>

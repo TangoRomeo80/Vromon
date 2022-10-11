@@ -4,7 +4,7 @@ import axios from 'axios'
 const signupLocal = async (userData) => {
   const response = await axios.post('/api/users/signup/local', userData)
   if (response.data.status === 'success') {
-    localStorage.setItem('user', JSON.stringify(response.data.data))
+    localStorage.setItem('userInfo', JSON.stringify(response.data.data))
   }
   return response.data.data
 }
@@ -13,7 +13,7 @@ const signupLocal = async (userData) => {
 const signinLocal = async (userData) => {
   const response = await axios.post('/api/users/signin/local', userData)
   if (response.data.status === 'success') {
-    localStorage.setItem('user', JSON.stringify(response.data.data))
+    localStorage.setItem('userInfo', JSON.stringify(response.data.data))
   }
   return response.data.data
 }
