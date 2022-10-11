@@ -1,9 +1,7 @@
 import React from 'react'
 
 const ErrorScreen = () => {
-  return (
-    <div>ErrorScreen</div>
-  )
+  return <div style={{ backgroundColor: 'red' }}>ErrorScreen</div>
 }
 
 export default ErrorScreen
