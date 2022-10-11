@@ -88,7 +88,14 @@ export const getAuthedUser = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    data: { ...user._doc, token: generateToken(user._id) },
+    data: {
+      _id: user._id,
+      userName: user.userName,
+      email: user.email,
+      loginType: user.loginType,
+      userType: user.userType,
+      token: generateToken(user._id),
+    },
   })
 })
 
