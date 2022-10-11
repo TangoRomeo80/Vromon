@@ -1,31 +1,35 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
-import axios from 'axios'
+import { getAuthedUser, reset } from '../features/auth/authSlice'
 
 const Navbar = () => {
-  const [user, setUser] = useState(null)
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
+
+  const { userInfo, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  )
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (searchParams.get('id')) {
-      axios
-        .get(`/api/users/auth/${searchParams.get('id')}`)
-        .then((res) => {
-          setUser(res.data.data)
-          localStorage.setItem('userInfo', JSON.stringify(res.data.data))
-        })
+      if (!isSuccess || !userInfo) {
+        dispatch(getAuthedUser(searchParams.get('id')))
+      }
+      if (isError) {
+        alert(message)
+      }
+      dispatch(reset())
     }
-  }, [])
-
+  }, [searchParams, userInfo, isError, isSuccess, message, dispatch])
 
   return (
     <>
       <Card>
-        <Card.Img variant="top" src="/Nav/test2.jpg" />
-        <Card.Body>
-          
-        </Card.Body>
+        <Card.Img variant='top' src='/Nav/test2.jpg' />
+        <Card.Body></Card.Body>
       </Card>
     </>
   )

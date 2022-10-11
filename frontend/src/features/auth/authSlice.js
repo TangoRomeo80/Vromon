@@ -44,8 +44,21 @@ export const signinLocal = createAsyncThunk(
   }
 )
 
-//signin user with google
-export const signinGoogle = createAsyncThunk()
+//get google loggedin user information
+export const getAuthedUser = createAsyncThunk(
+  'auth/getAuthedUser',
+  async (id, thunkAPI) => {
+    try {
+      return await authService.getAuthedUser(id)
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
 
 //logout user
 export const logout = createAsyncThunk('auth/logout', async () => {
@@ -89,6 +102,20 @@ export const authSlice = createSlice({
         state.userInfo = action.payload
       })
       .addCase(signinLocal.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.userInfo = null
+      })
+      .addCase(getAuthedUser.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getAuthedUser.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.userInfo = action.payload
+      })
+      .addCase(getAuthedUser.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

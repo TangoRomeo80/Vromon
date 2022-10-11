@@ -18,9 +18,13 @@ const signinLocal = async (userData) => {
   return response.data.data
 }
 
-//signin user with google
-const signinGoogle = async () => { 
-  
+//get google loggedin user information
+const getAuthedUser = async (id) => {
+  const response = await axios.get(`/api/users/auth/${id}`)
+  if (response.data.status === 'success') {
+    localStorage.setItem('userInfo', JSON.stringify(response.data.data))
+  }
+  return response.data.data
 }
 
 //logout user
@@ -31,6 +35,7 @@ const logout = async () => {
 const authService = {
   signupLocal,
   signinLocal,
+  getAuthedUser,
   logout,
 }
 
