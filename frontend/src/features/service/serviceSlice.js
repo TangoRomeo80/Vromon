@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 const initialState = {
   services: [],
+  serviceDetail: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
