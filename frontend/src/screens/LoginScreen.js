@@ -14,12 +14,12 @@ const LoginScreen = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
+  const { userInfo, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
   )
 
   useEffect(() => {
-    if (isSuccess || user) {
+    if (isSuccess || userInfo) {
       navigate('/')
     }
     if (isError) {
@@ -27,7 +27,7 @@ const LoginScreen = () => {
     }
 
     dispatch(reset())
-  }, [user, isError, isSuccess, message, navigate, dispatch])
+  }, [userInfo, isError, isSuccess, message, navigate, dispatch])
 
   const passwordShow = (e) => {
     e.target.checked ? setShowPassword('text') : setShowPassword('password')
