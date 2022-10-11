@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
 
 //get user from local storage
-const user = JSON.parse(localStorage.getItem('user'))
+const userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
 const initialState = {
-  user: user ? user : null,
+  userInfo: userInfo ? userInfo : null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -15,9 +15,9 @@ const initialState = {
 //signup user locally
 export const signupLocal = createAsyncThunk(
   'auth/signupLocal',
-  async (user, thunkAPI) => {
+  async (userData, thunkAPI) => {
     try {
-      return await authService.signupLocal(user)
+      return await authService.signupLocal(userData)
     } catch (err) {
       const message =
         (err.response && err.response.data && err.response.data.message) ||
@@ -31,9 +31,9 @@ export const signupLocal = createAsyncThunk(
 //signin user locally
 export const signinLocal = createAsyncThunk(
   'auth/signinLocal',
-  async (user, thunkAPI) => {
+  async (userData, thunkAPI) => {
     try {
-      return await authService.signinLocal(user)
+      return await authService.signinLocal(userData)
     } catch (err) {
       const message =
         (err.response && err.response.data && err.response.data.message) ||
@@ -43,6 +43,9 @@ export const signinLocal = createAsyncThunk(
     }
   }
 )
+
+//signin user with google
+export const signinGoogle = createAsyncThunk()
 
 //logout user
 export const logout = createAsyncThunk('auth/logout', async () => {
@@ -69,13 +72,13 @@ export const authSlice = createSlice({
       .addCase(signupLocal.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.user = action.payload
+        state.userInfo = action.payload
       })
       .addCase(signupLocal.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
-        state.user = null
+        state.userInfo = null
       })
       .addCase(signinLocal.pending, (state) => {
         state.isLoading = true
@@ -83,16 +86,16 @@ export const authSlice = createSlice({
       .addCase(signinLocal.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.user = action.payload
+        state.userInfo = action.payload
       })
       .addCase(signinLocal.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
-        state.user = null
+        state.userInfo = null
       })
       .addCase(logout.fulfilled, (state) => {
-        state.user = null
+        state.userInfo = null
       })
   },
 })

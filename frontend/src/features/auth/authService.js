@@ -18,6 +18,11 @@ const signinLocal = async (userData) => {
   return response.data.data
 }
 
+//signin user with google
+const signinGoogle = async () => { 
+  
+}
+
 //logout user
 const logout = async () => {
   localStorage.removeItem('user')
