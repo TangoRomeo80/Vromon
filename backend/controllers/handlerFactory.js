@@ -107,6 +107,6 @@ export const deleteOne = (Model) =>
 
     res.status(204).json({
       status: 'success',
-      data: null,
+      data: { _id: req.params.id },
     })
   })

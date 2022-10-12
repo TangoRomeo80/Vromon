@@ -11,6 +11,7 @@ import TouristInfoScreen from './screens/TouristInfoScreen'
 import GuidedTourSearchScreen from './screens/GuidedTourSearchScreen'
 import BusinessOwnerInfoScreen from './screens/BusinessOwnerInfoScreen'
 import ErrorScreen from './screens/ErrorScreen'
+import TestScreen from './screens/TestScreen'
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
               path='/businessOwnerInfo'
               element={<BusinessOwnerInfoScreen />}
             />
+            <Route path='/test' element={<TestScreen />} />
             <Route path='/*' element={<ErrorScreen />} />
           </Routes>
         </Container>

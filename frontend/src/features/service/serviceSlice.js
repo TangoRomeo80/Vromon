@@ -3,11 +3,27 @@ import serviceService from './serviceService'
 
 const initialState = {
   services: [],
-  service: {},
-  isError: false,
-  isSuccess: false,
-  isLoading: false,
-  message: '',
+  service: null,
+  isListError: false,
+  isListSuccess: false,
+  isListLoading: false,
+  listErrorMessage: '',
+  isDetailsError: false,
+  isDetailsSuccess: false,
+  isDetailsLoading: false,
+  detailsErrorMessage: '',
+  isCreateError: false,
+  isCreateSuccess: false,
+  isCreateLoading: false,
+  createErrorMessage: '',
+  isUpdateError: false,
+  isUpdateSuccess: false,
+  isUpdateLoading: false,
+  updateErrorMessage: '',
+  isDeleteError: false,
+  isDeleteSuccess: false,
+  isDeleteLoading: false,
+  deleteErrorMessage: '',
 }
 
 //get all services
@@ -102,75 +118,77 @@ export const serviceSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getAllServices.pending, (state) => {
-        state.isLoading = true
+        state.isListLoading = true
       })
       .addCase(getAllServices.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.isListLoading = false
+        state.isListSuccess = true
         state.services = action.payload
       })
       .addCase(getAllServices.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isListLoading = false
+        state.isListError = true
+        state.listErrorMessage = action.payload
         state.services = []
       })
       .addCase(getServiceById.pending, (state) => {
-        state.isLoading = true
+        state.isDetailsLoading = true
       })
       .addCase(getServiceById.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.isDetailsLoading = false
+        state.isDetailsSuccess = true
         state.service = action.payload
       })
       .addCase(getServiceById.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
-        state.service = {}
+        state.isDetailsLoading = false
+        state.isDetailsError = true
+        state.detailsErrorMessage = action.payload
+        state.service = null
       })
       .addCase(createService.pending, (state) => {
-        state.isLoading = true
+        state.isCreateLoading = true
       })
       .addCase(createService.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.isCreateLoading = false
+        state.isCreateSuccess = true
         state.services.push(action.payload)
       })
       .addCase(createService.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isCreateLoading = false
+        state.isCreateError = true
+        state.createErrorMessage = action.payload
       })
       .addCase(updateService.pending, (state) => {
-        state.isLoading = true
+        state.isUpdateLoading = true
       })
       .addCase(updateService.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.isUpdateLoading = false
+        state.isUpdateSuccess = true
         state.services = state.services.map((service) =>
           service._id === action.payload._id ? action.payload : service
         )
+        state.service = state.service._id === action.payload._id ? action.payload : state.service
       })
       .addCase(updateService.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isUpdateLoading = false
+        state.isUpdateError = true
+        state.updateErrorMessage = action.payload
       })
       .addCase(deleteService.pending, (state) => {
-        state.isLoading = true
+        state.isDeleteLoading = true
       })
       .addCase(deleteService.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.isSuccess = true
+        state.isDeleteLoading = false
+        state.isDeleteSuccess = true
         state.services = state.services.filter(
           (service) => service._id !== action.payload._id
         )
+        state.service = state.service._id === action.payload._id ? null : state.service
       })
       .addCase(deleteService.rejected, (state, action) => {
-        state.isLoading = false
-        state.isError = true
-        state.message = action.payload
+        state.isDeleteLoading = false
+        state.isDeleteError = true
+        state.deleteErrorMessage = action.payload
       })
   },
 })
