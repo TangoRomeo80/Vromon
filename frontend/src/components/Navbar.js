@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
-import { getAuthedUser, reset } from '../features/auth/authSlice'
+import { getAuthedUser, resetAuth } from '../features/auth/authSlice'
 
 const Navbar = () => {
   const [searchParams] = useSearchParams()
@@ -21,7 +21,7 @@ const Navbar = () => {
       if (isError) {
         alert(message)
       }
-      dispatch(reset())
+      dispatch(resetAuth())
     }
   }, [searchParams, userInfo, isError, isSuccess, message, dispatch])
 

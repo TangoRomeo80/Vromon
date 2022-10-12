@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button, Form, Row, Col } from 'react-bootstrap'
 import { FcGoogle } from 'react-icons/fc'
 import FormContainer from '../components/FormContainer'
-import { signinLocal, reset } from '../features/auth/authSlice'
+import { signinLocal, resetAuth } from '../features/auth/authSlice'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
@@ -26,7 +26,7 @@ const LoginScreen = () => {
       alert(message)
     }
 
-    dispatch(reset())
+    dispatch(resetAuth())
   }, [userInfo, isError, isSuccess, message, navigate, dispatch])
 
   const passwordShow = (e) => {
