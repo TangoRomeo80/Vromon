@@ -29,7 +29,7 @@ const initialState = {
 //get all services
 export const getAllServices = createAsyncThunk(
   'service/getAllServices',
-  async (thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
       return await serviceService.getAllServices()
     } catch (err) {

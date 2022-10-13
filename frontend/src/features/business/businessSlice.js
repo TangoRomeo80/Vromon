@@ -29,7 +29,7 @@ const initialState = {
 //get all businesses
 export const getAllBusinesses = createAsyncThunk(
   'business/getAllBusinesses',
-  async (thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.userInfo.token
       return await businessService.getAllBusinesses(token)

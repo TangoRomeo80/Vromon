@@ -25,8 +25,7 @@ const TestScreen = () => {
 
   const { userInfo } = useSelector((state) => state.auth)
 
-  const { services, service, isLoading, isSuccess, isError, message } =
-    useSelector((state) => state.service)
+  const { businesses, listErrorMessage } = useSelector((state) => state.service)
 
   const handleGetAllBusinesses = () => {
     dispatch(getAllBusinesses())
