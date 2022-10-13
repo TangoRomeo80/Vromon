@@ -136,6 +136,8 @@ export const serviceSlice = createSlice({
       .addCase(getAllServices.fulfilled, (state, action) => {
         state.isListLoading = false
         state.isListSuccess = true
+        state.isListError = false
+        state.message = ''
         state.services = action.payload
       })
       .addCase(getAllServices.rejected, (state, action) => {
@@ -149,6 +151,8 @@ export const serviceSlice = createSlice({
       .addCase(getServiceById.fulfilled, (state, action) => {
         state.isDetailsLoading = false
         state.isDetailsSuccess = true
+        state.isDetailsError = false
+        state.detailsErrorMessage = ''
         state.service = action.payload
       })
       .addCase(getServiceById.rejected, (state, action) => {
@@ -162,6 +166,8 @@ export const serviceSlice = createSlice({
       .addCase(createService.fulfilled, (state, action) => {
         state.isCreateLoading = false
         state.isCreateSuccess = true
+        state.isCreateError = false
+        state.createErrorMessage = ''
         state.services.push(action.payload)
       })
       .addCase(createService.rejected, (state, action) => {
@@ -175,6 +181,8 @@ export const serviceSlice = createSlice({
       .addCase(updateService.fulfilled, (state, action) => {
         state.isUpdateLoading = false
         state.isUpdateSuccess = true
+        state.isUpdateError = false
+        state.updateErrorMessage = ''
         state.services = state.services.map((service) =>
           service._id === action.payload._id ? action.payload : service
         )
@@ -194,6 +202,8 @@ export const serviceSlice = createSlice({
       .addCase(deleteService.fulfilled, (state, action) => {
         state.isDeleteLoading = false
         state.isDeleteSuccess = true
+        state.isDeleteError = false
+        state.deleteErrorMessage = ''
         state.services = state.services.filter(
           (service) => service._id !== action.payload._id
         )

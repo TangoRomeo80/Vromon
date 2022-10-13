@@ -23,7 +23,7 @@ const TestScreen = () => {
     dispatch(getAllServices())
   }
 
-  const handleGetServiceById = () => { 
+  const handleGetServiceById = () => {
     dispatch(getServiceById('633e948c54052ace47ab1cbd'))
   }
 
