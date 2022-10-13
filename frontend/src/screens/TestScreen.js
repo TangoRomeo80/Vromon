@@ -8,6 +8,15 @@ import {
   updateService,
   deleteService,
 } from '../features/service/serviceSlice'
+
+import {
+  getAllBusinesses,
+  getBusinessById,
+  createBusiness,
+  updateBusiness,
+  deleteBusiness,
+} from '../features/business/businessSlice'
+
 import { useDispatch, useSelector } from 'react-redux'
 
 const TestScreen = () => {
@@ -19,19 +28,19 @@ const TestScreen = () => {
   const { services, service, isLoading, isSuccess, isError, message } =
     useSelector((state) => state.service)
 
-  const handleGetAllServices = () => {
-    dispatch(getAllServices())
+  const handleGetAllBusinesses = () => {
+    dispatch(getAllBusinesses())
   }
 
-  const handleGetServiceById = () => {
-    dispatch(getServiceById('633e948c54052ace47ab1cbd'))
+  const handleGetBusinessById = () => {
+    dispatch(getBusinessById('62f2673ab8da6c2bcdb9d0b7'))
   }
 
   return (
     <>
       <div>TestScreen</div>
-      <Button onClick={handleGetAllServices}>Get All Services</Button>
-      <Button onClick={handleGetServiceById}>Get Service By Id</Button>
+      <Button onClick={handleGetAllBusinesses}>Get All Businesses</Button>
+      <Button onClick={handleGetBusinessById}>Get Business By Id</Button>
       <Button variant='primary' onClick={() => navigate('/')}>
         Return to home
       </Button>

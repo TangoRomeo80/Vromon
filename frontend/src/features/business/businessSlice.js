@@ -138,6 +138,8 @@ const businessSlice = createSlice({
       .addCase(getAllBusinesses.fulfilled, (state, action) => {
         state.isListLoading = false
         state.isListSuccess = true
+        state.isListError = false
+        state.listErrorMessage = ''
         state.businesses = action.payload
       })
       .addCase(getAllBusinesses.rejected, (state, action) => {
@@ -151,6 +153,8 @@ const businessSlice = createSlice({
       .addCase(getBusinessById.fulfilled, (state, action) => {
         state.isDetailsLoading = false
         state.isDetailsSuccess = true
+        state.isDetailsError = false
+        state.detailsErrorMessage = ''
         state.business = action.payload
       })
       .addCase(getBusinessById.rejected, (state, action) => {
@@ -164,6 +168,8 @@ const businessSlice = createSlice({
       .addCase(createBusiness.fulfilled, (state, action) => {
         state.isCreateLoading = false
         state.isCreateSuccess = true
+        state.isCreateError = false
+        state.createErrorMessage = ''
         state.businesses.push(action.payload)
       })
       .addCase(createBusiness.rejected, (state, action) => {
@@ -177,6 +183,8 @@ const businessSlice = createSlice({
       .addCase(updateBusiness.fulfilled, (state, action) => {
         state.isUpdateLoading = false
         state.isUpdateSuccess = true
+        state.isUpdateError = false
+        state.updateErrorMessage = ''
         state.businesses = state.businesses.map((business) =>
           business._id === action.payload._id ? action.payload : business
         )
@@ -196,6 +204,8 @@ const businessSlice = createSlice({
       .addCase(deleteBusiness.fulfilled, (state, action) => {
         state.isDeleteLoading = false
         state.isDeleteSuccess = true
+        state.isDeleteError = false
+        state.deleteErrorMessage = ''
         state.businesses = state.businesses.filter(
           (business) => business._id !== action.payload._id
         )
