@@ -21,6 +21,26 @@ import {
   resetBusinessDetails,
 } from '../features/business/businessSlice'
 
+import {
+  getAllDestinations,
+  getDestinationById,
+  createDestination,
+  updateDestination,
+  deleteDestination,
+  resetDestinationList,
+  resetDestinationDetails,
+} from '../features/destination/destinationSlice'
+
+import {
+  getAllUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+  resetUserList,
+  resetUserDetails,
+} from '../features/user/userSlice'
+
 import { useDispatch, useSelector } from 'react-redux'
 
 const TestScreen = () => {
@@ -29,29 +49,28 @@ const TestScreen = () => {
 
   const { userInfo } = useSelector((state) => state.auth)
 
-  const { businesses, listErrorMessage } = useSelector((state) => state.service)
 
-  const handleGetAllBusinesses = () => {
-    dispatch(getAllBusinesses())
+  const handleGetList = () => {
+    dispatch(getAllUsers())
   }
 
-  const handleGetBusinessById = () => {
-    dispatch(getBusinessById('62f2673ab8da6c2bcdb9d0b7'))
+  const handleGetDetailById = () => {
+    dispatch(getUserById('62e633a777697bb04b9a3be7'))
   }
 
-  const handleListReset = () => { 
-    dispatch(resetBusinessList())
+  const handleListReset = () => {
+    dispatch(resetUserList())
   }
 
-  const handleDetailsReset = () => { 
-    dispatch(resetBusinessDetails())
+  const handleDetailsReset = () => {
+    dispatch(resetUserDetails())
   }
 
   return (
     <>
       <div>TestScreen</div>
-      <Button onClick={handleGetAllBusinesses}>Get All Businesses</Button>
-      <Button onClick={handleGetBusinessById}>Get Business By Id</Button>
+      <Button onClick={handleGetList}>Get data list from store</Button>
+      <Button onClick={handleGetDetailById}>Get detail of data by ID</Button>
       <Button onClick={handleListReset}>Reset List</Button>
       <Button onClick={handleDetailsReset}>Reset Details</Button>
       <Button variant='primary' onClick={() => navigate('/')}>
