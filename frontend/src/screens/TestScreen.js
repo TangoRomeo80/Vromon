@@ -41,6 +41,16 @@ import {
   resetUserDetails,
 } from '../features/user/userSlice'
 
+import {
+  getAllBookings,
+  getBookingById,
+  createBooking,
+  updateBooking,
+  deleteBooking,
+  resetBookingList,
+  resetBookingDetails,
+} from '../features/booking/bookingSlice'
+
 import { useDispatch, useSelector } from 'react-redux'
 
 const TestScreen = () => {
@@ -51,19 +61,19 @@ const TestScreen = () => {
 
 
   const handleGetList = () => {
-    dispatch(getAllUsers())
+    dispatch(getAllBookings())
   }
 
   const handleGetDetailById = () => {
-    dispatch(getUserById('62e633a777697bb04b9a3be7'))
+    dispatch(getBookingById('62e633a777697bb04b9a3be7'))
   }
 
   const handleListReset = () => {
-    dispatch(resetUserList())
+    dispatch(resetBookingList())
   }
 
   const handleDetailsReset = () => {
-    dispatch(resetUserDetails())
+    dispatch(resetBookingDetails())
   }
 
   return (

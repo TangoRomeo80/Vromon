@@ -4,6 +4,7 @@ import authReducer from '../features/auth/authSlice'
 import businessReducer from '../features/business/businessSlice'
 import userReducer from '../features/user/userSlice'
 import destinationReducer from '../features/destination/destinationSlice'
+import bookingReducer from '../features/booking/bookingSlice'
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     service: serviceReducer,
     business: businessReducer,
     destination: destinationReducer,
+    booking: bookingReducer,
   },
 })
