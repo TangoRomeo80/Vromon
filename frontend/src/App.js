@@ -17,7 +17,7 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <main>
+      <main className="mt-6">
         <Container fluid className='px-0'>
           <Routes>
             <Route path='/' element={<HomeScreen />} />
