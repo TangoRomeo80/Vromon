@@ -12,7 +12,7 @@ const GuidedTourSearchScreen = () => {
 
   return (
     <Container>
-      <Row className="mb-4 pt-3">
+      <Row className="mb-2 pt-3">
         <Col lg={6} md={6} sm={6}>
           <Card.Text as="h3">Unga Bunga</Card.Text>
           <Card.Text>Search by Destination</Card.Text>
@@ -29,7 +29,7 @@ const GuidedTourSearchScreen = () => {
         {/* Left Colomn */}
         <Col xs={12} md={4} xl={4}>
           <Row className="my-3">
-            <Link to="" className="btn btn-primary-1">
+            <Link to="" className="btn btn-outline-primary">
               Reset Search
             </Link>
           </Row>
