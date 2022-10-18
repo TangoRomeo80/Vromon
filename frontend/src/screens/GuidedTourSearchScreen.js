@@ -12,13 +12,13 @@ const GuidedTourSearchScreen = () => {
 
   return (
     <Container>
-      <Row className="my-4">
+      <Row className="mb-4 pt-3">
         <Col lg={6} md={6} sm={6}>
           <Card.Text as="h3">Unga Bunga</Card.Text>
           <Card.Text>Search by Destination</Card.Text>
         </Col>
         <Col lg={6} md={6} sm={6} className="d-flex justify-content-end">
-          <Link to="" className="btn btn-primary">
+          <Link to="" className="btn btn-primary mb-5">
             Modify Search
           </Link>
         </Col>
