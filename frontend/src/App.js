@@ -12,6 +12,7 @@ import GuidedTourSearchScreen from './screens/GuidedTourSearchScreen'
 import BusinessOwnerInfoScreen from './screens/BusinessOwnerInfoScreen'
 import ErrorScreen from './screens/ErrorScreen'
 import TestScreen from './screens/TestScreen'
+import TestNavbar from './screens/TestNavbar'
 
 const App = () => {
   return (
@@ -33,6 +34,8 @@ const App = () => {
             />
             <Route path='/test' element={<TestScreen />} />
             <Route path='/*' element={<ErrorScreen />} />
+
+            <Route path='/testNav' element={<TestNavbar/>}/>
           </Routes>
         </Container>
       </main>
