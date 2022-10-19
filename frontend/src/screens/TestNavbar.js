@@ -20,7 +20,16 @@ const SearchTransports = () => {
 const SearchDestinations = () => {
   return (
     <div>
-      <h1>Search Destinations</h1>
+      <Card>
+        <Row>
+          <Card.Header as='h5'>Search Destinations</Card.Header>
+        </Row>
+        <Row>
+          <Col>
+            
+          </Col>
+        </Row>
+      </Card>
     </div>
   );
 };
@@ -40,7 +49,6 @@ const TestNavbar = () => {
     <div
       style={{
         minHeight: "80vh",
-        backgroundColor: "red",
         backgroundImage: 'url("/Nav/test2.jpg")',
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -51,7 +59,7 @@ const TestNavbar = () => {
         {/* <Card.Img variant="top" src="/Nav/test2.jpg" /> */}
 
         <Card.Body>
-          <Card.Text>
+          <Card.Header>
             {searchSelection === "stays" ? (
               <SearchStays />
             ) : searchSelection === "destinations" ? (
@@ -61,7 +69,7 @@ const TestNavbar = () => {
             ) : searchSelection === "transports" ? (
               <SearchTransports />
             ) : null}
-          </Card.Text>
+          </Card.Header>
         </Card.Body>
       </Card>
     </div>
