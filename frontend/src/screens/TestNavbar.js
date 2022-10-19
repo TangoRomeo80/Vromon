@@ -18,7 +18,6 @@ const SearchTransports = () => {
   const [passengerCount, setPassengerCount] = useState('')
   const [category, setCategory] = useState('')
 
-
   return (
     <div>
       <Card>
