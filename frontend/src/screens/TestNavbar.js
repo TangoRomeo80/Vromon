@@ -24,9 +24,9 @@ const SearchDestinations = () => {
         <Row>
           <Card.Header as='h5'>Search Destinations</Card.Header>
         </Row>
-        <Row>
+        <Row className='my-5'>
           <Col>
-            
+            <Card.Text>Enter City</Card.Text>
           </Col>
         </Row>
       </Card>
