@@ -6,6 +6,12 @@ const getAllServices = async () => {
   return response.data.data
 }
 
+//get all services by searchParams
+const getAllServicesBySearchParams = async (searchParams) => {
+  const response = await axios.get(`/api/services?${searchParams}`)
+  return response.data.data
+}
+
 //get service by id
 const getServiceById = async (id) => {
   const response = await axios.get(`/api/services/${id}`)
@@ -44,6 +50,7 @@ const deleteService = async (id, token) => {
 
 const serviceService = {
   getAllServices,
+  getAllServicesBySearchParams,
   getServiceById,
   createService,
   updateService,

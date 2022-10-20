@@ -98,11 +98,11 @@ const serviceSchema = new mongoose.Schema(
           'accomodation',
           'transportation',
           'food',
-          'tourGuide',
+          'tours',
           'others',
         ],
         message:
-          'Service type needs to be accomodation, transportation, food, tourGuide or others',
+          'Service type needs to be accomodation, transportation, food, tours or others',
       },
     },
 
