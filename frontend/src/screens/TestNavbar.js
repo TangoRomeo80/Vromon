@@ -9,7 +9,7 @@ import {
   Form,
   InputGroup,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Moment from "moment";
 
 const SearchStays = () => {
@@ -316,6 +316,13 @@ const SearchTours = () => {
   const [travelDate, setTravelDate] = useState("");
   const [travelerCount, setTravelerCount] = useState("");
 
+  const navigate = useNavigate();
+
+  const handleTourSearch = (e) => {
+    e.preventDefault();
+    navigate(`/tourSearch?city=${searchTourCity}&travelDate=${travelDate}&travelerCount=${travelerCount}`);
+  }
+
   return (
     <Card>
       <Row>
@@ -374,11 +381,8 @@ const SearchTours = () => {
           </Form.Group>
         </Col>
       </Row>
-      {/* <Row>
-        <Link to="" className="btn btn-primary">
-          Submit Search
-        </Link>
-      </Row> */}
+
+      <Button onClick={handleTourSearch}>Submit Search</Button>
     </Card>
   );
 };

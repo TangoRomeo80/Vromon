@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Container, Card, Form } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { MdDateRange, MdLocationOn } from "react-icons/md";
 
 const GuidedTourSearchScreen = () => {
@@ -9,6 +9,10 @@ const GuidedTourSearchScreen = () => {
   const [maxPrice, setMaxPrice] = useState();
   const [searchPackage, setSearchPackage] = useState();
   const [duration, setDuration] = useState();
+
+  const [searchParams] = useSearchParams();
+
+  console.log(searchParams.get('travelerCount'));
 
   return (
     <Container>
