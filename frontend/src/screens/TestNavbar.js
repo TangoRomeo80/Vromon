@@ -9,6 +9,7 @@ import {
   Form,
   InputGroup,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Moment from "moment";
 
 const SearchStays = () => {
@@ -373,6 +374,11 @@ const SearchTours = () => {
           </Form.Group>
         </Col>
       </Row>
+      {/* <Row>
+        <Link to="" className="btn btn-primary">
+          Submit Search
+        </Link>
+      </Row> */}
     </Card>
   );
 };
