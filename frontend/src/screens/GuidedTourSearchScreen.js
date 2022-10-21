@@ -4,10 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Link, useSearchParams } from 'react-router-dom'
 import { MdDateRange, MdLocationOn } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  getAllServicesBySearchParams,
-  resetSearchedServiceList,
-} from '../features/service/serviceSlice'
+import { getAllServices } from '../features/service/serviceSlice'
 
 const GuidedTourSearchScreen = () => {
   const dispatch = useDispatch()
@@ -16,32 +13,34 @@ const GuidedTourSearchScreen = () => {
   const [maxPrice, setMaxPrice] = useState()
   const [searchPackage, setSearchPackage] = useState()
   const [duration, setDuration] = useState()
+  const [searchedServices, setSearchedServices] = useState([])
 
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
 
   const {
-    searchedServices,
-    isSearchedListLoading,
-    isSearchedListError,
-    isSearchedListSuccess,
-    searchedListErrorMessage,
+    services,
+    isListSuccess,
+    isListError,
+    isListLoading,
+    listErrorMessage,
   } = useSelector((state) => state.service)
 
-  // console.log(searchParams.toString())
-
   useEffect(() => {
-    if (!isSearchedListSuccess) {
-      dispatch(
-        getAllServicesBySearchParams(
-          searchParams.toString().concat('&serviceType=tours')
-        )
+    if (!isListSuccess) {
+      dispatch(getAllServices())
+    }
+    if (isListError) {
+      alert(listErrorMessage)
+    }
+    const searched = services.filter((service) => {
+      return (
+        service.serviceType === 'tours'
       )
-      console.log(searchedServices)
-    }
-    if (isSearchedListError) {
-      alert(searchedListErrorMessage)
-    }
-  }, [searchedServices, searchParams, dispatch])
+    })
+    setSearchedServices(searched)
+  }, [services, isListSuccess, isListError, dispatch])
+
+  console.log(searchedServices)
 
   return (
     <Container>

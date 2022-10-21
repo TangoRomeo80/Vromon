@@ -9,10 +9,6 @@ const initialState = {
   isListSuccess: false,
   isListLoading: false,
   listErrorMessage: '',
-  isSearchedListError: false,
-  isSearchedListSuccess: false,
-  isSearchedListLoading: false,
-  searchedListErrorMessage: '',
   isDetailsError: false,
   isDetailsSuccess: false,
   isDetailsLoading: false,
@@ -37,22 +33,6 @@ export const getAllServices = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       return await serviceService.getAllServices()
-    } catch (err) {
-      const message =
-        (err.response && err.response.data && err.response.data.message) ||
-        err.message ||
-        err.toString()
-      return thunkAPI.rejectWithValue(message)
-    }
-  }
-)
-
-//get all services by searchParams
-export const getAllServicesBySearchParams = createAsyncThunk(
-  'service/getAllServicesBySearchParams',
-  async (searchParams, thunkAPI) => {
-    try {
-      return await serviceService.getAllServicesBySearchParams(searchParams)
     } catch (err) {
       const message =
         (err.response && err.response.data && err.response.data.message) ||
@@ -141,13 +121,6 @@ export const serviceSlice = createSlice({
       state.isListLoading = false
       state.listErrorMessage = ''
     },
-    resetSearchedServiceList: (state) => {
-      state.searchedServices = []
-      state.isListError = false
-      state.isListSuccess = false
-      state.isListLoading = false
-      state.listErrorMessage = ''
-    },
     resetServiceDetails: (state) => {
       state.service = null
       state.isDetailsError = false
@@ -165,28 +138,13 @@ export const serviceSlice = createSlice({
         state.isListLoading = false
         state.isListSuccess = true
         state.isListError = false
-        state.message = ''
+        state.listErrorMessage = ''
         state.services = action.payload
       })
       .addCase(getAllServices.rejected, (state, action) => {
         state.isListLoading = false
         state.isListError = true
         state.listErrorMessage = action.payload
-      })
-      .addCase(getAllServicesBySearchParams.pending, (state) => {
-        state.isSearchedListLoading = true
-      })
-      .addCase(getAllServicesBySearchParams.fulfilled, (state, action) => {
-        state.isSearchedListLoading = false
-        state.isSearchedListSuccess = true
-        state.isSearchedListError = false
-        state.message = ''
-        state.searchedServices = action.payload
-      })
-      .addCase(getAllServicesBySearchParams.rejected, (state, action) => {
-        state.isSearchedListLoading = false
-        state.isSearchedListError = true
-        state.searchedListErrorMessage = action.payload
       })
       .addCase(getServiceById.pending, (state) => {
         state.isDetailsLoading = true
@@ -261,9 +219,5 @@ export const serviceSlice = createSlice({
   },
 })
 
-export const {
-  resetServiceList,
-  resetSearchedServiceList,
-  resetServiceDetails,
-} = serviceSlice.actions
+export const { resetServiceList, resetServiceDetails } = serviceSlice.actions
 export default serviceSlice.reducer
