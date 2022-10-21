@@ -57,7 +57,7 @@ const bookingSchema = new mongoose.Schema(
 )
 
 //populating schema for specific id request
-bookingSchema.pre('findOne', function (next) {
+bookingSchema.pre(/^find/, function (next) {
   this.populate([
     {
       path: 'user',

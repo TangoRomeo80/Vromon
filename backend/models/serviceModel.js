@@ -136,7 +136,7 @@ serviceSchema.virtual('numOfRatings').get(function () {
 })
 
 //populating schema for specific id request
-serviceSchema.pre('findOne', function (next) {
+serviceSchema.pre(/^find/, function (next) {
   this.populate([
     {
       path: 'reviews',

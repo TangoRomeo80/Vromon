@@ -76,7 +76,7 @@ const businessSchema = new mongoose.Schema(
   }
 )
 
-businessSchema.pre('findOne', function (next) {
+businessSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'businessOwner',
     select: '-password',
