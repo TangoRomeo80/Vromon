@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Container, Card, Form } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 const DestinationSearchScreen = () => {
   const [budget, setBudget] = useState(0);
@@ -11,7 +12,7 @@ const DestinationSearchScreen = () => {
         {/* Left Coloumn For Filtering */}
         <Col xs={12} md={3} xl={3}>
           {/* Row For Budget */}
-          <Row className='my-4'>
+          <Row className="my-4">
             <Card>
               <Card.Header as="h5">Budget</Card.Header>
             </Card>
@@ -89,6 +90,79 @@ const DestinationSearchScreen = () => {
         {/* Right Colomn For Places/Card */}
 
         <Col xs={12} md={9} xl={9}>
+          <Row className="my-4">
+            <Col xs={12} md={4} lg={4}>
+              <LinkContainer to="">
+                <Card>
+                  <Card.Img
+                    variant="top"
+                    src="/Destinations/Test.jpg"
+                    style={{ height: "30vh", objectFit: "cover" }}
+                  />
+                  <Card.Body cascade>
+                    <Row>
+                    <Col lg={6} md={2} xs={6}>
+                        <Card.Title as="h6">Chittagong</Card.Title>
+                        <Card.Text> Bangladesh </Card.Text>
+                    </Col>
+                    <Col lg={6} md={2} xs={6} className='d-flex flex-column justify-content-end'>
+                        <Card.Title as="h6">TK: 10,000</Card.Title>
+                        <Card.Text> Madafaka </Card.Text>
+                    </Col>
+                    </Row>
+                  </Card.Body>
+                </Card>
+              </LinkContainer>
+            </Col>
+
+            <Col xs={12} md={4} lg={4}>
+              <LinkContainer to="">
+                <Card>
+                  <Card.Img
+                    variant="top"
+                    src="/Destinations/Test.jpg"
+                    style={{ height: "30vh", objectFit: "cover" }}
+                  />
+                  <Card.Body cascade>
+                    <Row>
+                    <Col lg={6} md={2} xs={6}>
+                        <Card.Title as="h6">Chittagong</Card.Title>
+                        <Card.Text> Bangladesh </Card.Text>
+                    </Col>
+                    <Col lg={6} md={2} xs={6} className='d-flex flex-column justify-content-end'>
+                        <Card.Title as="h6">TK: 10,000</Card.Title>
+                        <Card.Text> Madafaka </Card.Text>
+                    </Col>
+                    </Row>
+                  </Card.Body>
+                </Card>
+              </LinkContainer>
+            </Col>
+
+            <Col xs={12} md={4} lg={4}>
+              <LinkContainer to="">
+                <Card>
+                  <Card.Img
+                    variant="top"
+                    src="/Destinations/Test.jpg"
+                    style={{ height: "30vh", objectFit: "cover" }}
+                  />
+                  <Card.Body cascade>
+                    <Row>
+                    <Col lg={6} md={2} xs={6}>
+                        <Card.Title as="h6">Chittagong</Card.Title>
+                        <Card.Text> Bangladesh </Card.Text>
+                    </Col>
+                    <Col lg={6} md={2} xs={6} className='d-flex flex-column justify-content-end'>
+                        <Card.Title as="h6">TK: 10,000</Card.Title>
+                        <Card.Text> Madafaka </Card.Text>
+                    </Col>
+                    </Row>
+                  </Card.Body>
+                </Card>
+              </LinkContainer>
+            </Col>
+          </Row>
         </Col>
       </Row>
     </Container>
