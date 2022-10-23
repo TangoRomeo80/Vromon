@@ -24,7 +24,7 @@ const StaysSearchScreen = () => {
 
       <Row>
         {/* Left Column */}
-        <Col xs={12} md={4} xl={4}>
+        <Col xs={12} md={3} xl={3}>
           <Row className="my-3">
             <Link to="" className="btn btn-outline-primary">
               Reset Search
@@ -80,7 +80,7 @@ const StaysSearchScreen = () => {
 
 
         {/* Right Colomn/Package Images Card */}
-        <Col xs={12} md={8} xl={8}>
+        <Col xs={12} md={9} xl={9}>
         <Row className="my-4">
             <Card.Header as='h5' className="mx-4">
               20 Available Hotels
