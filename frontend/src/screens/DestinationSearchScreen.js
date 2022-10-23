@@ -14,7 +14,7 @@ const DestinationSearchScreen = () => {
           {/* Row For Budget */}
           <Row className="my-4">
             <Card>
-              <Card.Header as="h5">Budget</Card.Header>
+              <Card.Header as="h6">Budget</Card.Header>
             </Card>
           </Row>
           <Row>
@@ -31,7 +31,7 @@ const DestinationSearchScreen = () => {
           {/* Row For Duration */}
           <Row className="my-4">
             <Card>
-              <Card.Header as="h5">Package Duration</Card.Header>
+              <Card.Header as="h6">Package Duration</Card.Header>
             </Card>
 
             <Col className="mt-3">
@@ -60,7 +60,7 @@ const DestinationSearchScreen = () => {
           {/* Row for Favourite Tour Place Type */}
           <Row className="my-4">
             <Card>
-              <Card.Header as="h5">Desired Place Type</Card.Header>
+              <Card.Header as="h6">Desired Place Type</Card.Header>
             </Card>
 
             <Col className="mt-3">
@@ -91,6 +91,14 @@ const DestinationSearchScreen = () => {
 
         <Col xs={12} md={9} xl={9}>
           <Row className="my-4">
+            <Card.Header as='h5' className="mx-4">
+              Explore Destinations
+            </Card.Header>
+            <Card.Text className='mx-3 mt-2'>
+              From Chittagong
+            </Card.Text>
+          </Row>
+          <Row className="my-4">
             <Col xs={12} md={4} lg={4}>
               <LinkContainer to="">
                 <Card>
@@ -101,14 +109,19 @@ const DestinationSearchScreen = () => {
                   />
                   <Card.Body cascade>
                     <Row>
-                    <Col lg={6} md={2} xs={6}>
+                      <Col lg={6} md={2} xs={6}>
                         <Card.Title as="h6">Chittagong</Card.Title>
                         <Card.Text> Bangladesh </Card.Text>
-                    </Col>
-                    <Col lg={6} md={2} xs={6} className='d-flex flex-column justify-content-end'>
+                      </Col>
+                      <Col
+                        lg={6}
+                        md={2}
+                        xs={6}
+                        className="d-flex flex-column justify-content-end"
+                      >
                         <Card.Title as="h6">TK: 10,000</Card.Title>
                         <Card.Text> Madafaka </Card.Text>
-                    </Col>
+                      </Col>
                     </Row>
                   </Card.Body>
                 </Card>
@@ -125,14 +138,19 @@ const DestinationSearchScreen = () => {
                   />
                   <Card.Body cascade>
                     <Row>
-                    <Col lg={6} md={2} xs={6}>
+                      <Col lg={6} md={2} xs={6}>
                         <Card.Title as="h6">Chittagong</Card.Title>
                         <Card.Text> Bangladesh </Card.Text>
-                    </Col>
-                    <Col lg={6} md={2} xs={6} className='d-flex flex-column justify-content-end'>
+                      </Col>
+                      <Col
+                        lg={6}
+                        md={2}
+                        xs={6}
+                        className="d-flex flex-column justify-content-end"
+                      >
                         <Card.Title as="h6">TK: 10,000</Card.Title>
                         <Card.Text> Madafaka </Card.Text>
-                    </Col>
+                      </Col>
                     </Row>
                   </Card.Body>
                 </Card>
@@ -149,14 +167,19 @@ const DestinationSearchScreen = () => {
                   />
                   <Card.Body cascade>
                     <Row>
-                    <Col lg={6} md={2} xs={6}>
+                      <Col lg={6} md={2} xs={6}>
                         <Card.Title as="h6">Chittagong</Card.Title>
                         <Card.Text> Bangladesh </Card.Text>
-                    </Col>
-                    <Col lg={6} md={2} xs={6} className='d-flex flex-column justify-content-end'>
+                      </Col>
+                      <Col
+                        lg={6}
+                        md={2}
+                        xs={6}
+                        className="d-flex flex-column justify-content-end"
+                      >
                         <Card.Title as="h6">TK: 10,000</Card.Title>
                         <Card.Text> Madafaka </Card.Text>
-                    </Col>
+                      </Col>
                     </Row>
                   </Card.Body>
                 </Card>
