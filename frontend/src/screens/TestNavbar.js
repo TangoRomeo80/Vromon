@@ -21,8 +21,8 @@ const SearchStays = () => {
 
   return (
     <Card>
-      <Row>
-        <Card.Header as="h5">Search Stays</Card.Header>
+      <Row className="mt-3">
+        <Card.Text as="h5">Search Stays</Card.Text>
       </Row>
 
       <Row className="my-5 mx-3">
@@ -131,8 +131,8 @@ const SearchTransports = () => {
   return (
     <div>
       <Card>
-        <Row>
-          <Card.Header as="h5">Search Transports</Card.Header>
+        <Row className="mt-3">
+          <Card.Text as="h5">Search Transports</Card.Text>
         </Row>
         <Row className="my-5 mx-3">
           <Col>
@@ -254,8 +254,8 @@ const SearchDestinations = () => {
   return (
     <div>
       <Card>
-        <Row>
-          <Card.Header as="h5">Search Destinations</Card.Header>
+        <Row className="mt-3">
+          <Card.Text as="h5">Search Destinations</Card.Text>
         </Row>
         <Row className="my-5 mx-3">
           <Col>
@@ -325,7 +325,7 @@ const SearchTours = () => {
 
   return (
     <Card>
-      <Row>
+      <Row className="mt-3">
         <Card.Text as="h5">Search Holiday Packages</Card.Text>
       </Row>
 
