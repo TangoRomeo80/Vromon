@@ -9,13 +9,19 @@ import { getAllServices } from '../features/service/serviceSlice'
 const GuidedTourSearchScreen = () => {
   const dispatch = useDispatch()
 
-  const [minPrice, setMinPrice] = useState()
-  const [maxPrice, setMaxPrice] = useState()
-  const [searchPackage, setSearchPackage] = useState()
-  const [duration, setDuration] = useState()
-  const [searchedServices, setSearchedServices] = useState([])
-
   const [searchParams] = useSearchParams()
+  const [minPrice, setMinPrice] = useState(0)
+  const [maxPrice, setMaxPrice] = useState(0)
+  const [searchPackage, setSearchPackage] = useState('')
+  const [duration, setDuration] = useState('')
+  const [city, setCity] = useState(searchParams.get('city') || '')
+  const [travelDate, setTravelDate] = useState(
+    searchParams.get('travelDate') || ''
+  )
+  const [travelerCount, setTravelerCount] = useState(
+    searchParams.get('travelerCount') || ''
+  )
+  const [searchedServices, setSearchedServices] = useState([])
 
   const {
     services,
@@ -34,7 +40,7 @@ const GuidedTourSearchScreen = () => {
     }
     const searched = services.filter((service) => {
       return (
-        service.serviceType === 'tours'
+        service.serviceType === 'tours' && service.destination.district === city
       )
     })
     setSearchedServices(searched)
