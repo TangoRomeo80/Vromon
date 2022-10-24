@@ -91,7 +91,7 @@ const StaysSearchScreen = () => {
           </Row>
 
           <Card className="mx-2 mb-3">
-            <Row>
+            <Row className="d-flex">
               <Col sm={4} md={3} lg={3}>
                 <Card.Img
                   src="/Destinations/Test.jpg"
@@ -117,14 +117,73 @@ const StaysSearchScreen = () => {
                   <Card.Text className="my-3">Starts From</Card.Text>
                   <Card.Text>BDT Magna/Night</Card.Text>
 
-                  <Button block className="mt-4">Book Now</Button>
+                  <Button className="mt-4">Book Now</Button>
+                </Card.Body>
+              </Col>
+            </Row>
+          </Card>
 
-                  
-                  {/* <Link to="" className="btn btn-primary mb-5 d-flex flex-column">
-            Modify Search
-          </Link> */}
-                  
-                  
+          <Card className="mx-2 mb-3">
+            <Row className="d-flex">
+              <Col sm={4} md={3} lg={3}>
+                <Card.Img
+                  src="/Destinations/Test.jpg"
+                  className="img-fluid rounded-start"
+                  variant="top"
+                  style={{ objectFit: "cover", height: "220px" }}
+                />
+              </Col>
+              <Col sm={4} md={6} lg={6}>
+                <Card.Body>
+                  <Card.Title as="h5">Sayeman Hotel & Resort</Card.Title>
+                  <Card.Text>
+                    <MdLocationOn /> &nbsp;14 Kalatoli Hotel Motel Zone, Cox's
+                    Bazar, Bangladesh
+                  </Card.Text>
+                  <Card.Text>*Rating Here</Card.Text>
+                  <Card.Text>*Trip Coin</Card.Text>
+                </Card.Body>
+              </Col>
+
+              <Col sm={4} md={3} lg={3} className="d-flex justify-content-end">
+                <Card.Body>
+                  <Card.Text className="my-3">Starts From</Card.Text>
+                  <Card.Text>BDT Magna/Night</Card.Text>
+
+                  <Button className="mt-4">Book Now</Button>
+                </Card.Body>
+              </Col>
+            </Row>
+          </Card>
+
+          <Card className="mx-2 mb-3">
+            <Row className="d-flex">
+              <Col sm={4} md={3} lg={3}>
+                <Card.Img
+                  src="/Destinations/Test.jpg"
+                  className="img-fluid rounded-start"
+                  variant="top"
+                  style={{ objectFit: "cover", height: "220px" }}
+                />
+              </Col>
+              <Col sm={4} md={6} lg={6}>
+                <Card.Body>
+                  <Card.Title as="h5">Sayeman Hotel & Resort</Card.Title>
+                  <Card.Text>
+                    <MdLocationOn /> &nbsp;14 Kalatoli Hotel Motel Zone, Cox's
+                    Bazar, Bangladesh
+                  </Card.Text>
+                  <Card.Text>*Rating Here</Card.Text>
+                  <Card.Text>*Trip Coin</Card.Text>
+                </Card.Body>
+              </Col>
+
+              <Col sm={4} md={3} lg={3} className="d-flex justify-content-end">
+                <Card.Body>
+                  <Card.Text className="my-3">Starts From</Card.Text>
+                  <Card.Text>BDT Magna/Night</Card.Text>
+
+                  <Button className="mt-4">Book Now</Button>
                 </Card.Body>
               </Col>
             </Row>
