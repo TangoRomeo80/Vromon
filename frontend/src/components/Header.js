@@ -1,41 +1,54 @@
 import React from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
+import { Navbar, Nav, Container, NavDropdown, Button } from 'react-bootstrap'
 import {
   FaMapMarkerAlt,
   FaCar,
   FaPlane,
   FaUmbrellaBeach,
-  FaUser,
+  FaUserCircle,
+  FaSignOutAlt,
+  FaSignInAlt,
+  FaTag,
 } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../features/auth/authSlice'
 
 const Header = () => {
+  const dispatch = useDispatch()
+
+  const { userInfo } = useSelector((state) => state.auth)
+
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
+
   return (
-    <header className="fixed-top">
-      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
+    <header className='fixed-top'>
+      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
         <Container>
-          <LinkContainer to="/">
+          <LinkContainer to='/'>
             <Navbar.Brand>
               <h3>VROMON</h3>
             </Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <LinkContainer to="/destinations">
+          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+          <Navbar.Collapse id='responsive-navbar-nav'>
+            <Nav className='me-auto'>
+              <LinkContainer to='/destinations'>
                 <Nav.Link>
                   <FaMapMarkerAlt />
                   Destinations
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/transports">
+              <LinkContainer to='/transports'>
                 <Nav.Link>
                   <FaCar />/<FaPlane />
                   Transport
                 </Nav.Link>
               </LinkContainer>
 
-              <LinkContainer to="/packages">
+              <LinkContainer to='/packages'>
                 <Nav.Link>
                   <FaUmbrellaBeach />
                   Holiday Packages
@@ -44,25 +57,47 @@ const Header = () => {
             </Nav>
 
             <Nav>
-              <NavDropdown title={<FaUser />} id="basic-nav-dropdown">
-                <NavDropdown.Item>
-                  <LinkContainer to="/login">
-                    <Nav.Link className="text-dark">Sign In</Nav.Link>
-                  </LinkContainer>
-                </NavDropdown.Item>
-
-                <NavDropdown.Item>
-                  <LinkContainer to="/login">
-                    <Nav.Link className="text-dark">Sign Out</Nav.Link>
-                  </LinkContainer>
-                </NavDropdown.Item>
-              </NavDropdown>
+              {userInfo ? (
+                <NavDropdown title={userInfo.userName} className='me-5'>
+                  <NavDropdown.Item>
+                    <LinkContainer to='/touristInfo' className='px-0'>
+                      <Nav.Link className='text-dark'>
+                        <FaUserCircle className='me-2' />
+                        Profile
+                      </Nav.Link>
+                    </LinkContainer>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <LinkContainer to='/bookingInfo' className='px-0'>
+                      <Nav.Link className='text-dark'>
+                        <FaTag className='me-2' />
+                        My Bookings
+                      </Nav.Link>
+                    </LinkContainer>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    <LinkContainer to='#' className='px-0'>
+                      <Nav.Link className='text-dark'>
+                        <FaSignOutAlt className='me-2' />
+                        Sign out
+                      </Nav.Link>
+                    </LinkContainer>
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <LinkContainer to='/login'>
+                  <Button variant='blue'>
+                    <FaSignInAlt className='me-2 mb-1' />
+                    Sign In
+                  </Button>
+                </LinkContainer>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </header>
-  );
+  )
 }
 
 export default Header

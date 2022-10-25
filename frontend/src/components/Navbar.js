@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import { getAuthedUser, resetAuth } from '../features/auth/authSlice'
 
@@ -12,11 +12,13 @@ const Navbar = () => {
   )
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (searchParams.get('id')) {
       if (!isSuccess || !userInfo) {
         dispatch(getAuthedUser(searchParams.get('id')))
+        navigate('/')
       }
       if (isError) {
         alert(message)

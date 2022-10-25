@@ -28,15 +28,15 @@ const getAuthedUser = async (id) => {
 }
 
 //logout user
-const logout = async () => {
-  localStorage.removeItem('user')
-}
+// const logout = () => {
+//   localStorage.removeItem('userInfo')
+// }
 
 const authService = {
   signupLocal,
   signinLocal,
   getAuthedUser,
-  logout,
+  // logout,
 }
 
 export default authService

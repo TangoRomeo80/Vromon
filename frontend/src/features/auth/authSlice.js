@@ -61,9 +61,9 @@ export const getAuthedUser = createAsyncThunk(
 )
 
 //logout user
-export const logout = createAsyncThunk('auth/logout', async () => {
-  await authService.logout()
-})
+// export const logout = createAsyncThunk('auth/logout', async () => {
+//   await authService.logout()
+// })
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -74,6 +74,11 @@ export const authSlice = createSlice({
       state.isSuccess = false
       state.isLoading = false
       state.message = ''
+    },
+    logout: (state) => {
+      state.userInfo = null
+      localStorage.removeItem('userInfo')
+      document.location.href = '/'
     },
   },
 
@@ -121,11 +126,11 @@ export const authSlice = createSlice({
         state.message = action.payload
         state.userInfo = null
       })
-      .addCase(logout.fulfilled, (state) => {
-        state.userInfo = null
-      })
+    // .addCase(logout.fulfilled, (state) => {
+    //   state.userInfo = null
+    // })
   },
 })
 
-export const { resetAuth } = authSlice.actions
+export const { resetAuth, logout } = authSlice.actions
 export default authSlice.reducer
