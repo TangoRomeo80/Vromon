@@ -29,12 +29,14 @@ const Header = () => {
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>
-              <h3>VROMON</h3>
+            <img style={{ maxWidth: "150px"}}
+              src='/Nav/logp.png'
+                />
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <Navbar.Collapse id='responsive-navbar-nav'>
-            <Nav className='me-auto'>
+            <Nav className='me-auto align-items-center pt-2 pb-2'>
               <LinkContainer to='/destinations'>
                 <Nav.Link>
                   <FaMapMarkerAlt />
