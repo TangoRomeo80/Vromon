@@ -6,6 +6,7 @@ const DestinationSearchScreen = () => {
   const [budget, setBudget] = useState(0);
   const [duration, setDuration] = useState("");
   const [placeType, setPlaceType] = useState("");
+  
   return (
     <Container>
       <Row>

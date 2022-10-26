@@ -4,7 +4,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
-import TransportScreen from './screens/TransportScreen'
+// import TransportScreen from './screens/TransportScreen'
 import DestinationScreen from './screens/DestinationScreen'
 import HolidayPackagesScreen from './screens/HolidayPackagesScreen'
 import ProfileScreen from './screens/ProfileScreen'
@@ -15,6 +15,7 @@ import TestScreen from './screens/TestScreen'
 import TestNavbar from './screens/TestNavbar'
 import DestinationSearchScreen from './screens/DestinationSearchScreen'
 import StaysSearchScreen from './screens/StaysSearchScreen'
+import TransportSearchScreen from './screens/TransportSearchScreen'
 
 const App = () => {
   return (
@@ -25,13 +26,14 @@ const App = () => {
           <Routes>
             <Route path='/' element={<HomeScreen />} />
             <Route path='/login' element={<LoginScreen />} />
-            <Route path='/transports' element={<TransportScreen />} />
+            {/* <Route path='/transports' element={<TransportScreen />} /> */}
             <Route path='/destinations' element={<DestinationScreen />} />
             <Route path='/packages' element={<HolidayPackagesScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
             <Route path='/tourSearch' element={<GuidedTourSearchScreen />} />
             <Route path='/destinationSearch' element={<DestinationSearchScreen />}/>
             <Route path='/staysSearch' element={<StaysSearchScreen />} />
+            <Route path='/transportSearch' element={<TransportSearchScreen />}/>
             <Route
               path='/businessOwnerInfo'
               element={<BusinessOwnerInfoScreen />}
