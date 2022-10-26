@@ -94,6 +94,7 @@ export const getAuthedUser = catchAsync(async (req, res, next) => {
       email: user.email,
       loginType: user.loginType,
       userType: user.userType,
+      newUser: user.newUser,
       token: generateToken(user._id),
     },
   })
@@ -146,7 +147,7 @@ export const googleAuthCallback = async (profile, done) => {
 */
 export const googleAuthResponse = (req, res, next) => {
   if (req.user) {
-    res.redirect('http://localhost:3000?id=' + req.user._id)
+    res.redirect('http://localhost:3000/newUser?id=' + req.user._id)
   } else {
     next(new AppError('No user found or created', 401))
     res.redirect('http://localhost:3000')

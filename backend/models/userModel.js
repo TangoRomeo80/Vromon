@@ -216,6 +216,10 @@ const userSchema = new mongoose.Schema(
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
+    newUser: {
+      type: Boolean,
+      default: true,
+    },
     image: {
       type: String,
       default: '',
