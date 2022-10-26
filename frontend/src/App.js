@@ -16,6 +16,7 @@ import TestNavbar from './screens/TestNavbar'
 import DestinationSearchScreen from './screens/DestinationSearchScreen'
 import StaysSearchScreen from './screens/StaysSearchScreen'
 import TransportSearchScreen from './screens/TransportSearchScreen'
+import RegistrationScreen from './screens/RegistrationScreen'
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Routes>
             <Route path='/' element={<HomeScreen />} />
             <Route path='/login' element={<LoginScreen />} />
+            <Route path='/registration' element={<RegistrationScreen />}/>
             {/* <Route path='/transports' element={<TransportScreen />} /> */}
             <Route path='/destinations' element={<DestinationScreen />} />
             <Route path='/packages' element={<HolidayPackagesScreen />} />
