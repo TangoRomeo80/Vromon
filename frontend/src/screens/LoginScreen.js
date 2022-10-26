@@ -45,7 +45,7 @@ const LoginScreen = () => {
 
   return (
     <FormContainer>
-      <h1 className='d-flex justify-content-center pt-5'>Sign In</h1>
+      <h1 className='d-flex justify-content-center pt-1'>Sign In</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group className='mb-3' controlId='LoginEmail'>
           <Form.Label>Email address</Form.Label>
@@ -81,17 +81,16 @@ const LoginScreen = () => {
       </Form>
 
       <Row>
-        <h6 className='d-flex justify-content-center pt-5'>Or Continue With</h6>
-        <Col className='d-flex justify-content-center pt-2'>
+        <h6 className='d-flex justify-content-center pt-5'>OR</h6>
+        <Col className='d-grid gap-2' sm={12} md={12} lg={12}>
           {/* <Link to='/'> */}
           <Button
-            className='mx-2'
-            variant='danger'
+            variant='outline-danger'
             align='end'
-            size='sm'
+            size='lg'
             onClick={handleGoogle}
           >
-            <FcGoogle /> Google
+            <FcGoogle /> Sign in with Google
           </Button>
         </Col>
       </Row>
@@ -107,10 +106,10 @@ const LoginScreen = () => {
         </div>
       </Row>
 
-      <Row className='py-3 mt-3'>
+      <Row className='py-1 mt-2'>
         <Col>
           <Link to='/'>
-            <Button variant='primary' size='sm'>
+            <Button variant='primary' size='md'>
               Back to Home page
             </Button>
           </Link>

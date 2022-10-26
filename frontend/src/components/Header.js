@@ -33,7 +33,7 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <Navbar.Collapse id='responsive-navbar-nav'>
-            <Nav className='mx-auto align-items-center pt-2 pb-2'>
+            <Nav className='me-auto align-items-center pt-2 pb-2'>
               <LinkContainer to='/destinations'>
                 <Nav.Link>
                   <FaMapMarkerAlt />
@@ -55,7 +55,7 @@ const Header = () => {
               </LinkContainer>
             </Nav>
 
-            <Nav className='align-items-center pt-2 pb-2 ms-5'>
+            <Nav className='align-items-center pt-2 pb-2'>
               {userInfo ? (
                 <NavDropdown title={userInfo.userName} className='me-5'>
                   <NavDropdown.Item>
