@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { Button, Form, Row, Col } from 'react-bootstrap'
-import { getAuthedUser } from '../features/auth/authSlice'
+import { getAuthedUser, updateAuthedUser } from '../features/auth/authSlice'
 
 const NewUserScreen = () => {
   const [searchParams] = useSearchParams()
   const [mobile, setMobile] = useState('')
-  const [userType, setUserType] = useState('')
+  const [userType, setUserType] = useState('tourist')
 
   const { userInfo, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
@@ -33,7 +33,15 @@ const NewUserScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    alert(`Mobile: ${mobile} and User Type: ${userType}`)
+    const id = searchParams.get('id')
+    const userData = {
+      mobile,
+      userType,
+      newUser: false,
+    }
+    dispatch(updateAuthedUser({id, userData}))
+    alert(`Mobile: ${userData.mobile}, User Type: ${userData.userType}, New User: ${userData.newUser}`)
+    navigate('/')
   }
 
   return (

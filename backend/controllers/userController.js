@@ -64,6 +64,17 @@ export const createUser = catchAsync(async (req, res, next) => {
 export const updateUser = updateOne(User)
 
 /*
+  Request type: GET
+  Endpoint: /api/users/getMe
+  Description: This endpoint gets the logged in user info
+*/
+
+export const getMe = (req, res, next) => { 
+  req.params.id = req.user._id
+  next()
+}
+
+/*
   Request type: PATCH
   Endpoint: /api/users/updateMe
   Description: This endpoint updates info about currently logged in user

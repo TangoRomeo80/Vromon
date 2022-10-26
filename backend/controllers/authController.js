@@ -101,6 +101,36 @@ export const getAuthedUser = catchAsync(async (req, res, next) => {
 })
 
 /*
+  Request type: Patch
+  Endpoint: /api/users/auth/:id
+  Description: This endpoint authorizes addition of further info for the user
+*/
+
+export const updateAuthedUser = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  })
+
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404))
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      _id: user._id,
+      userName: user.userName,
+      email: user.email,
+      loginType: user.loginType,
+      userType: user.userType,
+      newUser: user.newUser,
+      token: generateToken(user._id),
+    },
+  })
+})
+
+/*
   Request type: GET
   Endpoint: /api/users/signin/google
   Description: This endpoint gets authentication code from google

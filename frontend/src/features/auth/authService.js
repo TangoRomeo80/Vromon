@@ -27,6 +27,15 @@ const getAuthedUser = async (id) => {
   return response.data.data
 }
 
+//update authed user for further Information
+const updateAuthedUser = async (id, userData) => {
+  const response = await axios.patch(`/api/users/auth/${id}`, userData)
+  if (response.data.status === 'success') {
+    localStorage.setItem('userInfo', JSON.stringify(response.data.data))
+  }
+  return response.data.data
+}
+
 //logout user
 // const logout = () => {
 //   localStorage.removeItem('userInfo')
@@ -36,6 +45,7 @@ const authService = {
   signupLocal,
   signinLocal,
   getAuthedUser,
+  updateAuthedUser,
   // logout,
 }
 

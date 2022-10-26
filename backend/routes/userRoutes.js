@@ -8,6 +8,7 @@ import {
   createUser,
   updateUser,
   deleteUser,
+  getMe,
   updateMe,
   deleteMe,
 } from '../controllers/userController.js' //import User controller
@@ -19,6 +20,7 @@ import {
   googleAuthRedirect,
   googleAuthResponse,
   getAuthedUser,
+  updateAuthedUser,
   protect,
   restrictTo,
   forgotPassword,
@@ -34,12 +36,13 @@ router.route('/signin/google').get(googleAuth) //sigin using google
 router
   .route('/signin/google/redirect') //google's redirect route
   .get(googleAuthRedirect, googleAuthResponse)
-router.route('/auth/:id').get(getAuthedUser) //route to get data from external source, i.e: google
+router.route('/auth/:id').get(getAuthedUser).patch(updateAuthedUser) //route to get data from external source, i.e: google
 
 router.route('/forgotPassword').post(forgotPassword) //route to handle forgot password
 router.route('/resetPassword/:token').post(resetPassword) //route to handle reset password after forgetting password
 router.route('/updatePassword/:id').post(updatePassword) //route to handle update password
 
+router.route('/getMe').get(protect, getMe, getUser) //route to get profile information
 router.route('/updateMe').patch(updateMe) //route to handle profile information update by user
 router.route('/deleteMe').delete(deleteMe) //route to handle profile deletion by user
 
