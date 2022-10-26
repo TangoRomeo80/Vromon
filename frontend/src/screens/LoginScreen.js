@@ -99,7 +99,7 @@ const LoginScreen = () => {
         <div className='d-flex justify-content-center py-3 mt-3 '>
           <p>
             New User?
-            <a href='#'>
+            <a href='/registration'>
               <b>Sign Up</b>
             </a>
           </p>
