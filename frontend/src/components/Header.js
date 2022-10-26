@@ -9,6 +9,7 @@ import {
   FaUserCircle,
   FaSignOutAlt,
   FaSignInAlt,
+  FaTag,
 } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../features/auth/authSlice'
@@ -34,25 +35,57 @@ const Header = () => {
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <Navbar.Collapse id='responsive-navbar-nav'>
             <Nav className='me-auto align-items-center pt-2 pb-2'>
-              <LinkContainer to='/destinations'>
-                <Nav.Link>
-                  <FaMapMarkerAlt />
-                  Destinations
-                </Nav.Link>
-              </LinkContainer>
-              <LinkContainer to='/transports'>
-                <Nav.Link>
-                  <FaCar />/<FaPlane />
-                  Transport
-                </Nav.Link>
-              </LinkContainer>
+              {userInfo && userInfo.userType === 'tourist' ? (
+                <>
+                  <LinkContainer to='/destinations'>
+                    <Nav.Link>
+                      <FaMapMarkerAlt className='me-1'/>
+                      Destinations
+                    </Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to='/transports'>
+                    <Nav.Link>
+                      <FaCar />/<FaPlane className='me-1'/>
+                      Transport
+                    </Nav.Link>
+                  </LinkContainer>
 
-              <LinkContainer to='/packages'>
-                <Nav.Link>
-                  <FaUmbrellaBeach />
-                  Holiday Packages
-                </Nav.Link>
-              </LinkContainer>
+                  <LinkContainer to='/packages'>
+                    <Nav.Link>
+                      <FaUmbrellaBeach className='me-1'/>
+                      Holiday Packages
+                    </Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to='/touristBookings'>
+                    <Nav.Link>
+                      <FaTag className='me-1'/>
+                      My Bookings
+                    </Nav.Link>
+                  </LinkContainer>
+                </>
+              ) : (
+                <>
+                  <LinkContainer to='/destinations'>
+                    <Nav.Link>
+                      <FaMapMarkerAlt className='me-1'/>
+                      Destinations
+                    </Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to='/transports'>
+                    <Nav.Link>
+                      <FaCar />/<FaPlane className='me-1'/>
+                      Transport
+                    </Nav.Link>
+                  </LinkContainer>
+
+                  <LinkContainer to='/packages'>
+                    <Nav.Link>
+                      <FaUmbrellaBeach className='me-1'/>
+                      Holiday Packages
+                    </Nav.Link>
+                  </LinkContainer>
+                </>
+              )}
             </Nav>
 
             <Nav className='align-items-center pt-2 pb-2'>
