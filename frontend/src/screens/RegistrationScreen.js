@@ -4,24 +4,30 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { FcGoogle } from "react-icons/fc";
 import FormContainer from "../components/FormContainer";
-import { signinLocal, resetAuth } from "../features/auth/authSlice";
+import { signupLocal, resetAuth } from "../features/auth/authSlice";
 
 const RegistrationScreen = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-
-    const [showPassword, setShowPassword] = useState('password')
+  const [showPassword, setShowPassword] = useState("password");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const submitHandler = (e) => {
-    e.preventDefault()
-    dispatch(signinLocal({ email, password }))
-  }
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Passwords did not match");
+    } else if (email != "" && password != "" && phoneNumber != "") {
+      dispatch(signupLocal({ email, password, phoneNumber }));
+    }
+    else {
+      alert("Please fill all the fields");
+    }
+  };
 
   const passwordShow = (e) => {
     e.target.checked ? setShowPassword("text") : setShowPassword("password");
