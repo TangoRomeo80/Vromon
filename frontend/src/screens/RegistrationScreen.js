@@ -13,6 +13,8 @@ const RegistrationScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
 
+    const [showPassword, setShowPassword] = useState('password')
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -88,36 +90,11 @@ const RegistrationScreen = () => {
         </div>
       </Form>
 
-      {/* <Row>
-        <h6 className="d-flex justify-content-center pt-5">OR</h6>
-        <Col className="d-grid gap-2" sm={12} md={12} lg={12}>
-          <Button
-            variant="outline-danger"
-            align="end"
-            size="lg"
-            onClick={handleGoogle}
-          >
-            <FcGoogle /> Sign in with Google
-          </Button>
-        </Col>
-      </Row> */}
-
-      <Row>
-        <div className="d-flex justify-content-center py-3 mt-3 ">
-          <p>
-            New User?
-            <a href="#">
-              <b>Sign Up</b>
-            </a>
-          </p>
-        </div>
-      </Row>
-
-      <Row className="py-1 mt-2">
+      <Row className="mt-5">
         <Col>
-          <Link to="/">
+          <Link to="/login">
             <Button variant="primary" size="md">
-              Back to Home page
+              Back to Sign In Page
             </Button>
           </Link>
         </Col>
