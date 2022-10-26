@@ -7,7 +7,7 @@ import LoginScreen from './screens/LoginScreen'
 import TransportScreen from './screens/TransportScreen'
 import DestinationScreen from './screens/DestinationScreen'
 import HolidayPackagesScreen from './screens/HolidayPackagesScreen'
-import TouristInfoScreen from './screens/TouristInfoScreen'
+import ProfileScreen from './screens/ProfileScreen'
 import GuidedTourSearchScreen from './screens/GuidedTourSearchScreen'
 import BusinessOwnerInfoScreen from './screens/BusinessOwnerInfoScreen'
 import ErrorScreen from './screens/ErrorScreen'
@@ -28,7 +28,7 @@ const App = () => {
             <Route path='/transports' element={<TransportScreen />} />
             <Route path='/destinations' element={<DestinationScreen />} />
             <Route path='/packages' element={<HolidayPackagesScreen />} />
-            <Route path='/touristInfo' element={<TouristInfoScreen />} />
+            <Route path='/profile' element={<ProfileScreen />} />
             <Route path='/tourSearch' element={<GuidedTourSearchScreen />} />
             <Route path='/destinationSearch' element={<DestinationSearchScreen />}/>
             <Route path='/staysSearch' element={<StaysSearchScreen />} />

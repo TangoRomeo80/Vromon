@@ -9,7 +9,6 @@ import {
   FaUserCircle,
   FaSignOutAlt,
   FaSignInAlt,
-  FaTag,
 } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../features/auth/authSlice'
@@ -29,14 +28,12 @@ const Header = () => {
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>
-            <img style={{ maxWidth: "150px"}}
-              src='/Nav/logp.png'
-                />
+              <img style={{ maxWidth: '150px' }} src='/Nav/logp.png' />
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
           <Navbar.Collapse id='responsive-navbar-nav'>
-            <Nav className='me-auto align-items-center pt-2 pb-2'>
+            <Nav className='mx-auto align-items-center pt-2 pb-2'>
               <LinkContainer to='/destinations'>
                 <Nav.Link>
                   <FaMapMarkerAlt />
@@ -58,22 +55,14 @@ const Header = () => {
               </LinkContainer>
             </Nav>
 
-            <Nav>
+            <Nav className='align-items-center pt-2 pb-2 ms-5'>
               {userInfo ? (
                 <NavDropdown title={userInfo.userName} className='me-5'>
                   <NavDropdown.Item>
-                    <LinkContainer to='/touristInfo' className='px-0'>
+                    <LinkContainer to='/profile' className='px-0'>
                       <Nav.Link className='text-dark'>
                         <FaUserCircle className='me-2' />
                         Profile
-                      </Nav.Link>
-                    </LinkContainer>
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    <LinkContainer to='/bookingInfo' className='px-0'>
-                      <Nav.Link className='text-dark'>
-                        <FaTag className='me-2' />
-                        My Bookings
                       </Nav.Link>
                     </LinkContainer>
                   </NavDropdown.Item>
@@ -88,10 +77,12 @@ const Header = () => {
                 </NavDropdown>
               ) : (
                 <LinkContainer to='/login'>
-                  <Button variant='blue'>
-                    <FaSignInAlt className='me-2 mb-1' />
-                    Sign In
-                  </Button>
+                  <Nav.Link className='px-0 py-0'>
+                    <Button variant='blue'>
+                      <FaSignInAlt className='me-2 mb-1' />
+                      Sign In
+                    </Button>
+                  </Nav.Link>
                 </LinkContainer>
               )}
             </Nav>
