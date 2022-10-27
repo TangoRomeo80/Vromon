@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { Container } from 'react-bootstrap'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -21,36 +23,45 @@ import RegistrationScreen from './screens/RegistrationScreen'
 
 const App = () => {
   return (
-    <Router>
-      <Header />
-      <main className="mt-6">
-        <Container fluid className='px-0'>
-          <Routes>
-            <Route path='/' element={<HomeScreen />} />
-            <Route path='/login' element={<LoginScreen />} />
-            <Route path='/registration' element={<RegistrationScreen />} />
-            <Route path='/newUser' element={<NewUserScreen />} />
-            {/* <Route path='/transports' element={<TransportScreen />} /> */}
-            <Route path='/destinations' element={<DestinationScreen />} />
-            <Route path='/packages' element={<HolidayPackagesScreen />} />
-            <Route path='/profile' element={<ProfileScreen />} />
-            <Route path='/tourSearch' element={<GuidedTourSearchScreen />} />
-            <Route path='/destinationSearch' element={<DestinationSearchScreen />}/>
-            <Route path='/staysSearch' element={<StaysSearchScreen />} />
-            <Route path='/transportSearch' element={<TransportSearchScreen />}/>
-            <Route
-              path='/businessOwnerInfo'
-              element={<BusinessOwnerInfoScreen />}
-            />
-            <Route path='/test' element={<TestScreen />} />
-            <Route path='/*' element={<ErrorScreen />} />
+    <>
+      <Router>
+        <Header />
+        <main className='mt-6'>
+          <Container fluid className='px-0'>
+            <Routes>
+              <Route path='/' element={<HomeScreen />} />
+              <Route path='/login' element={<LoginScreen />} />
+              <Route path='/registration' element={<RegistrationScreen />} />
+              <Route path='/newUser' element={<NewUserScreen />} />
+              {/* <Route path='/transports' element={<TransportScreen />} /> */}
+              <Route path='/destinations' element={<DestinationScreen />} />
+              <Route path='/packages' element={<HolidayPackagesScreen />} />
+              <Route path='/profile' element={<ProfileScreen />} />
+              <Route path='/tourSearch' element={<GuidedTourSearchScreen />} />
+              <Route
+                path='/destinationSearch'
+                element={<DestinationSearchScreen />}
+              />
+              <Route path='/staysSearch' element={<StaysSearchScreen />} />
+              <Route
+                path='/transportSearch'
+                element={<TransportSearchScreen />}
+              />
+              <Route
+                path='/businessOwnerInfo'
+                element={<BusinessOwnerInfoScreen />}
+              />
+              <Route path='/test' element={<TestScreen />} />
+              <Route path='/*' element={<ErrorScreen />} />
 
-            <Route path='/testNav' element={<TestNavbar/>}/>
-          </Routes>
-        </Container>
-      </main>
-      <Footer />
-    </Router>
+              <Route path='/testNav' element={<TestNavbar />} />
+            </Routes>
+          </Container>
+        </main>
+        <Footer />
+      </Router>
+      <ToastContainer />
+    </>
   )
 }
 

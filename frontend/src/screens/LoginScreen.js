@@ -5,6 +5,7 @@ import { Button, Form, Row, Col } from 'react-bootstrap'
 import { FcGoogle } from 'react-icons/fc'
 import FormContainer from '../components/FormContainer'
 import { signinLocal, resetAuth } from '../features/auth/authSlice'
+import { toast } from 'react-toastify'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
@@ -19,11 +20,15 @@ const LoginScreen = () => {
   )
 
   useEffect(() => {
-    if (isSuccess || userInfo) {
+    if (userInfo) {
+      navigate('/')
+    }
+    if (isSuccess) {
+      toast.success('Logged in successfully', { position: 'top-center' })
       navigate('/')
     }
     if (isError) {
-      alert(message)
+      toast.error(message, { position: 'top-center' })
     }
 
     dispatch(resetAuth())
@@ -99,9 +104,9 @@ const LoginScreen = () => {
         <div className='d-flex justify-content-center py-3 mt-3 '>
           <p>
             New User?
-            <a href='/registration'>
+            <Link to='/registration'>
               <b>Sign Up</b>
-            </a>
+            </Link>
           </p>
         </div>
       </Row>
