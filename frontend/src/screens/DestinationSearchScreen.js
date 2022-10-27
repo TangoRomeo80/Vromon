@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Container, Card, Form } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 
 const DestinationSearchScreen = () => {
   const [budget, setBudget] = useState(0);
@@ -9,6 +10,20 @@ const DestinationSearchScreen = () => {
   
   return (
     <Container>
+      <Row className="mb-2 pt-3">
+        <Col lg={6} md={6} sm={6}>
+          <Card.Text as="h3">Location Name</Card.Text>
+          <Card.Text>
+            Deestination Search Queries (Division, District, City)
+          </Card.Text>
+        </Col>
+        <Col lg={6} md={6} sm={6} className="d-flex justify-content-end">
+          <Link to="" className="btn btn-primary mb-5">
+            Modify Search
+          </Link>
+        </Col>
+      </Row>
+
       <Row>
         {/* Left Coloumn For Filtering */}
         <Col xs={12} md={3} xl={3}>
