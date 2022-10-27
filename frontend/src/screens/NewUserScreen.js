@@ -74,7 +74,7 @@ const NewUserScreen = () => {
             </Form.Group>
             <Form.Group className='mb-3' controlId='userType'>
               <Form.Label className='small mb-1'>
-                Choose account type
+                Choose User type
               </Form.Label>
               <Form.Control
                 required
