@@ -80,7 +80,8 @@ export const createBusiness = createAsyncThunk(
 //update business
 export const updateBusiness = createAsyncThunk(
   'business/updateBusiness',
-  async (id, businessData, thunkAPI) => {
+  async (data, thunkAPI) => {
+    const { id, businessData } = data
     try {
       const token = thunkAPI.getState().auth.userInfo.token
       return await businessService.updateBusiness(id, businessData, token)

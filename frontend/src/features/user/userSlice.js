@@ -80,7 +80,8 @@ export const createUser = createAsyncThunk(
 //update user
 export const updateUser = createAsyncThunk(
   'user/updateUser',
-  async (id, userData, thunkAPI) => {
+  async (data, thunkAPI) => {
+    const { id, userData } = data
     try {
       const token = thunkAPI.getState().auth.userInfo.token
       return await userService.updateUser(id, userData, token)

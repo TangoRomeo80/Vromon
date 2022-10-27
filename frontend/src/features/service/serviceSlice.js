@@ -79,7 +79,8 @@ export const createService = createAsyncThunk(
 //update service
 export const updateService = createAsyncThunk(
   'service/updateService',
-  async (id, serviceData, thunkAPI) => {
+  async (data, thunkAPI) => {
+    const { id, serviceData } = data
     try {
       const token = thunkAPI.getState().auth.userInfo.token
       return await serviceService.updateService(id, serviceData, token)

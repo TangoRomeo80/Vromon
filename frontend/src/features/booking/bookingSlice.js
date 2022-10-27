@@ -80,7 +80,8 @@ export const createBooking = createAsyncThunk(
 //update booking
 export const updateBooking = createAsyncThunk(
   'booking/updateBooking',
-  async (id, bookingData, thunkAPI) => {
+  async (data, thunkAPI) => {
+    const {id, bookingData} = data
     try {
       const token = thunkAPI.getState().auth.userInfo.token
       return await bookingService.updateBooking(id, bookingData, token)
