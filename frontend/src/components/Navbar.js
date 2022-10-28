@@ -5,7 +5,6 @@ import {
   Container,
   Card,
   Button,
-  Nav,
   Form,
   InputGroup,
 } from 'react-bootstrap'
