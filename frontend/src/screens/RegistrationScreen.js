@@ -1,30 +1,62 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button, Form, Row, Col } from 'react-bootstrap'
-import { FcGoogle } from 'react-icons/fc'
+import { Button, Form, Row } from 'react-bootstrap'
 import FormContainer from '../components/FormContainer'
 import { signupLocal, resetAuth } from '../features/auth/authSlice'
+import { toast } from 'react-toastify'
 
 const RegistrationScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const [mobile, setMobile] = useState('')
+  const [userType, setUserType] = useState('tourist')
 
   const [showPassword, setShowPassword] = useState('password')
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const { userInfo, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  )
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/')
+    }
+    if (isSuccess) {
+      toast.success('Account created successfully', {
+        position: 'top-center',
+      })
+      navigate('/')
+    }
+    if (isError) {
+      toast.error(message, { position: 'top-center' })
+    }
+
+    dispatch(resetAuth())
+  }, [userInfo, isError, isSuccess, message, navigate, dispatch])
+
   const submitHandler = (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
-      alert('Passwords did not match')
-    } else if (email != '' && password != '' && phoneNumber != '') {
-      dispatch(signupLocal({ email, password, phoneNumber }))
+      toast.error('Password and confirmed password do not match', {
+        position: 'top-center',
+      })
     } else {
-      alert('Please fill all the fields')
+      dispatch(
+        signupLocal({
+          email,
+          password,
+          mobile,
+          userType,
+          loginType: 'local',
+          newUser: false,
+          userName: email.split('@')[0],
+        })
+      )
     }
   }
 
@@ -53,8 +85,8 @@ const RegistrationScreen = () => {
             required
             type='text'
             placeholder='Please Enter Your Mobile Number'
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
           />
         </Form.Group>
 
@@ -74,7 +106,7 @@ const RegistrationScreen = () => {
           <Form.Control
             required
             type={showPassword}
-            placeholder='Confirm Password'
+            placeholder='Confirm the entered Password'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
@@ -87,6 +119,23 @@ const RegistrationScreen = () => {
             onChange={(e) => passwordShow(e)}
           />
         </Form.Group>
+
+        <Form.Group className='mb-3' controlId='userType'>
+          <Form.Label className='small mb-1'>Choose User type</Form.Label>
+          <Form.Control
+            required
+            as='select'
+            className='mb-3'
+            type='select'
+            placeholder='Enter if you want to open account as tourist or as service provider'
+            value={userType}
+            onChange={(e) => setUserType(e.target.value)}
+          >
+            <option value='tourist'>Tourist</option>
+            <option value='businessowner'>Service Provider</option>
+          </Form.Control>
+        </Form.Group>
+
         <div className='d-grid gap-2'>
           <Button variant='primary' size='lg' type='submit'>
             Sign up
