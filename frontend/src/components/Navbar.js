@@ -256,40 +256,40 @@ const SearchDestinations = () => {
   return (
     <div>
       <Card>
-        <Row className='mt-3'>
-          <Card.Text as='h5'>Search Destinations</Card.Text>
+        <Row className="mt-3">
+          <Card.Text as="h5">Search Destinations</Card.Text>
         </Row>
-        <Row className='my-5 mx-3'>
+        <Row className="my-5 mx-3">
           <Col>
-            <Card.Text>Selct Division</Card.Text>
-            <Form.Group className='mb-3' controlId='searchDivision'>
+            <Card.Text>Select Division</Card.Text>
+            <Form.Group className="mb-3" controlId="searchDivision">
               <Form.Control
-                className='form-select'
-                as='select'
-                type='select'
-                placeholder='Select Division'
+                className="form-select"
+                as="select"
+                type="select"
+                placeholder="Select Division"
                 value={searchDivision}
                 onChange={(e) => setSearchDivision(e.target.value)}
               >
                 <option>{searchDivision}</option>
-                <option value='Dhaka'>Dhaka</option>
-                <option value='Chittagong'>Chittagong</option>
-                <option value='Sylhet'>Sylhet</option>
-                <option value='Rajshahi'>Rajshahi</option>
-                <option value='Khulna'>Khulna</option>
-                <option value='Barisal'>Barisal</option>
-                <option value='Rangpur'>Rangpur</option>
-                <option value='Mymensingh'>Mymensingh</option>
+                <option value="Dhaka">Dhaka</option>
+                <option value="Chittagong">Chittagong</option>
+                <option value="Sylhet">Sylhet</option>
+                <option value="Rajshahi">Rajshahi</option>
+                <option value="Khulna">Khulna</option>
+                <option value="Barisal">Barisal</option>
+                <option value="Rangpur">Rangpur</option>
+                <option value="Mymensingh">Mymensingh</option>
               </Form.Control>
             </Form.Group>
           </Col>
 
           <Col>
             <Card.Text>Enter District</Card.Text>
-            <Form.Group className='mb-3' controlId='searchDistrict'>
+            <Form.Group className="mb-3" controlId="searchDistrict">
               <Form.Control
-                type='text'
-                placeholder='Enter District Name'
+                type="text"
+                placeholder="Enter District Name"
                 value={searchDistrict}
                 onChange={(e) => setSearchDistrict(e.target.value)}
               ></Form.Control>
@@ -298,10 +298,10 @@ const SearchDestinations = () => {
 
           <Col>
             <Card.Text>Enter City</Card.Text>
-            <Form.Group className='mb-3' controlId='searchCity'>
+            <Form.Group className="mb-3" controlId="searchCity">
               <Form.Control
-                type='text'
-                placeholder='Enter the City Name'
+                type="text"
+                placeholder="Enter the City Name"
                 value={searchCity}
                 onChange={(e) => setSearchCity(e.target.value)}
               ></Form.Control>
@@ -310,7 +310,7 @@ const SearchDestinations = () => {
         </Row>
       </Card>
     </div>
-  )
+  );
 }
 
 const SearchTours = () => {
@@ -328,18 +328,18 @@ const SearchTours = () => {
   }
 
   return (
-    <Card>
-      <Row className='mt-3'>
-        <Card.Text as='h5'>Search Holiday Packages</Card.Text>
+    <Card style={{ width: "700px" }}>
+      <Row className="mt-3">
+        <Card.Text as="h5">Search Holiday Packages</Card.Text>
       </Row>
 
-      <Row className='my-5 mx-3'>
+      <Row className="my-5 mx-3">
         <Col>
           <Card.Text>Enter City</Card.Text>
-          <Form.Group className='mb-3' controlId='searchTourCity'>
+          <Form.Group className="mb-3" controlId="searchTourCity">
             <Form.Control
-              type='text'
-              placeholder='Enter the City Name'
+              type="text"
+              placeholder="Enter the City Name"
               value={searchTourCity}
               onChange={(e) => setSearchTourCity(e.target.value)}
             ></Form.Control>
@@ -348,25 +348,25 @@ const SearchTours = () => {
 
         <Col>
           <Card.Text>Travel Date</Card.Text>
-          <Form.Group className='mb-3' controlId='travelDate'>
+          <Form.Group className="mb-3" controlId="travelDate">
             <InputGroup>
               <div
                 onClick={(e) => {
-                  setTravelDate('')
+                  setTravelDate("");
                 }}
-                className='cancle-icon'
+                className="cancle-icon"
                 style={{
-                  position: 'absolute',
-                  right: '5px',
-                  top: '5px',
-                  zIndex: '9999',
-                  width: '3vh',
+                  position: "absolute",
+                  right: "5px",
+                  top: "5px",
+                  zIndex: "9999",
+                  width: "3vh",
                 }}
               ></div>
             </InputGroup>
             <Form.Control
-              type='date'
-              placeholder={travelDate === 'Select Check-In Date'}
+              type="date"
+              placeholder={travelDate === "Select Check-In Date"}
               value={travelDate}
               onChange={(e) => setTravelDate(e.target.value)}
             ></Form.Control>
@@ -375,10 +375,10 @@ const SearchTours = () => {
 
         <Col>
           <Card.Text>Number of Travelers</Card.Text>
-          <Form.Group className='mb-3' controlId='travelerCount'>
+          <Form.Group className="mb-3" controlId="travelerCount">
             <Form.Control
-              type='text'
-              placeholder='Number of Travelers'
+              type="text"
+              placeholder="Number of Travelers"
               value={travelerCount}
               onChange={(e) => setTravelerCount(e.target.value)}
             ></Form.Control>
@@ -388,7 +388,7 @@ const SearchTours = () => {
 
       <Button onClick={handleTourSearch}>Submit Search</Button>
     </Card>
-  )
+  );
 }
 
 const TestNavbar = () => {
@@ -418,28 +418,29 @@ const TestNavbar = () => {
   return (
     <div
       style={{
-        minHeight: '80vh',
+        minHeight: "80vh",
         backgroundImage: 'url("/Nav/test2.jpg")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
-      className='d-flex justify-content-center align-items-center'
+      className="d-flex justify-content-center align-items-center"
     >
-      <Card className='text-center w-55'>
+      <Card className="text-center w-55">
         <Card.Header>
           <Container>
             <Row>
               <Col
                 sm={6}
                 lg={3}
-                className='d-flex justify-content-center'
-                onClick={() => setSearchSelection('destinations')}
+                className="d-flex justify-content-center pb-1"
+                onClick={() => setSearchSelection("destinations")}
               >
                 <Button
+                  style={{ width: "100%", borderRadius: "0" }}
                   variant={
-                    searchSelection === 'destinations'
-                      ? 'success'
-                      : 'outline-success'
+                    searchSelection === "destinations"
+                      ? "success"
+                      : "outline-success"
                   }
                 >
                   Destination
@@ -448,14 +449,15 @@ const TestNavbar = () => {
               <Col
                 sm={6}
                 lg={3}
-                className='d-flex justify-content-center'
-                onClick={() => setSearchSelection('transports')}
+                className="d-flex justify-content-center pb-1"
+                onClick={() => setSearchSelection("transports")}
               >
                 <Button
+                  style={{ width: "100%", borderRadius: "0" }}
                   variant={
-                    searchSelection === 'transports'
-                      ? 'success'
-                      : 'outline-success'
+                    searchSelection === "transports"
+                      ? "success"
+                      : "outline-success"
                   }
                 >
                   Transports
@@ -464,12 +466,13 @@ const TestNavbar = () => {
               <Col
                 sm={6}
                 lg={3}
-                className='d-flex justify-content-center'
-                onClick={() => setSearchSelection('stays')}
+                className="d-flex justify-content-center pb-1"
+                onClick={() => setSearchSelection("stays")}
               >
                 <Button
+                  style={{ width: "100%", borderRadius: "0" }}
                   variant={
-                    searchSelection === 'stays' ? 'success' : 'outline-success'
+                    searchSelection === "stays" ? "success" : "outline-success"
                   }
                 >
                   Stays
@@ -478,12 +481,13 @@ const TestNavbar = () => {
               <Col
                 sm={6}
                 lg={3}
-                className='d-flex justify-content-center'
-                onClick={() => setSearchSelection('tours')}
+                className="d-flex justify-content-center pb-1"
+                onClick={() => setSearchSelection("tours")}
               >
                 <Button
+                  style={{ width: "100%", borderRadius: "0" }}
                   variant={
-                    searchSelection === 'tours' ? 'success' : 'outline-success'
+                    searchSelection === "tours" ? "success" : "outline-success"
                   }
                 >
                   Tours
@@ -493,19 +497,19 @@ const TestNavbar = () => {
           </Container>
         </Card.Header>
         <Card.Body>
-          {searchSelection === 'stays' ? (
+          {searchSelection === "stays" ? (
             <SearchStays />
-          ) : searchSelection === 'destinations' ? (
+          ) : searchSelection === "destinations" ? (
             <SearchDestinations />
-          ) : searchSelection === 'tours' ? (
+          ) : searchSelection === "tours" ? (
             <SearchTours />
-          ) : searchSelection === 'transports' ? (
+          ) : searchSelection === "transports" ? (
             <SearchTransports />
           ) : null}
         </Card.Body>
       </Card>
     </div>
-  )
+  );
 }
 
 export default TestNavbar
