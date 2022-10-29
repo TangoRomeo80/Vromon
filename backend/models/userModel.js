@@ -127,6 +127,16 @@ const touristSchema = new mongoose.Schema(
       },
     },
 
+    passportExpire: {
+      type: Date,
+      default: '',
+    },
+
+    dob: {
+      type: Date,
+      default: '',
+    },
+
     gender: {
       type: String,
       default: '',

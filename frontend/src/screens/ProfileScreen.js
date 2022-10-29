@@ -20,9 +20,9 @@ import {
   FaCreditCard,
   FaCalculator,
 } from 'react-icons/fa'
-import { MdEmail, MdLogin } from 'react-icons/md'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
+import Moment from 'moment'
 import Loader from '../components/Loader'
 
 const ProfileScreen = () => {
@@ -34,13 +34,18 @@ const ProfileScreen = () => {
   const { meUser, isMeError, isMeSuccess, isMeLoading, meErrorMessage } =
     useSelector((state) => state.user)
 
-  const [userName, setUserName] = useState()
-  const [email, setEmail] = useState()
-  const [loginType, setLoginType] = useState()
-  // const [googleID, setGoogleID] = useState()
-  const [mobile, setMobile] = useState()
-  const [password, setPassword] = useState()
-  const [userType, setUserType] = useState()
+  const [userName, setUserName] = useState('')
+  const [nid, setNid] = useState('')
+  const [passport, setPassport] = useState('')
+  const [dob, setDob] = useState('')
+  const [gender, setGender] = useState('')
+  const [address, setAddress] = useState('')
+  const [emergencyContact, setEmergencyContact] = useState('')
+  const [email, setEmail] = useState('')
+  const [mobile, setMobile] = useState('')
+  const [prevPassword, setPrevPassword] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [imageUrl, setImageUrl] = useState('')
   const [uploading, setUploading] = useState('')
 
@@ -52,13 +57,18 @@ const ProfileScreen = () => {
       navigate('/newUser')
     }
     if (isMeSuccess) {
-      setUserName(meUser.userName)
-      setEmail(meUser.email)
-      setLoginType(meUser.loginType)
-      // setGoogleID(user.googleID)
-      setMobile(meUser.mobile)
-      setUserType(meUser.userType)
-      setImageUrl(meUser.image === '' ? imageUrl : meUser.image)
+      if (meUser.userType === 'tourist') {
+        setUserName(meUser.userName)
+        setNid(meUser.touristInfo.nid)
+        setPassport(meUser.touristInfo.passport)
+        setDob(meUser.touristInfo.dob)
+        setGender(meUser.touristInfo.gender)
+        setAddress(meUser.touristInfo.address)
+        setEmergencyContact(meUser.touristInfo.emergencyContact)
+        setEmail(meUser.email)
+        setMobile(meUser.mobile)
+        setImageUrl(meUser.image)
+      }
     } else if (isMeError) {
       toast.error(meErrorMessage, { position: 'top-center' })
     } else {
@@ -123,7 +133,7 @@ const ProfileScreen = () => {
       <Form>
         <Row>
           <Col lg={4} md={12} sm={12}>
-            <Card className='mb-1'>
+            <Card className='mb-1 shadow'>
               <Card.Body>
                 <Row>
                   <Col
@@ -255,12 +265,80 @@ const ProfileScreen = () => {
               ) : null}
             </Card>
           </Col>
-          <Col
-            lg={8}
-            md={12}
-            sm={12}
-            style={{ backgroundColor: 'red', minHeight: '80vh' }}
-          ></Col>
+          <Col lg={8} md={12} sm={12}>
+            <Card className='mb-2 shadow'>
+              <Card.Body>
+                <h4 className='font-weight-bolder text-dark'>
+                  Profile Information
+                </h4>
+                <Row>
+                  <Col lg={12} md={12} sm={12}>
+                    <h5 className='font-weight-bolder text-muted mb-3'>
+                      Basic Information
+                    </h5>
+                  </Col>
+                  <Col lg={6} md={6} sm={12}>
+                    <Form.Group className='mb-3' controlId='userName'>
+                      <Form.Label>Full Name</Form.Label>
+                      <Form.Control
+                        type='text'
+                        placeholder='Enter User Name'
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                      ></Form.Control>
+                    </Form.Group>
+                  </Col>
+                  <Col lg={6} md={6} sm={12}>
+                    <Form.Group className='mb-3' controlId='nid'>
+                      <Form.Label>NID number</Form.Label>
+                      <Form.Control
+                        type='text'
+                        placeholder='Enter Nid Number'
+                        value={nid}
+                        onChange={(e) => setNid(e.target.value)}
+                      ></Form.Control>
+                    </Form.Group>
+                  </Col>
+                  <Col lg={6} md={6} sm={12}>
+                    <Form.Group className='mb-3' controlId='dob'>
+                      <Form.Label className='small mb-1'>
+                        Date of Birth
+                      </Form.Label>
+                      <Form.Control
+                        type='text'
+                        placeholder='Date of Birth'
+                        value={
+                          dob !== '' ? '' : Moment(dob).format('DD.MM.YYYY')
+                        }
+                      ></Form.Control>
+                      <Form.Control
+                        type='date'
+                        placeholder='Enter Date of Birth'
+                        value={dob}
+                        onChange={(e) => setDob(e.target.value)}
+                      ></Form.Control>
+                    </Form.Group>
+                  </Col>
+                  <Col lg={6} md={6} sm={12}>
+                    <Form.Group className='mb-3' controlId='gender'>
+                      <Form.Label>Gender</Form.Label>
+                      <Form.Control
+                        as='select'
+                        type='select'
+                        placeholder='Select Gender'
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
+                      >
+                        <option value='male'>Male</option>
+                        <option value='female'>Female</option>
+                        <option value='other'>Other</option>
+                      </Form.Control>
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
       </Form>
     </Container>
