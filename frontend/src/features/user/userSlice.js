@@ -119,11 +119,11 @@ export const deleteUser = createAsyncThunk(
 
 //get info about logged in user
 export const getMeUser = createAsyncThunk(
-  'user/getLoggedInUser',
+  'user/getMeUser',
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.userInfo.token
-      return await userService.getLoggedInUser(token)
+      return await userService.getMeUser(token)
     } catch (err) {
       const message =
         (err.response && err.response.data && err.response.data.message) ||

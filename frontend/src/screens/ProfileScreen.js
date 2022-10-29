@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getLoggedInUser } from '../features/user/userSlice'
+import { getMeUser } from '../features/user/userSlice'
 import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap'
 import {
   FaUser,
@@ -58,7 +58,7 @@ const ProfileScreen = () => {
     } else if (isMeError) {
       toast.error(meErrorMessage, { position: 'top-center' })
     } else {
-      dispatch(getLoggedInUser())
+      dispatch(getMeUser())
     }
   }, [
     isMeSuccess,
