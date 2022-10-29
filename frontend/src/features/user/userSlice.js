@@ -112,6 +112,23 @@ export const deleteUser = createAsyncThunk(
   }
 )
 
+//get info about logged in user
+export const getLoggedInUser = createAsyncThunk(
+  'user/getLoggedInUser',
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.userInfo.token
+      return await userService.getLoggedInUser(token)
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -190,9 +207,7 @@ const userSlice = createSlice({
           user._id === action.payload._id ? action.payload : user
         )
         state.user =
-          state.user._id === action.payload._id
-            ? action.payload
-            : state.user
+          state.user._id === action.payload._id ? action.payload : state.user
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.isUpdateLoading = false
@@ -210,13 +225,27 @@ const userSlice = createSlice({
         state.users = state.users.filter(
           (user) => user._id !== action.payload._id
         )
-        state.user =
-          state.user._id === action.payload._id ? null : state.user
+        state.user = state.user._id === action.payload._id ? null : state.user
       })
       .addCase(deleteUser.rejected, (state, action) => {
         state.isDeleteLoading = false
         state.isDeleteError = true
         state.deleteErrorMessage = action.payload
+      })
+      .addCase(getLoggedInUser.pending, (state) => {
+        state.isDetailsLoading = true
+      })
+      .addCase(getLoggedInUser.fulfilled, (state, action) => {
+        state.isDetailsLoading = false
+        state.isDetailsSuccess = true
+        state.isDetailsError = false
+        state.detailsErrorMessage = ''
+        state.user = action.payload
+      })
+      .addCase(getLoggedInUser.rejected, (state, action) => {
+        state.isDetailsLoading = false
+        state.isDetailsError = true
+        state.detailsErrorMessage = action.payload
       })
   },
 })

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getLoggedInUser } from '../features/user/userSlice'
 import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap'
 import {
   FaUser,
@@ -12,16 +15,23 @@ import {
   FaCreditCard,
 } from 'react-icons/fa'
 import { MdEmail, MdLogin } from 'react-icons/md'
-
-// import {useDispatch} from 'react-redux'
-
+import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import Loader from '../components/Loader'
 
 const ProfileScreen = () => {
-  // const userID = params.id
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  // const dispatch = useDispatch()
+  const { userInfo } = useSelector((state) => state.auth)
+
+  const {
+    user,
+    isDetailsError,
+    isDetailsSuccess,
+    isDetailsLoading,
+    detailsErrorMessage,
+  } = useSelector((state) => state.user)
 
   const [userName, setUserName] = useState()
   const [email, setEmail] = useState()
@@ -34,6 +44,36 @@ const ProfileScreen = () => {
     'http://bootdey.com/img/Content/avatar/avatar7.png'
   )
   const [uploading, setUploading] = useState('')
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/login')
+    }
+    if (userInfo && userInfo.newUser) {
+      navigate('/newUser')
+    }
+    if (isDetailsSuccess) {
+      setUserName(user.userName)
+      setEmail(user.email)
+      setLoginType(user.loginType)
+      // setGoogleID(user.googleID)
+      setMobile(user.mobile)
+      setUserType(user.userType)
+      setImageUrl(user.image === '' ? imageUrl : user.image)
+    } else if (isDetailsError) {
+      toast.error(detailsErrorMessage, { position: 'top-center' })
+    } else {
+      dispatch(getLoggedInUser())
+    }
+  }, [
+    isDetailsSuccess,
+    isDetailsError,
+    detailsErrorMessage,
+    user,
+    userInfo,
+    navigate,
+    dispatch,
+  ])
 
   const uploadUserImageFileHandler = async (e) => {
     const file = e.target.files[0]
