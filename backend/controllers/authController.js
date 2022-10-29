@@ -40,6 +40,7 @@ export const signupLocal = catchAsync(async (req, res, next) => {
       email: newUser.email,
       loginType: newUser.loginType,
       userType: newUser.userType,
+      newUser: newUser.newUser,
       token: generateToken(newUser._id),
     },
   })
@@ -66,6 +67,7 @@ export const signinLocal = catchAsync(async (req, res, next) => {
         email: authedUser.email,
         loginType: authedUser.loginType,
         userType: authedUser.userType,
+        newUser: authedUser.newUser,
         token: generateToken(authedUser._id),
       },
     })

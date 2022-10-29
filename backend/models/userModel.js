@@ -17,7 +17,6 @@ const businessOwnerSchema = new mongoose.Schema(
     nid: {
       type: String,
       default: '',
-      unique: true,
       trim: true,
       validate: {
         validator: function (val) {
@@ -30,7 +29,6 @@ const businessOwnerSchema = new mongoose.Schema(
 
     passport: {
       type: String,
-      unique: true,
       default: '',
       trim: true,
       validate: {
@@ -106,7 +104,6 @@ const touristSchema = new mongoose.Schema(
     nid: {
       type: String,
       default: '',
-      unique: true,
       trim: true,
       validate: {
         validator: function (val) {
@@ -120,7 +117,6 @@ const touristSchema = new mongoose.Schema(
     passport: {
       type: String,
       default: '',
-      unique: true,
       trim: true,
       validate: {
         validator: function (val) {
