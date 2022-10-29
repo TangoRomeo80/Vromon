@@ -4,6 +4,7 @@ import userService from './userService'
 const initialState = {
   users: [],
   user: null,
+  meUser: null,
   isListError: false,
   isListSuccess: false,
   isListLoading: false,
@@ -12,6 +13,10 @@ const initialState = {
   isDetailsSuccess: false,
   isDetailsLoading: false,
   detailsErrorMessage: '',
+  isMeError: false,
+  isMeSuccess: false,
+  isMeLoading: false,
+  meErrorMessage: '',
   isCreateError: false,
   isCreateSuccess: false,
   isCreateLoading: false,
@@ -113,7 +118,7 @@ export const deleteUser = createAsyncThunk(
 )
 
 //get info about logged in user
-export const getLoggedInUser = createAsyncThunk(
+export const getMeUser = createAsyncThunk(
   'user/getLoggedInUser',
   async (_, thunkAPI) => {
     try {
@@ -189,6 +194,7 @@ const userSlice = createSlice({
         state.isCreateError = false
         state.createErrorMessage = ''
         state.users.push(action.payload)
+        state.user = action.payload
       })
       .addCase(createUser.rejected, (state, action) => {
         state.isCreateLoading = false
@@ -232,20 +238,20 @@ const userSlice = createSlice({
         state.isDeleteError = true
         state.deleteErrorMessage = action.payload
       })
-      .addCase(getLoggedInUser.pending, (state) => {
-        state.isDetailsLoading = true
+      .addCase(getMeUser.pending, (state) => {
+        state.isMeLoading = true
       })
-      .addCase(getLoggedInUser.fulfilled, (state, action) => {
-        state.isDetailsLoading = false
-        state.isDetailsSuccess = true
-        state.isDetailsError = false
-        state.detailsErrorMessage = ''
-        state.user = action.payload
+      .addCase(getMeUser.fulfilled, (state, action) => {
+        state.isMeLoading = false
+        state.isMeSuccess = true
+        state.isMeError = false
+        state.meErrorMessage = ''
+        state.meUser = action.payload
       })
-      .addCase(getLoggedInUser.rejected, (state, action) => {
-        state.isDetailsLoading = false
-        state.isDetailsError = true
-        state.detailsErrorMessage = action.payload
+      .addCase(getMeUser.rejected, (state, action) => {
+        state.isMeLoading = false
+        state.isMeError = true
+        state.meErrorMessage = action.payload
       })
   },
 })

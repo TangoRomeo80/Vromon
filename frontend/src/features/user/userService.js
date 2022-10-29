@@ -51,7 +51,7 @@ const deleteUser = async (id, token) => {
 }
 
 //get info about logged in user
-const getLoggedInUser = async (token) => { 
+const getMeUser = async (token) => { 
   const response = await axios.get('/api/users/getMe', {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -66,7 +66,7 @@ const userService = {
   createUser,
   updateUser,
   deleteUser,
-  getLoggedInUser,
+  getMeUser,
 }
 
 export default userService

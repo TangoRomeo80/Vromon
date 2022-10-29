@@ -25,13 +25,8 @@ const ProfileScreen = () => {
 
   const { userInfo } = useSelector((state) => state.auth)
 
-  const {
-    user,
-    isDetailsError,
-    isDetailsSuccess,
-    isDetailsLoading,
-    detailsErrorMessage,
-  } = useSelector((state) => state.user)
+  const { meUser, isMeError, isMeSuccess, isMeLoading, meErrorMessage } =
+    useSelector((state) => state.user)
 
   const [userName, setUserName] = useState()
   const [email, setEmail] = useState()
@@ -52,24 +47,24 @@ const ProfileScreen = () => {
     if (userInfo && userInfo.newUser) {
       navigate('/newUser')
     }
-    if (isDetailsSuccess) {
-      setUserName(user.userName)
-      setEmail(user.email)
-      setLoginType(user.loginType)
+    if (isMeSuccess) {
+      setUserName(meUser.userName)
+      setEmail(meUser.email)
+      setLoginType(meUser.loginType)
       // setGoogleID(user.googleID)
-      setMobile(user.mobile)
-      setUserType(user.userType)
-      setImageUrl(user.image === '' ? imageUrl : user.image)
-    } else if (isDetailsError) {
-      toast.error(detailsErrorMessage, { position: 'top-center' })
+      setMobile(meUser.mobile)
+      setUserType(meUser.userType)
+      setImageUrl(meUser.image === '' ? imageUrl : meUser.image)
+    } else if (isMeError) {
+      toast.error(meErrorMessage, { position: 'top-center' })
     } else {
       dispatch(getLoggedInUser())
     }
   }, [
-    isDetailsSuccess,
-    isDetailsError,
-    detailsErrorMessage,
-    user,
+    isMeSuccess,
+    isMeError,
+    meErrorMessage,
+    meUser,
     userInfo,
     navigate,
     dispatch,
