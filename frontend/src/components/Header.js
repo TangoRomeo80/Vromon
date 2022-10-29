@@ -39,48 +39,48 @@ const Header = () => {
                 <>
                   <LinkContainer to='/destinations'>
                     <Nav.Link>
-                      <FaMapMarkerAlt className='me-1'/>
+                      <FaMapMarkerAlt className='me-1' />
                       Destinations
                     </Nav.Link>
                   </LinkContainer>
                   <LinkContainer to='/transports'>
                     <Nav.Link>
-                      <FaCar />/<FaPlane className='me-1'/>
+                      <FaCar />/<FaPlane className='me-1' />
                       Transport
                     </Nav.Link>
                   </LinkContainer>
 
                   <LinkContainer to='/packages'>
                     <Nav.Link>
-                      <FaUmbrellaBeach className='me-1'/>
+                      <FaUmbrellaBeach className='me-1' />
                       Holiday Packages
                     </Nav.Link>
                   </LinkContainer>
-                  <LinkContainer to='/touristBookings'>
+                  {/* <LinkContainer to='/touristBookings'>
                     <Nav.Link>
-                      <FaTag className='me-1'/>
+                      <FaTag className='me-1' />
                       My Bookings
                     </Nav.Link>
-                  </LinkContainer>
+                  </LinkContainer> */}
                 </>
               ) : (
                 <>
                   <LinkContainer to='/destinations'>
                     <Nav.Link>
-                      <FaMapMarkerAlt className='me-1'/>
+                      <FaMapMarkerAlt className='me-1' />
                       Destinations
                     </Nav.Link>
                   </LinkContainer>
                   <LinkContainer to='/transports'>
                     <Nav.Link>
-                      <FaCar />/<FaPlane className='me-1'/>
+                      <FaCar />/<FaPlane className='me-1' />
                       Transport
                     </Nav.Link>
                   </LinkContainer>
 
                   <LinkContainer to='/packages'>
                     <Nav.Link>
-                      <FaUmbrellaBeach className='me-1'/>
+                      <FaUmbrellaBeach className='me-1' />
                       Holiday Packages
                     </Nav.Link>
                   </LinkContainer>
@@ -88,9 +88,9 @@ const Header = () => {
               )}
             </Nav>
 
-            <Nav className='align-items-center pt-2 pb-2'>
+            <Nav className='align-items-center ms-auto py-2'>
               {userInfo ? (
-                <NavDropdown title={userInfo.userName} className='me-5'>
+                <NavDropdown title={userInfo.userName}>
                   <NavDropdown.Item>
                     <LinkContainer to='/profile' className='px-0'>
                       <Nav.Link className='text-dark'>
@@ -99,6 +99,16 @@ const Header = () => {
                       </Nav.Link>
                     </LinkContainer>
                   </NavDropdown.Item>
+                  {userInfo.userType === 'tourist' && (
+                    <NavDropdown.Item>
+                      <LinkContainer to='/touristBookings' className='px-0'>
+                        <Nav.Link className='text-dark'>
+                          <FaTag className='me-2' />
+                          My Booking
+                        </Nav.Link>
+                      </LinkContainer>
+                    </NavDropdown.Item>
+                  )}
                   <NavDropdown.Item onClick={logoutHandler}>
                     <LinkContainer to='#' className='px-0'>
                       <Nav.Link className='text-dark'>
