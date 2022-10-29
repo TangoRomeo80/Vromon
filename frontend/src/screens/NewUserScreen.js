@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import { useSearchParams, useNavigate } from 'react-router-dom'
-import { Button, Form, Container, ToastHeader } from 'react-bootstrap'
+import { Button, Form, Container } from 'react-bootstrap'
 import { getAuthedUser, updateAuthedUser } from '../features/auth/authSlice'
 import Loader from '../components/Loader'
 import { toast } from 'react-toastify'
@@ -32,7 +32,7 @@ const NewUserScreen = () => {
         navigate('/')
       }
     }
-  }, [searchParams, userInfo, isError, isSuccess, message, dispatch])
+  }, [searchParams, userInfo, isError, isSuccess, message, navigate, dispatch])
 
   const submitHandler = (e) => {
     e.preventDefault()
