@@ -127,6 +127,38 @@ const touristSchema = new mongoose.Schema(
       },
     },
 
+    gender: {
+      type: String,
+      default: '',
+      trim: true,
+      enum: {
+        values: ['male', 'female', 'other', ''],
+        message: 'Gender must be male, female or other',
+      },
+    },
+
+    address: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+
+    emergencyContact: {
+      type: String,
+      default: '',
+      validate: {
+        validator: function (val) {
+          if (val !== '') {
+            return validator.isNumeric //May need to change validator.isNumeric
+          } else {
+            return true
+          }
+        },
+        message:
+          'Emergency contact number can only have numeric values and country codes',
+      },
+    },
+
     subscription: {
       type: Boolean,
       default: false,
