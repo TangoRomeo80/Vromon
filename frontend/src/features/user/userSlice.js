@@ -196,6 +196,7 @@ const userSlice = createSlice({
       state.detailsErrorMessage = ''
     },
     resetMeUser: (state) => {
+      state.meUser = null
       state.isMeGetError = false
       state.isMeGetSuccess = false
       state.isMeGetLoading = false
