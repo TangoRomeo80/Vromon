@@ -69,7 +69,16 @@ const ProfileScreen = () => {
         setMobile(meUser.mobile)
         setImageUrl(meUser.image)
       }
-    } else if (isMeError) {
+      else if (meUser.userType === 'businessowner') {
+        setUserName(meUser.userName)
+        setNid(meUser.businessOwnerInfo.nid)
+        setPassport(meUser.businessOwnerInfo.passport)
+        setEmail(meUser.email)
+        setMobile(meUser.mobile)
+        setImageUrl(meUser.image)
+      }
+    }
+    else if (isMeError) {
       toast.error(meErrorMessage, { position: 'top-center' })
     } else {
       dispatch(getMeUser())
