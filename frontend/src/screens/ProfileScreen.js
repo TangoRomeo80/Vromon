@@ -187,7 +187,7 @@ const ProfileScreen = () => {
               {userInfo && userInfo.userType === 'tourist' ? (
                 <div className='list-group'>
                   <Link
-                    to='#'
+                    to='#personalInfo'
                     className='list-group-item list-group-item-action text-center d-grid gap-2'
                   >
                     <Button>
@@ -277,7 +277,7 @@ const ProfileScreen = () => {
 
           {/* Right Column For Form */}
           <Col lg={8} md={12} sm={12}>
-            <Card className='mb-2 shadow'>
+            <Card id='#personalInfo' className='mb-2 shadow'>
               <Card.Body>
                 <h4 className='font-weight-bolder text-dark'>
                   Profile Information
