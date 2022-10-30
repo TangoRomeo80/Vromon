@@ -51,12 +51,36 @@ const deleteUser = async (id, token) => {
 }
 
 //get info about logged in user
-const getMeUser = async (token) => { 
+const getMeUser = async (token) => {
   const response = await axios.get('/api/users/getMe', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   })
+  return response.data.data
+}
+
+//update info about logged in user
+const updateMeUser = async (userData, token) => {
+  const response = await axios.patch('/api/users/updateMe', userData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  return response.data.data
+}
+
+//change password of logged in user
+const changePassword = async (prevPassword, newPassword, token) => {
+  const response = await axios.post(
+    '/api/users/updateMyPassword',
+    { prevPassword, newPassword },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
   return response.data.data
 }
 
@@ -67,6 +91,8 @@ const userService = {
   updateUser,
   deleteUser,
   getMeUser,
+  updateMeUser,
+  changePassword,
 }
 
 export default userService

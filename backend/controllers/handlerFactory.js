@@ -31,7 +31,7 @@ export const getAll = (Model) =>
 //Get one instance
 export const getOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.findById(req.params.id)
+    const doc = await Model.findById(req.params.id).select('-__v -password -passwordChangedAt')
 
     if (!doc) {
       return next(

@@ -13,10 +13,18 @@ const initialState = {
   isDetailsSuccess: false,
   isDetailsLoading: false,
   detailsErrorMessage: '',
-  isMeError: false,
-  isMeSuccess: false,
-  isMeLoading: false,
-  meErrorMessage: '',
+  isMeGetError: false,
+  isMeGetSuccess: false,
+  isMeGetLoading: false,
+  meGetErrorMessage: '',
+  isMeUpdateError: false,
+  isMeUpdateSuccess: false,
+  isMeUpdateLoading: false,
+  meUpdateErrorMessage: '',
+  isChangePasswordError: false,
+  isChangePasswordSuccess: false,
+  isChangePasswordLoading: false,
+  changePasswordErrorMessage: '',
   isCreateError: false,
   isCreateSuccess: false,
   isCreateLoading: false,
@@ -134,6 +142,41 @@ export const getMeUser = createAsyncThunk(
   }
 )
 
+//update info about logged in user
+export const updateMeUser = createAsyncThunk(
+  'user/updateMeUser',
+  async (userData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.userInfo.token
+      return await userService.updateMeUser(userData, token)
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+//change password of logged in user
+export const changePassword = createAsyncThunk(
+  'user/changePassword',
+  async (data, thunkAPI) => {
+    const { prevPassword, newPassword } = data
+    try {
+      const token = thunkAPI.getState().auth.userInfo.token
+      return await userService.changePassword(prevPassword, newPassword, token)
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -151,6 +194,43 @@ const userSlice = createSlice({
       state.isDetailsSuccess = false
       state.isDetailsLoading = false
       state.detailsErrorMessage = ''
+    },
+    resetMeUser: (state) => {
+      state.meUser = null
+      state.isMeGetError = false
+      state.isMeGetSuccess = false
+      state.isMeGetLoading = false
+      state.meGetMessage = ''
+    },
+    resetCreateUser: (state) => {
+      state.isCreateError = false
+      state.isCreateSuccess = false
+      state.isCreateLoading = false
+      state.createErrorMessage = ''
+    },
+    resetUpdateUser: (state) => {
+      state.isUpdateError = false
+      state.isUpdateSuccess = false
+      state.isUpdateLoading = false
+      state.updateErrorMessage = ''
+    },
+    resetDeleteUser: (state) => {
+      state.isDeleteError = false
+      state.isDeleteSuccess = false
+      state.isDeleteLoading = false
+      state.deleteErrorMessage = ''
+    },
+    resetMeUpdateUser: (state) => {
+      state.isMeUpdateError = false
+      state.isMeUpdateSuccess = false
+      state.isMeUpdateLoading = false
+      state.meUpdateMessage = ''
+    },
+    resetChangePassword: (state) => {
+      state.isChangePasswordError = false
+      state.isChangePasswordSuccess = false
+      state.isChangePasswordLoading = false
+      state.changePasswordMessage = ''
     },
   },
   extraReducers: (builder) => {
@@ -239,22 +319,60 @@ const userSlice = createSlice({
         state.deleteErrorMessage = action.payload
       })
       .addCase(getMeUser.pending, (state) => {
-        state.isMeLoading = true
+        state.isMeGetLoading = true
       })
       .addCase(getMeUser.fulfilled, (state, action) => {
-        state.isMeLoading = false
-        state.isMeSuccess = true
-        state.isMeError = false
-        state.meErrorMessage = ''
+        state.isMeGetLoading = false
+        state.isMeGetSuccess = true
+        state.isMeGetError = false
+        state.meGetErrorMessage = ''
         state.meUser = action.payload
       })
       .addCase(getMeUser.rejected, (state, action) => {
-        state.isMeLoading = false
-        state.isMeError = true
-        state.meErrorMessage = action.payload
+        state.isMeGetLoading = false
+        state.isMeGetError = true
+        state.meGetErrorMessage = action.payload
+      })
+      .addCase(updateMeUser.pending, (state) => {
+        state.isMeUpdateLoading = true
+      })
+      .addCase(updateMeUser.fulfilled, (state, action) => {
+        state.isMeUpdateLoading = false
+        state.isMeUpdateSuccess = true
+        state.isMeUpdateError = false
+        state.meUpdateErrorMessage = ''
+        state.meUser = action.payload
+      })
+      .addCase(updateMeUser.rejected, (state, action) => {
+        state.isMeUpdateLoading = false
+        state.isMeUpdateError = true
+        state.meUpdateErrorMessage = action.payload
+      })
+      .addCase(changePassword.pending, (state) => {
+        state.isChangePasswordLoading = true
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.isChangePasswordLoading = false
+        state.isChangePasswordSuccess = true
+        state.isChangePasswordError = false
+        state.changePasswordMessage = ''
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.isChangePasswordLoading = false
+        state.isChangePasswordError = true
+        state.changePasswordMessage = action.payload
       })
   },
 })
 
-export const { resetUserList, resetUserDetails } = userSlice.actions
+export const {
+  resetUserList,
+  resetUserDetails,
+  resetCreateUser,
+  resetUpdateUser,
+  resetDeleteUser,
+  resetMeGetUser,
+  resetMeUpdateUser,
+  resetChangePassword,
+} = userSlice.actions
 export default userSlice.reducer

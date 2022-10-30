@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMeUser } from '../features/user/userSlice'
+import { getMeUser, updateMeUser,  } from '../features/user/userSlice'
 import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap'
 import {
   FaEdit,
@@ -31,7 +31,7 @@ const ProfileScreen = () => {
 
   const { userInfo } = useSelector((state) => state.auth)
 
-  const { meUser, isMeError, isMeSuccess, isMeLoading, meErrorMessage } =
+  const { meUser, isMeGetError, isMeGetSuccess, isMeGetLoading, meGetErrorMessage } =
     useSelector((state) => state.user)
 
   const [userName, setUserName] = useState('')
@@ -59,7 +59,7 @@ const ProfileScreen = () => {
     if (userInfo && userInfo.newUser) {
       navigate('/newUser')
     }
-    if (isMeSuccess) {
+    if (isMeGetSuccess) {
       if (meUser.userType === 'tourist') {
         setUserName(meUser.userName)
         setNid(meUser.touristInfo.nid)
@@ -79,15 +79,15 @@ const ProfileScreen = () => {
         setMobile(meUser.mobile)
         setImageUrl(meUser.image)
       }
-    } else if (isMeError) {
-      toast.error(meErrorMessage, { position: 'top-center' })
+    } else if (isMeGetError) {
+      toast.error(meGetErrorMessage, { position: 'top-center' })
     } else {
       dispatch(getMeUser())
     }
   }, [
-    isMeSuccess,
-    isMeError,
-    meErrorMessage,
+    isMeGetSuccess,
+    isMeGetError,
+    meGetErrorMessage,
     meUser,
     userInfo,
     navigate,

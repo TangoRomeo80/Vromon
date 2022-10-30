@@ -326,11 +326,11 @@ export const resetPassword = catchAsync(async (req, res, next) => {
 
 /*
   Request type: POST
-  Endpoint: /api/users/updatePassword/:id
+  Endpoint: /api/users/updateMyPassword
   Description: This endpoint gives the functionality to handle reset password functionality
 */
 export const updatePassword = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.params.id)
+  const user = await User.findById(req.user._id)
   if (!user) {
     return next(new AppError('No user found with that ID', 404))
   }
