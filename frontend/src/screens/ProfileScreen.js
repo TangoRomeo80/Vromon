@@ -103,9 +103,6 @@ const ProfileScreen = () => {
       }
       setTimeout(logoutRef, 5000)
     }
-    if (!isMeGetSuccess) {
-      dispatch(getMeUser())
-    }
     if (isMeGetSuccess) {
       if (meUser.userType === 'tourist') {
         setUserName(meUser.userName)
@@ -126,6 +123,8 @@ const ProfileScreen = () => {
         setMobile(meUser.mobile)
         setImageUrl(meUser.image)
       }
+    } else {
+      dispatch(getMeUser())
     }
   }, [
     meUser,
