@@ -196,7 +196,6 @@ const userSlice = createSlice({
       state.detailsErrorMessage = ''
     },
     resetMeUser: (state) => {
-      state.meUser = null
       state.isMeGetError = false
       state.isMeGetSuccess = false
       state.isMeGetLoading = false
@@ -230,13 +229,16 @@ const userSlice = createSlice({
       state.isChangePasswordError = false
       state.isChangePasswordSuccess = false
       state.isChangePasswordLoading = false
-      state.changePasswordMessage = ''
+      state.changePasswordErrorMessage = ''
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(getAllUsers.pending, (state) => {
         state.isListLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
       })
       .addCase(getAllUsers.fulfilled, (state, action) => {
         state.isListLoading = false
@@ -252,6 +254,9 @@ const userSlice = createSlice({
       })
       .addCase(getUserById.pending, (state) => {
         state.isDetailsLoading = true
+        state.isDetailsError = false
+        state.isDetailsSuccess = false
+        state.detailsErrorMessage = ''
       })
       .addCase(getUserById.fulfilled, (state, action) => {
         state.isDetailsLoading = false
@@ -267,6 +272,9 @@ const userSlice = createSlice({
       })
       .addCase(createUser.pending, (state) => {
         state.isCreateLoading = true
+        state.isCreateError = false
+        state.isCreateSuccess = false
+        state.createErrorMessage = ''
       })
       .addCase(createUser.fulfilled, (state, action) => {
         state.isCreateLoading = false
@@ -283,6 +291,9 @@ const userSlice = createSlice({
       })
       .addCase(updateUser.pending, (state) => {
         state.isUpdateLoading = true
+        state.isUpdateError = false
+        state.isUpdateSuccess = false
+        state.updateErrorMessage = ''
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isUpdateLoading = false
@@ -302,6 +313,9 @@ const userSlice = createSlice({
       })
       .addCase(deleteUser.pending, (state) => {
         state.isDeleteLoading = true
+        state.isDeleteError = false
+        state.isDeleteSuccess = false
+        state.deleteErrorMessage = ''
       })
       .addCase(deleteUser.fulfilled, (state, action) => {
         state.isDeleteLoading = false
@@ -320,6 +334,9 @@ const userSlice = createSlice({
       })
       .addCase(getMeUser.pending, (state) => {
         state.isMeGetLoading = true
+        state.isMeGetError = false
+        state.isMeGetSuccess = false
+        state.meGetMessage = ''
       })
       .addCase(getMeUser.fulfilled, (state, action) => {
         state.isMeGetLoading = false
@@ -335,6 +352,9 @@ const userSlice = createSlice({
       })
       .addCase(updateMeUser.pending, (state) => {
         state.isMeUpdateLoading = true
+        state.isMeUpdateError = false
+        state.isMeUpdateSuccess = false
+        state.meUpdateMessage = ''
       })
       .addCase(updateMeUser.fulfilled, (state, action) => {
         state.isMeUpdateLoading = false
@@ -350,17 +370,20 @@ const userSlice = createSlice({
       })
       .addCase(changePassword.pending, (state) => {
         state.isChangePasswordLoading = true
+        state.isChangePasswordError = false
+        state.isChangePasswordSuccess = false
+        state.changePasswordErrorMessage = ''
       })
       .addCase(changePassword.fulfilled, (state, action) => {
         state.isChangePasswordLoading = false
         state.isChangePasswordSuccess = true
         state.isChangePasswordError = false
-        state.changePasswordMessage = ''
+        state.changePasswordErrorMessage = ''
       })
       .addCase(changePassword.rejected, (state, action) => {
         state.isChangePasswordLoading = false
         state.isChangePasswordError = true
-        state.changePasswordMessage = action.payload
+        state.changePasswordErrorMessage = action.payload
       })
   },
 })
@@ -371,7 +394,7 @@ export const {
   resetCreateUser,
   resetUpdateUser,
   resetDeleteUser,
-  resetMeGetUser,
+  resetMeUser,
   resetMeUpdateUser,
   resetChangePassword,
 } = userSlice.actions
