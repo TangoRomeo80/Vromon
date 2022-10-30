@@ -143,7 +143,7 @@ const ProfileScreen = () => {
   // };
 
   return (
-    <Container className='pt-5'>
+    <Container className='pt-5' id='personalInfo'>
       <Form>
         <Row>
           {/* Left Column For Options*/}
@@ -192,24 +192,24 @@ const ProfileScreen = () => {
               </Card.Body>
               {userInfo && userInfo.userType === 'tourist' ? (
                 <div className='list-group'>
-                  <Link
-                    to='#personalInfo'
+                  <a
+                    href='#personalInfo'
                     className='list-group-item list-group-item-action text-center d-grid gap-2'
                   >
                     <Button>
                       <FaUser className='me-2 mb-2' />
                       Personal Info
                     </Button>
-                  </Link>
-                  <Link
-                    to='#'
+                  </a>
+                  <a
+                    href='#password'
                     className='list-group-item list-group-item-action text-center d-grid gap-2'
                   >
                     <Button>
                       <FaKey className='me-2 mb-2' />
                       Password and Security
                     </Button>
-                  </Link>
+                  </a>
                   <Link
                     to='#'
                     className='list-group-item list-group-item-action text-center d-grid gap-2'
@@ -222,24 +222,24 @@ const ProfileScreen = () => {
                 </div>
               ) : userInfo && userInfo.userType === 'businessowner' ? (
                 <div className='list-group'>
-                  <Link
-                    to='#'
+                  <a
+                    href='#personalInfo'
                     className='list-group-item list-group-item-action text-center d-grid gap-2'
                   >
                     <Button>
                       <FaUser className='me-2 mb-2' />
                       Personal Info
                     </Button>
-                  </Link>
-                  <Link
-                    to='#'
+                  </a>
+                  <a
+                    href='#password'
                     className='list-group-item list-group-item-action text-center d-grid gap-2'
                   >
                     <Button>
                       <FaKey className='me-2 mb-2' />
                       Password and Security
                     </Button>
-                  </Link>
+                  </a>
                   <Link
                     to='#'
                     className='list-group-item list-group-item-action text-center d-grid gap-2'
@@ -283,7 +283,7 @@ const ProfileScreen = () => {
 
           {/* Right Column For Form */}
           <Col lg={8} md={12} sm={12}>
-            <Card id='#personalInfo' className='mb-2 shadow'>
+            <Card className='mb-2 shadow'>
               <Card.Body>
                 <h4 className='font-weight-bolder text-dark'>
                   Profile Information
@@ -489,7 +489,7 @@ const ProfileScreen = () => {
               </Card.Body>
             </Card>
 
-            <Card>
+            <Card id='password'>
               <Card.Body>
                 <h4>Password & Security</h4>
                 <Row>
@@ -506,19 +506,19 @@ const ProfileScreen = () => {
                   <Col lg={9} md={9} sm={6} className='mt-4'>
                     {/* <Button> Change Password</Button> */}
                     {!changePassword && (
-                      <Link
-                        to=''
+                      <a
+                        href='#changePassword'
                         className='text-decoration-none'
                         onClick={() => setChangePassword(true)}
                       >
                         Change Password?
-                      </Link>
+                      </a>
                     )}
                   </Col>
                 </Row>
 
                 {changePassword && (
-                  <Row>
+                  <Row id='changePassword'>
                     <Col lg={12} md={12} sm={12}>
                       <Form.Group className='mb-3' controlId='prevPassword'>
                         <Form.Label>Old Password</Form.Label>
@@ -545,10 +545,10 @@ const ProfileScreen = () => {
 
                     <Col lg={6} md={6} sm={12}>
                       <Form.Group className='mb-3' controlId='confirmPassword'>
-                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Label>Confirm New Password</Form.Label>
                         <Form.Control
                           type={showPassword}
-                          placeholder='Confirm Password'
+                          placeholder='Confirm New Password'
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                         ></Form.Control>
