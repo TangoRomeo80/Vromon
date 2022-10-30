@@ -142,6 +142,14 @@ const ProfileScreen = () => {
     dispatch,
   ])
 
+  useEffect(() => {
+    return () => {
+      dispatch(resetMeUser())
+      dispatch(resetMeUpdateUser())
+      dispatch(resetChangePassword())
+    }
+  }, [dispatch])
+
   const passwordShow = (e) => {
     e.target.checked ? setShowPassword('text') : setShowPassword('password')
   }
