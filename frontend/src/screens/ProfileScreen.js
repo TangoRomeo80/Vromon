@@ -138,6 +138,7 @@ const ProfileScreen = () => {
     isChangePasswordError,
     isChangePasswordSuccess,
     changePasswordErrorMessage,
+    userInfo,
     navigate,
     dispatch,
   ])
