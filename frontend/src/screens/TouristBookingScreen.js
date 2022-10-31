@@ -27,13 +27,13 @@ const touristBookingScreen = () => {
           </Card>
         </Col>
 
-        <Col lg={9} md={12} sm={12}>
+        {/* <Col lg={9} md={12} sm={12}>
             <Card className='shadow'>
                 <Card.Body>
 
                 </Card.Body>
             </Card>
-        </Col>
+        </Col> */}
       </Row>
     </Container>
   );

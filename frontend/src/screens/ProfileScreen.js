@@ -87,8 +87,8 @@ const ProfileScreen = () => {
     if (isMeUpdateSuccess) {
       dispatch(resetMeUpdateUser())
       dispatch(getMeUser())
-      dispatch(getAuthedUser(userInfo._id))
-      toast.success('Profile information Updated successfully', {
+      dispatch(getAuthedUser(userInfo._id)) //Update info in Local Storage
+      toast.success('Profile Information Updated Successfully', {
         position: 'top-center',
       })
     }
@@ -208,8 +208,11 @@ const ProfileScreen = () => {
   }
 
   const updatePasswordHandler = () => {
+    if (password === '' || confirmPassword === '' || prevPassword === '') {
+      toast.error('Please Fill All The Password Fields', { position: 'top-center' })
+    }
     if (password !== confirmPassword) {
-      toast.error('Password and Confirm Password does not match', {
+      toast.error('Password and Confirm Password Does Not Match', {
         position: 'top-center',
       })
     } else {
@@ -628,7 +631,7 @@ const ProfileScreen = () => {
                             variant='danger'
                             onClick={() => setChangePasswordState(false)}
                           >
-                            <MdOutlineClose/>
+                            <MdOutlineClose size='28'/>
                           </Button>
                         </Col>
                         <Col lg={12} md={12} sm={12}>
