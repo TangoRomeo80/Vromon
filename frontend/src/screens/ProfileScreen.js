@@ -113,6 +113,7 @@ const ProfileScreen = () => {
         setDob(meUser.touristInfo.dob)
         setGender(meUser.touristInfo.gender)
         setAddress(meUser.touristInfo.address)
+        setPassportExpire(meUser.touristInfo.passportExpire)
         setEmergencyContact(meUser.touristInfo.emergencyContact)
         setEmail(meUser.email)
         setMobile(meUser.mobile)

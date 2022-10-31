@@ -20,6 +20,7 @@ import DestinationSearchScreen from './screens/DestinationSearchScreen'
 import StaysSearchScreen from './screens/StaysSearchScreen'
 import TransportSearchScreen from './screens/TransportSearchScreen'
 import RegistrationScreen from './screens/RegistrationScreen'
+import TouristBookingScreen from './screens/TouristBookingScreen'
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
               <Route path='/packages' element={<HolidayPackagesScreen />} />
               <Route path='/profile' element={<ProfileScreen />} />
               <Route path='/tourSearch' element={<GuidedTourSearchScreen />} />
+              <Route path='/myBookings' element={<TouristBookingScreen />}/>
               <Route
                 path='/destinationSearch'
                 element={<DestinationSearchScreen />}
