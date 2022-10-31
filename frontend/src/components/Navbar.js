@@ -432,13 +432,13 @@ const Navbar = () => {
               <Col
                 sm={6}
                 lg={3}
-                className='d-flex justify-content-center pb-1'
+                className='d-flex justify-content-center pe-0'
                 onClick={() => setSearchSelection('destinations')}
               >
                 <Link 
                   to=''
-                  className='my-1 text-decoration-none d-flex justify-content-center align-items-center text-dark shadow'
-                  style={{ width: '100%',  height: '100%', borderRadius: '0' }}
+                  className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow py-1'
+                  style={{ width: '100%', borderRadius: '0' }}
                   variant={
                     searchSelection === 'destinations'
                       ? 'success'
@@ -451,13 +451,13 @@ const Navbar = () => {
               <Col
                 sm={6}
                 lg={3}
-                className='d-flex justify-content-center pb-1'
+                className='d-flex justify-content-center px-0'
                 onClick={() => setSearchSelection('transports')}
               >
                 <Link
                   to=''
                   className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow'
-                  style={{ width: '100%', height: '100%', borderRadius: '0' }}
+                  style={{ width: '100%', borderRadius: '0' }}
                   variant={
                     searchSelection === 'transports'
                       ? 'success'
@@ -470,13 +470,13 @@ const Navbar = () => {
               <Col
                 sm={6}
                 lg={3}
-                className='d-flex justify-content-center pb-1'
+                className='d-flex justify-content-center px-0'
                 onClick={() => setSearchSelection('stays')}
               >
                 <Link
                   to=''
                   className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow'
-                  style={{ width: '100%', height: '100%', borderRadius: '0' }}
+                  style={{ width: '100%', borderRadius: '0' }}
                   variant={
                     searchSelection === 'stays' ? 'success' : 'outline-success'
                   }
@@ -487,13 +487,13 @@ const Navbar = () => {
               <Col
                 sm={6}
                 lg={3}
-                className='d-flex justify-content-center pb-1'
+                className='d-flex justify-content-center ps-0'
                 onClick={() => setSearchSelection('tours')}
               >
                 <Link
                   to=''
                   className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow'
-                  style={{ width: '100%', height: '100%', borderRadius: '0' }}
+                  style={{ width: '100%', borderRadius: '0' }}
                   variant={
                     searchSelection === 'tours' ? 'success' : 'outline-success'
                   }
