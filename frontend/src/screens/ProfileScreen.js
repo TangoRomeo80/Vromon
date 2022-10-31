@@ -21,6 +21,8 @@ import {
   FaRoute,
   FaCalculator,
 } from 'react-icons/fa'
+import { CgCloseO } from 'react-icons/cg'
+import { MdOutlineClose } from 'react-icons/md'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import Moment from 'moment'
@@ -398,10 +400,11 @@ const ProfileScreen = () => {
                             Date of Birth
                           </Form.Label>
                           <Form.Control
+                            disabled
                             type='text'
                             placeholder='Date of Birth'
                             value={
-                              dob !== '' ? '' : Moment(dob).format('DD.MM.YYYY')
+                              dob === '' ? '' : Moment(dob).format('DD.MM.YYYY')
                             }
                           ></Form.Control>
                           <Form.Control
@@ -504,6 +507,14 @@ const ProfileScreen = () => {
                           <Form.Label className='small mb-1'>
                             Passport Expiry Date
                           </Form.Label>
+                          <Form.Control
+                            disabled
+                            type='text'
+                            placeholder='Passport Expiration Date'
+                            value={
+                              passportExpire === '' ? '' : Moment(passportExpire).format('DD.MM.YYYY')
+                            }
+                          ></Form.Control>
                           <Form.Control
                             type='date'
                             placeholder='Select Passport Expiration Date'
@@ -610,6 +621,15 @@ const ProfileScreen = () => {
 
                     {changePasswordState && (
                       <Row id='changePassword'>
+                        <Col lg={12} md={12} sm={12} className="d-flex justify-content-end mb-2">
+                        <Button
+                            size='sm'
+                            variant='danger'
+                            onClick={() => setChangePasswordState(false)}
+                          >
+                            <MdOutlineClose/>
+                          </Button>
+                        </Col>
                         <Col lg={12} md={12} sm={12}>
                           <Form.Group className='mb-3' controlId='prevPassword'>
                             <Form.Label>Old Password</Form.Label>
@@ -659,7 +679,8 @@ const ProfileScreen = () => {
                           label='Show Password'
                           onChange={(e) => passwordShow(e)}
                         />
-                        <Col lg={12} md={12} sm={12}>
+
+                        <Col lg={12} md={12} sm={12} className='my-3'>
                           <Button
                             className='me-2'
                             variant='success'
@@ -667,12 +688,13 @@ const ProfileScreen = () => {
                           >
                             Update Password
                           </Button>
-                          <Button
+                          {/* <Button
+                            size='sm'
                             variant='danger'
                             onClick={() => setChangePasswordState(false)}
                           >
-                            Close
-                          </Button>
+                            <MdOutlineClose/>
+                          </Button> */}
                         </Col>
                       </Row>
                     )}
