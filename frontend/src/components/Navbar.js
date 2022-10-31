@@ -457,7 +457,7 @@ const Navbar = () => {
                 <Link
                   to=''
                   className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow'
-                  style={{ width: '100%', borderRadius: '0' }}
+                  style={{ width: '100%', height: '100%', borderRadius: '0' }}
                   variant={
                     searchSelection === 'transports'
                       ? 'success'
@@ -476,7 +476,7 @@ const Navbar = () => {
                 <Link
                   to=''
                   className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow'
-                  style={{ width: '100%', borderRadius: '0' }}
+                  style={{ width: '100%', height: '100%', borderRadius: '0' }}
                   variant={
                     searchSelection === 'stays' ? 'success' : 'outline-success'
                   }
@@ -493,7 +493,7 @@ const Navbar = () => {
                 <Link
                   to=''
                   className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow'
-                  style={{ width: '100%', borderRadius: '0' }}
+                  style={{ width: '100%', height: '100%', borderRadius: '0' }}
                   variant={
                     searchSelection === 'tours' ? 'success' : 'outline-success'
                   }
