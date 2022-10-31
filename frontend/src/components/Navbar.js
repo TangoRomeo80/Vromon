@@ -438,7 +438,7 @@ const Navbar = () => {
                 <Link 
                   to=''
                   className='my-1 text-decoration-none d-flex justify-content-center align-items-center text-dark shadow'
-                  style={{ width: '100%', borderRadius: '0' }}
+                  style={{ width: '100%',  height: '100%', borderRadius: '0' }}
                   variant={
                     searchSelection === 'destinations'
                       ? 'success'
