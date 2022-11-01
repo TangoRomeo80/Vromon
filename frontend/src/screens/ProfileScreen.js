@@ -128,6 +128,7 @@ const ProfileScreen = () => {
         setUserName(meUser.userName)
         setNid(meUser.businessOwnerInfo.nid)
         setPassport(meUser.businessOwnerInfo.passport)
+        setPassportExpire(meUser.businessOwnerInfo.passportExpire)
         setEmail(meUser.email)
         setMobile(meUser.mobile)
         setImageUrl(meUser.image)

@@ -40,51 +40,9 @@ const businessOwnerSchema = new mongoose.Schema(
       },
     },
 
-    paymentStatus: {
-      type: String,
-      default: 'due',
-      trim: true,
-      enum: {
-        values: ['due', 'paid'],
-        message: 'Payment Status need to bbe due or paid',
-      },
-    },
-
-    duePaymentAmount: {
-      type: Number,
-      required: [
-        function () {
-          return this.paymentStatus === 'due'
-        },
-        'Due payment status is required',
-      ],
-      default: 0,
-      trim: true,
-    },
-
-    paidPaymentAmount: {
-      type: Number,
-      required: [
-        function () {
-          return this.paymentStatus === 'paid'
-        },
-        'Paid payment status is required',
-      ],
-      default: 0,
-      trim: true,
-    },
-
-    paymentDate: {
+    passportExpire: {
       type: Date,
-    },
-
-    paymentDueAmount: {
-      type: Number,
-      // required: [true, 'Due Amount is Required'], //Should be Automatically Filled
-    },
-
-    paymentDueDate: {
-      type: Date,
+      default: '',
     },
   },
   {
