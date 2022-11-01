@@ -56,7 +56,10 @@ const ProfileScreen = () => {
   const [passportExpire, setPassportExpire] = useState('')
   const [dob, setDob] = useState('')
   const [gender, setGender] = useState('')
-  const [address, setAddress] = useState('')
+  const [house, setHouse] = useState('')
+  const [street, setStreet] = useState('')
+  const [area, setArea] = useState('')
+  const [city, setCity] = useState('')
   const [emergencyContact, setEmergencyContact] = useState('')
   const [email, setEmail] = useState('')
   const [mobile, setMobile] = useState('')
@@ -112,9 +115,12 @@ const ProfileScreen = () => {
         setPassport(meUser.touristInfo.passport)
         setDob(meUser.touristInfo.dob)
         setGender(meUser.touristInfo.gender)
-        setAddress(meUser.touristInfo.address)
         setPassportExpire(meUser.touristInfo.passportExpire)
         setEmergencyContact(meUser.touristInfo.emergencyContact)
+        setHouse(meUser.touristInfo.address.house)
+        setStreet(meUser.touristInfo.address.street)
+        setArea(meUser.touristInfo.address.area)
+        setCity(meUser.touristInfo.address.city)
         setEmail(meUser.email)
         setMobile(meUser.mobile)
         setImageUrl(meUser.image)
@@ -195,7 +201,12 @@ const ProfileScreen = () => {
             passportExpire,
             dob,
             gender,
-            address,
+            address: {
+              house,
+              street,
+              area,
+              city,
+            },
             emergencyContact,
           },
         })
@@ -209,7 +220,9 @@ const ProfileScreen = () => {
 
   const updatePasswordHandler = () => {
     if (password === '' || confirmPassword === '' || prevPassword === '') {
-      toast.error('Please Fill All The Password Fields', { position: 'top-center' })
+      toast.error('Please Fill All The Password Fields', {
+        position: 'top-center',
+      })
     }
     if (password !== confirmPassword) {
       toast.error('Password and Confirm Password Does Not Match', {
@@ -408,7 +421,7 @@ const ProfileScreen = () => {
                             type='text'
                             placeholder='Date of Birth'
                             value={
-                              dob === '' ? '' : Moment(dob).format('DD.MM.YYYY')
+                              dob === ('' || null) ? '' : Moment(dob).format('DD.MM.YYYY')
                             }
                           ></Form.Control>
                           <Form.Control
@@ -442,49 +455,49 @@ const ProfileScreen = () => {
                     </h5>
                     <Row>
                       <Col lg={6} md={6} sm={12}>
-                        <Form.Group className='mb-3' controlId='address'>
-                          <Form.Label>House No.</Form.Label>
+                        <Form.Group className='mb-3' controlId='house'>
+                          <Form.Label>House Name/No.</Form.Label>
                           <Form.Control
                             type='text'
                             placeholder='Enter House Number'
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
+                            value={house}
+                            onChange={(e) => setHouse(e.target.value)}
                           ></Form.Control>
                         </Form.Group>
                       </Col>
 
                       <Col lg={6} md={6} sm={12}>
-                        <Form.Group className='mb-3' controlId='address'>
-                          <Form.Label>Road No.</Form.Label>
+                        <Form.Group className='mb-3' controlId='street'>
+                          <Form.Label>Street Name/No.</Form.Label>
                           <Form.Control
                             type='text'
                             placeholder='Enter Road Number'
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
+                            value={street}
+                            onChange={(e) => setStreet(e.target.value)}
                           ></Form.Control>
                         </Form.Group>
                       </Col>
 
                       <Col lg={6} md={6} sm={12}>
-                        <Form.Group className='mb-3' controlId='address'>
+                        <Form.Group className='mb-3' controlId='area'>
                           <Form.Label>Area</Form.Label>
                           <Form.Control
                             type='text'
                             placeholder='Enter The Name of Your Area'
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
+                            value={area}
+                            onChange={(e) => setArea(e.target.value)}
                           ></Form.Control>
                         </Form.Group>
                       </Col>
 
                       <Col lg={6} md={6} sm={12}>
-                        <Form.Group className='mb-3' controlId='address'>
+                        <Form.Group className='mb-3' controlId='city'>
                           <Form.Label>City</Form.Label>
                           <Form.Control
                             type='text'
                             placeholder='Enter The City Name'
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
                           ></Form.Control>
                         </Form.Group>
                       </Col>
@@ -516,7 +529,9 @@ const ProfileScreen = () => {
                             type='text'
                             placeholder='Passport Expiration Date'
                             value={
-                              passportExpire === '' ? '' : Moment(passportExpire).format('DD.MM.YYYY')
+                              passportExpire === ('' || null)
+                                ? ''
+                                : Moment(passportExpire).format('DD.MM.YYYY')
                             }
                           ></Form.Control>
                           <Form.Control
@@ -625,13 +640,18 @@ const ProfileScreen = () => {
 
                     {changePasswordState && (
                       <Row id='changePassword'>
-                        <Col lg={12} md={12} sm={12} className="d-flex justify-content-end mb-2">
-                        <Button
+                        <Col
+                          lg={12}
+                          md={12}
+                          sm={12}
+                          className='d-flex justify-content-end mb-2'
+                        >
+                          <Button
                             size='sm'
                             variant='danger'
                             onClick={() => setChangePasswordState(false)}
                           >
-                            <MdOutlineClose size='28'/>
+                            <MdOutlineClose size='28' />
                           </Button>
                         </Col>
                         <Col lg={12} md={12} sm={12}>

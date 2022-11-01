@@ -148,9 +148,26 @@ const touristSchema = new mongoose.Schema(
     },
 
     address: {
-      type: String,
-      default: '',
-      trim: true,
+      house: {
+        type: String,
+        default: '',
+        trim: true,
+      },
+      street: {
+        type: String,
+        default: '',
+        trim: true,
+      },
+      area: {
+        type: String,
+        default: '',
+        trim: true,
+      },
+      city: {
+        type: String,
+        default: '',
+        trim: true,
+      },
     },
 
     emergencyContact: {
