@@ -55,36 +55,6 @@ const businessOwnerSchema = new mongoose.Schema(
       },
     },
 
-    // businessInfo: {
-    //   serviceType: {
-    //     type: String,
-    //     default: '',
-    //     trim: true,
-    //     enum: {
-    //       values: ['Transport', 'Hotels', 'Tours', 'Foods', 'Others'],
-    //       message: 'Please select your service type',
-    //     },
-    //   },
-
-    //   location: {
-    //     type: String,
-    //     default: '',
-    //     trim: true,
-    //   },
-
-    //   TIN: {
-    //     type: String,
-    //     default: '',
-    //     trim: true,
-    //   },
-
-    //   license: {
-    //     type: String,
-    //     default: '',
-    //     trim: true,
-    //   },
-    // },
-
     // address: {
     //   house: {
     //     type: String,
@@ -107,23 +77,6 @@ const businessOwnerSchema = new mongoose.Schema(
     //     trim: true,
     //   },
     // },
-
-    // emergencyContact: {
-    //   type: String,
-    //   default: '',
-    //   validate: {
-    //     validator: function (val) {
-    //       if (val !== '') {
-    //         return validator.isNumeric //May need to change validator.isNumeric
-    //       } else {
-    //         return true
-    //       }
-    //     },
-    //     message:
-    //       'Emergency contact number can only have numeric values and country codes',
-    //   },
-    // },
-
   },
   {
     timestamps: true,
@@ -416,3 +369,17 @@ userSchema.pre('findOneAndUpdate', async function (next) {
 const User = mongoose.model('User', userSchema) //create a model
 
 export default User //export the model
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Admin Info: Name, Email, Mobile

@@ -226,23 +226,15 @@ const ProfileScreen = () => {
         //     passport,
         //     passportExpire,
         //     gender, 
-        //     businessInfo:{
-        //       serviceType,
-        //       location,
-        //       TIN,
-        //       License,
-        //     },
         //     address: {
         //       house,
         //       street,
         //       area,
         //       city,
         //     },
-        //     emergencyContact,
         //   }
         // })
       )
-      // alert('dispatch for business owner needs to be implemented')
     } else if (meUser.userType === 'admin') {
       alert('dispatch for admin needs to be implemented')
     }
