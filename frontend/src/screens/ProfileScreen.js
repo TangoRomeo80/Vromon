@@ -213,7 +213,20 @@ const ProfileScreen = () => {
         })
       )
     } else if (meUser.userType === 'businessowner') {
-      alert('dispatch for business owner needs to be implemented')
+      dispatch(
+        updateMeUser({
+          userName,
+          email,
+          mobile,
+          image: imageUrl,
+          businessOwnerInfo: {
+            nid,
+            passport,
+            passportExpire,
+          }
+        })
+      )
+      // alert('dispatch for business owner needs to be implemented')
     } else if (meUser.userType === 'admin') {
       alert('dispatch for admin needs to be implemented')
     }
