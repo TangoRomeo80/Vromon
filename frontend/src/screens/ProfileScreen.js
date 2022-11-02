@@ -70,6 +70,8 @@ const ProfileScreen = () => {
   const [imageUrl, setImageUrl] = useState('')
   const [uploading, setUploading] = useState('')
   const [changePasswordState, setChangePasswordState] = useState(false)
+  const [serviceType, getServiceType] = useState('')
+  const [] = useState('')
 
   useEffect(() => {
     if (!userInfo) {
@@ -214,17 +216,31 @@ const ProfileScreen = () => {
       )
     } else if (meUser.userType === 'businessowner') {
       dispatch(
-        updateMeUser({
-          userName,
-          email,
-          mobile,
-          image: imageUrl,
-          businessOwnerInfo: {
-            nid,
-            passport,
-            passportExpire,
-          }
-        })
+        // updateMeUser({
+        //   userName,
+        //   email,
+        //   mobile,
+        //   image: imageUrl,
+        //   businessOwnerInfo: {
+        //     nid,
+        //     passport,
+        //     passportExpire,
+        //     gender, 
+        //     businessInfo:{
+        //       serviceType,
+        //       location,
+        //       TIN,
+        //       License,
+        //     },
+        //     address: {
+        //       house,
+        //       street,
+        //       area,
+        //       city,
+        //     },
+        //     emergencyContact,
+        //   }
+        // })
       )
       // alert('dispatch for business owner needs to be implemented')
     } else if (meUser.userType === 'admin') {
