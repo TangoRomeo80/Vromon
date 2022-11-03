@@ -21,6 +21,7 @@ import StaysSearchScreen from './screens/StaysSearchScreen'
 import TransportSearchScreen from './screens/TransportSearchScreen'
 import RegistrationScreen from './screens/RegistrationScreen'
 import TouristBookingScreen from './screens/TouristBookingScreen'
+import BusinessListScreen from './screens/BusinessListScreen'
 
 const App = () => {
   return (
@@ -53,6 +54,7 @@ const App = () => {
                 path='/businessOwnerInfo'
                 element={<BusinessOwnerInfoScreen />}
               />
+              <Route path='/businessList' element={<BusinessListScreen />}/>
               <Route path='/test' element={<TestScreen />} />
               <Route path='/*' element={<ErrorScreen />} />
 
