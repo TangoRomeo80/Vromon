@@ -131,9 +131,14 @@ const ProfileScreen = () => {
         setNid(meUser.businessOwnerInfo.nid)
         setPassport(meUser.businessOwnerInfo.passport)
         setPassportExpire(meUser.businessOwnerInfo.passportExpire)
+        setGender(meUser.businessOwnerInfo.gender)
         setEmail(meUser.email)
         setMobile(meUser.mobile)
         setImageUrl(meUser.image)
+        setHouse(meUser.businessOwnerInfo.address.house)
+        setCity(meUser.businessOwnerInfo.address.city)
+        setArea(meUser.businessOwnerInfo.address.area)
+        setStreet(meUser.businessOwnerInfo.address.street)
       }
     } else {
       dispatch(getMeUser())
@@ -216,24 +221,24 @@ const ProfileScreen = () => {
       )
     } else if (meUser.userType === 'businessowner') {
       dispatch(
-        // updateMeUser({
-        //   userName,
-        //   email,
-        //   mobile,
-        //   image: imageUrl,
-        //   businessOwnerInfo: {
-        //     nid,
-        //     passport,
-        //     passportExpire,
-        //     gender, 
-        //     address: {
-        //       house,
-        //       street,
-        //       area,
-        //       city,
-        //     },
-        //   }
-        // })
+        updateMeUser({
+          userName,
+          email,
+          mobile,
+          image: imageUrl,
+          businessOwnerInfo: {
+            nid,
+            passport,
+            passportExpire,
+            gender,
+            address: {
+              house,
+              street,
+              area,
+              city,
+            },
+          }
+        })
       )
     } else if (meUser.userType === 'admin') {
       alert('dispatch for admin needs to be implemented')
@@ -399,10 +404,13 @@ const ProfileScreen = () => {
               </Col>
 
               {/* Right Column For Form */}
+              {/* {userInfo && userInfo.userType === 'tourist' ? () : null} */}
               <Col lg={8} md={12} sm={12}>
                 <Card className='mb-2 shadow'>
                   <Card.Body>
-                    <h4 className='font-weight-bolder text-dark'>
+                    {userInfo && userInfo.userType === 'tourist' ? (
+                      <>
+                      <h4 className='font-weight-bolder text-dark'>
                       Profile Information
                     </h4>
                     <Row>
@@ -427,7 +435,7 @@ const ProfileScreen = () => {
                           <Form.Label>NID number</Form.Label>
                           <Form.Control
                             type='text'
-                            placeholder='Enter Nid Number'
+                            placeholder='Enter 17 Digit Nid Number'
                             value={nid}
                             onChange={(e) => setNid(e.target.value)}
                           ></Form.Control>
@@ -623,6 +631,210 @@ const ProfileScreen = () => {
                         </Button>
                       </Col>
                     </Row>
+                    </>
+                    ) : userInfo && userInfo.userType === 'businessowner' ? (
+                      <>
+                        <h4 className='font-weight-bolder text-dark'>
+                      Profile Information
+                    </h4>
+                    <Row>
+                      <Col lg={12} md={12} sm={12}>
+                        <h5 className='font-weight-bolder text-muted mb-3'>
+                          Basic Information
+                        </h5>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='userName'>
+                          <Form.Label>Full Name</Form.Label>
+                          <Form.Control
+                            type='text'
+                            placeholder='Enter User Name'
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='nid'>
+                          <Form.Label>NID number</Form.Label>
+                          <Form.Control
+                            type='text'
+                            placeholder='Enter 17 Digit Nid Number'
+                            value={nid}
+                            onChange={(e) => setNid(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      {/* <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='dob'>
+                          <Form.Label className='small mb-1'>
+                            Date of Birth
+                          </Form.Label>
+                          <Form.Control
+                            disabled
+                            type='text'
+                            placeholder='Date of Birth'
+                            value={
+                              dob === ('' || null) ? '' : Moment(dob).format('DD.MM.YYYY')
+                            }
+                          ></Form.Control>
+                          <Form.Control
+                            type='date'
+                            placeholder='Enter Date of Birth'
+                            value={dob}
+                            onChange={(e) => setDob(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col> */}
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='gender'>
+                          <Form.Label>Gender</Form.Label>
+                          <Form.Control
+                            as='select'
+                            type='select'
+                            placeholder='Select Gender'
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
+                          >
+                            <option value='male'>Male</option>
+                            <option value='female'>Female</option>
+                            <option value='other'>Other</option>
+                          </Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    <h5 className='font-weight-bolder text-muted mb-3'>
+                      Address
+                    </h5>
+                    <Row>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='house'>
+                          <Form.Label>House Name/No.</Form.Label>
+                          <Form.Control
+                            type='text'
+                            placeholder='Enter House Number'
+                            value={house}
+                            onChange={(e) => setHouse(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='street'>
+                          <Form.Label>Street Name/No.</Form.Label>
+                          <Form.Control
+                            type='text'
+                            placeholder='Enter Road Number'
+                            value={street}
+                            onChange={(e) => setStreet(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='area'>
+                          <Form.Label>Area</Form.Label>
+                          <Form.Control
+                            type='text'
+                            placeholder='Enter The Name of Your Area'
+                            value={area}
+                            onChange={(e) => setArea(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='city'>
+                          <Form.Label>City</Form.Label>
+                          <Form.Control
+                            type='text'
+                            placeholder='Enter The City Name'
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    <h5 className='font-weight-bolder text-muted mb-3'>
+                      Passport Information
+                    </h5>
+                    <Row>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='passport'>
+                          <Form.Label>Passport Number</Form.Label>
+                          <Form.Control
+                            type='text'
+                            placeholder='Enter The Passport Number'
+                            value={passport}
+                            onChange={(e) => setPassport(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='passportExpire'>
+                          <Form.Label className='small mb-1'>
+                            Passport Expiry Date
+                          </Form.Label>
+                          <Form.Control
+                            disabled
+                            type='text'
+                            placeholder='Passport Expiration Date'
+                            value={
+                              passportExpire === ('' || null)
+                                ? ''
+                                : Moment(passportExpire).format('DD.MM.YYYY')
+                            }
+                          ></Form.Control>
+                          <Form.Control
+                            type='date'
+                            placeholder='Select Passport Expiration Date'
+                            value={passportExpire}
+                            onChange={(e) => setPassportExpire(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    <h5 className='font-weight-bolder text-muted mb-3'>
+                      Contact Information
+                    </h5>
+                    <Row>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='email'>
+                          <Form.Label>Email</Form.Label>
+                          <Form.Control
+                            type='email'
+                            placeholder='Enter Email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='mobile'>
+                          <Form.Label>Mobile Number</Form.Label>
+                          <Form.Control
+                            type='email'
+                            placeholder='Enter mobile number'
+                            value={mobile}
+                            onChange={(e) => setMobile(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={12} md={12} sm={12} className='d-grid gap-2'>
+                        <Button variant='success' onClick={updateInfoHandler}>
+                          Submit Changes
+                        </Button>
+                      </Col>
+                    </Row>
+                      </>
+                    ) : null}
                   </Card.Body>
                 </Card>
 

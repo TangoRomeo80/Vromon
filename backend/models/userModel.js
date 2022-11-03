@@ -55,28 +55,28 @@ const businessOwnerSchema = new mongoose.Schema(
       },
     },
 
-    // address: {
-    //   house: {
-    //     type: String,
-    //     default: '',
-    //     trim: true,
-    //   },
-    //   street: {
-    //     type: String,
-    //     default: '',
-    //     trim: true,
-    //   },
-    //   area: {
-    //     type: String,
-    //     default: '',
-    //     trim: true,
-    //   },
-    //   city: {
-    //     type: String,
-    //     default: '',
-    //     trim: true,
-    //   },
-    // },
+    address: {
+      house: {
+        type: String,
+        default: '',
+        trim: true,
+      },
+      street: {
+        type: String,
+        default: '',
+        trim: true,
+      },
+      area: {
+        type: String,
+        default: '',
+        trim: true,
+      },
+      city: {
+        type: String,
+        default: '',
+        trim: true,
+      },
+    },
   },
   {
     timestamps: true,
