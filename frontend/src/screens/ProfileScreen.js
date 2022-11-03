@@ -375,7 +375,7 @@ const ProfileScreen = () => {
                         </Button>
                       </a>
                       <Link
-                        to='#'
+                        to='/businessList'
                         className='list-group-item list-group-item-action text-center d-grid gap-2'
                       >
                         <Button>
