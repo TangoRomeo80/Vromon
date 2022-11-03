@@ -139,6 +139,11 @@ const ProfileScreen = () => {
         setCity(meUser.businessOwnerInfo.address.city)
         setArea(meUser.businessOwnerInfo.address.area)
         setStreet(meUser.businessOwnerInfo.address.street)
+      } else if (meUser.userType === 'admin') {
+        setUserName(meUser.userName)
+        setMobile(meUser.mobile)
+        setEmail(meUser.email)
+        setImageUrl(meUser.image)
       }
     } else {
       dispatch(getMeUser())
@@ -241,7 +246,14 @@ const ProfileScreen = () => {
         })
       )
     } else if (meUser.userType === 'admin') {
-      alert('dispatch for admin needs to be implemented')
+      dispatch(
+        updateMeUser({
+          userName,
+          email,
+          mobile,
+          image: imageUrl,
+        })
+      )
     }
   }
 
