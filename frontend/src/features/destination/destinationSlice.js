@@ -153,6 +153,9 @@ const destinationSlice = createSlice({
     builder
       .addCase(getAllDestinations.pending, (state) => {
         state.isListLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
       })
       .addCase(getAllDestinations.fulfilled, (state, action) => {
         state.isListLoading = false
@@ -166,8 +169,29 @@ const destinationSlice = createSlice({
         state.isListError = true
         state.listErrorMessage = action.payload
       })
+      .addCase(getTopDestinations.pending, (state) => {
+        state.isListLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
+      })
+      .addCase(getTopDestinations.fulfilled, (state, action) => {
+        state.isListLoading = false
+        state.isListSuccess = true
+        state.isListError = false
+        state.listErrorMessage = ''
+        state.destinations = action.payload
+      })
+      .addCase(getTopDestinations.rejected, (state, action) => {
+        state.isListLoading = false
+        state.isListError = true
+        state.listErrorMessage = action.payload
+      })
       .addCase(getDestinationById.pending, (state) => {
         state.isDetailsLoading = true
+        state.isDetailsError = false
+        state.isDetailsSuccess = false
+        state.detailsErrorMessage = ''
       })
       .addCase(getDestinationById.fulfilled, (state, action) => {
         state.isDetailsLoading = false
@@ -183,6 +207,9 @@ const destinationSlice = createSlice({
       })
       .addCase(createDestination.pending, (state) => {
         state.isCreateLoading = true
+        state.isCreateError = false
+        state.isCreateSuccess = false
+        state.createErrorMessage = ''
       })
       .addCase(createDestination.fulfilled, (state, action) => {
         state.isCreateLoading = false
@@ -198,6 +225,9 @@ const destinationSlice = createSlice({
       })
       .addCase(updateDestination.pending, (state) => {
         state.isUpdateLoading = true
+        state.isUpdateError = false
+        state.isUpdateSuccess = false
+        state.updateErrorMessage = ''
       })
       .addCase(updateDestination.fulfilled, (state, action) => {
         state.isUpdateLoading = false
@@ -219,6 +249,9 @@ const destinationSlice = createSlice({
       })
       .addCase(deleteDestination.pending, (state) => {
         state.isDeleteLoading = true
+        state.isDeleteError = false
+        state.isDeleteSuccess = false
+        state.deleteErrorMessage = ''
       })
       .addCase(deleteDestination.fulfilled, (state, action) => {
         state.isDeleteLoading = false

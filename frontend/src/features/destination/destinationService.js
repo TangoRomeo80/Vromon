@@ -8,7 +8,7 @@ const getAllDestinations = async (token) => {
 
 //get top destinations
 const getTopDestinations = async (token) => {
-  const response = await axios.get('/api/destinations?sort=-rating')
+  const response = await axios.get('/api/destinations/most-popular')
   return response.data.data
 }
 
@@ -58,6 +58,7 @@ const destinationService = {
   createDestination,
   updateDestination,
   deleteDestination,
+  getTopDestinations,
 }
 
 export default destinationService
