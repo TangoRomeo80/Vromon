@@ -55,7 +55,7 @@ const serviceSchema = new mongoose.Schema(
         function () {
           return this.coverImg != ''
         },
-        'A destination must have a cover image',
+        'A service must have a cover image',
       ],
     },
 
@@ -94,13 +94,7 @@ const serviceSchema = new mongoose.Schema(
       type: String,
       required: [true, 'service type is required'],
       enum: {
-        values: [
-          'accomodation',
-          'transportation',
-          'food',
-          'tours',
-          'others',
-        ],
+        values: ['accomodation', 'transportation', 'food', 'tours', 'others'],
         message:
           'Service type needs to be accomodation, transportation, food, tours or others',
       },
@@ -116,6 +110,16 @@ const serviceSchema = new mongoose.Schema(
       max: [100, 'Service price discount cannot be more than 100%'],
     },
     reviews: [reviewSchema],
+    rating: {
+      type: Number,
+      default: 4.5,
+      min: 1,
+      max: 5,
+    },
+    numOfRatings: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
@@ -125,15 +129,45 @@ const serviceSchema = new mongoose.Schema(
 )
 
 //creating virtual fields
-serviceSchema.virtual('averageRating').get(function () {
-  if (this.reviews.length === 0) return 4.5
-  const sum = this.reviews.reduce((acc, curr) => acc + curr.rating, 0)
-  return sum / this.reviews.length
+// serviceSchema.virtual('averageRating').get(function () {
+//   if (this.reviews.length === 0) return 4.5
+//   const sum = this.reviews.reduce((acc, curr) => acc + curr.rating, 0)
+//   return sum / this.reviews.length
+// })
+
+// serviceSchema.virtual('numOfRatings').get(function () {
+//   return this.reviews.length
+// })
+
+//populating rating before save
+serviceSchema.pre('save', function (next) {
+  if (this.reviews.length === 0) {
+    this.rating = 4.5
+    this.numOfRatings = 0
+  } else {
+    const sum = this.reviews.reduce((acc, curr) => acc + curr.rating, 0)
+    this.rating = sum / this.reviews.length
+    this.numOfRatings = this.reviews.length
+  }
+  next()
 })
 
-serviceSchema.virtual('numOfRatings').get(function () {
-  return this.reviews.length
+//populating rating before update
+serviceSchema.pre('findOneAndUpdate', function (next) {
+  if (!this._update.reviews) {
+    next()
+  }
+  if (this._update.reviews.length === 0) {
+    this._update.rating = 4.5
+    this._update.numOfRatings = 0
+  } else {
+    const sum = this._update.reviews.reduce((acc, curr) => acc + curr.rating, 0)
+    this._update.rating = sum / this._update.reviews.length
+    this._update.numOfRatings = this._update.reviews.length
+  }
+  next()
 })
+
 
 //populating schema for specific id request
 serviceSchema.pre(/^find/, function (next) {

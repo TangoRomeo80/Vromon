@@ -6,6 +6,12 @@ const getAllDestinations = async (token) => {
   return response.data.data
 }
 
+//get top destinations
+const getTopDestinations = async (token) => {
+  const response = await axios.get('/api/destinations?sort=-rating')
+  return response.data.data
+}
+
 //get destination by id
 const getDestinationById = async (id, token) => {
   const response = await axios.get(`/api/destinations/${id}`)

@@ -42,6 +42,22 @@ export const getAllDestinations = createAsyncThunk(
   }
 )
 
+//get top destinations
+export const getTopDestinations = createAsyncThunk(
+  'destination/getTopDestinations',
+  async (_, thunkAPI) => {
+    try {
+      return await destinationService.getTopDestinations()
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 //get destination by id
 export const getDestinationById = createAsyncThunk(
   'destination/getDestinationById',
