@@ -11,6 +11,16 @@ import {
 } from './handlerFactory.js' //import generic handler
 
 /*
+ Alias middleware for getting most popular destinations
+*/
+
+export const getMostPopularDestinations = async (req, res, next) => {
+  req.query.limit = '9'
+  req.query.sort = '-rating'
+  next()
+}
+
+/*
 Request type: POST
 Endpoint: /api/destinations/
 Description: This endpoint creates new destination
