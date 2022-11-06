@@ -59,6 +59,19 @@ export const getServiceById = createAsyncThunk(
   }
 )
 
+//get top services
+export const getTopServices= createAsyncThunk(
+  'services/getTopServices',
+  async(_, thunkAPI)=>{
+    try{
+      return await serviceService.getTopServices()
+    }catch(err){
+      const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+      return thunkAPI.rejectWithValue(message);
+  }
+}
+)
+
 //create service
 export const createService = createAsyncThunk(
   'service/createService',
@@ -146,6 +159,24 @@ export const serviceSlice = createSlice({
         state.isListLoading = false
         state.isListError = true
         state.listErrorMessage = action.payload
+      })
+      .addCase(getTopServices.pending, (state) => {
+        state.isListLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
+      })
+      .addCase(getTopServices.fulfilled, (state, action) => {
+        state.isListLoading = false
+        state.isListSuccess = true
+        state.isListError = false
+        state.listErrorMessage = ''
+        state.services = action.payload
+      })
+      .addCase(getTopServices.rejected, (state, action)=> {
+        state.isListLoading= false
+        state.listErrorMessage= true
+        state.listErrorMessage=action.payload
       })
       .addCase(getServiceById.pending, (state) => {
         state.isDetailsLoading = true

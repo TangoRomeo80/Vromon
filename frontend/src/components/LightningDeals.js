@@ -1,10 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { MdDateRange, MdLocationOn } from "react-icons/md";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getTopServices,
+  resetServiceList,
+} from "../features/service/serviceSlice";
 
 const LightningDeals = () => {
+  const dispatch = useDispatch();
+
+  const [topServices, setTopServices] = useState([]);
+
+  const {
+    services,
+    isListLoading,
+    isListSuccess,
+    isListError,
+    listErrorMessage,
+  } = useSelector((state) => state.service);
+
+  useEffect(() => {
+    if (isListError) {
+      toast.error(listErrorMessage, { position: "top-center" });
+    }
+    if (isListSuccess) {
+      setTopServices(services);
+    } else {
+      dispatch(getTopServices());
+    }
+  }, [dispatch, services, isListSuccess, isListError, listErrorMessage]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetServiceList());
+    };
+  }, [dispatch]);
+
   return (
     <div>
       <Container>

@@ -6,6 +6,12 @@ const getAllServices = async () => {
   return response.data.data
 }
 
+//get top services
+const getTopServices= async (token) => {
+  const response = await axios.get('/api/services/most-popular')
+  return response.data.data
+}
+
 //get service by id
 const getServiceById = async (id) => {
   const response = await axios.get(`/api/services/${id}`)
@@ -48,6 +54,7 @@ const serviceService = {
   createService,
   updateService,
   deleteService,
+  getTopServices,
 }
 
 export default serviceService
