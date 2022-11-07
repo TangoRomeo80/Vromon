@@ -124,6 +124,20 @@ export const deleteService = createAsyncThunk(
   }
 )
 
+//get all transports
+
+export const getAllTransports = createAsyncThunk(
+  'services/getAllTransports',
+  async(_, thunkAPI)=> {
+    try{
+      return await serviceService.getAllTransports()
+    }catch(err){
+      const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+)
+
 export const serviceSlice = createSlice({
   name: 'service',
   initialState,
@@ -247,6 +261,22 @@ export const serviceSlice = createSlice({
         state.isDeleteLoading = false
         state.isDeleteError = true
         state.deleteErrorMessage = action.payload
+      })
+
+      .addCase(getAllTransports.pending, (state) => {
+        state.isListLoading = true
+      })
+      .addCase(getAllTransports.fulfilled, (state, action) => {
+        state.isListLoading = false
+        state.isListSuccess = true
+        state.isListError = false
+        state.listErrorMessage = ''
+        state.services = action.payload
+      })
+      .addCase(getAllTransports.rejected, (state, action) => {
+        state.isListLoading = false
+        state.isListError = true
+        state.listErrorMessage = action.payload
       })
   },
 })

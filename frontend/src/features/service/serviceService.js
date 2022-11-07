@@ -48,6 +48,13 @@ const deleteService = async (id, token) => {
   return response.data.data
 }
 
+//get all transports
+const getAllTransports= async () => {
+  const response = await axios.get('/api/services?serviceType=transport')
+  return response.data.data
+}
+
+
 const serviceService = {
   getAllServices,
   getServiceById,
@@ -55,6 +62,7 @@ const serviceService = {
   updateService,
   deleteService,
   getTopServices,
+  getAllTransports,
 }
 
 export default serviceService
