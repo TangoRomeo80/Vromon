@@ -48,7 +48,7 @@ const PopularDestinations = () => {
         </h2>
         <Row className="my-4 ">
           {destinations.map((destination, idx) => (
-            <Col xs={12} md={3}>
+            <Col xs={12} md={(idx === 0) || (idx === 1) ? 6 : 3} lg={(idx === 0) || (idx === 1) ? 6 : 3}>
               <LinkContainer to="">
                 <Card key={destination._id}>
                   <Card.Img
