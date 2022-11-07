@@ -46,8 +46,31 @@ const PopularDestinations = () => {
         <h2 className="font-weight-bold text-center mb-4">
           Popular Destinations
         </h2>
+        <Row className="my-4 ">
+          {destinations.map((destination, idx) => (
+            <Col xs={12} md={3}>
+              <LinkContainer to="">
+                <Card key={destination._id}>
+                  <Card.Img
+                    cascade
+                    className="img-fluid"
+                    src="/LightningDeals/test.jpg"
+                  />
 
-        <Row className="my-4">
+                  <Card.Body cascade>
+                    <Card.Title>{destination.name} {idx}</Card.Title>
+                    <Card.Text>
+                      <MdLocationOn /> {destination.district},{" "}
+                      {destination.division}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </LinkContainer>
+            </Col>
+          ))}
+        </Row>
+
+        {/* <Row className="my-4">
           <Col xs={12} md={12} lg={12}>
             <LinkContainer to="">
               <Card>
@@ -69,9 +92,8 @@ const PopularDestinations = () => {
               </Card>
             </LinkContainer>
           </Col>
-        </Row>
-
-        <Row className="my-4">
+        </Row> */}
+        {/* <Row className="my-4">
           <Col xs={12} md={3}>
             <LinkContainer to="">
               <Card>
@@ -94,81 +116,13 @@ const PopularDestinations = () => {
               </Card>
             </LinkContainer>
           </Col>
-
-          <Col xs={12} md={3}>
-            <LinkContainer to="">
-              <Card>
-                <Card.Img
-                  cascade
-                  className="img-fluid"
-                  src="/LightningDeals/test.jpg"
-                />
-
-                <Card.Body cascade>
-                  <Card.Title>Fly, Baby! Fly!</Card.Title>
-                  <Card.Text>
-                    <MdDateRange /> &nbsp;4 day <br />
-                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
-                  </Card.Text>
-                  <Card.Text style={{ fontWeight: "bold" }}>
-                    BDT 15,500/Person
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </LinkContainer>
-          </Col>
-
-          <Col xs={12} md={3}>
-            <LinkContainer to="">
-              <Card>
-                <Card.Img
-                  cascade
-                  className="img-fluid"
-                  src="/LightningDeals/test.jpg"
-                />
-
-                <Card.Body cascade>
-                  <Card.Title>Fly, Baby! Fly!</Card.Title>
-                  <Card.Text>
-                    <MdDateRange /> &nbsp;4 day <br />
-                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
-                  </Card.Text>
-                  <Card.Text style={{ fontWeight: "bold" }}>
-                    BDT 15,500/Person
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </LinkContainer>
-          </Col>
-
-          <Col xs={12} md={3}>
-            <LinkContainer to="">
-              <Card>
-                <Card.Img
-                  cascade
-                  className="img-fluid"
-                  src="/LightningDeals/test.jpg"
-                />
-
-                <Card.Body cascade>
-                  <Card.Title>Fly, Baby! Fly!</Card.Title>
-                  <Card.Text>
-                    <MdDateRange /> &nbsp;4 day <br />
-                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
-                  </Card.Text>
-                  <Card.Text style={{ fontWeight: "bold" }}>
-                    BDT 15,500/Person
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </LinkContainer>
-          </Col>
-        </Row>
-
+        </Row> */}
         <Row className="mb-4">
-          <Button variant="info" size="sm">
-            Show More
-          </Button>
+          <LinkContainer to="/destinations">
+            <Button variant="info" size="sm">
+              Show More
+            </Button>
+          </LinkContainer>
         </Row>
       </Container>
     </div>
