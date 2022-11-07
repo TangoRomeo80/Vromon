@@ -7,7 +7,7 @@ const getAllServices = async () => {
 }
 
 //get top services
-const getTopServices= async (token) => {
+const getTopServices = async (token) => {
   const response = await axios.get('/api/services/most-popular')
   return response.data.data
 }
@@ -49,11 +49,10 @@ const deleteService = async (id, token) => {
 }
 
 //get all transports
-const getAllTransports= async () => {
-  const response = await axios.get('/api/services?serviceType=transport')
+const getAllTransports = async () => {
+  const response = await axios.get('/api/services?serviceType=transportation')
   return response.data.data
 }
-
 
 const serviceService = {
   getAllServices,
