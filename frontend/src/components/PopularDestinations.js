@@ -58,7 +58,7 @@ const PopularDestinations = () => {
                   />
 
                   <Card.Body cascade>
-                    <Card.Title>{destination.name} {idx}</Card.Title>
+                    <Card.Title>{destination.name}</Card.Title>
                     <Card.Text>
                       <MdLocationOn /> {destination.district},{" "}
                       {destination.division}
