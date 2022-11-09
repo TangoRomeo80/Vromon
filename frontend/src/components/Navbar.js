@@ -413,7 +413,7 @@ const Navbar = () => {
       }}
       className='d-flex justify-content-center align-items-center'
     >
-      <Card className='text-center w-55'>
+      <Card className='text-center w-75'>
         <Card.Header>
           <Container>
             <Row>
