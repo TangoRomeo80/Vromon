@@ -223,6 +223,7 @@ const userSchema = new mongoose.Schema(
         'google ID is required',
       ],
     },
+
     // facebookID: {
     //   type: String,
     //   required: [
@@ -232,6 +233,7 @@ const userSchema = new mongoose.Schema(
     //     'google ID is required',
     //   ],
     // },
+    
     mobile: {
       type: String,
       default: '',
