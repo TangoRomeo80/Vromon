@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col, Container, Card, Form } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { MdDateRange, MdLocationOn } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllServices } from '../features/service/serviceSlice'
 
 const GuidedTourSearchScreen = () => {
   const dispatch = useDispatch()
+  const location = useLocation()
 
-  const [searchParams] = useSearchParams()
   const [minPrice, setMinPrice] = useState(0)
   const [maxPrice, setMaxPrice] = useState(0)
   const [searchPackage, setSearchPackage] = useState('')
   const [duration, setDuration] = useState('')
-  const [city, setCity] = useState(searchParams.get('city') || '')
+  const [city, setCity] = useState(
+    location.state ? location.state.searchTourCity : ''
+  )
   const [travelDate, setTravelDate] = useState(
-    searchParams.get('travelDate') || ''
+    location.state ? location.state.travelDate : ''
   )
   const [travelerCount, setTravelerCount] = useState(
-    searchParams.get('travelerCount') || ''
+    location.state ? location.state.travelerCount : ''
   )
   const [searchedServices, setSearchedServices] = useState([])
 
@@ -30,6 +32,8 @@ const GuidedTourSearchScreen = () => {
     isListLoading,
     listErrorMessage,
   } = useSelector((state) => state.service)
+
+  console.log(city, travelDate, travelerCount)
 
   useEffect(() => {
     if (!isListSuccess) {
@@ -46,8 +50,6 @@ const GuidedTourSearchScreen = () => {
     setSearchedServices(searched)
   }, [services, isListSuccess, isListError, dispatch])
 
-  console.log(searchedServices)
-
   return (
     <Container>
       <Row className='mb-2 pt-3'>
@@ -56,7 +58,7 @@ const GuidedTourSearchScreen = () => {
           <Card.Text>Search by Destination</Card.Text>
         </Col>
         <Col lg={6} md={6} sm={6} className='d-flex justify-content-end'>
-          <Link to='' className='btn btn-primary mb-5'>
+          <Link to='#' className='btn btn-primary mb-5'>
             Modify Search
           </Link>
         </Col>

@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { getAuthedUser, resetAuth } from '../features/auth/authSlice'
 import Moment from 'moment'
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 const SearchStays = () => {
   const [checkinDate, setCheckinDate] = useState('')
@@ -24,7 +24,9 @@ const SearchStays = () => {
   return (
     <Card>
       <Row className='mt-3'>
-        <Card.Text as='h5' className='font-weight-bolder text-muted'>Search Stays</Card.Text>
+        <Card.Text as='h5' className='font-weight-bolder text-muted'>
+          Search Stays
+        </Card.Text>
       </Row>
 
       <Row className='my-5 mx-3'>
@@ -134,7 +136,9 @@ const SearchTransports = () => {
     <div>
       <Card>
         <Row className='mt-3'>
-          <Card.Text as='h5' className='font-weight-bolder text-muted'>Search Transports</Card.Text>
+          <Card.Text as='h5' className='font-weight-bolder text-muted'>
+            Search Transports
+          </Card.Text>
         </Row>
         <Row className='my-5 mx-3'>
           <Col>
@@ -256,7 +260,9 @@ const SearchDestinations = () => {
     <div>
       <Card>
         <Row className='mt-3'>
-          <Card.Text as='h5' className='font-weight-bolder text-muted'>Search Destinations</Card.Text>
+          <Card.Text as='h5' className='font-weight-bolder text-muted'>
+            Search Destinations
+          </Card.Text>
         </Row>
         <Row className='my-5 mx-3'>
           <Col>
@@ -270,7 +276,9 @@ const SearchDestinations = () => {
                 value={searchDivision}
                 onChange={(e) => setSearchDivision(e.target.value)}
               >
-                <option disabled selected value=''>Select Division</option>
+                <option disabled selected value=''>
+                  Select Division
+                </option>
                 <option value='Dhaka'>Dhaka</option>
                 <option value='Chittagong'>Chittagong</option>
                 <option value='Sylhet'>Sylhet</option>
@@ -294,7 +302,6 @@ const SearchDestinations = () => {
               ></Form.Control>
             </Form.Group>
           </Col>
-
         </Row>
       </Card>
     </div>
@@ -306,19 +313,12 @@ const SearchTours = () => {
   const [travelDate, setTravelDate] = useState('')
   const [travelerCount, setTravelerCount] = useState('')
 
-  const navigate = useNavigate()
-
-  const handleTourSearch = (e) => {
-    e.preventDefault()
-    navigate(
-      `/tourSearch?city=${searchTourCity}&travelDate=${travelDate}&travelerCount=${travelerCount}`
-    )
-  }
-
   return (
     <Card>
       <Row className='mt-3'>
-        <Card.Text as='h5' className='font-weight-bolder text-muted'>Search Holiday Packages</Card.Text>
+        <Card.Text as='h5' className='font-weight-bolder text-muted'>
+          Search Holiday Packages
+        </Card.Text>
       </Row>
 
       <Row className='my-5 mx-3'>
@@ -374,7 +374,17 @@ const SearchTours = () => {
         </Col>
       </Row>
 
-      <Button onClick={handleTourSearch}>Submit Search</Button>
+      <Link
+        className='mb-3'
+        to='tourSearch'
+        state={{
+          searchTourCity: searchTourCity,
+          travelDate: travelDate,
+          travelerCount: travelerCount,
+        }}
+      >
+        <Button>Submit Search</Button>
+      </Link>
     </Card>
   )
 }
@@ -413,7 +423,7 @@ const Navbar = () => {
       }}
       className='d-flex justify-content-center align-items-center'
     >
-      <Card className='text-center w-75'>
+      <Card className='text-center w-75 shadow bg-light'>
         <Card.Header>
           <Container>
             <Row>
@@ -423,7 +433,7 @@ const Navbar = () => {
                 className='d-flex justify-content-center pe-0'
                 onClick={() => setSearchSelection('destinations')}
               >
-                <Link 
+                <Link
                   to=''
                   className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow py-1'
                   style={{ width: '100%', borderRadius: '0' }}
