@@ -50,7 +50,7 @@ const DestinationScreen = () => {
   return (
     <div>
       <Container className='mb-3 pt-5'>
-        <Card className='mb-3 pt-5'>
+        <Card className='mb-3 pt-5 bg-light shadow' >
           <Row>
             <Card.Text as='h5' className='font-weight-bolder text-center'>
               Search Destinations
