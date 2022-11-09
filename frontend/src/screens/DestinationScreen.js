@@ -53,7 +53,7 @@ const DestinationScreen = () => {
         <Card className='mb-3 pt-5 bg-light shadow' >
           <Row>
             <Card.Text as='h5' className='font-weight-bolder text-center'>
-              Search Destinations
+              Destinations
             </Card.Text>
           </Row>
           <Row className='my-5 mx-3'>
@@ -67,7 +67,7 @@ const DestinationScreen = () => {
                   onChange={(e) => setDivisionSearch(e.target.value)}
                   placeholder='Select Division'
                 >
-                  <option value=''>{divisionSearch}</option>
+                  <option disabled selected value='' >Select Division</option>
                   <option value='Dhaka'>Dhaka</option>
                   <option value='Chittagong'>Chittagong</option>
                   <option value='Sylhet'>Sylhet</option>
@@ -103,10 +103,6 @@ const DestinationScreen = () => {
             </Col> */}
           </Row>
         </Card>
-
-        <h2 className='font-weight-bold text-center mb-4'>
-          Popular Destinations
-        </h2>
 
         {isListLoading ? (
           <Loader />

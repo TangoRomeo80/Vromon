@@ -251,7 +251,6 @@ const SearchTransports = () => {
 const SearchDestinations = () => {
   const [searchDistrict, setSearchDistrict] = useState('')
   const [searchDivision, setSearchDivision] = useState('')
-  const [searchCity, setSearchCity] = useState('')
 
   return (
     <div>
@@ -271,7 +270,7 @@ const SearchDestinations = () => {
                 value={searchDivision}
                 onChange={(e) => setSearchDivision(e.target.value)}
               >
-                <option>{searchDivision}</option>
+                <option disabled selected value=''>Select Division</option>
                 <option value='Dhaka'>Dhaka</option>
                 <option value='Chittagong'>Chittagong</option>
                 <option value='Sylhet'>Sylhet</option>
@@ -296,17 +295,6 @@ const SearchDestinations = () => {
             </Form.Group>
           </Col>
 
-          <Col>
-            <Card.Text>Enter City</Card.Text>
-            <Form.Group className='mb-3' controlId='searchCity'>
-              <Form.Control
-                type='text'
-                placeholder='Enter the City Name'
-                value={searchCity}
-                onChange={(e) => setSearchCity(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-          </Col>
         </Row>
       </Card>
     </div>
