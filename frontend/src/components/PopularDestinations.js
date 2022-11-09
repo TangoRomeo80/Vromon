@@ -46,19 +46,16 @@ const PopularDestinations = () => {
         <h2 className="font-weight-bold text-center mb-4">
           Popular Destinations Right Now
         </h2>
-<<<<<<< HEAD
-        
         <Row className="my-4">
-=======
-        <Row className="my-4 ">
           {destinations.map((destination, idx) => (
-            <Col xs={12} md={(idx === 0) || (idx === 1) ? 6 : 3} lg={(idx === 0) || (idx === 1) ? 6 : 3}>
+            <Col xs={12} md={(idx === 0) ? 12 : 3} lg={(idx === 0)? 12: 3}>
               <LinkContainer to="">
-                <Card key={destination._id}>
+                <Card key={destination._id} className='mb-2'>
                   <Card.Img
                     cascade
                     className="img-fluid"
                     src="/LightningDeals/test.jpg"
+                    style={{ maxHeight: "40vh", objectFit: "cover" }}
                   />
 
                   <Card.Body cascade>
@@ -74,61 +71,6 @@ const PopularDestinations = () => {
           ))}
         </Row>
 
-        {/* <Row className="my-4">
-          <Col xs={12} md={12} lg={12}>
-            <LinkContainer to="">
-              <Card>
-                <Card.Img
-                  variant="top"
-                  src="/LightningDeals/test.jpg"
-                  style={{ height: "40vh", objectFit: "cover" }}
-                />
-                <Card.ImgOverlay className="d-flex flex-column justify-content-end">
-                  <Card.Title>Fly, Baby! Fly!</Card.Title>
-                  <Card.Text className="text-light">
-                    <MdDateRange /> &nbsp;4 day <br />
-                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
-                  </Card.Text>
-                  <Card.Text style={{ fontWeight: "bold", color: "white" }}>
-                    BDT 15,500/Person
-                  </Card.Text>
-                </Card.ImgOverlay>
-              </Card>
-            </LinkContainer>
-          </Col>
-        </Row> */}
-        {/* <Row className="my-4">
->>>>>>> 4ebc4080d26bed8857b363d9e4e1093474628766
-          <Col xs={12} md={3}>
-            <LinkContainer to="">
-              <Card>
-                <Card.Img
-                  cascade
-                  className="img-fluid"
-                  src="/LightningDeals/test.jpg"
-                />
-
-                <Card.Body cascade>
-                  <Card.Title>Fly, Baby! Fly!</Card.Title>
-                  <Card.Text>
-                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
-                  </Card.Text>
-<<<<<<< HEAD
-=======
-                  <Card.Text style={{ fontWeight: "bold" }}>
-                    BDT 15,500/Person
-                  </Card.Text>
->>>>>>> 4ebc4080d26bed8857b363d9e4e1093474628766
-                </Card.Body>
-              </Card>
-            </LinkContainer>
-          </Col>
-<<<<<<< HEAD
-        </Row>
-
-=======
-        </Row> */}
->>>>>>> 4ebc4080d26bed8857b363d9e4e1093474628766
         <Row className="mb-4">
           <LinkContainer to="/destinations">
             <Button variant="info" size="sm">
