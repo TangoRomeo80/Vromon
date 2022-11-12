@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Form, Row, Col } from "react-bootstrap";
+import { Button, Form, Row, Col, Card } from "react-bootstrap";
 import { FcGoogle } from "react-icons/fc";
 import FormContainer from "../components/FormContainer";
 import { signinLocal, resetAuth } from "../features/auth/authSlice";
@@ -11,6 +11,7 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState("password");
+  const [forgotPassword, setForgotPassword] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -52,48 +53,94 @@ const LoginScreen = () => {
     <FormContainer>
       <h1 className="d-flex justify-content-center pt-1">Sign In</h1>
       <Form onSubmit={submitHandler}>
-        <Form.Group className="mb-3" controlId="LoginEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="LoginPassword">
-          <Form.Label>Enter password</Form.Label>
-          <Form.Control
-            type={showPassword}
-            placeholder="Enter Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Row>
-          <Col>
-            <Form.Group className="mb-3" controlId="showPassword">
-              <Form.Check
-                type="checkbox"
-                label="Show password"
-                onChange={(e) => passwordShow(e)}
+        {!forgotPassword && (
+          <>
+            <Form.Group className="mb-3" controlId="LoginEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group
-              className="mb-3"
-              controlId="showPassword"
-            >
-              <Link to="/">
-              Forgot Password?
-            </Link>
-            </Form.Group>
-          </Col>
-        </Row>
 
-        <div className="d-grid gap-2">
+            <Form.Group className="mb-3" controlId="LoginPassword">
+              <Form.Label>Enter password</Form.Label>
+              <Form.Control
+                type={showPassword}
+                placeholder="Enter Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+          </>
+        )}
+
+        {forgotPassword && (
+          <>
+            <Card className="my-4">
+              <Card.Header as="h5" className="text-center">
+                Want to Set a New Password
+              </Card.Header>
+              <Row>
+                <Col lg={6} md={6} sm={12}>
+                  <Card.Body>Want to Send a Link to Your Mail?</Card.Body>
+                </Col>
+                <Col
+                  lg={6}
+                  md={6}
+                  sm={12}
+                  className="d-flex justify-content-end py-3"
+                >
+                  <Button variant="primary" size="sm">
+                    Send
+                  </Button>
+                </Col>
+              </Row>
+            </Card>
+            <Row>
+              <Col>
+                <Form.Group
+                  className="mb-3 d-flex justify-content-end"
+                  controlId="forgotPassword"
+                >
+                  <Button onClick={() => setForgotPassword(false)}>
+                    Go Back
+                  </Button>
+                </Form.Group>
+              </Col>
+            </Row>
+          </>
+        )}
+
+        {!forgotPassword && (
+          <>
+            <Row>
+              <Col>
+                <Form.Group className="mb-3" controlId="showPassword">
+                  <Form.Check
+                    type="checkbox"
+                    label="Show password"
+                    onChange={(e) => passwordShow(e)}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group
+                  className="mb-3 d-flex justify-content-end"
+                  controlId="forgotPassword"
+                >
+                  <Button onClick={() => setForgotPassword(true)}>
+                    Forgot Password?
+                  </Button>
+                </Form.Group>
+              </Col>
+            </Row>
+          </>
+        )}
+
+        <div className="d-grid gap-2 ">
           <Button variant="primary" size="lg" type="submit">
             Login
           </Button>
