@@ -6,12 +6,14 @@ import { FcGoogle } from "react-icons/fc";
 import FormContainer from "../components/FormContainer";
 import { signinLocal, resetAuth } from "../features/auth/authSlice";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState("password");
-  const [forgotPassword, setForgotPassword] = useState("");
+  const [forgotPassword, setForgotPassword] = useState(false);
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState('')
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,6 +21,17 @@ const LoginScreen = () => {
   const { userInfo, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
   );
+
+  const handleForgotPassword = async () => {
+    const response = await axios.post('/api/users/forgotPassword', { email: forgotPasswordEmail })
+    console.log(response);
+    // if (response.data.status === 'success') {
+    //   toast.success('Password reset link sent to your email')
+    //   setForgotPassword(false)
+    // } else {    
+    //   toast.error(response.data.data.message)
+    // }
+  }
 
   useEffect(() => {
     if (userInfo) {
@@ -86,13 +99,13 @@ const LoginScreen = () => {
               <Row>
                 <Col lg={12} md={12} sm={12}>
                   <Card.Body>
-                    <Form.Group className="mb-3" controlId="LoginEmail">
+                    <Form.Group className="mb-3" controlId="forgotPasswordEmail">
                       <Form.Label>Enter Email To Reset Password</Form.Label>
                       <Form.Control
                         type="email"
-                        placeholder="Enter email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter Email"
+                        value={forgotPasswordEmail}
+                        onChange={(e) => setForgotPasswordEmail(e.target.value)}
                       />
                     </Form.Group>
                   </Card.Body>
@@ -103,7 +116,7 @@ const LoginScreen = () => {
                   sm={12}
                   className="d-grid gap-2 py-2"
                 >
-                  <Button variant="primary" size="md" className>
+                  <Button variant="primary" size="md" onClick={handleForgotPassword}>
                     Send
                   </Button>
                 </Col>
