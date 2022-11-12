@@ -84,16 +84,26 @@ const LoginScreen = () => {
                 Want to Set a New Password
               </Card.Header>
               <Row>
-                <Col lg={6} md={6} sm={12}>
-                  <Card.Body>Want to Send a Link to Your Mail?</Card.Body>
+                <Col lg={12} md={12} sm={12}>
+                  <Card.Body>
+                    <Form.Group className="mb-3" controlId="LoginEmail">
+                      <Form.Label>Enter Email To Reset Password</Form.Label>
+                      <Form.Control
+                        type="email"
+                        placeholder="Enter email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Card.Body>
                 </Col>
                 <Col
-                  lg={6}
-                  md={6}
+                  lg={12}
+                  md={12}
                   sm={12}
-                  className="d-flex justify-content-end py-3"
+                  className="d-grid gap-2 py-2"
                 >
-                  <Button variant="primary" size="sm">
+                  <Button variant="primary" size="md" className>
                     Send
                   </Button>
                 </Col>
@@ -140,11 +150,14 @@ const LoginScreen = () => {
           </>
         )}
 
-        <div className="d-grid gap-2 ">
+        {!forgotPassword && (
+          <div className="d-grid gap-2 ">
           <Button variant="primary" size="lg" type="submit">
             Login
           </Button>
         </div>
+        )}
+        
       </Form>
 
       <Row>
