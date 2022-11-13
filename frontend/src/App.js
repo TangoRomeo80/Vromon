@@ -17,6 +17,7 @@ import ErrorScreen from './screens/ErrorScreen'
 import TestScreen from './screens/TestScreen'
 import TestNavbar from './screens/TestNavbar'
 import DestinationSearchScreen from './screens/DestinationSearchScreen'
+import DestinationDetailsScreen from './screens/DestinationDetailsScreen'
 import StaysSearchScreen from './screens/StaysSearchScreen'
 import TransportSearchScreen from './screens/TransportSearchScreen'
 import RegistrationScreen from './screens/RegistrationScreen'
@@ -43,6 +44,7 @@ const App = () => {
               <Route path='/profile' element={<ProfileScreen />} />
               <Route path='/tourSearch' element={<GuidedTourSearchScreen />} />
               <Route path='/myBookings' element={<TouristBookingScreen />}/>
+              <Route path='/destinationDetails' element={<DestinationDetailsScreen />} />
               <Route
                 path='/destinationSearch'
                 element={<DestinationSearchScreen />}
