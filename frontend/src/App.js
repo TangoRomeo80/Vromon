@@ -22,6 +22,7 @@ import TransportSearchScreen from './screens/TransportSearchScreen'
 import RegistrationScreen from './screens/RegistrationScreen'
 import TouristBookingScreen from './screens/TouristBookingScreen'
 import BusinessListScreen from './screens/BusinessListScreen'
+import ForgotPasswordScreen from './screens/ForgotPasswordScreen'
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
               <Route path='/' element={<HomeScreen />} />
               <Route path='/login' element={<LoginScreen />} />
               <Route path='/registration' element={<RegistrationScreen />} />
+              <Route path='/forgotPassword/:token' element={<ForgotPasswordScreen />} />
               <Route path='/newUser' element={<NewUserScreen />} />
               <Route path='/transports' element={<TransportScreen />} />
               <Route path='/destinations' element={<DestinationScreen />} />

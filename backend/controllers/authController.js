@@ -253,17 +253,30 @@ export const forgotPassword = catchAsync(async (req, res, next) => {
     return next(new AppError('There is no user with this email address', 404))
   }
 
+  if (user.loginType !== 'local') {
+    return next(
+      new AppError(
+        'You cannot reset password for this account. Please use the appropriate login method',
+        404
+      )
+    )
+  }
+
   // 2) Generate the random reset token
   const resetToken = user.createPasswordResetToken()
   await user.save({ validateBeforeSave: false })
 
   // 3) Send it to user's email
 
-  const resetURL = `${req.protocol}://${req.get(
-    'host'
-  )}/api/users/resetPassword/${resetToken}`
+  // const resetURL = `${req.protocol}://${req.get(
+  //   'host'
+  // )}/api/users/resetPassword/${resetToken}`
 
-  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`
+  // const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`
+
+  const resetURL = `${req.protocol}://localhost:3000/forgotPassword/${resetToken}`
+
+  const message = `This mail is sent to you because you have requested to reset your password. Please click on the link below to reset your password. If you didn't request to reset your password, please ignore this email. \n\n${resetURL}`
 
   try {
     await sendEmail({
@@ -320,7 +333,15 @@ export const resetPassword = catchAsync(async (req, res, next) => {
   // 4) Log the user in, send JWT
   res.status(200).json({
     status: 'success',
-    data: { ...user._doc, token: generateToken(user._id) },
+    data: {
+      _id: user._id,
+      userName: user.userName,
+      email: user.email,
+      loginType: user.loginType,
+      userType: user.userType,
+      newUser: user.newUser,
+      token: generateToken(user._id),
+    },
   })
 })
 

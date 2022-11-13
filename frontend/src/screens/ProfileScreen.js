@@ -373,7 +373,7 @@ const ProfileScreen = () => {
                           Password and Security
                         </Button>
                       </a>
-                      <Link
+                      {/* <Link
                         to='/businessList'
                         className='list-group-item list-group-item-action text-center d-grid gap-2'
                       >
@@ -381,7 +381,7 @@ const ProfileScreen = () => {
                           <FaBusinessTime className='me-2 mb-2' />
                           My Businesses
                         </Button>
-                      </Link>
+                      </Link> */}
                       <Link
                         to='#'
                         className='list-group-item list-group-item-action text-center d-grid gap-2'
