@@ -23,6 +23,7 @@ import RegistrationScreen from './screens/RegistrationScreen'
 import TouristBookingScreen from './screens/TouristBookingScreen'
 import BusinessListScreen from './screens/BusinessListScreen'
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen'
+import BusinessOwnerDashoard from './screens/BusinessOwnerDashoard'
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
               <Route path='/profile' element={<ProfileScreen />} />
               <Route path='/tourSearch' element={<GuidedTourSearchScreen />} />
               <Route path='/myBookings' element={<TouristBookingScreen />}/>
+              <Route path='/businessDash' element={<BusinessOwnerDashoard/>}/>
               <Route
                 path='/destinationSearch'
                 element={<DestinationSearchScreen />}
