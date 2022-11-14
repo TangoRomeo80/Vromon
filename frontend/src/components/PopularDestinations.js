@@ -73,7 +73,7 @@ const PopularDestinations = () => {
 
         <Row className="py-4">
           <LinkContainer to="/destinations">
-            <Button variant="outline-secondary" size="md">
+            <Button variant="outline-dark" size="md">
               <b>Show More</b>
             </Button>
           </LinkContainer>
