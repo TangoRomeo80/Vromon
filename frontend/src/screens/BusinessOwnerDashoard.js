@@ -397,6 +397,9 @@ const BusinessOwnerDashoard = () => {
               </Card>
             </Form>
           )}
+          <Row className='mt-3'>
+            <Button>Create Business</Button>
+          </Row>
         </Col>
       </Row>
     </Container>
