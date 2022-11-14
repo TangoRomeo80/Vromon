@@ -56,7 +56,7 @@ const BusinessOwnerDashoard = () => {
   const addBusinessHandler = () => {
     setBusinessList(false);
     setAddBusiness(true);
-  }
+  };
 
   return (
     <Container className="py-3">
@@ -64,9 +64,9 @@ const BusinessOwnerDashoard = () => {
         <h1 className="text-center">Dashboard</h1>
       </Row>
 
-      <Row className="my-2">
+      <Row className="my-3">
         <Col lg={3} md={6} sm={12}>
-          <Card className="my-3 p-3 rounded">
+          <Card className="p-3 rounded">
             <Card.Body>
               <Row>
                 <Card.Title as="h5" className="text-center">
@@ -109,7 +109,7 @@ const BusinessOwnerDashoard = () => {
           </Card>
         </Col>
 
-        <Col lg={9} md={6} sm={12} className="mt-2">
+        <Col lg={9} md={6} sm={12} className="">
           {/* <Row>
             <Card.Header as="h4" className="mx-4 mb-3">
               Business List
@@ -264,6 +264,9 @@ const BusinessOwnerDashoard = () => {
                                 value={serviceType}
                                 onChange={(e) => setServiceType(e.target.value)}
                               >
+                                <option disabled selected value="">
+                                  Select Service Type
+                                </option>
                                 <option value="stays">Accomodation</option>
                                 <option value="transport">Transport</option>
                                 <option value="food">Food</option>
