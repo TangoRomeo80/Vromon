@@ -52,8 +52,8 @@ const DestinationScreen = () => {
       <Container className='mb-3 pt-5'>
         <Card className='mb-3 pt-5 bg-light shadow' >
           <Row>
-            <Card.Text as='h5' className='font-weight-bolder text-center'>
-              Destinations
+            <Card.Text as='h2' className='font-weight-bolder text-center'>
+              Most Popular Destinations
             </Card.Text>
           </Row>
           <Row className='my-5 mx-3'>
@@ -136,7 +136,7 @@ const DestinationScreen = () => {
 
               .map((destination) => (
                 <Col xs={12} md={3}>
-                  <LinkContainer to=''>
+                  <LinkContainer to='/destinationDetails'>
                     <Card key={destination._id} className='mb-2'>
                       <Card.Img
                         cascade

@@ -22,6 +22,8 @@ const LoginScreen = () => {
     (state) => state.auth
   )
 
+  let redirect
+
   const handleForgotPassword = async () => {
     try {
       const { data } = await axios.post('/api/users/forgotpassword', {
@@ -36,18 +38,19 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate('/')
+      redirect = userInfo.userType === 'businessowner' ? '/businessDash' : '/'
+      navigate(redirect)
     }
     if (isSuccess) {
       toast.success('Logged in successfully', { position: 'top-center' })
-      navigate('/')
+      navigate(redirect)
     }
     if (isError) {
       toast.error(message, { position: 'top-center' })
     }
 
     dispatch(resetAuth())
-  }, [userInfo, isError, isSuccess, message, navigate, dispatch])
+  }, [userInfo, isError, isSuccess, message, redirect, navigate, dispatch])
 
   const passwordShow = (e) => {
     e.target.checked ? setShowPassword('text') : setShowPassword('password')

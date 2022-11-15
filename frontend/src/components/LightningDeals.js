@@ -141,9 +141,9 @@ const LightningDeals = () => {
           </Col>
         </Row>
 
-        <Row className="mb-4">
-          <Button variant="info" size="sm">
-            Show More
+        <Row className="py-4">
+          <Button variant="outline-dark" size="md">
+            <b>Show More</b>
           </Button>
         </Row>
       </Container>
