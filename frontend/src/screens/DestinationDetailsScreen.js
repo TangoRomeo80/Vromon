@@ -56,7 +56,7 @@ const DestinationDetails = () => {
         </Row>
         <Row className="pt-3">
           <Card>
-            <Card.Header>Description About This Place</Card.Header>
+            <Card.Header as='h3' className='text-center'>About This Place</Card.Header>
             <Card.Body>
               <Card.Text>
                 Contrary to popular belief, Lorem Ipsum is not simply random
