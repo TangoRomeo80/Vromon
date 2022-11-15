@@ -11,6 +11,7 @@ import {
   FaSignInAlt,
   FaTag,
 } from 'react-icons/fa'
+import { GoDashboard } from 'react-icons/go'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../features/auth/authSlice'
 
@@ -84,6 +85,13 @@ const Header = () => {
                       Holiday Packages
                     </Nav.Link>
                   </LinkContainer>
+
+                  <LinkContainer to='/businessDash'>
+                    <Nav.Link>
+                      <GoDashboard className='me-1' />
+                      Dashboard
+                    </Nav.Link>
+                  </LinkContainer>
                 </>
               )}
             </Nav>
@@ -104,7 +112,7 @@ const Header = () => {
                       <LinkContainer to='/touristBookings' className='px-0'>
                         <Nav.Link className='text-dark'>
                           <FaTag className='me-2' />
-                          My Booking
+                          My Bookings
                         </Nav.Link>
                       </LinkContainer>
                     </NavDropdown.Item>
