@@ -43,7 +43,7 @@ const LoginScreen = () => {
     }
     if (isSuccess) {
       toast.success('Logged in successfully', { position: 'top-center' })
-      navigate('/')
+      navigate(redirect)
     }
     if (isError) {
       toast.error(message, { position: 'top-center' })
