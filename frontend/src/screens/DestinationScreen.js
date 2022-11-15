@@ -90,17 +90,6 @@ const DestinationScreen = () => {
                 ></Form.Control>
               </Form.Group>
             </Col>
-
-            {/* <Col>
-              <Card.Text>Enter City</Card.Text>
-              <Form.Group className='mb-3' controlId='searchCity'>
-                <Form.Control
-                  type='text'
-                  onChange={(e) => setCitySearch(e.target.value)}
-                  placeholder='Enter the City Name'
-                ></Form.Control>
-              </Form.Group>
-            </Col> */}
           </Row>
         </Card>
 
