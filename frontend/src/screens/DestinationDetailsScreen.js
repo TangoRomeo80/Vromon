@@ -6,16 +6,49 @@ import { Row, Col, Container, Card, Form } from "react-bootstrap";
 import ListGroup from "react-bootstrap/ListGroup";
 import Carousel from "react-bootstrap/Carousel";
 import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import { useDispatch, useSelector} from "react-redux";
+import { getDestinationById, resetDestinationDetails } from '../features/destination/destinationSlice'
 
 const DestinationDetails = () => {
+
+  // const dispatch = useDispatch()
+
+  // const [destinationDetails, setDestinationDetails] = useState()
+
+  // const {
+  //   destination,
+  //   isDetailsLoading,
+  //   isDetailsError,
+  //   isDetailsSuccess,
+  //   detailsErrorMessage,
+  // } = useSelector((state) => state.destination)
+
+
+  // useEffect(() => {
+  //   if(isDetailsError) {
+  //     toast.error(detailsErrorMessage, { position: "top-center" });
+  //   }
+  //   if(isDetailsSuccess){
+  //     setDestinationDetails(destination)
+  //   }
+  //   else{
+  //     dispatch(getDestinationById()) //id
+  //   }
+  // }, [dispatch, destination, isDetailsSuccess, isDetailsError, detailsErrorMessage])
+
+  // useEffect(() => {
+  //   return() => {
+  //     dispatch(resetDestinationDetails())
+  //   }
+  // }, [dispatch])
+
   return (
     <div>
       <Container className='py-3'>
         <Row className='my-2'>
-          <h3 className='text-center'>Explore Beautiful (Location Name)</h3>
+          <h3 className='text-center'>Explore Beautiful (Place Name)</h3>
         </Row>
         <Row className="pt-3">
           <Col lg={4} sm={12} md={4}>
@@ -47,7 +80,7 @@ const DestinationDetails = () => {
           <Col lg={8} sm={12} md={8}>
             <Card>
               <ListGroup variant="flush">
-                <ListGroup.Item>Place Name : Bolbo na</ListGroup.Item>
+                <ListGroup.Item>Place Name : (Name)</ListGroup.Item>
                 <ListGroup.Item>Division Name : </ListGroup.Item>
                 <ListGroup.Item>District Name : </ListGroup.Item>
               </ListGroup>
