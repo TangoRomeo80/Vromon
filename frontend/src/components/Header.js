@@ -10,8 +10,10 @@ import {
   FaSignOutAlt,
   FaSignInAlt,
   FaTag,
+  FaRoute,
 } from 'react-icons/fa'
 import { GoDashboard } from 'react-icons/go'
+import { MdOutlineSpaceDashboard } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../features/auth/authSlice'
 
@@ -63,30 +65,31 @@ const Header = () => {
                   )}
                   {userInfo.userType === 'businessowner' && (
                     <>
-                      {/* <LinkContainer to='/destinations'>
-                        <Nav.Link>
-                          <FaMapMarkerAlt className='me-1' />
-                          Destinations
-                        </Nav.Link>
-                      </LinkContainer>
-                      <LinkContainer to='/transports'>
-                        <Nav.Link>
-                          <FaCar />/<FaPlane className='me-1' />
-                          Transport
-                        </Nav.Link>
-                      </LinkContainer>
-
-                      <LinkContainer to='/packages'>
-                        <Nav.Link>
-                          <FaUmbrellaBeach className='me-1' />
-                          Holiday Packages
-                        </Nav.Link>
-                      </LinkContainer> */}
-
                       <LinkContainer to='/businessDash'>
                         <Nav.Link>
-                          <FaUmbrellaBeach className='me-1' />
+                          <MdOutlineSpaceDashboard className='me-1' />
                           Dashboard
+                        </Nav.Link>
+                      </LinkContainer>
+
+                      <LinkContainer to='/serviceList'>
+                        <Nav.Link>
+                          <FaRoute className='me-1' />
+                          My Services
+                        </Nav.Link>
+                      </LinkContainer>
+
+                      <LinkContainer to='/bookingRequestList'>
+                        <Nav.Link>
+                          <FaTag className='me-1' />
+                          Booking Requests
+                        </Nav.Link>
+                      </LinkContainer>
+
+                      <LinkContainer to='/businessOwnerAnalytics'>
+                        <Nav.Link>
+                          <GoDashboard className='me-1' />
+                          Analytics
                         </Nav.Link>
                       </LinkContainer>
                     </>

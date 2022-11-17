@@ -25,6 +25,8 @@ import TouristBookingScreen from './screens/TouristBookingScreen'
 import ServiceListScreen from './screens/ServiceListScreen'
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen'
 import BusinessOwnerDashoard from './screens/BusinessOwnerDashoard'
+import BookingRequestsScreen from './screens/BookingRequestsScreen'
+import BusinessOwnerAnalyticsScreen from './screens/BusinessOwnerAnalyticsScreen'
 
 const App = () => {
   return (
@@ -60,7 +62,12 @@ const App = () => {
                 path='/businessOwnerInfo'
                 element={<BusinessOwnerInfoScreen />}
               />
-              <Route path='/serviceList' element={<ServiceListScreen />}/>
+              <Route
+                path='/businessOwnerAnalytics'
+                element={<BusinessOwnerAnalyticsScreen />}
+              />
+              <Route path='/serviceList' element={<ServiceListScreen />} />
+              <Route path='/bookingRequestList' element={<BookingRequestsScreen />}/>
               <Route path='/test' element={<TestScreen />} />
               <Route path='/*' element={<ErrorScreen />} />
 
