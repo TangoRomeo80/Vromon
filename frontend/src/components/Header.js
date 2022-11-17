@@ -1,6 +1,6 @@
-import React from "react";
-import { LinkContainer } from "react-router-bootstrap";
-import { Navbar, Nav, Container, NavDropdown, Button } from "react-bootstrap";
+import React from 'react'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Navbar, Nav, Container, NavDropdown, Button } from 'react-bootstrap'
 import {
   FaMapMarkerAlt,
   FaCar,
@@ -10,106 +10,106 @@ import {
   FaSignOutAlt,
   FaSignInAlt,
   FaTag,
-} from "react-icons/fa";
-import { GoDashboard } from "react-icons/go";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../features/auth/authSlice";
+} from 'react-icons/fa'
+import { GoDashboard } from 'react-icons/go'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../features/auth/authSlice'
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.auth)
 
   const logoutHandler = () => {
-    dispatch(logout());
-  };
+    dispatch(logout())
+  }
 
   return (
-    <header className="fixed-top">
-      <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
+    <header className='fixed-top'>
+      <Navbar bg='primary' variant='dark' expand='lg' collapseOnSelect>
         <Container>
-          <LinkContainer to="/">
+          <LinkContainer to='/'>
             <Navbar.Brand>
-              <img style={{ maxWidth: "150px" }} src="/Nav/logp.png" />
+              <img style={{ maxWidth: '150px' }} src='/Nav/logp.png' />
             </Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto align-items-center pt-2 pb-2">
+          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+          <Navbar.Collapse id='responsive-navbar-nav'>
+            <Nav className='me-auto align-items-center pt-2 pb-2'>
               {userInfo ? (
                 <>
-                  {userInfo.userType === "tourist" && (
+                  {userInfo.userType === 'tourist' && (
                     <>
-                      <LinkContainer to="/destinations">
+                      <LinkContainer to='/destinations'>
                         <Nav.Link>
-                          <FaMapMarkerAlt className="me-1" />
+                          <FaMapMarkerAlt className='me-1' />
                           Destinations
                         </Nav.Link>
                       </LinkContainer>
-                      <LinkContainer to="/transports">
+                      <LinkContainer to='/transports'>
                         <Nav.Link>
-                          <FaCar />/<FaPlane className="me-1" />
+                          <FaCar />/<FaPlane className='me-1' />
                           Transport
                         </Nav.Link>
                       </LinkContainer>
 
-                      <LinkContainer to="/packages">
+                      <LinkContainer to='/packages'>
                         <Nav.Link>
-                          <FaUmbrellaBeach className="me-1" />
+                          <FaUmbrellaBeach className='me-1' />
                           Holiday Packages
                         </Nav.Link>
                       </LinkContainer>
                     </>
                   )}
-                  {userInfo.userType === "businessowner" && (
+                  {userInfo.userType === 'businessowner' && (
                     <>
-                    <LinkContainer to="/destinations">
-                      <Nav.Link>
-                        <FaMapMarkerAlt className="me-1" />
-                        Destinations
-                      </Nav.Link>
-                    </LinkContainer>
-                    <LinkContainer to="/transports">
-                      <Nav.Link>
-                        <FaCar />/<FaPlane className="me-1" />
-                        Transport
-                      </Nav.Link>
-                    </LinkContainer>
+                      {/* <LinkContainer to='/destinations'>
+                        <Nav.Link>
+                          <FaMapMarkerAlt className='me-1' />
+                          Destinations
+                        </Nav.Link>
+                      </LinkContainer>
+                      <LinkContainer to='/transports'>
+                        <Nav.Link>
+                          <FaCar />/<FaPlane className='me-1' />
+                          Transport
+                        </Nav.Link>
+                      </LinkContainer>
 
-                    <LinkContainer to="/packages">
-                      <Nav.Link>
-                        <FaUmbrellaBeach className="me-1" />
-                        Holiday Packages
-                      </Nav.Link>
-                    </LinkContainer>
+                      <LinkContainer to='/packages'>
+                        <Nav.Link>
+                          <FaUmbrellaBeach className='me-1' />
+                          Holiday Packages
+                        </Nav.Link>
+                      </LinkContainer> */}
 
-                    <LinkContainer to="/businessDash">
-                      <Nav.Link>
-                        <FaUmbrellaBeach className="me-1" />
-                        Dashboard
-                      </Nav.Link>
-                    </LinkContainer>
-                  </>
+                      <LinkContainer to='/businessDash'>
+                        <Nav.Link>
+                          <FaUmbrellaBeach className='me-1' />
+                          Dashboard
+                        </Nav.Link>
+                      </LinkContainer>
+                    </>
                   )}
                 </>
               ) : (
                 <>
-                  <LinkContainer to="/destinations">
+                  <LinkContainer to='/destinations'>
                     <Nav.Link>
-                      <FaMapMarkerAlt className="me-1" />
+                      <FaMapMarkerAlt className='me-1' />
                       Destinations
                     </Nav.Link>
                   </LinkContainer>
-                  <LinkContainer to="/transports">
+                  <LinkContainer to='/transports'>
                     <Nav.Link>
-                      <FaCar />/<FaPlane className="me-1" />
+                      <FaCar />/<FaPlane className='me-1' />
                       Transport
                     </Nav.Link>
                   </LinkContainer>
 
-                  <LinkContainer to="/packages">
+                  <LinkContainer to='/packages'>
                     <Nav.Link>
-                      <FaUmbrellaBeach className="me-1" />
+                      <FaUmbrellaBeach className='me-1' />
                       Holiday Packages
                     </Nav.Link>
                   </LinkContainer>
@@ -117,41 +117,41 @@ const Header = () => {
               )}
             </Nav>
 
-            <Nav className="align-items-center ms-auto py-2">
+            <Nav className='align-items-center ms-auto py-2'>
               {userInfo ? (
                 <NavDropdown title={userInfo.userName}>
                   <NavDropdown.Item>
-                    <LinkContainer to="/profile" className="px-0">
-                      <Nav.Link className="text-dark">
-                        <FaUserCircle className="me-2" />
+                    <LinkContainer to='/profile' className='px-0'>
+                      <Nav.Link className='text-dark'>
+                        <FaUserCircle className='me-2' />
                         Profile
                       </Nav.Link>
                     </LinkContainer>
                   </NavDropdown.Item>
-                  {userInfo.userType === "tourist" && (
+                  {userInfo.userType === 'tourist' && (
                     <NavDropdown.Item>
-                      <LinkContainer to="/touristBookings" className="px-0">
-                        <Nav.Link className="text-dark">
-                          <FaTag className="me-2" />
+                      <LinkContainer to='/touristBookings' className='px-0'>
+                        <Nav.Link className='text-dark'>
+                          <FaTag className='me-2' />
                           My Bookings
                         </Nav.Link>
                       </LinkContainer>
                     </NavDropdown.Item>
                   )}
                   <NavDropdown.Item onClick={logoutHandler}>
-                    <LinkContainer to="#" className="px-0">
-                      <Nav.Link className="text-dark">
-                        <FaSignOutAlt className="me-2" />
+                    <LinkContainer to='#' className='px-0'>
+                      <Nav.Link className='text-dark'>
+                        <FaSignOutAlt className='me-2' />
                         Sign out
                       </Nav.Link>
                     </LinkContainer>
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <LinkContainer to="/login">
-                  <Nav.Link className="px-0 py-0">
-                    <Button variant="blue">
-                      <FaSignInAlt className="me-2 mb-1" />
+                <LinkContainer to='/login'>
+                  <Nav.Link className='px-0 py-0'>
+                    <Button variant='blue'>
+                      <FaSignInAlt className='me-2 mb-1' />
                       Sign In
                     </Button>
                   </Nav.Link>
@@ -162,7 +162,7 @@ const Header = () => {
         </Container>
       </Navbar>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

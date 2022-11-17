@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { MdLocationOn } from "react-icons/md";
 
-const BusinessListScreen = () => {
+const ServiceListScreen = () => {
   return (
     <Container className="pt-5">
       <Form>
@@ -113,4 +113,4 @@ const BusinessListScreen = () => {
   );
 };
 
-export default BusinessListScreen;
+export default ServiceListScreen;
