@@ -61,6 +61,13 @@ const Header = () => {
                           Holiday Packages
                         </Nav.Link>
                       </LinkContainer>
+
+                      <LinkContainer to='/touristBookings'>
+                        <Nav.Link>
+                          <FaTag className='me-1' />
+                          My Bookings
+                        </Nav.Link>
+                      </LinkContainer>
                     </>
                   )}
                   {userInfo.userType === 'businessowner' && (
@@ -89,7 +96,45 @@ const Header = () => {
                       <LinkContainer to='/businessOwnerAnalytics'>
                         <Nav.Link>
                           <GoDashboard className='me-1' />
-                          Analytics
+                          My Analytics
+                        </Nav.Link>
+                      </LinkContainer>
+                    </>
+                  )}
+                  {userInfo.userType === 'admin' && (
+                    <>
+                      <LinkContainer to='/adminDash'>
+                        <Nav.Link>
+                          <MdOutlineSpaceDashboard className='me-1' />
+                          Dashboard
+                        </Nav.Link>
+                      </LinkContainer>
+
+                      <LinkContainer to='/serviceList'>
+                        <Nav.Link>
+                          <FaMapMarkerAlt className='me-1' />
+                          Destinations
+                        </Nav.Link>
+                      </LinkContainer>
+
+                      <LinkContainer to='/serviceList'>
+                        <Nav.Link>
+                          <FaRoute className='me-1' />
+                          Services
+                        </Nav.Link>
+                      </LinkContainer>
+
+                      <LinkContainer to='/bookingRequestList'>
+                        <Nav.Link>
+                          <FaUserCircle className='me-1' />
+                          Users
+                        </Nav.Link>
+                      </LinkContainer>
+
+                      <LinkContainer to='/businessOwnerAnalytics'>
+                        <Nav.Link>
+                          <FaTag className='me-1' />
+                          Bookings
                         </Nav.Link>
                       </LinkContainer>
                     </>

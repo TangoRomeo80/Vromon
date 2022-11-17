@@ -38,7 +38,12 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (userInfo) {
-      redirect = userInfo.userType === 'businessowner' ? '/businessDash' : '/'
+      redirect =
+        userInfo.userType === 'businessowner'
+          ? '/businessDash'
+          : userInfo.userType === 'admin'
+          ? '/adminDash'
+          : '/'
       navigate(redirect)
     }
     if (isSuccess) {
