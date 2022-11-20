@@ -53,7 +53,7 @@ const DestinationScreen = () => {
         <Card className='mb-3 pt-5 bg-light shadow' >
           <Row>
             <Card.Text as='h2' className='font-weight-bolder text-center'>
-              Most Popular Destinations
+              Search Destinations
             </Card.Text>
           </Row>
           <Row className='my-5 mx-3'>
