@@ -49,7 +49,7 @@ const PopularDestinations = () => {
         <Row className="my-4">
           {destinations.map((destination, idx) => (
             <Col xs={12} md={(idx === 0) ? 12 : 3} lg={(idx === 0)? 12: 3}>
-              <LinkContainer to="/destinationDetails">
+              <LinkContainer to={`/destinationDetails/${destination._id}`}>
                 <Card key={destination._id} className='mb-2'>
                   <Card.Img
                     cascade

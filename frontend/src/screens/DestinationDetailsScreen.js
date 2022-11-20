@@ -1,44 +1,84 @@
-import React, { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Row, Col, Container, Card, Form } from "react-bootstrap";
-import ListGroup from "react-bootstrap/ListGroup";
-import Carousel from "react-bootstrap/Carousel";
-import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
+import React, { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { Row, Col, Container, Card, Form } from 'react-bootstrap'
+import ListGroup from 'react-bootstrap/ListGroup'
+import Carousel from 'react-bootstrap/Carousel'
+import { LinkContainer } from 'react-router-bootstrap'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  getDestinationById,
+  resetDestinationDetails,
+} from '../features/destination/destinationSlice'
 
 const DestinationDetails = () => {
+  const dispatch = useDispatch()
+  const params = useParams()
+
+  const [destinationDetails, setDestinationDetails] = useState()
+
+  const {
+    destination,
+    isDetailsLoading,
+    isDetailsError,
+    isDetailsSuccess,
+    detailsErrorMessage,
+  } = useSelector((state) => state.destination)
+
+  useEffect(() => {
+    if (isDetailsError) {
+      toast.error(detailsErrorMessage, { position: 'top-center' })
+    }
+    if (isDetailsSuccess) {
+      setDestinationDetails(destination)
+    } else {
+      dispatch(getDestinationById(params.id)) //id
+    }
+  }, [
+    dispatch,
+    destination,
+    isDetailsSuccess,
+    isDetailsError,
+    detailsErrorMessage,
+  ])
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetDestinationDetails())
+    }
+  }, [dispatch])
+
   return (
     <div>
       <Container className='py-3'>
         <Row className='my-2'>
-          <h3 className='text-center'>Explore Beautiful (Location Name)</h3>
+          <h3 className='text-center'>Explore Beautiful</h3>
         </Row>
-        <Row className="pt-3">
+        <Row className='pt-3'>
           <Col lg={4} sm={12} md={4}>
             <Carousel>
               <Carousel.Item>
                 <img
-                  className="d-block w-100"
-                  src="/LightningDeals/test.jpg"
-                  alt="First slide"
+                  className='d-block w-100'
+                  src='/LightningDeals/test.jpg'
+                  alt='First slide'
                 />
               </Carousel.Item>
               <Carousel.Item>
                 <img
-                  className="d-block w-100"
-                  src="/LightningDeals/test.jpg"
-                  alt="Second slide"
+                  className='d-block w-100'
+                  src='/LightningDeals/test.jpg'
+                  alt='Second slide'
                 />
               </Carousel.Item>
               <Carousel.Item>
                 <img
-                  className="d-block w-100"
-                  src="/LightningDeals/test.jpg"
-                  alt="Third slide"
+                  className='d-block w-100'
+                  src='/LightningDeals/test.jpg'
+                  alt='Third slide'
                 />
               </Carousel.Item>
             </Carousel>
@@ -46,17 +86,19 @@ const DestinationDetails = () => {
 
           <Col lg={8} sm={12} md={8}>
             <Card>
-              <ListGroup variant="flush">
-                <ListGroup.Item>Place Name : Bolbo na</ListGroup.Item>
+              <ListGroup variant='flush'>
+                <ListGroup.Item>Place Name : (Name)</ListGroup.Item>
                 <ListGroup.Item>Division Name : </ListGroup.Item>
                 <ListGroup.Item>District Name : </ListGroup.Item>
               </ListGroup>
             </Card>
           </Col>
         </Row>
-        <Row className="pt-3">
+        <Row className='pt-3'>
           <Card>
-            <Card.Header as='h3' className='text-center'>About This Place</Card.Header>
+            <Card.Header as='h3' className='text-center'>
+              About This Place
+            </Card.Header>
             <Card.Body>
               <Card.Text>
                 Contrary to popular belief, Lorem Ipsum is not simply random
@@ -78,7 +120,7 @@ const DestinationDetails = () => {
         </Row>
       </Container>
     </div>
-  );
-};
+  )
+}
 
-export default DestinationDetails;
+export default DestinationDetails

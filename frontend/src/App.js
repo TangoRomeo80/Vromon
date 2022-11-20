@@ -22,9 +22,15 @@ import StaysSearchScreen from './screens/StaysSearchScreen'
 import TransportSearchScreen from './screens/TransportSearchScreen'
 import RegistrationScreen from './screens/RegistrationScreen'
 import TouristBookingScreen from './screens/TouristBookingScreen'
-import BusinessListScreen from './screens/BusinessListScreen'
+import ServiceListScreen from './screens/ServiceListScreen'
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen'
 import BusinessOwnerDashoard from './screens/BusinessOwnerDashoard'
+import BookingRequestsScreen from './screens/BookingRequestsScreen'
+import BusinessOwnerAnalyticsScreen from './screens/BusinessOwnerAnalyticsScreen'
+import AdminDashboard from './screens/AdminDashboard'
+import AdminUserListScreen from './screens/AdminUserListScreen'
+import AdminServiceListScreen from './screens/AdminServiceListScreen'
+import AdminDestinationListScreen from './screens/AdminDestinationListScreen'
 
 const App = () => {
   return (
@@ -37,16 +43,22 @@ const App = () => {
               <Route path='/' element={<HomeScreen />} />
               <Route path='/login' element={<LoginScreen />} />
               <Route path='/registration' element={<RegistrationScreen />} />
-              <Route path='/forgotPassword/:token' element={<ForgotPasswordScreen />} />
+              <Route
+                path='/forgotPassword/:token'
+                element={<ForgotPasswordScreen />}
+              />
               <Route path='/newUser' element={<NewUserScreen />} />
               <Route path='/transports' element={<TransportScreen />} />
               <Route path='/destinations' element={<DestinationScreen />} />
               <Route path='/packages' element={<HolidayPackagesScreen />} />
               <Route path='/profile' element={<ProfileScreen />} />
               <Route path='/tourSearch' element={<GuidedTourSearchScreen />} />
-              <Route path='/myBookings' element={<TouristBookingScreen />}/>
-              <Route path='/businessDash' element={<BusinessOwnerDashoard/>}/>
-              <Route path='/destinationDetails' element={<DestinationDetailsScreen />} />
+              <Route path='/myBookings' element={<TouristBookingScreen />} />
+              <Route
+                path='/destinationDetails/:id'
+                element={<DestinationDetailsScreen />}
+              />
+              <Route path='/businessDash' element={<BusinessOwnerDashoard />} />
               <Route
                 path='/destinationSearch'
                 element={<DestinationSearchScreen />}
@@ -60,7 +72,19 @@ const App = () => {
                 path='/businessOwnerInfo'
                 element={<BusinessOwnerInfoScreen />}
               />
-              <Route path='/businessList' element={<BusinessListScreen />}/>
+              <Route
+                path='/businessOwnerAnalytics'
+                element={<BusinessOwnerAnalyticsScreen />}
+              />
+              <Route path='/adminDash' element={<AdminDashboard />} />
+              <Route path='/adminUserList' element={<AdminUserListScreen />} />
+              <Route path='/adminServiceList' element={<AdminServiceListScreen />} />
+              <Route path='/adminDestinationList' element={<AdminDestinationListScreen />} />
+              <Route path='/serviceList' element={<ServiceListScreen />} />
+              <Route
+                path='/bookingRequestList'
+                element={<BookingRequestsScreen />}
+              />
               <Route path='/test' element={<TestScreen />} />
               <Route path='/*' element={<ErrorScreen />} />
 

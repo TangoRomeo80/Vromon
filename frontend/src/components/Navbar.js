@@ -13,6 +13,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom'
 import { getAuthedUser, resetAuth } from '../features/auth/authSlice'
 import Moment from 'moment'
 import { Link } from 'react-router-dom'
+import districts from '../staticData/districts'
 
 const SearchStays = () => {
   const [checkinDate, setCheckinDate] = useState('')
@@ -255,6 +256,7 @@ const SearchTransports = () => {
 const SearchDestinations = () => {
   const [searchDistrict, setSearchDistrict] = useState('')
   const [searchDivision, setSearchDivision] = useState('')
+  console.log(districts.length)
 
   return (
     <div>
