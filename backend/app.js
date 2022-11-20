@@ -2,6 +2,8 @@
   This file contains all the express functionalities
   and global middlewares.
 */
+import path from 'path' //import path for folder locationing
+
 import dotenv from 'dotenv' //import dotenv
 dotenv.config() //load the .env file
 
@@ -28,6 +30,7 @@ import userRouter from './routes/userRoutes.js' //import user routes
 import destinationRouter from './routes/destinationRoutes.js' //import destination routes
 import businessRouter from './routes/businessRoutes.js'
 import bookingRouter from './routes/bookingRoutes.js'
+import uploadRouter from './routes/uploadRoutes.js'
 
 const app = express() //create an instance of express
 
@@ -57,6 +60,10 @@ app.use('/api/users', userRouter) //use user routes
 app.use('/api/destinations', destinationRouter) //destination routes
 app.use('/api/businesses', businessRouter) //use businesses routes
 app.use('/api/bookings', bookingRouter) //use booking routes
+app.use('/api/upload', uploadRouter)
+
+const __dirname = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 //route for the root path
 app.get('/', (req, res) => {
