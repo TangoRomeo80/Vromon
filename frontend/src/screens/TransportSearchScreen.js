@@ -62,7 +62,7 @@ const TransportSearchScreen = () => {
           </Row>
 
           <Row className="my-4">
-            <Card style={{ border: "1px solid black" }}>
+            <Card>
               <Card.Header as="h5">Schedule</Card.Header>
 
               <Card.Text className="mt-2">Departure Time</Card.Text>
@@ -82,7 +82,7 @@ const TransportSearchScreen = () => {
           </Row>
 
           <Row>
-            <Card style={{ border: "1px solid black" }}>
+            <Card>
               <Card.Header as="h5">Transport Services</Card.Header>
 
               <Form.Group controlId="checkTransport">
