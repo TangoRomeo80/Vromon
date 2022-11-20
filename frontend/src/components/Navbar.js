@@ -7,12 +7,14 @@ import {
   Button,
   Form,
   InputGroup,
+  ListGroup,
 } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { getAuthedUser, resetAuth } from '../features/auth/authSlice'
 import Moment from 'moment'
 import { Link } from 'react-router-dom'
+import districts from '../staticData/districts'
 
 const SearchStays = () => {
   const [checkinDate, setCheckinDate] = useState('')
@@ -255,6 +257,7 @@ const SearchTransports = () => {
 const SearchDestinations = () => {
   const [searchDistrict, setSearchDistrict] = useState('')
   const [searchDivision, setSearchDivision] = useState('')
+  const [searchSelected, setSearchSelected] = useState(false)
 
   return (
     <div>
@@ -298,9 +301,38 @@ const SearchDestinations = () => {
                 type='text'
                 placeholder='Enter District Name'
                 value={searchDistrict}
-                onChange={(e) => setSearchDistrict(e.target.value)}
+                onChange={(e) => {
+                  setSearchDistrict(e.target.value)
+                  setSearchSelected(false)
+                }}
               ></Form.Control>
             </Form.Group>
+            {searchDistrict && !searchSelected && (
+              <ListGroup
+                style={{
+                  position: 'absolute',
+                  zIndex: '9999',
+                }}
+              >
+                {districts
+                  .filter((district) =>
+                    district
+                      .toLowerCase()
+                      .startsWith(searchDistrict.toLowerCase())
+                  )
+                  .map((district, index) => (
+                    <ListGroup.Item
+                      key={index}
+                      onClick={(e) => {
+                        setSearchDistrict(e.target.innerText)
+                        setSearchSelected(true)
+                      }}
+                    >
+                      {district}
+                    </ListGroup.Item>
+                  ))}
+              </ListGroup>
+            )}
           </Col>
         </Row>
       </Card>
