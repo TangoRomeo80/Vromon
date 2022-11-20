@@ -62,7 +62,7 @@ const Header = () => {
                         </Nav.Link>
                       </LinkContainer>
 
-                      <LinkContainer to='/touristBookings'>
+                      <LinkContainer to='/myBookings'>
                         <Nav.Link>
                           <FaTag className='me-1' />
                           My Bookings
@@ -178,7 +178,7 @@ const Header = () => {
                   </NavDropdown.Item>
                   {userInfo.userType === 'tourist' && (
                     <NavDropdown.Item>
-                      <LinkContainer to='/touristBookings' className='px-0'>
+                      <LinkContainer to='/myBookings' className='px-0'>
                         <Nav.Link className='text-dark'>
                           <FaTag className='me-2' />
                           My Bookings
