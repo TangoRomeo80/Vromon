@@ -30,6 +30,178 @@ const reviewSchema = new mongoose.Schema(
   }
 )
 
+//create transport Schema
+const transportSchema = new mongoose.Schema({
+  transportType: {
+    type: String,
+    default: 'car',
+    enum: {
+      values: ['bus', 'car'],
+      message: 'Transport type must be car, bus, train or plane',
+    },
+  },
+  from: {
+    type: String,
+    default: '',
+    required: [true, 'Transport must have a from location'],
+  },
+  to: {
+    type: String,
+    default: '',
+    required: [true, 'Transport must have a to location'],
+  },
+  departureDate: {
+    type: Date,
+    default: Date.now(),
+    required: [
+      function () {
+        return this.transportType === 'bus'
+      },
+      'There needs to be a departureDate for bus',
+    ],
+  },
+  departureTime: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'bus'
+      },
+      'There needs to be a departureTime for bus',
+    ],
+  },
+  arrivalDate: {
+    type: Date,
+    default: Date.now(),
+    required: [
+      function () {
+        return this.transportType === 'bus'
+      },
+      'There needs to be a arrivalDate for bus',
+    ],
+  },
+  arrivalTime: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'bus'
+      },
+      'There needs to be a arrivalTime for bus',
+    ],
+  },
+  busProvider: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'bus'
+      },
+      'There needs to be a busProvider for bus',
+    ],
+  },
+  rentDuration: {
+    type: Number,
+    default: 0,
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a rentDuration for car',
+    ],
+  },
+  rentStartDate: {
+    type: Date,
+    default: Date.now(),
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a rentStartDate for car',
+    ],
+  },
+  rentEndDate: {
+    type: Date,
+    default: Date.now(),
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a rentEndDate for car',
+    ],
+  },
+  rentStartTime: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a rentStartTime for car',
+    ],
+  },
+  rentEndTime: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a rentEndTime for car',
+    ],
+  },
+  driverName: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a driverName for car',
+    ],
+  },
+  driverContact: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a driverContact for car',
+    ],
+  },
+  driverLicense: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a driverLicense for car',
+    ],
+  },
+  carRegistration: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a carRegistration for car',
+    ],
+  },
+  carModel: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a carModel for car',
+    ],
+  }, 
+})
+
 //create a services schema
 const serviceSchema = new mongoose.Schema(
   {
@@ -100,6 +272,19 @@ const serviceSchema = new mongoose.Schema(
       },
     },
 
+    transportInfo: {
+      type: transportSchema,
+      default: function () {
+        return this.serviceType === 'transportation' ? {} : undefined
+      },
+      required: [
+        function () {
+          return this.serviceType === 'transportation'
+        },
+        'There needs to be a transportInfo for transportation',
+      ],
+    },
+
     price: {
       type: Number,
       required: [true, 'service price is required'],
@@ -167,7 +352,6 @@ serviceSchema.pre('findOneAndUpdate', function (next) {
   }
   next()
 })
-
 
 //populating schema for specific id request
 serviceSchema.pre(/^find/, function (next) {
