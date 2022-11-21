@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Row, Col, Container, Card, Form, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { IoCloudyNight, IoDiamond } from "react-icons/io5";
-import { FaCloudSun, FaCoins } from "react-icons/fa";
+import { FaCloudSun, FaCoins, FaBusAlt } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import { BsSunsetFill } from "react-icons/bs";
 import { GiLightningHelix } from "react-icons/gi";
@@ -143,20 +143,63 @@ const TransportSearchScreen = () => {
             </Col>
           </Row>
 
-          <Card>
-            <Row className='d-flex'>
+          <Card style={{border: '1px solid black'}}>
+            <Row>
               <Col lg={4} md={4} sm={12}>
-                
-                  <Card.Body className='d-flex'>
+                <Card.Body className="d-flex">
+                  <Col lg={2} md={2} sm={2}>
                     <Card.Img
                       src="https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/BG.png"
                       alt=""
-                      style={{ height: "26px", width: "26px" }}
+                      style={{ height: "45px", width: "45px" }}
                     />
-                    <Card.Title as='h5'>(From) & (Time)</Card.Title>
+                  </Col>
+                  <Col lg={10} md={10} sm={10}>
+                    <Card.Title>(From) & (Time)</Card.Title>
                     <Card.Text>Date</Card.Text>
-                  </Card.Body>
-                
+                  </Col>
+                </Card.Body>
+              </Col>
+
+              <Col lg={4} md={4} sm={12}>
+                <Card.Body className="d-flex">
+                  <Col lg={2} md={2} sm={2}>
+                    <FaBusAlt style={{ height: "45px", width: "30px" }} />
+                  </Col>
+                  <Col lg={10} md={10} sm={10}>
+                    <Card.Title>(To) & (Time)</Card.Title>
+                    <Card.Text>Date</Card.Text>
+                  </Col>
+                </Card.Body>
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={4} md={4} sm={12}>
+                <Card.Body className="d-flex">
+                  <Col lg={2} md={2} sm={2}>
+                    <Card.Img
+                      src="https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/BG.png"
+                      alt=""
+                      style={{ height: "45px", width: "45px" }}
+                    />
+                  </Col>
+                  <Col lg={10} md={10} sm={10}>
+                    <Card.Title>(From) & (Time)</Card.Title>
+                    <Card.Text>Date</Card.Text>
+                  </Col>
+                </Card.Body>
+              </Col>
+
+              <Col lg={4} md={4} sm={12}>
+                <Card.Body className="d-flex">
+                  <Col lg={2} md={2} sm={2}>
+                    <FaBusAlt style={{ height: "45px", width: "30px" }} />
+                  </Col>
+                  <Col lg={10} md={10} sm={10}>
+                    <Card.Title>(To) & (Time)</Card.Title>
+                    <Card.Text>Date</Card.Text>
+                  </Col>
+                </Card.Body>
               </Col>
             </Row>
           </Card>
