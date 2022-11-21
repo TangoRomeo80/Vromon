@@ -30,6 +30,90 @@ const reviewSchema = new mongoose.Schema(
   }
 )
 
+//create accomodation Schema
+const accomodationSchema = new mongoose.Schema({
+  address: {
+    house: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    street: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    area: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+    city: {
+      type: String,
+      default: '',
+      trim: true,
+    },
+  },
+  ownerContact: {
+    type: String,
+    default: '',
+    required: [true, 'Accomodation must have an owner contact'],
+    validate: {
+      validator: function (val) {
+        if (val !== '') {
+          return validator.isNumeric(val)
+        } else {
+          return true
+        }
+      },
+      message:
+        'Owner contact number can only have numeric values and country codes',
+    },
+  },
+  ownerName: {
+    type: String,
+    default: '',
+    required: [true, 'Accomodation must have an owner name'],
+    trim: true,
+  },
+  ownerNid: {
+    type: String,
+    required: [true, 'Accomodation must have an owner NID'],
+    default: '',
+    trim: true,
+    validate: {
+      validator: function (val) {
+        if (val === '') return true
+        return (val.length === 10 || val.length === 17) && validator.isNumeric
+      },
+      message: 'nid number needs to be of 10 or 17 digits',
+    },
+  },
+  rooms: {
+    type: Number,
+    default: 1,
+    min: 1,
+    max: 10,
+    required: [true, 'Accomodation must have a number of rooms'],
+  },
+  checkinDate: {
+    type: Date,
+    default: Date.now(),
+    required: [true, 'Accomodation must have a rent start date'],
+  },
+  checkoutDate: {
+    type: Date,
+    default: Date.now(),
+    required: [true, 'Accomodation must have a rent end date'],
+  },
+  maxGuests: {
+    type: Number,
+    default: 1,
+    min: 1,
+    max: 10,
+  },
+})
+
 //create transport Schema
 const transportSchema = new mongoose.Schema({
   transportType: {
@@ -169,6 +253,17 @@ const transportSchema = new mongoose.Schema({
       },
       'There needs to be a driverContact for car',
     ],
+    validate: {
+      validator: function (val) {
+        if (val !== '') {
+          return validator.isNumeric(val)
+        } else {
+          return true
+        }
+      },
+      message:
+        'Owner contact number can only have numeric values and country codes',
+    },
   },
   driverLicense: {
     type: String,
@@ -199,7 +294,7 @@ const transportSchema = new mongoose.Schema({
       },
       'There needs to be a carModel for car',
     ],
-  }, 
+  },
 })
 
 //create a services schema
@@ -282,6 +377,19 @@ const serviceSchema = new mongoose.Schema(
           return this.serviceType === 'transportation'
         },
         'There needs to be a transportInfo for transportation',
+      ],
+    },
+
+    accomodationInfo: {
+      type: accomodationSchema,
+      default: function () {
+        return this.serviceType === 'accomodation' ? {} : undefined
+      },
+      required: [
+        function () {
+          return this.serviceType === 'accomodation'
+        },
+        'There needs to be a accomodationInfo for accomodation',
       ],
     },
 

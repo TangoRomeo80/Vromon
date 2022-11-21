@@ -167,7 +167,7 @@ const touristSchema = new mongoose.Schema(
       validate: {
         validator: function (val) {
           if (val !== '') {
-            return validator.isNumeric //May need to change validator.isNumeric
+            return validator.isNumeric(val) //May need to change validator.isNumeric
           } else {
             return true
           }
