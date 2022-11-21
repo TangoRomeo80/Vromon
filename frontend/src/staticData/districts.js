@@ -8,7 +8,6 @@ const districts = [
     "Bhola",
     "Bogra",
     "Brahmanbaria",
-    "Chattogram",
     "Chandpur",
     "Chapainawabganj",
     "Chattogram",
