@@ -297,6 +297,74 @@ const transportSchema = new mongoose.Schema({
   },
 })
 
+//create tour Schema
+const tourSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    default: '',
+    required: [true, 'Tour must have a name'],
+  },
+  duration: {
+    type: Number,
+    required: [true, 'Tour must have a duration'],
+    min: 1,
+    max: 10,
+  },
+  maxGroupSize: {
+    type: Number,
+    required: [true, 'Tour must have a maximum group size'],
+  },
+  startLocation: {
+    type: String,
+    default: '',
+    required: [true, 'Tour must have a start location'],
+  },
+  locations: [
+    {
+      type: String,
+      default: '',
+      required: [true, 'Tour must have a location'],
+    },
+  ],
+  guideNames: [
+    {
+      type: String,
+      default: '',
+      required: [true, 'Tour must have a guide name'],
+    },
+  ],
+  leadGuideName: {
+    type: String,
+    default: '',
+    required: [true, 'Tour must have a lead guide name'],
+  },
+  leadGuideNid: {
+    type: String,
+    default: '',
+    required: [true, 'Tour must have a lead guide NID'],
+    trim: true,
+    validate: {
+      validator: function (val) {
+        if (val === '') return true
+        return (val.length === 10 || val.length === 17) && validator.isNumeric
+      },
+      message: 'nid number needs to be of 10 or 17 digits',
+    },
+  },
+  leadGuideContact: {
+    type: String,
+    default: '',
+    required: [true, 'Tour must have a lead guide contact'],
+    trim: true,
+    validate: {
+      validator: function (val) {
+        if (val === '') return true
+        return validator.isNumeric(val)
+      },
+    },
+  },
+})
+
 //create a services schema
 const serviceSchema = new mongoose.Schema(
   {
@@ -390,6 +458,19 @@ const serviceSchema = new mongoose.Schema(
           return this.serviceType === 'accomodation'
         },
         'There needs to be a accomodationInfo for accomodation',
+      ],
+    },
+
+    tourInfo: {
+      type: tourSchema,
+      default: function () {
+        return this.serviceType === 'tours' ? {} : undefined
+      },
+      required: [
+        function () {
+          return this.serviceType === 'tours'
+        },
+        'There needs to be a toursInfo for tours',
       ],
     },
 
