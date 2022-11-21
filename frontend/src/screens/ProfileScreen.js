@@ -176,27 +176,30 @@ const ProfileScreen = () => {
   }
 
   const uploadUserImageFileHandler = async (e) => {
-    // const file = e.target.files[0]
-    // const formData = new FormData()
-    // formData.append('image', file)
-    // setUploading(true)
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
 
-    // try {
-    //   const config = {
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data',
-    //     },
-    //   }
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
 
-    //   const { data } = await axios.post('/upload', formData, config)
+      const { data } = await axios.post(
+        `/api/upload${imageUrl ? `/${imageUrl.slice(8)}` : ''}`,
+        formData,
+        config
+      )
 
-    //   setImageUrl(data)
-    //   setUploading(false)
-    // } catch (error) {
-    //   console.error(error)
-    //   setUploading(false)
-    // }
-    alert('Image upload needs to be implemented')
+      setImageUrl(data)
+      setUploading(false)
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
   }
 
   const updateInfoHandler = () => {
