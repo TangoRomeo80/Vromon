@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Container, Card, Form, Button } from "react-bootstrap";
-import { IoCloudyNight } from "react-icons/io5";
-import { FaCloudSun } from "react-icons/fa";
+import { LinkContainer } from "react-router-bootstrap";
+import { IoCloudyNight, IoDiamond } from "react-icons/io5";
+import { FaCloudSun, FaCoins } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import { BsSunsetFill } from "react-icons/bs";
+import { GiLightningHelix } from "react-icons/gi";
 
 const TransportSearchScreen = () => {
   const [minPrice, setMinPrice] = useState("");
@@ -99,6 +101,65 @@ const TransportSearchScreen = () => {
               </Form.Group>
             </Card>
           </Row>
+        </Col>
+
+        {/* Right Column */}
+        <Col lg={9} md={9} sm={12}>
+          <Row className="my-2">
+            <h5>Available Transports (Number)</h5>
+          </Row>
+          <Row>
+            <Col lg={4} md={4} sm={12}>
+              <LinkContainer to="">
+                <Card>
+                  <Card.Body className="d-flex flex-row justify-content-center">
+                    <GiLightningHelix className="mt-1" /> &nbsp;&nbsp;
+                    <Card.Title>Fastest Transports</Card.Title>
+                  </Card.Body>
+                </Card>
+              </LinkContainer>
+            </Col>
+
+            <Col lg={4} md={4} sm={12}>
+              <LinkContainer to="">
+                <Card>
+                  <Card.Body className="d-flex flex-row justify-content-center">
+                    <IoDiamond className="mt-1" /> &nbsp;&nbsp;
+                    <Card.Title>Earliest Transports</Card.Title>
+                  </Card.Body>
+                </Card>
+              </LinkContainer>
+            </Col>
+
+            <Col lg={4} md={4} sm={12}>
+              <LinkContainer to="">
+                <Card>
+                  <Card.Body className="d-flex flex-row justify-content-center">
+                    <FaCoins className="mt-1" /> &nbsp;&nbsp;
+                    <Card.Title>Cheapest Transports</Card.Title>
+                  </Card.Body>
+                </Card>
+              </LinkContainer>
+            </Col>
+          </Row>
+
+          <Card>
+            <Row className='d-flex'>
+              <Col lg={4} md={4} sm={12}>
+                <Card>
+                  <Card.Body className='d-flex'>
+                    <Card.Img
+                      src="https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/BG.png"
+                      alt=""
+                      style={{ height: "26px", width: "26px" }}
+                    />
+                    <Card.Title as='h5'>(From) & (Time)</Card.Title>
+                    <Card.Text>Date</Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          </Card>
         </Col>
       </Row>
     </Container>
