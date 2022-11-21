@@ -70,7 +70,7 @@ const ProfileScreen = () => {
   const [uploading, setUploading] = useState('')
   const [changePasswordState, setChangePasswordState] = useState(false)
   const [serviceType, getServiceType] = useState('')
-  const [] = useState('')
+  
 
   useEffect(() => {
     if (!userInfo) {

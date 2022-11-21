@@ -146,7 +146,7 @@ const TransportSearchScreen = () => {
           <Card>
             <Row className='d-flex'>
               <Col lg={4} md={4} sm={12}>
-                <Card>
+                
                   <Card.Body className='d-flex'>
                     <Card.Img
                       src="https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/BG.png"
@@ -156,7 +156,7 @@ const TransportSearchScreen = () => {
                     <Card.Title as='h5'>(From) & (Time)</Card.Title>
                     <Card.Text>Date</Card.Text>
                   </Card.Body>
-                </Card>
+                
               </Col>
             </Row>
           </Card>
