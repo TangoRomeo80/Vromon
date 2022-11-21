@@ -272,6 +272,19 @@ const serviceSchema = new mongoose.Schema(
       },
     },
 
+    transportInfo: {
+      type: transportSchema,
+      default: function () {
+        return this.serviceType === 'transportation' ? {} : undefined
+      },
+      required: [
+        function () {
+          return this.serviceType === 'transportation'
+        },
+        'There needs to be a transportInfo for transportation',
+      ],
+    },
+
     price: {
       type: Number,
       required: [true, 'service price is required'],
