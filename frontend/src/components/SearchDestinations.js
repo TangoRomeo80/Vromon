@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 
 const SearchDestinations = () => {
-  const [searchDistrict, setSearchDistrict] = useState('')
-  const [searchDivision, setSearchDivision] = useState('')
-  const [searchSelected, setSearchSelected] = useState(false)
+  const [searchDistrict, setSearchDistrict] = useState('Dhaka')
+  const [searchDivision, setSearchDivision] = useState('Dhaka')
+  const [searchSelected, setSearchSelected] = useState(true)
 
   return (
     <div>
@@ -29,12 +29,12 @@ const SearchDestinations = () => {
                 value={searchDivision}
                 onChange={(e) => setSearchDivision(e.target.value)}
               >
-                <option disabled selected value=''>
-                  Select Division
+                <option disabled selected value='Dhaka'>
+                  Dhaka
                 </option>
                 <option value='Dhaka'>Dhaka</option>
-                <option value='Chittagong'>Chittagong</option>
-                <option value='Sylhet'>Sylhet</option>
+                <option value='Dhittagong'>Chittagong</option>
+                <option value='Dylhet'>Sylhet</option>
                 <option value='Rajshahi'>Rajshahi</option>
                 <option value='Khulna'>Khulna</option>
                 <option value='Barisal'>Barisal</option>
@@ -86,7 +86,7 @@ const SearchDestinations = () => {
           </Col>
         </Row>
         <Link
-          className='mb-3'
+          className='mb-3 mx-2 d-grid gap-3'
           to='destinationSearch'
           state={{
             searchDistrict,

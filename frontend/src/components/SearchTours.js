@@ -71,7 +71,7 @@ const SearchTours = () => {
       </Row>
 
       <Link
-        className='mb-3'
+        className='mb-3 mx-2 d-grid gap-3'
         to='tourSearch'
         state={{
           searchTourCity: searchTourCity,
