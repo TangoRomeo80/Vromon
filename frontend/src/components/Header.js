@@ -13,7 +13,7 @@ import {
   FaRoute,
 } from 'react-icons/fa'
 import { GoDashboard } from 'react-icons/go'
-import {BiLocationPlus} from 'react-icons/bi'
+import { BiLocationPlus } from 'react-icons/bi'
 import { MdOutlineSpaceDashboard } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../features/auth/authSlice'
@@ -70,7 +70,7 @@ const Header = () => {
                         </Nav.Link>
                       </LinkContainer>
 
-                      <LinkContainer to='#'>
+                      <LinkContainer to='/destinationCreate'>
                         <Nav.Link>
                           <BiLocationPlus className='me-1' />
                           Add a Destination
@@ -108,7 +108,7 @@ const Header = () => {
                         </Nav.Link>
                       </LinkContainer>
 
-                      <LinkContainer to='#'>
+                      <LinkContainer to='/destinationCreate'>
                         <Nav.Link>
                           <BiLocationPlus className='me-1' />
                           Add a Destination
