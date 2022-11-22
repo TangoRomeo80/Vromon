@@ -135,13 +135,13 @@ const Navbar = () => {
         </Card.Header>
         <Card.Body>
           {searchSelection === 'stays' ? (
-            <SearchStays loc={'nav'} />
+            <SearchStays loc='nav' />
           ) : searchSelection === 'destinations' ? (
-            <SearchDestinations loc={'nav'} />
+            <SearchDestinations loc='nav' />
           ) : searchSelection === 'tours' ? (
-            <SearchTours loc={'nav'} />
+            <SearchTours loc='nav' />
           ) : searchSelection === 'transports' ? (
-            <SearchTransports loc={'nav'} />
+            <SearchTransports loc='nav' />
           ) : null}
         </Card.Body>
       </Card>

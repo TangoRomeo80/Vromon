@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { Row, Col, Card, Form, ListGroup } from 'react-bootstrap'
+import { Row, Col, Card, Form, Button, ListGroup } from 'react-bootstrap'
 import districts from '../staticData/districts'
 import { useDispatch, useSelector } from 'react-redux'
-import { useSearchParams, useNavigate } from 'react-router-dom'
+import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 
-const SearchDestinations = ({ loc }) => {
-  const [searchDistrict, setSearchDistrict] = useState('')
-  const [searchDivision, setSearchDivision] = useState('')
-  const [searchSelected, setSearchSelected] = useState(false)
+const SearchDestinations = ({district, division}) => {
+  const [searchDistrict, setSearchDistrict] = useState(district ? district : '')
+  const [searchDivision, setSearchDivision] = useState(division ? division : '')
+  const [searchSelected, setSearchSelected] = useState(true)
 
   return (
     <div>
@@ -33,7 +33,7 @@ const SearchDestinations = ({ loc }) => {
                   Select Division
                 </option>
                 <option value='Dhaka'>Dhaka</option>
-                <option value='Chittagong'>Chittagong</option>
+                <option value='Chattogram'>Chattogram</option>
                 <option value='Sylhet'>Sylhet</option>
                 <option value='Rajshahi'>Rajshahi</option>
                 <option value='Khulna'>Khulna</option>
@@ -85,6 +85,12 @@ const SearchDestinations = ({ loc }) => {
             )}
           </Col>
         </Row>
+        <a
+          className='mb-3 mx-2 d-grid gap-3'
+          href={searchDistrict && searchDivision ? `/destinations?district=${searchDistrict}&division=${searchDivision}` : '/destinations'}
+        >
+          <Button>Search</Button>
+        </a>
       </Card>
     </div>
   )

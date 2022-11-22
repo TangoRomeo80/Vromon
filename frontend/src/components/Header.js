@@ -13,6 +13,7 @@ import {
   FaRoute,
 } from 'react-icons/fa'
 import { GoDashboard } from 'react-icons/go'
+import {BiLocationPlus} from 'react-icons/bi'
 import { MdOutlineSpaceDashboard } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../features/auth/authSlice'
@@ -50,7 +51,7 @@ const Header = () => {
                       </LinkContainer>
                       <LinkContainer to='/transports'>
                         <Nav.Link>
-                          <FaCar />/<FaPlane className='me-1' />
+                          <FaCar className='me-1' />
                           Transport
                         </Nav.Link>
                       </LinkContainer>
@@ -66,6 +67,13 @@ const Header = () => {
                         <Nav.Link>
                           <FaTag className='me-1' />
                           My Bookings
+                        </Nav.Link>
+                      </LinkContainer>
+
+                      <LinkContainer to='#'>
+                        <Nav.Link>
+                          <BiLocationPlus className='me-1' />
+                          Add a Destination
                         </Nav.Link>
                       </LinkContainer>
                     </>
@@ -97,6 +105,13 @@ const Header = () => {
                         <Nav.Link>
                           <GoDashboard className='me-1' />
                           My Analytics
+                        </Nav.Link>
+                      </LinkContainer>
+
+                      <LinkContainer to='#'>
+                        <Nav.Link>
+                          <BiLocationPlus className='me-1' />
+                          Add a Destination
                         </Nav.Link>
                       </LinkContainer>
                     </>
@@ -150,7 +165,7 @@ const Header = () => {
                   </LinkContainer>
                   <LinkContainer to='/transports'>
                     <Nav.Link>
-                      <FaCar />/<FaPlane className='me-1' />
+                      <FaCar className='me-1' />
                       Transport
                     </Nav.Link>
                   </LinkContainer>
