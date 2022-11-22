@@ -3,7 +3,7 @@ import { Row, Col, Card, Form, InputGroup } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 
-const SearchTransports = ({ loc }) => {
+const SearchTransports = () => {
   const [departFrom, setDepartFrom] = useState('')
   const [departTo, setDepartTo] = useState('')
   const [departOn, setDepartOn] = useState('')

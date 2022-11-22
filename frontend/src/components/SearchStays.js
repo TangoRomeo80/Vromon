@@ -3,7 +3,7 @@ import { Row, Col, Card, Form, InputGroup } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 
-const SearchStays = ({ loc }) => {
+const SearchStays = () => {
   const [checkinDate, setCheckinDate] = useState('')
   const [checkoutDate, setCheckoutDate] = useState('')
   const [guestCount, setGuestCount] = useState('')

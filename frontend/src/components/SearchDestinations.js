@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Row, Col, Card, Form, ListGroup } from 'react-bootstrap'
+import { Row, Col, Card, Form, Button, ListGroup } from 'react-bootstrap'
 import districts from '../staticData/districts'
 import { useDispatch, useSelector } from 'react-redux'
-import { useSearchParams, useNavigate } from 'react-router-dom'
+import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 
-const SearchDestinations = ({ loc }) => {
+const SearchDestinations = () => {
   const [searchDistrict, setSearchDistrict] = useState('')
   const [searchDivision, setSearchDivision] = useState('')
   const [searchSelected, setSearchSelected] = useState(false)
@@ -85,6 +85,16 @@ const SearchDestinations = ({ loc }) => {
             )}
           </Col>
         </Row>
+        <Link
+          className='mb-3'
+          to='destinationSearch'
+          state={{
+            searchDistrict,
+            searchDivision,
+          }}
+        >
+          <Button>Search</Button>
+        </Link>
       </Card>
     </div>
   )

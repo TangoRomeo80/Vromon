@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 
-const SearchTours = ({ loc }) => {
+const SearchTours = () => {
   const [searchTourCity, setSearchTourCity] = useState('')
   const [travelDate, setTravelDate] = useState('')
   const [travelerCount, setTravelerCount] = useState('')
@@ -79,7 +79,7 @@ const SearchTours = ({ loc }) => {
           travelerCount: travelerCount,
         }}
       >
-        <Button>Submit Search</Button>
+        <Button>Search</Button>
       </Link>
     </Card>
   )
