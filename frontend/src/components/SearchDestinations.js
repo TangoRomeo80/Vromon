@@ -4,9 +4,9 @@ import districts from '../staticData/districts'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 
-const SearchDestinations = () => {
-  const [searchDistrict, setSearchDistrict] = useState('')
-  const [searchDivision, setSearchDivision] = useState('')
+const SearchDestinations = ({district, division}) => {
+  const [searchDistrict, setSearchDistrict] = useState(district ? district : '')
+  const [searchDivision, setSearchDivision] = useState(division ? division : '')
   const [searchSelected, setSearchSelected] = useState(true)
 
   return (
@@ -33,7 +33,7 @@ const SearchDestinations = () => {
                   Select Division
                 </option>
                 <option value='Dhaka'>Dhaka</option>
-                <option value='Chittagong'>Chittagong</option>
+                <option value='Chattogram'>Chattogram</option>
                 <option value='Sylhet'>Sylhet</option>
                 <option value='Rajshahi'>Rajshahi</option>
                 <option value='Khulna'>Khulna</option>
