@@ -31,6 +31,7 @@ import AdminDashboard from './screens/AdminDashboard'
 import AdminUserListScreen from './screens/AdminUserListScreen'
 import AdminServiceListScreen from './screens/AdminServiceListScreen'
 import AdminDestinationListScreen from './screens/AdminDestinationListScreen'
+import DestinationCreateScreen from './screens/DestinationCreateScreen'
 
 const App = () => {
   return (
@@ -63,6 +64,7 @@ const App = () => {
                 path='/destinationSearch'
                 element={<DestinationSearchScreen />}
               />
+              <Route path='/destinationCreate' element={<DestinationCreateScreen />} />
               <Route path='/staysSearch' element={<StaysSearchScreen />} />
               <Route
                 path='/transportSearch'
