@@ -6,7 +6,7 @@ import { MdDateRange, MdLocationOn } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllServices } from '../features/service/serviceSlice'
 
-const GuidedTourSearchScreen = () => {
+const TourSearchScreen = () => {
   const dispatch = useDispatch()
   const location = useLocation()
 
@@ -203,4 +203,4 @@ const GuidedTourSearchScreen = () => {
   )
 }
 
-export default GuidedTourSearchScreen
+export default TourSearchScreen
