@@ -122,7 +122,7 @@ const DestinationSearchScreen = () => {
               <Row className='my-4'>
                 {allDestinations.map((destination) => (
                   <Col xs={12} md={3}>
-                    <LinkContainer to='/destinationDetails'>
+                    <LinkContainer to={`/destinationDetails/${destination._id}`}>
                       <Card key={destination._id} className='mb-2'>
                         <Card.Img
                           cascade
