@@ -8,7 +8,6 @@ import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
 import NewUserScreen from './screens/NewUserScreen'
 import TransportScreen from './screens/TransportScreen'
-import DestinationScreen from './screens/DestinationScreen'
 import HolidayPackagesScreen from './screens/HolidayPackagesScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import TourSearchScreen from './screens/TourSearchScreen'
@@ -50,7 +49,6 @@ const App = () => {
               />
               <Route path='/newUser' element={<NewUserScreen />} />
               <Route path='/transports' element={<TransportScreen />} />
-              <Route path='/destinations' element={<DestinationScreen />} />
               <Route path='/packages' element={<HolidayPackagesScreen />} />
               <Route path='/profile' element={<ProfileScreen />} />
               <Route path='/tourSearch' element={<TourSearchScreen />} />

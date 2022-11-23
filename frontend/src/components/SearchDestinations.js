@@ -4,7 +4,7 @@ import districts from '../staticData/districts'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 
-const SearchDestinations = ({district, division}) => {
+const SearchDestinations = ({ district, division }) => {
   const [searchDistrict, setSearchDistrict] = useState(district ? district : '')
   const [searchDivision, setSearchDivision] = useState(division ? division : '')
   const [searchSelected, setSearchSelected] = useState(true)
@@ -87,7 +87,11 @@ const SearchDestinations = ({district, division}) => {
         </Row>
         <a
           className='mb-3 mx-2 d-grid gap-3'
-          href={searchDistrict && searchDivision ? `/destinations?district=${searchDistrict}&division=${searchDivision}` : '/destinations'}
+          href={
+            searchDistrict && searchDivision
+              ? `/destinationSearch?district=${searchDistrict}&division=${searchDivision}`
+              : '/destinationSearch'
+          }
         >
           <Button>Search</Button>
         </a>

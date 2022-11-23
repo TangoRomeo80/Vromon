@@ -1,211 +1,152 @@
-import React, { useState, useEffect } from "react";
-import { Row, Col, Container, Card, Form } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { Row, Col, Container, Card, Button } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import { MdDateRange, MdLocationOn } from 'react-icons/md'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import {
+  getAllDestinations,
+  resetDestinationList,
+} from '../features/destination/destinationSlice'
+import SearchDestinations from '../components/SearchDestinations'
 
 const DestinationSearchScreen = () => {
-  const [budget, setBudget] = useState(0);
-  const [duration, setDuration] = useState("");
-  const [placeType, setPlaceType] = useState("");
-  
+  const dispatch = useDispatch()
+  const [searchParams] = useSearchParams()
+
+  const [allDestinations, setAllDestinations] = useState([])
+  const [divisionSearch, setDivisionSearch] = useState(
+    searchParams.get('division') || ''
+  )
+  const [districtSearch, setDistrictSearch] = useState(
+    searchParams.get('district') || ''
+  )
+  const [modifySearch, setModifySearch] = useState(false)
+
+  const {
+    destinations,
+    isListLoading,
+    isListSuccess,
+    isListError,
+    listErrorMessage,
+  } = useSelector((state) => state.destination)
+
+  useEffect(() => {
+    if (isListError) {
+      toast.error(listErrorMessage, { position: 'top-center' })
+    }
+    if (isListSuccess) {
+      const filteredDestinations = destinations
+        .filter((destination) => {
+          if (divisionSearch === '') {
+            return destination
+          } else if (
+            destination.division
+              .toLowerCase()
+              .includes(divisionSearch.toLowerCase())
+          ) {
+            return destination
+          }
+        })
+        .filter((destination) => {
+          if (districtSearch === '') {
+            return destination
+          } else if (
+            destination.district
+              .toLowerCase()
+              .includes(districtSearch.toLowerCase())
+          ) {
+            return destination
+          }
+        })
+      setAllDestinations(filteredDestinations)
+    } else {
+      dispatch(getAllDestinations())
+    }
+  }, [dispatch, destinations, isListSuccess, isListError, listErrorMessage])
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetDestinationList())
+    }
+  }, [dispatch])
+
   return (
-    <Container>
-      <Row className="mb-2 pt-3">
-        <Col lg={6} md={6} sm={6}>
-          <Card.Text as="h3">Location Name</Card.Text>
-          <Card.Text>
-            Deestination Search Queries (Division, District, City)
-          </Card.Text>
-        </Col>
-        <Col lg={6} md={6} sm={6} className="d-flex justify-content-end">
-          <Link to="" className="btn btn-primary mb-5">
-            Modify Search
-          </Link>
-        </Col>
-      </Row>
-
-      <Row>
-        {/* Left Coloumn For Filtering */}
-        <Col xs={12} md={3} xl={3}>
-          {/* Row For Budget */}
-          <Row className="my-4">
-            <Card>
-              <Card.Header as="h6">Budget</Card.Header>
-            </Card>
-          </Row>
-          <Row>
-            <Form.Group className="mb-3" controlId="budget">
-              {/* <Form.Label className='small mb-1'>Budget</Form.Label> */}
-              <Form.Control
-                type="text"
-                value={budget}
-                onChange={(e) => setBudget(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-          </Row>
-
-          {/* Row For Duration */}
-          <Row className="my-4">
-            <Card>
-              <Card.Header as="h6">Package Duration</Card.Header>
-            </Card>
-
-            <Col className="mt-3">
-              <Form.Group className="mb-3" controlId="">
-                <Form.Control
-                  className="form-select"
-                  as="select"
-                  type="select"
-                  placeholder="Select Duration"
-                  value={duration}
-                  onChange={(e) => setDuration(e.target.value)}
-                >
-                  <option>{duration}</option>
-                  <option value="1day">1 day</option>
-                  <option value="2days">2 days</option>
-                  <option value="3days">3 days</option>
-                  <option value="4days">4 days</option>
-                  <option value="5days">5 days</option>
-                  <option value="6days">6 days</option>
-                  <option value="7days">7 days</option>
-                </Form.Control>
-              </Form.Group>
-            </Col>
-          </Row>
-
-          {/* Row for Favourite Tour Place Type */}
-          <Row className="my-4">
-            <Card>
-              <Card.Header as="h6">Desired Place Type</Card.Header>
-            </Card>
-
-            <Col className="mt-3">
-              <Form.Group className="mb-3" controlId="placeType">
-                <Form.Control
-                  className="form-select"
-                  as="select"
-                  type="select"
-                  placeholder="Select Place Type"
-                  value={placeType}
-                  onChange={(e) => setPlaceType(e.target.value)}
-                >
-                  <option>{placeType}</option>
-                  <option value="seaBeach">Sea Beach</option>
-                  <option value="hillTracking">Hill Tracking</option>
-                  <option value="hillSighting">Hill Sighting</option>
-                  <option value="skiing">Skiing</option>
-                  <option value="family">Family</option>
-                  <option value="romantic">Romantic</option>
-                  <option value="city">City</option>
-                </Form.Control>
-              </Form.Group>
-            </Col>
-          </Row>
-        </Col>
-
-        {/* Right Colomn For Places/Card */}
-
-        <Col xs={12} md={9} xl={9}>
-          <Row className="my-4">
-            <Card.Header as='h5' className="mx-4">
-              Explore Destinations
-            </Card.Header>
-            <Card.Text className='mx-3 mt-2'>
-              From Chittagong
+    <div>
+      <Container>
+        <Row className='mb-2 pt-3'>
+          <Col lg={6} md={6} sm={12} className='d-flex justify-content-center'>
+            <Card.Text>
+              Travel Destination for:  {districtSearch}, {divisionSearch}
             </Card.Text>
-          </Row>
-          <Row className="my-4">
-            <Col xs={12} md={4} lg={4}>
-              <LinkContainer to="">
-                <Card>
-                  <Card.Img
-                    variant="top"
-                    src="/Destinations/Test.jpg"
-                    style={{ height: "30vh", objectFit: "cover" }}
-                  />
-                  <Card.Body cascade>
-                    <Row>
-                      <Col lg={6} md={2} xs={6}>
-                        <Card.Title as="h6">Chittagong</Card.Title>
-                        <Card.Text> Bangladesh </Card.Text>
-                      </Col>
-                      <Col
-                        lg={6}
-                        md={2}
-                        xs={6}
-                        className="d-flex flex-column justify-content-end"
-                      >
-                        <Card.Title as="h6">TK: 10,000</Card.Title>
-                        <Card.Text> Madafaka </Card.Text>
-                      </Col>
-                    </Row>
-                  </Card.Body>
-                </Card>
-              </LinkContainer>
-            </Col>
+          </Col>
+          <Col lg={6} md={6} sm={12} className='d-flex justify-content-center'>
+            <Button onClick={() => setModifySearch(!modifySearch)}>{ modifySearch ? 'Cancel Search' : 'Modify Search'}</Button>
+          </Col>
+        </Row>
 
-            <Col xs={12} md={4} lg={4}>
-              <LinkContainer to="">
-                <Card>
-                  <Card.Img
-                    variant="top"
-                    src="/Destinations/Test.jpg"
-                    style={{ height: "30vh", objectFit: "cover" }}
+        {modifySearch && (
+          <Row className='mb-2 pt-3'>
+            <Col
+              lg={12}
+              md={12}
+              sm={12}
+              className='d-flex justify-content-center align-items-center'
+            >
+              <Card className='text-center w-75 shadow bg-light'>
+                <Card.Body>
+                  <SearchDestinations
+                    district={districtSearch}
+                    division={divisionSearch}
                   />
-                  <Card.Body cascade>
-                    <Row>
-                      <Col lg={6} md={2} xs={6}>
-                        <Card.Title as="h6">Chittagong</Card.Title>
-                        <Card.Text> Bangladesh </Card.Text>
-                      </Col>
-                      <Col
-                        lg={6}
-                        md={2}
-                        xs={6}
-                        className="d-flex flex-column justify-content-end"
-                      >
-                        <Card.Title as="h6">TK: 10,000</Card.Title>
-                        <Card.Text> Madafaka </Card.Text>
-                      </Col>
-                    </Row>
-                  </Card.Body>
-                </Card>
-              </LinkContainer>
-            </Col>
-
-            <Col xs={12} md={4} lg={4}>
-              <LinkContainer to="">
-                <Card>
-                  <Card.Img
-                    variant="top"
-                    src="/Destinations/Test.jpg"
-                    style={{ height: "30vh", objectFit: "cover" }}
-                  />
-                  <Card.Body cascade>
-                    <Row>
-                      <Col lg={6} md={2} xs={6}>
-                        <Card.Title as="h6">Chittagong</Card.Title>
-                        <Card.Text> Bangladesh </Card.Text>
-                      </Col>
-                      <Col
-                        lg={6}
-                        md={2}
-                        xs={6}
-                        className="d-flex flex-column justify-content-end"
-                      >
-                        <Card.Title as="h6">TK: 10,000</Card.Title>
-                        <Card.Text> Madafaka </Card.Text>
-                      </Col>
-                    </Row>
-                  </Card.Body>
-                </Card>
-              </LinkContainer>
+                </Card.Body>
+              </Card>
             </Col>
           </Row>
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+        )}
 
-export default DestinationSearchScreen;
+        <Row className='mb-2 pt-3'>
+          <Col lg={12} md={12} sm={12}>
+            {isListLoading ? (
+              <Loader />
+            ) : allDestinations.length <= 0 ? (
+              <Message variant='danger'>
+                No destinatin found for the searched division and district
+              </Message>
+            ) : (
+              <Row className='my-4'>
+                {allDestinations.map((destination) => (
+                  <Col xs={12} md={3}>
+                    <LinkContainer to='/destinationDetails'>
+                      <Card key={destination._id} className='mb-2'>
+                        <Card.Img
+                          cascade
+                          className='img-fluid'
+                          src='/LightningDeals/test.jpg'
+                        />
+
+                        <Card.Body cascade>
+                          <Card.Title>{destination.name}</Card.Title>
+                          <Card.Text>
+                            <MdLocationOn /> {destination.district},{' '}
+                            {destination.division}
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                    </LinkContainer>
+                  </Col>
+                ))}
+              </Row>
+            )}
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  )
+}
+
+export default DestinationSearchScreen
