@@ -43,7 +43,7 @@ const Header = () => {
                 <>
                   {userInfo.userType === 'tourist' && (
                     <>
-                      <LinkContainer to='/destinations'>
+                      <LinkContainer to='/destinationSearch'>
                         <Nav.Link>
                           <FaMapMarkerAlt className='me-1' />
                           Destinations
@@ -157,7 +157,7 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <LinkContainer to='/destinations'>
+                  <LinkContainer to='/destinationSearch'>
                     <Nav.Link>
                       <FaMapMarkerAlt className='me-1' />
                       Destinations
