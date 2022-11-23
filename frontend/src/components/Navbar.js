@@ -12,7 +12,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { getAuthedUser, resetAuth } from '../features/auth/authSlice'
-import Moment from 'moment'
 import { Link } from 'react-router-dom'
 import SearchStays from '../components/SearchStays'
 import SearchTransports from '../components/SearchTransports'

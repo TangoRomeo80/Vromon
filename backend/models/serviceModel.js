@@ -124,15 +124,25 @@ const transportSchema = new mongoose.Schema({
       message: 'Transport type must be car or bus',
     },
   },
-  from: {
+  ticketFrom: {
     type: String,
     default: '',
-    required: [true, 'Transport must have a from location'],
+    required: [
+      function () {
+        return this.transportType === 'bus'
+      },
+      'Ticket from is required for bus',
+    ],
   },
-  to: {
+  ticketTo: {
     type: String,
     default: '',
-    required: [true, 'Transport must have a to location'],
+    required: [
+      function () {
+        return this.transportType === 'bus'
+      },
+      'Ticket to is required for bus',
+    ],
   },
   departureDate: {
     type: Date,
@@ -174,6 +184,16 @@ const transportSchema = new mongoose.Schema({
       'There needs to be a arrivalTime for bus',
     ],
   },
+  returnDate: {
+    type: Date,
+    default: null,
+  },
+
+  returnTime: {
+    type: String,
+    default: '',
+  },
+
   busProvider: {
     type: String,
     default: '',
@@ -182,6 +202,26 @@ const transportSchema = new mongoose.Schema({
         return this.transportType === 'bus'
       },
       'There needs to be a busProvider for bus',
+    ],
+  },
+  pickupFrom: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a pickupFrom for car',
+    ],
+  },
+  dropTo: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a dropTo for car',
     ],
   },
   rentDuration: {
