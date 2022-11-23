@@ -3,7 +3,6 @@ import serviceService from './serviceService'
 
 const initialState = {
   services: [],
-  searchedServices: [],
   service: null,
   isListError: false,
   isListSuccess: false,
@@ -124,13 +123,27 @@ export const deleteService = createAsyncThunk(
   }
 )
 
-//get all transports
 
+//get all transports
 export const getAllTransports = createAsyncThunk(
   'services/getAllTransports',
   async(_, thunkAPI)=> {
     try{
       return await serviceService.getAllTransports()
+    }catch(err){
+      const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+)
+
+
+//get all accomodations
+export const getAllAcomodations = createAsyncThunk(
+  'services/getAllAcomodations',
+  async(_, thunkAPI)=> {
+    try{
+      return await serviceService.getAllAcomodations()
     }catch(err){
       const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
       return thunkAPI.rejectWithValue(message);
@@ -161,6 +174,9 @@ export const serviceSlice = createSlice({
     builder
       .addCase(getAllServices.pending, (state) => {
         state.isListLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
       })
       .addCase(getAllServices.fulfilled, (state, action) => {
         state.isListLoading = false
@@ -194,6 +210,9 @@ export const serviceSlice = createSlice({
       })
       .addCase(getServiceById.pending, (state) => {
         state.isDetailsLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
       })
       .addCase(getServiceById.fulfilled, (state, action) => {
         state.isDetailsLoading = false
@@ -209,6 +228,9 @@ export const serviceSlice = createSlice({
       })
       .addCase(createService.pending, (state) => {
         state.isCreateLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
       })
       .addCase(createService.fulfilled, (state, action) => {
         state.isCreateLoading = false
@@ -224,6 +246,9 @@ export const serviceSlice = createSlice({
       })
       .addCase(updateService.pending, (state) => {
         state.isUpdateLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
       })
       .addCase(updateService.fulfilled, (state, action) => {
         state.isUpdateLoading = false
@@ -245,6 +270,9 @@ export const serviceSlice = createSlice({
       })
       .addCase(deleteService.pending, (state) => {
         state.isDeleteLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
       })
       .addCase(deleteService.fulfilled, (state, action) => {
         state.isDeleteLoading = false
@@ -265,6 +293,9 @@ export const serviceSlice = createSlice({
 
       .addCase(getAllTransports.pending, (state) => {
         state.isListLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
       })
       .addCase(getAllTransports.fulfilled, (state, action) => {
         state.isListLoading = false
@@ -274,6 +305,24 @@ export const serviceSlice = createSlice({
         state.services = action.payload
       })
       .addCase(getAllTransports.rejected, (state, action) => {
+        state.isListLoading = false
+        state.isListError = true
+        state.listErrorMessage = action.payload
+      })
+      .addCase(getAllAcomodations.pending, (state) => {
+        state.isListLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
+      })
+      .addCase(getAllAcomodations.fulfilled, (state, action) => {
+        state.isListLoading = false
+        state.isListSuccess = true
+        state.isListError = false
+        state.listErrorMessage = ''
+        state.services = action.payload
+      })
+      .addCase(getAllAcomodations.rejected, (state, action) => {
         state.isListLoading = false
         state.isListError = true
         state.listErrorMessage = action.payload

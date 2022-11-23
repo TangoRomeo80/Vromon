@@ -54,6 +54,12 @@ const getAllTransports = async () => {
   return response.data.data
 }
 
+//get all accomodation
+const getAllAcomodations = async () => {
+  const response = await axios.get('/api/services?serviceType=accomodation')
+  return response.data.data
+}
+
 const serviceService = {
   getAllServices,
   getServiceById,
@@ -62,6 +68,7 @@ const serviceService = {
   deleteService,
   getTopServices,
   getAllTransports,
+  getAllAcomodations
 }
 
 export default serviceService
