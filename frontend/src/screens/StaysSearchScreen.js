@@ -17,7 +17,8 @@ const StaysSearchScreen = () => {
 
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
-  const [allAcomodations, setAllAcomodations] = useState([]);
+
+  const [allAccomodations, setAllAccomodations] = useState([]);
   const [checkinDateSearch, setCheckinDateSearch] = useState(
     searchParams.get("checkinDate") || ""
   )
