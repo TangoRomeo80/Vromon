@@ -77,11 +77,12 @@ const DestinationSearchScreen = () => {
 
   return (
     <div>
+      {/* {districtSearch}, {divisionSearch} */}
       <Container>
         <Row className='mb-2 pt-3'>
           <Col lg={6} md={6} sm={12} className='d-flex justify-content-center'>
-            <Card.Text>
-              Travel Destination for:  {districtSearch}, {divisionSearch}
+            <Card.Text>  
+              {!districtSearch && !divisionSearch ? 'Search Destinations for All Districts & Divisions' : `Search Destinations for ${districtSearch}, ${divisionSearch}`}
             </Card.Text>
           </Col>
           <Col lg={6} md={6} sm={12} className='d-flex justify-content-center'>
