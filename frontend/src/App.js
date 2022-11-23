@@ -7,7 +7,6 @@ import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
 import NewUserScreen from './screens/NewUserScreen'
-import HolidayPackagesScreen from './screens/HolidayPackagesScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import TourSearchScreen from './screens/TourSearchScreen'
 import BusinessOwnerInfoScreen from './screens/BusinessOwnerInfoScreen'
@@ -47,7 +46,6 @@ const App = () => {
                 element={<ForgotPasswordScreen />}
               />
               <Route path='/newUser' element={<NewUserScreen />} />
-              <Route path='/packages' element={<HolidayPackagesScreen />} />
               <Route path='/profile' element={<ProfileScreen />} />
               <Route path='/tourSearch' element={<TourSearchScreen />} />
               <Route path='/myBookings' element={<TouristBookingScreen />} />

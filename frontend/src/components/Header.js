@@ -49,14 +49,14 @@ const Header = () => {
                           Destinations
                         </Nav.Link>
                       </LinkContainer>
-                      <LinkContainer to='/transports'>
+                      <LinkContainer to='/transportSearch'>
                         <Nav.Link>
                           <FaCar className='me-1' />
                           Transport
                         </Nav.Link>
                       </LinkContainer>
 
-                      <LinkContainer to='/packages'>
+                      <LinkContainer to='/tourSearch'>
                         <Nav.Link>
                           <FaUmbrellaBeach className='me-1' />
                           Holiday Packages
@@ -163,14 +163,14 @@ const Header = () => {
                       Destinations
                     </Nav.Link>
                   </LinkContainer>
-                  <LinkContainer to='/transports'>
+                  <LinkContainer to='/transportSearch'>
                     <Nav.Link>
                       <FaCar className='me-1' />
                       Transport
                     </Nav.Link>
                   </LinkContainer>
 
-                  <LinkContainer to='/packages'>
+                  <LinkContainer to='/tourSearch'>
                     <Nav.Link>
                       <FaUmbrellaBeach className='me-1' />
                       Holiday Packages
