@@ -121,7 +121,7 @@ const transportSchema = new mongoose.Schema({
     default: 'car',
     enum: {
       values: ['bus', 'car'],
-      message: 'Transport type must be car, bus, train or plane',
+      message: 'Transport type must be car or bus',
     },
   },
   from: {
