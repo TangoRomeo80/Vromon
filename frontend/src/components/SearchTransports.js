@@ -20,6 +20,7 @@ const TicketSearch = ({ from, to, dep, ret }) => {
           <Card.Text>Depart From</Card.Text>
           <Form.Group className='mb-3' controlId='departFrom'>
             <Form.Control
+              required
               type='text'
               placeholder='Depart From'
               value={departFrom}
@@ -116,6 +117,18 @@ const TicketSearch = ({ from, to, dep, ret }) => {
           </Form.Group>
         </Col>
       </Row>
+      <a
+        className='mb-3 mx-2 d-grid gap-3'
+        href={`/transportSearch?from=${departFrom}&to=${departTo}&dep=${departOn}&ret=${returnOn}&rental=false`}
+        onClick={(e) => {
+          if (!departFrom || !departTo || !departOn || !returnOn) {
+            e.preventDefault()
+            alert('Please fill all the fields')
+          }
+        }}
+      >
+        <Button>Search</Button>
+      </a>
     </>
   )
 }
@@ -257,12 +270,31 @@ const RentalSearch = ({
           </Form.Group>
         </Col>
       </Row>
+      <a
+        className='mb-3 mx-2 d-grid gap-3'
+        href={`/transportSearch?pick=${pickUp}&drop=${dropOff}&pickDate=${pickUpDate}&dropDate=${dropOffDate}&pickTime=${pickUpTime}&dropTime=${dropOffTime}&rental=true`}
+        onClick={(e) => {
+          if (
+            !pickUp ||
+            !dropOff ||
+            !pickUpDate ||
+            !dropOffDate ||
+            !pickUpTime ||
+            !dropOffTime
+          ) {
+            e.preventDefault()
+            alert('Please fill all the fields')
+          }
+        }}
+      >
+        <Button>Search</Button>
+      </a>
     </>
   )
 }
 
-const SearchTransports = () => {
-  const [isRent, setIsRent] = useState(false)
+const SearchTransports = ({ rental }) => {
+  const [isRent, setIsRent] = useState(rental ? rental : false)
 
   return (
     <div>

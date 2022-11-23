@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Row, Col, Card, Form, Button, ListGroup } from 'react-bootstrap'
 import districts from '../staticData/districts'
+import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 
@@ -87,11 +88,15 @@ const SearchDestinations = ({ district, division }) => {
         </Row>
         <a
           className='mb-3 mx-2 d-grid gap-3'
-          href={
-            searchDistrict && searchDivision
-              ? `/destinationSearch?district=${searchDistrict}&division=${searchDivision}`
-              : '/destinationSearch'
-          }
+          href={`/destinationSearch?district=${searchDistrict}&division=${searchDivision}`}
+          onClick={(e) => {
+            if (!searchDistrict || !searchDivision) {
+              e.preventDefault()
+              toast.error('Please select both division and district', {
+                position: 'top-center',
+              })
+            }
+          }}
         >
           <Button>Search</Button>
         </a>
