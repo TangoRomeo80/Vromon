@@ -1,12 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Row, Col, Container, Card, Form, Button } from "react-bootstrap";
 import { MdLocationOn } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { LinkContainer } from "react-router-bootstrap";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
+import { toast } from "react-toastify";
+import { getAllAcomodations, resetServiceList } from "../features/service/serviceSlice";
+import SearchStays from "../components/SearchStays";
 
 const StaysSearchScreen = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [searchHotel, setSearchHotel] = useState("");
+
+  const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const [allAcomodations, setAllAcomodations] = useState([]);
+  const [checkinDateSearch, setCheckinDateSearch] = useState(
+    searchParams.get("checkinDate") || ""
+  )
+  const [checkoutDateSearch, setCheckoutDateSearch] = useState(
+    searchParams.get("checkoutDate") || ""
+  )
+  const [guestCountSearch, setGuestCountSearch] = useState(
+    searchParams.get("guestCount") || ""
+  )
+  const [roomCountSearch, setRoomCountSearch] = useState(
+    searchParams.get("roomCount") || ""
+  )
+  const [modifySearch, setModifySearch] = useState(false);
+
+  const {
+    services,
+    isListLoading,
+    isListSuccess,
+    isListError,
+    listErrorMessage,
+  } = useSelector((state) => state.service);
+
   return (
     <Container>
       <Row className="mb-2 pt-3">
