@@ -20,17 +20,13 @@ const StaysSearchScreen = () => {
 
   const [allAccomodations, setAllAccomodations] = useState([]);
   const [checkinDateSearch, setCheckinDateSearch] = useState(
-    searchParams.get("checkinDate") || ""
-  )
+    searchParams.get("checkinDate") || null)
   const [checkoutDateSearch, setCheckoutDateSearch] = useState(
-    searchParams.get("checkoutDate") || ""
-  )
+    searchParams.get("checkoutDate") || null)
   const [guestCountSearch, setGuestCountSearch] = useState(
-    searchParams.get("guestCount") || ""
-  )
+    searchParams.get("guestCount") || "")
   const [roomCountSearch, setRoomCountSearch] = useState(
-    searchParams.get("roomCount") || ""
-  )
+    searchParams.get("roomCount") || "")
   const [modifySearch, setModifySearch] = useState(false);
 
   const {
@@ -40,6 +36,15 @@ const StaysSearchScreen = () => {
     isListError,
     listErrorMessage,
   } = useSelector((state) => state.service);
+
+  useEffect(() => {
+    if(isListError) {
+      toast.error(listErrorMessage, { position: 'top-center' })
+    }
+    if(isListSuccess) {
+      const filteredServices = services
+    }
+  });
 
   return (
     <Container>
