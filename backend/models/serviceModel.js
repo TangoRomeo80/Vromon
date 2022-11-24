@@ -124,7 +124,7 @@ const transportSchema = new mongoose.Schema({
       message: 'Transport type must be car or bus',
     },
   },
-  ticketFrom: {
+  departFrom: {
     type: String,
     default: '',
     required: [
@@ -134,7 +134,7 @@ const transportSchema = new mongoose.Schema({
       'Ticket from is required for bus',
     ],
   },
-  ticketTo: {
+  departTo: {
     type: String,
     default: '',
     required: [
@@ -144,7 +144,7 @@ const transportSchema = new mongoose.Schema({
       'Ticket to is required for bus',
     ],
   },
-  departureDate: {
+  departDate: {
     type: Date,
     default: Date.now(),
     required: [
@@ -154,7 +154,7 @@ const transportSchema = new mongoose.Schema({
       'There needs to be a departureDate for bus',
     ],
   },
-  departureTime: {
+  departTime: {
     type: String,
     default: '',
     required: [
