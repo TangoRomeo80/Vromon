@@ -85,6 +85,10 @@ const destinationSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    mapEmbed: {
+      type: String,
+      default: '',
+    },
   },
   {
     timestamps: true,
