@@ -29,6 +29,9 @@ import AdminUserListScreen from './screens/AdminUserListScreen'
 import AdminServiceListScreen from './screens/AdminServiceListScreen'
 import AdminDestinationListScreen from './screens/AdminDestinationListScreen'
 import DestinationCreateScreen from './screens/DestinationCreateScreen'
+import TransportSearchByDestinationScreen from './screens/TransportSearchByDestinationScreen'
+import StaysSearchByDestinationScreen from './screens/StaysSearchByDestinationScreen'
+import TourSearchByDestinationScreen from './screens/TourSearchByDestinationScreen'
 
 const App = () => {
   return (
@@ -58,11 +61,26 @@ const App = () => {
                 path='/destinationSearch'
                 element={<DestinationSearchScreen />}
               />
-              <Route path='/destinationCreate' element={<DestinationCreateScreen />} />
+              <Route
+                path='/destinationCreate'
+                element={<DestinationCreateScreen />}
+              />
               <Route path='/staysSearch' element={<StaysSearchScreen />} />
               <Route
                 path='/transportSearch'
                 element={<TransportSearchScreen />}
+              />
+              <Route
+                path='/transportByDestination'
+                element={<TransportSearchByDestinationScreen />}
+              />
+              <Route
+                path='/staysByDestination'
+                element={<StaysSearchByDestinationScreen />}
+              />
+              <Route
+                path='/tourByDestination'
+                element={<TourSearchByDestinationScreen />}
               />
               <Route
                 path='/businessOwnerInfo'
@@ -74,8 +92,14 @@ const App = () => {
               />
               <Route path='/adminDash' element={<AdminDashboard />} />
               <Route path='/adminUserList' element={<AdminUserListScreen />} />
-              <Route path='/adminServiceList' element={<AdminServiceListScreen />} />
-              <Route path='/adminDestinationList' element={<AdminDestinationListScreen />} />
+              <Route
+                path='/adminServiceList'
+                element={<AdminServiceListScreen />}
+              />
+              <Route
+                path='/adminDestinationList'
+                element={<AdminDestinationListScreen />}
+              />
               <Route path='/serviceList' element={<ServiceListScreen />} />
               <Route
                 path='/bookingRequestList'

@@ -13,7 +13,7 @@ import {
   FaRoute,
 } from 'react-icons/fa'
 import { GoDashboard } from 'react-icons/go'
-import { BiLocationPlus } from 'react-icons/bi'
+import { BiLocationPlus, BiHotel } from 'react-icons/bi'
 import { MdOutlineSpaceDashboard } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../features/auth/authSlice'
@@ -56,10 +56,17 @@ const Header = () => {
                         </Nav.Link>
                       </LinkContainer>
 
+                      <LinkContainer to='/staysSearch'>
+                        <Nav.Link>
+                          <BiHotel className='me-1' />
+                          Stays
+                        </Nav.Link>
+                      </LinkContainer>
+
                       <LinkContainer to='/tourSearch'>
                         <Nav.Link>
                           <FaUmbrellaBeach className='me-1' />
-                          Holiday Packages
+                          Tours
                         </Nav.Link>
                       </LinkContainer>
 
@@ -170,10 +177,17 @@ const Header = () => {
                     </Nav.Link>
                   </LinkContainer>
 
+                  <LinkContainer to='/staysSearch'>
+                    <Nav.Link>
+                      <BiHotel className='me-1' />
+                      Stays
+                    </Nav.Link>
+                  </LinkContainer>
+
                   <LinkContainer to='/tourSearch'>
                     <Nav.Link>
                       <FaUmbrellaBeach className='me-1' />
-                      Holiday Packages
+                      Tours
                     </Nav.Link>
                   </LinkContainer>
                 </>
