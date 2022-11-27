@@ -98,7 +98,7 @@ const SearchDestinations = ({ district, division }) => {
             }
           }}
         >
-          <Button>Search</Button>
+          <Button>Submit Search</Button>
         </a>
       </Card>
     </div>

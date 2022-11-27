@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Card, Form, InputGroup, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SearchStays = ({ checkin, checkout, guests, rooms }) => {
   const [checkinDate, setCheckinDate] = useState(checkin ? checkin : "");
@@ -119,6 +120,12 @@ const SearchStays = ({ checkin, checkout, guests, rooms }) => {
             ? `/staysSearch?checkinDate=${checkinDate}&checkoutDate=${checkoutDate}&roomCount=${roomCount}&guestCount=${guestCount}`
             : "/staysSearch"
         }
+        onClick={(e) => {
+          if(!checkinDate || !checkoutDate || !guestCount || !roomCount){
+            e.preventDefault()
+            toast.error('Please fill all the fields', {position: 'top-center'})
+          }
+        }}
       >
         <Button>Submit Search</Button>
       </a>

@@ -7,7 +7,10 @@ import { LinkContainer } from "react-router-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { toast } from "react-toastify";
-import { getAllAcomodations, resetServiceList } from "../features/service/serviceSlice";
+import {
+  getAllAcomodations,
+  resetServiceList,
+} from "../features/service/serviceSlice";
 import SearchStays from "../components/SearchStays";
 
 const StaysSearchScreen = () => {
@@ -20,13 +23,17 @@ const StaysSearchScreen = () => {
 
   const [allAccomodations, setAllAccomodations] = useState([]);
   const [checkinDateSearch, setCheckinDateSearch] = useState(
-    searchParams.get("checkinDate") || null)
+    searchParams.get("checkinDate") || null
+  );
   const [checkoutDateSearch, setCheckoutDateSearch] = useState(
-    searchParams.get("checkoutDate") || null)
+    searchParams.get("checkoutDate") || null
+  );
   const [guestCountSearch, setGuestCountSearch] = useState(
-    searchParams.get("guestCount") || "")
+    searchParams.get("guestCount") || ""
+  );
   const [roomCountSearch, setRoomCountSearch] = useState(
-    searchParams.get("roomCount") || "")
+    searchParams.get("roomCount") || ""
+  );
   const [modifySearch, setModifySearch] = useState(false);
 
   const {
@@ -38,24 +45,59 @@ const StaysSearchScreen = () => {
   } = useSelector((state) => state.service);
 
   useEffect(() => {
-    if(isListError) {
-      toast.error(listErrorMessage, { position: 'top-center' })
+    if (isListError) {
+      toast.error(listErrorMessage, { position: "top-center" });
     }
-    if(isListSuccess) {
-      const filteredServices = services
+    if (isListSuccess) {
+      const filteredServices = services.filter((service) => {
+        if (checkinDateSearch === "") {
+          // return service
+          toast.error("Please select checkin date", { position: "top-center" });
+        } else if (checkoutDateSearch === "") {
+          // return service
+          toast.error("Please select checkout date", {
+            position: "top-center",
+          });
+        } else if (guestCountSearch === 0) {
+          toast.error("Please select number of guests", {
+            position: "top-center",
+          });
+        } else if (roomCountSearch === 0) {
+          toast.error("Please select number of rooms", {
+            position: "top-center",
+          });
+        } else if (
+          service.checkinDate === checkinDateSearch &&
+          service.checkoutDate === checkoutDateSearch &&
+          service.guestCount === guestCountSearch &&
+          service.roomCount === roomCountSearch
+        ) {
+          return service;
+        }
+      });
+      setAllAccomodations(filteredServices);
     }
-  });
+    else{
+      dispatch(getAllAcomodations());
+    }
+  }, [dispatch, isListError, isListSuccess, services, listErrorMessage]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetServiceList());
+    }
+  }, [dispatch])
 
   return (
     <Container>
       <Row className="mb-2 pt-3">
-        <Col lg={6} md={6} sm={6}>
+        <Col lg={8} md={8} sm={6}>
           <Card.Text as="h3">Location Name</Card.Text>
           <Card.Text>
-            Stay Search Queries (Hotels, Check-in-out-Date, Guests, Rooms)
+            {!checkinDateSearch && !checkoutDateSearch && !guestCountSearch && !roomCountSearch ? 'Find Your Desired Accomodations or Hotels' : `Search Queries (Check In Date : ${checkinDateSearch}, Check Out Date : ${checkoutDateSearch}, Guest(s) : ${guestCountSearch}, Room(s) : ${roomCountSearch})`}
           </Card.Text>
         </Col>
-        <Col lg={6} md={6} sm={6} className="d-flex justify-content-end">
+        <Col lg={3} md={3} sm={6} className="d-flex justify-content-end">
           <Link to="" className="btn btn-primary mb-5">
             Modify Search
           </Link>
