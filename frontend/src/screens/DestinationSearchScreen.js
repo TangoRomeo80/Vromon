@@ -39,7 +39,7 @@ const DestinationSearchScreen = () => {
     if (isListError) {
       toast.error(listErrorMessage, { position: 'top-center' })
     }
-    if (isListSuccess) {
+    else if (isListSuccess) {
       const filteredDestinations = destinations
         .filter((destination) => {
           if (divisionSearch === '') {
