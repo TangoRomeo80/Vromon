@@ -98,11 +98,14 @@ const StaysSearchScreen = () => {
           </Card.Text>
         </Col>
         <Col lg={3} md={3} sm={6} className="d-flex justify-content-end">
-          <Link to="" className="btn btn-primary mb-5">
+          {/* <Link to="" className="btn btn-primary mb-5">
             Modify Search
-          </Link>
+          </Link> */}
+          <Button onClick={() => setModifySearch(!modifySearch)}>{modifySearch ? 'Cancle Search' : 'Modify Search'}</Button>
         </Col>
       </Row>
+
+      <Row className='my-3'>{modifySearch && <SearchStays />}</Row>
 
       <Row>
         {/* Left Column */}
