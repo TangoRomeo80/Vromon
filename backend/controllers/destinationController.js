@@ -8,6 +8,7 @@ import {
   createOne,
   updateOne,
   deleteOne,
+  addReview,
 } from './handlerFactory.js' //import generic handler
 
 /*
@@ -59,3 +60,11 @@ Description: This endpoint returns a destination with :id
 */
 
 export const getDestination = getOne(Destination)
+
+/*
+Request type: POST
+Endpoint: /api/destinations/:id/reviews
+Description: Add review to the destination
+*/
+
+export const addDestinationReview = addReview(Destination)

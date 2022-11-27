@@ -31,7 +31,9 @@ export const getAll = (Model) =>
 //Get one instance
 export const getOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.findById(req.params.id).select('-__v -password -passwordChangedAt')
+    const doc = await Model.findById(req.params.id).select(
+      '-__v -password -passwordChangedAt'
+    )
 
     if (!doc) {
       return next(
@@ -108,5 +110,47 @@ export const deleteOne = (Model) =>
     res.status(204).json({
       status: 'success',
       data: { _id: req.params.id },
+    })
+  })
+
+//function to add review
+export const addReview = (Model) =>
+  catchAsync(async (req, res, next) => {
+    const { user, rating, description } = req.body
+    const doc = await Model.findById(req.params.id)
+    if (!doc) {
+      return next(
+        new AppError(
+          `No ${Model.collection.collectionName} found with that ID`,
+          404
+        )
+      )
+    }
+
+    const alreadyReviewd = doc.reviews.find(
+      (review) => review.user.toString() === user.toString()
+    )
+
+    if (alreadyReviewd) {
+      return next(
+        new AppError(
+          `You have already reviewed this ${Model.collection.collectionName}`,
+          400
+        )
+      )
+    }
+
+    const review = {
+      user,
+      rating: Number(rating),
+      description,
+    }
+
+    doc.reviews.push(review)
+    await doc.save()
+
+    res.status(201).json({
+      status: 'success',
+      data: doc,
     })
   })
