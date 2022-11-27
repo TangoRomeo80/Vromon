@@ -49,41 +49,37 @@ const StaysSearchScreen = () => {
       toast.error(listErrorMessage, { position: "top-center" });
     }
     if (isListSuccess) {
-      const filteredServices = services.filter((service) => {
-        if (checkinDateSearch === '') {
-          return service
-        }
-        else if(service.checkinDate === checkinDateSearch){
-          return service
-        }
+      const filteredServices = services
+        .filter((service) => {
+          if (checkinDateSearch === "") {
+            return service;
+          } else if (service.checkinDate === checkinDateSearch) {
+            return service;
+          }
         })
         .filter((service) => {
-          if (checkoutDateSearch === '') {
-            return service
-          }
-          else if(service.checkoutDate === checkoutDateSearch){
-            return service
+          if (checkoutDateSearch === "") {
+            return service;
+          } else if (service.checkoutDate === checkoutDateSearch) {
+            return service;
           }
         })
         .filter((service) => {
           if (guestCountSearch === 0) {
-            return service
-          }
-          else if(service.guestCount === guestCountSearch){
-            return service
+            return service;
+          } else if (service.guestCount === guestCountSearch) {
+            return service;
           }
         })
         .filter((service) => {
           if (roomCountSearch === 0) {
-            return service
+            return service;
+          } else if (service.roomCount === roomCountSearch) {
+            return service;
           }
-          else if(service.roomCount === roomCountSearch){
-            return service
-          }
-        })
+        });
       setAllAccomodations(filteredServices);
-    }
-    else{
+    } else {
       dispatch(getAllAcomodations());
     }
   }, [dispatch, isListError, isListSuccess, services, listErrorMessage]);
@@ -91,8 +87,8 @@ const StaysSearchScreen = () => {
   useEffect(() => {
     return () => {
       dispatch(resetServiceList());
-    }
-  }, [dispatch])
+    };
+  }, [dispatch]);
 
   return (
     <Container>
@@ -100,18 +96,22 @@ const StaysSearchScreen = () => {
         <Col lg={8} md={8} sm={6}>
           <Card.Text as="h3">Location Name</Card.Text>
           <Card.Text>
-            {!checkinDateSearch && !checkoutDateSearch && !guestCountSearch && !roomCountSearch ? 'Find Your Desired Accomodations or Hotels' : `Search Queries (Check In Date : ${checkinDateSearch}, Check Out Date : ${checkoutDateSearch}, Guest(s) : ${guestCountSearch}, Room(s) : ${roomCountSearch})`}
+            {!checkinDateSearch &&
+            !checkoutDateSearch &&
+            !guestCountSearch &&
+            !roomCountSearch
+              ? "Find Your Desired Accomodations or Hotels"
+              : `Search Queries (Check In Date : ${checkinDateSearch}, Check Out Date : ${checkoutDateSearch}, Guest(s) : ${guestCountSearch}, Room(s) : ${roomCountSearch})`}
           </Card.Text>
         </Col>
         <Col lg={3} md={3} sm={6} className="d-flex justify-content-end">
-          {/* <Link to="" className="btn btn-primary mb-5">
-            Modify Search
-          </Link> */}
-          <Button onClick={() => setModifySearch(!modifySearch)}>{modifySearch ? 'Cancle Search' : 'Modify Search'}</Button>
+          <Button onClick={() => setModifySearch(!modifySearch)}>
+            {modifySearch ? "Cancle Search" : "Modify Search"}
+          </Button>
         </Col>
       </Row>
 
-      <Row className='my-3'>{modifySearch && <SearchStays />}</Row>
+      <Row className="my-3">{modifySearch && <SearchStays />}</Row>
 
       <Row>
         {/* Left Column */}
@@ -151,7 +151,7 @@ const StaysSearchScreen = () => {
           </Row>
 
           {/* Row For Hotel Search */}
-          <Row className="my-4">
+          {/* <Row className="my-4">
             <Card>
               <Card.Header as="h5">Search Hotels</Card.Header>
             </Card>
@@ -166,118 +166,71 @@ const StaysSearchScreen = () => {
                 ></Form.Control>
               </Form.Group>
             </Col>
-          </Row>
+          </Row> */}
         </Col>
 
         {/* Right Colomn/Package Images Card */}
         <Col xs={12} md={9} xl={9}>
           <Row className="my-4">
             <Card.Header as="h5" className="mx-4">
-              20 Available Hotels
+              Available Hotels
             </Card.Header>
             <Card.Text className="mx-3 mt-2">
               *Price is per night per room & includes VAT & Taxes
             </Card.Text>
           </Row>
 
-          <Card className="mx-2 mb-3">
-            <Row className="d-flex">
-              <Col sm={4} md={3} lg={3}>
-                <Card.Img
-                  src="/Destinations/Test.jpg"
-                  className="img-fluid rounded-start"
-                  variant="top"
-                  style={{ objectFit: "cover", height: "220px" }}
-                />
-              </Col>
-              <Col sm={4} md={6} lg={6}>
-                <Card.Body>
-                  <Card.Title as="h5">Sayeman Hotel & Resort</Card.Title>
-                  <Card.Text>
-                    <MdLocationOn /> &nbsp;14 Kalatoli Hotel Motel Zone, Cox's
-                    Bazar, Bangladesh
-                  </Card.Text>
-                  <Card.Text>*Rating Here</Card.Text>
-                  <Card.Text>*Trip Coin</Card.Text>
-                </Card.Body>
-              </Col>
+          {isListLoading ? (
+            <Loader />
+          ) : allAccomodations.length <= 0 ? (
+            <Message variant="danger">No Hotels or Accomodations Found</Message>
+          ) : (
+            <Card style={{ border: "1px solid black" }}>
+              {allAccomodations.map((accomodation) => (
+                <LinkContainer to="">
+                  <Card className="mx-2 my-3" key={accomodation._id}>
+                    <Row className="d-flex">
+                      <Col sm={4} md={3} lg={3}>
+                        <Card.Img
+                          src="/Destinations/Test.jpg"
+                          className="img-fluid rounded-start"
+                          variant="top"
+                          style={{ objectFit: "cover", height: "220px" }}
+                        />
+                      </Col>
+                      <Col sm={4} md={6} lg={6}>
+                        <Card.Body>
+                          <Card.Title as="h5">
+                            {accomodation.house}
+                          </Card.Title>
+                          <Card.Text>
+                            <MdLocationOn /> &nbsp;{accomodation.street}{accomodation.area}
+                            {accomodation.city}, Bangladesh
+                          </Card.Text>
+                          <Card.Text>*Rating Here</Card.Text>
+                          <Card.Text>*Trip Coin</Card.Text>
+                        </Card.Body>
+                      </Col>
 
-              <Col sm={4} md={3} lg={3} className="d-flex justify-content-end">
-                <Card.Body>
-                  <Card.Text className="my-3">Starts From</Card.Text>
-                  <Card.Text>BDT Magna/Night</Card.Text>
+                      <Col
+                        sm={4}
+                        md={3}
+                        lg={3}
+                        className="d-flex justify-content-end"
+                      >
+                        <Card.Body>
+                          <Card.Text className="my-3">Starts From</Card.Text>
+                          <Card.Text>BDT 12,000/Night</Card.Text>
 
-                  <Button className="mt-4">Book Now</Button>
-                </Card.Body>
-              </Col>
-            </Row>
-          </Card>
-
-          <Card className="mx-2 mb-3">
-            <Row className="d-flex">
-              <Col sm={4} md={3} lg={3}>
-                <Card.Img
-                  src="/Destinations/Test.jpg"
-                  className="img-fluid rounded-start"
-                  variant="top"
-                  style={{ objectFit: "cover", height: "220px" }}
-                />
-              </Col>
-              <Col sm={4} md={6} lg={6}>
-                <Card.Body>
-                  <Card.Title as="h5">Sayeman Hotel & Resort</Card.Title>
-                  <Card.Text>
-                    <MdLocationOn /> &nbsp;14 Kalatoli Hotel Motel Zone, Cox's
-                    Bazar, Bangladesh
-                  </Card.Text>
-                  <Card.Text>*Rating Here</Card.Text>
-                  <Card.Text>*Trip Coin</Card.Text>
-                </Card.Body>
-              </Col>
-
-              <Col sm={4} md={3} lg={3} className="d-flex justify-content-end">
-                <Card.Body>
-                  <Card.Text className="my-3">Starts From</Card.Text>
-                  <Card.Text>BDT Magna/Night</Card.Text>
-
-                  <Button className="mt-4">Book Now</Button>
-                </Card.Body>
-              </Col>
-            </Row>
-          </Card>
-
-          <Card className="mx-2 mb-3">
-            <Row className="d-flex">
-              <Col sm={4} md={3} lg={3}>
-                <Card.Img
-                  src="/Destinations/Test.jpg"
-                  className="img-fluid rounded-start"
-                  variant="top"
-                  style={{ objectFit: "cover", height: "220px" }}
-                />
-              </Col>
-              <Col sm={4} md={6} lg={6}>
-                <Card.Body>
-                  <Card.Title as="h5">Sayeman Hotel & Resort</Card.Title>
-                  <Card.Text>
-                    <MdLocationOn /> &nbsp;14 Kalatoli Hotel Motel Zone, Cox's
-                    Bazar, Bangladesh
-                  </Card.Text>
-                  <Card.Text>*Rating Here</Card.Text>
-                  <Card.Text>*Trip Coin</Card.Text>
-                </Card.Body>
-              </Col>
-
-              <Col sm={4} md={3} lg={3} className="d-flex justify-content-end">
-                <Card.Body>
-                  <Card.Text className="my-3">Starts From</Card.Text>
-                  <Card.Text>BDT Magna/Night</Card.Text>
-
-                  <Button className="mt-4">Book Now</Button>
-                </Card.Body>
-              </Col>
-            </Row>
-          </Card>
+                          <Button className="mt-4">Book Now</Button>
+                        </Card.Body>
+                      </Col>
+                    </Row>
+                  </Card>
+                </LinkContainer>
+              ))}
+            </Card>
+          )}
         </Col>
       </Row>
     </Container>
