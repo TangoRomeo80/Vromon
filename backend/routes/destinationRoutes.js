@@ -8,6 +8,7 @@ import {
   getAllDestinations,
   getDestination,
   getMostPopularDestinations,
+  addDestinationReview,
 } from '../controllers/destinationController.js' //import destination controller
 
 const router = express.Router() //create router instance
@@ -16,6 +17,7 @@ router.route('/').get(getAllDestinations).post(createDestination)
 router
   .route('/most-popular')
   .get(getMostPopularDestinations, getAllDestinations)
+router.route('/:id/reviews').post(addDestinationReview)
 router
   .route('/:id')
   .get(getDestination)
