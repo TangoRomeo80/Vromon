@@ -16,7 +16,7 @@ const SearchStays = ({ checkin, checkout, guests, rooms }) => {
   return (
     <Card>
       <Row className="mt-3">
-        <Card.Text as="h5" className="font-weight-bolder text-muted">
+        <Card.Text as="h5" className="font-weight-bolder text-muted d-flex justify-content-center">
           Search Accomodations
         </Card.Text>
       </Row>

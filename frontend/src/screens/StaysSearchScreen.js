@@ -182,9 +182,9 @@ const StaysSearchScreen = () => {
           {isListLoading ? (
             <Loader />
           ) : allAccomodations.length <= 0 ? (
-            <Message variant='danger'>No Hotels or Accomodations Found</Message>
+            <Message variant='danger'>No Hotels or Accomodations Found. Please Modify Search Queries!</Message>
           ) : (
-            <Card style={{ border: '1px solid black' }}>
+            <Card>
               {allAccomodations.map((accomodation) => (
                 <LinkContainer to=''>
                   <Card className='mx-2 my-3' key={accomodation._id}>
