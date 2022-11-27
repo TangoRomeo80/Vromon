@@ -183,7 +183,7 @@ const StaysSearchScreen = () => {
           {isListLoading ? (
             <Loader />
           ) : allAccomodations.length <= 0 ? (
-            <Message variant='danger'>No Hotels or Accomodations Found</Message>
+            <Message variant='danger'>No Hotels or Accomodations Found. Please Modify Search Queries!</Message>
           ) : (
             <Card>
               {allAccomodations.map((accomodation) => (

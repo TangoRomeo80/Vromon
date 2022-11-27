@@ -163,7 +163,7 @@ const TourSearchScreen = () => {
 
           <Row className="my-4">
             <Col sm={12} md={4} lg={4}>
-              <LinkContainer to="" style={{ border: "1px solid black" }}>
+              <LinkContainer to="" style={{ border: "1px solid black", width: "300px" }}>
                 <Card className="mb-2">
                   <Card.Img
                     cascade
