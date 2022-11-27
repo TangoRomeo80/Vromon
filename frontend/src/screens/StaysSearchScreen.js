@@ -50,31 +50,37 @@ const StaysSearchScreen = () => {
     }
     if (isListSuccess) {
       const filteredServices = services.filter((service) => {
-        if (checkinDateSearch === "") {
-          // return service
-          toast.error("Please select checkin date", { position: "top-center" });
-        } else if (checkoutDateSearch === "") {
-          // return service
-          toast.error("Please select checkout date", {
-            position: "top-center",
-          });
-        } else if (guestCountSearch === 0) {
-          toast.error("Please select number of guests", {
-            position: "top-center",
-          });
-        } else if (roomCountSearch === 0) {
-          toast.error("Please select number of rooms", {
-            position: "top-center",
-          });
-        } else if (
-          service.checkinDate === checkinDateSearch &&
-          service.checkoutDate === checkoutDateSearch &&
-          service.guestCount === guestCountSearch &&
-          service.roomCount === roomCountSearch
-        ) {
-          return service;
+        if (checkinDateSearch === '') {
+          return service
         }
-      });
+        else if(service.checkinDate === checkinDateSearch){
+          return service
+        }
+        })
+        .filter((service) => {
+          if (checkoutDateSearch === '') {
+            return service
+          }
+          else if(service.checkoutDate === checkoutDateSearch){
+            return service
+          }
+        })
+        .filter((service) => {
+          if (guestCountSearch === 0) {
+            return service
+          }
+          else if(service.guestCount === guestCountSearch){
+            return service
+          }
+        })
+        .filter((service) => {
+          if (roomCountSearch === 0) {
+            return service
+          }
+          else if(service.roomCount === roomCountSearch){
+            return service
+          }
+        })
       setAllAccomodations(filteredServices);
     }
     else{
