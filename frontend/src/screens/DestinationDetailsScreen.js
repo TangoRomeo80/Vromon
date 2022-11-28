@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Row, Col, Container, Card, Button } from 'react-bootstrap'
 import { FaCar, FaUmbrellaBeach } from 'react-icons/fa'
+import { MdLocationOn } from 'react-icons/md'
 import { BiHotel } from 'react-icons/bi'
 import ListGroup from 'react-bootstrap/ListGroup'
 import Carousel from 'react-bootstrap/Carousel'
@@ -15,6 +16,7 @@ import {
   getDestinationById,
   resetDestinationDetails,
 } from '../features/destination/destinationSlice'
+import Rating from '../components/Rating'
 
 const DestinationDetails = () => {
   const dispatch = useDispatch()
@@ -73,6 +75,29 @@ const DestinationDetails = () => {
                       src={destination.coverImg}
                       style={{ maxHeight: '40vh', objectFit: 'cover' }}
                     />
+                    <Card.Body cascade>
+                      <Card.Title>{destination.name}</Card.Title>
+                      <Card.Text>
+                        <MdLocationOn /> {destination.district},
+                        {destination.division}
+                      </Card.Text>
+                      <Card.Text>
+                        <Rating
+                          value={destination.rating}
+                          text={`${destination.numOfRatings} reviews`}
+                        />
+                      </Card.Text>
+                      <Card.Text>
+                        <Button
+                          className='me-1'
+                          style={{ backgroundColor: 'indigo' }}
+                        >
+                          Write a Review
+                        </Button>
+                          <Button className='ms-1'
+                          style={{ backgroundColor: 'green' }}>See all Reviews</Button>
+                      </Card.Text>
+                    </Card.Body>
                   </Card>
                 </Col>
               </Row>
@@ -83,7 +108,7 @@ const DestinationDetails = () => {
                   lg={12}
                   className='d-flex justify-content-center align-items-center'
                 >
-                  <Card className='mb-2 text-center w-75'>
+                  <Card className='mb-2 text-center w-100'>
                     <Card.Header as='h3' className='text-center'>
                       Services in {destination.name}
                     </Card.Header>
