@@ -17,6 +17,7 @@ import {
   resetDestinationDetails,
 } from '../features/destination/destinationSlice'
 import Rating from '../components/Rating'
+import AddReview from '../components/AddReview'
 
 const DestinationDetails = () => {
   const dispatch = useDispatch()
@@ -88,14 +89,15 @@ const DestinationDetails = () => {
                         />
                       </Card.Text>
                       <Card.Text>
-                        <Button
+                        <AddReview />
+                        {/* <Button
                           className='me-1'
                           style={{ backgroundColor: 'indigo' }}
                         >
                           Write a Review
                         </Button>
                           <Button className='ms-1'
-                          style={{ backgroundColor: 'green' }}>See all Reviews</Button>
+                          style={{ backgroundColor: 'green' }}>See all Reviews</Button> */}
                       </Card.Text>
                     </Card.Body>
                   </Card>
