@@ -52,6 +52,20 @@ const deleteDestination = async (id, token) => {
   return response.data.data
 }
 
+//Add destination review
+const addDestinationReview = async (id, reviewData, token) => {
+  const response = await axios.post(
+    `/api/destinations/${id}/reviews`,
+    reviewData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  )
+  return response.data.data
+}
+
 const destinationService = {
   getAllDestinations,
   getDestinationById,
@@ -59,6 +73,7 @@ const destinationService = {
   updateDestination,
   deleteDestination,
   getTopDestinations,
+  addDestinationReview,
 }
 
 export default destinationService

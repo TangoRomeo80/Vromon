@@ -69,6 +69,7 @@ const PopularDestinations = () => {
                       <Rating
                         value={destination.rating}
                         text={`${destination.numOfRatings} reviews`}
+                        num={destination.numOfRatings}
                       />
                     </Card.Text>
                   </Card.Body>

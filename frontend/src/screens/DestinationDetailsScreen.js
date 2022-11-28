@@ -34,6 +34,10 @@ const DestinationDetails = () => {
     detailsErrorMessage,
   } = useSelector((state) => state.destination)
 
+  const reFetchDestiantion = () => {
+    dispatch(getDestinationById(params.id))
+  }
+
   useEffect(() => {
     if (isDetailsError) {
       toast.error(detailsErrorMessage, { position: 'top-center' })
@@ -87,11 +91,12 @@ const DestinationDetails = () => {
                         <Rating
                           value={destination.rating}
                           text={`${destination.numOfRatings} reviews`}
+                          num={destination.numOfRatings}
                         />
                       </Card.Text>
                       <Card.Text>
-                        <AddReview />
-                        <ReadReviews />
+                        <AddReview reset={reFetchDestiantion} id={params.id} />
+                        <ReadReviews id={params.id} />
                       </Card.Text>
                     </Card.Body>
                   </Card>

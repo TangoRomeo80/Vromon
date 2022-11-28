@@ -24,6 +24,10 @@ const initialState = {
   isDeleteSuccess: false,
   isDeleteLoading: false,
   deleteErrorMessage: '',
+  isReviewError: false,
+  isReviewSuccess: false,
+  isReviewLoading: false,
+  reviewErrorMessage: '',
 }
 
 //get all destinations
@@ -130,6 +134,28 @@ export const deleteDestination = createAsyncThunk(
   }
 )
 
+//Add destination review
+export const addDestinationReview = createAsyncThunk(
+  'destination/addDestinationReview',
+  async (data, thunkAPI) => {
+    const { id, reviewData } = data
+    try {
+      const token = thunkAPI.getState().auth.userInfo.token
+      return await destinationService.addDestinationReview(
+        id,
+        reviewData,
+        token
+      )
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 const destinationSlice = createSlice({
   name: 'destination',
   initialState,
@@ -147,6 +173,12 @@ const destinationSlice = createSlice({
       state.isDetailsSuccess = false
       state.isDetailsLoading = false
       state.detailsErrorMessage = ''
+    },
+    resetDestinationReview: (state) => {
+      state.isReviewError = false
+      state.isReviewSuccess = false
+      state.isReviewLoading = false
+      state.reviewErrorMessage = ''
     },
   },
   extraReducers: (builder) => {
@@ -271,9 +303,36 @@ const destinationSlice = createSlice({
         state.isDeleteError = true
         state.deleteErrorMessage = action.payload
       })
+      .addCase(addDestinationReview.pending, (state) => {
+        state.isReviewLoading = true
+        state.isReviewError = false
+        state.isReviewSuccess = false
+        state.reviewErrorMessage = ''
+      })
+      .addCase(addDestinationReview.fulfilled, (state, action) => {
+        state.isReviewLoading = false
+        state.isReviewSuccess = true
+        state.isReviewError = false
+        state.reviewErrorMessage = ''
+        state.destinations = state.destinations.map((destination) =>
+          destination._id === action.payload._id ? action.payload : destination
+        )
+        state.destination =
+          state.destination._id === action.payload._id
+            ? action.payload
+            : state.destination
+      })
+      .addCase(addDestinationReview.rejected, (state, action) => {
+        state.isReviewLoading = false
+        state.isReviewError = true
+        state.reviewErrorMessage = action.payload
+      })
   },
 })
 
-export const { resetDestinationList, resetDestinationDetails } =
-  destinationSlice.actions
+export const {
+  resetDestinationList,
+  resetDestinationDetails,
+  resetDestinationReview,
+} = destinationSlice.actions
 export default destinationSlice.reducer
