@@ -18,6 +18,7 @@ import {
 } from '../features/destination/destinationSlice'
 import Rating from '../components/Rating'
 import AddReview from '../components/AddReview'
+import ReadReviews from '../components/ReadReviews'
 
 const DestinationDetails = () => {
   const dispatch = useDispatch()
@@ -90,14 +91,7 @@ const DestinationDetails = () => {
                       </Card.Text>
                       <Card.Text>
                         <AddReview />
-                        {/* <Button
-                          className='me-1'
-                          style={{ backgroundColor: 'indigo' }}
-                        >
-                          Write a Review
-                        </Button>
-                          <Button className='ms-1'
-                          style={{ backgroundColor: 'green' }}>See all Reviews</Button> */}
+                        <ReadReviews />
                       </Card.Text>
                     </Card.Body>
                   </Card>
