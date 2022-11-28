@@ -47,8 +47,7 @@ const StaysSearchScreen = () => {
   useEffect(() => {
     if (isListError) {
       toast.error(listErrorMessage, { position: 'top-center' })
-    }
-    else if (isListSuccess) {
+    } else if (isListSuccess) {
       const filteredServices = services
         .filter((service) => {
           if (checkinDateSearch === '') {
