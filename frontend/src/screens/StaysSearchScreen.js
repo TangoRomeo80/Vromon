@@ -106,7 +106,7 @@ const StaysSearchScreen = () => {
         </Col>
         <Col lg={3} md={3} sm={6} className='d-flex justify-content-end'>
           <Button onClick={() => setModifySearch(!modifySearch)}>
-            {modifySearch ? 'Cancle Search' : 'Modify Search'}
+            {modifySearch ? 'Cancel Search' : 'Modify Search'}
           </Button>
         </Col>
       </Row>

@@ -89,18 +89,6 @@ const SearchTours = ({ city, travel, traveler }) => {
       >
         <Button>Submit Search</Button>
       </a>
-
-      {/* <Link
-        className='mb-3 mx-2 d-grid gap-3'
-        to='tourSearch'
-        state={{
-          searchTourCity: searchTourCity,
-          travelDate: travelDate,
-          travelerCount: travelerCount,
-        }}
-      >
-        <Button>Search</Button>
-      </Link> */}
     </Card>
   );
 };
