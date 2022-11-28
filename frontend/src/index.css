@@ -5,3 +5,7 @@ html {
 main {
   min-height: 85vh;
 }
+
+.rating span {
+  margin: 0.1rem;
+}
