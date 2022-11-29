@@ -17,8 +17,8 @@ import {
   resetDestinationDetails,
 } from '../features/destination/destinationSlice'
 import Rating from '../components/Rating'
-import AddReview from '../components/AddReview'
-import ReadReviews from '../components/ReadReviews'
+import AddDestinationReview from '../components/AddDestinationReview'
+import ReadReviews from '../components/ReadDestinationReviews'
 
 const DestinationDetails = () => {
   const dispatch = useDispatch()
@@ -95,8 +95,8 @@ const DestinationDetails = () => {
                         />
                       </Card.Text>
                       <Card.Text>
-                        <AddReview reset={reFetchDestiantion} id={params.id} />
-                        <ReadReviews id={params.id} />
+                        <AddDestinationReview reset={reFetchDestiantion} id={params.id} />
+                        <ReadReviews destination={destination} user />
                       </Card.Text>
                     </Card.Body>
                   </Card>

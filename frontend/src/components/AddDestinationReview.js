@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Modal, Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
-import { addDestinationReview, resetDestinationReview } from '../features/destination/destinationSlice'
+import {
+  addDestinationReview,
+  resetDestinationReview,
+} from '../features/destination/destinationSlice'
 
-const AddReview = ({ reset, id }) => {
+const AddDestinationReview = ({ reset, id }) => {
   const dispatch = useDispatch()
 
   const { userInfo } = useSelector((state) => state.auth)
@@ -87,7 +90,7 @@ const AddReview = ({ reset, id }) => {
                 value={rating}
                 onChange={(e) => setRating(e.target.value)}
               >
-                <option value=''>Select...</option>
+                <option value=''>Select Rating...</option>
                 <option value='1'>1 - Poor</option>
                 <option value='2'>2 - Fair</option>
                 <option value='3'>3 - Good</option>
@@ -119,4 +122,4 @@ const AddReview = ({ reset, id }) => {
   )
 }
 
-export default AddReview
+export default AddDestinationReview
