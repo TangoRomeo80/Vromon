@@ -128,7 +128,7 @@ export const addReview = (Model) =>
     }
 
     const alreadyReviewd = doc.reviews.find(
-      (review) => review.user.toString() === user.toString()
+      (review) => review.user._id.toString() === user.toString()
     )
 
     if (alreadyReviewd) {
