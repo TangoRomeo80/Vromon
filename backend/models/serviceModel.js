@@ -194,6 +194,15 @@ const transportSchema = new mongoose.Schema({
     default: '',
   },
 
+  busType: {
+    type: String,
+    default: 'AC',
+    enum: {
+      values: ['AC', 'Non-AC'],
+      message: 'Bus type must be AC or Non-AC',
+    },
+  },
+
   busProvider: {
     type: String,
     default: '',

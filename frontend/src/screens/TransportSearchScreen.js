@@ -10,8 +10,10 @@ import {
   Form,
   InputGroup,
   Button,
+  Modal,
 } from 'react-bootstrap'
 import { MdLocationOn } from 'react-icons/md'
+import { FaFilter } from 'react-icons/fa'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -49,6 +51,16 @@ const TransportScreen = () => {
     searchParams.get('rental') === 'true' ? true : false
   )
   const [modifySearch, setModifySearch] = useState(false)
+  const [maxPrice, setMaxPrice] = useState(5000)
+  const [busType, setBusType] = useState('AC')
+  const [busProvider, setBusProvider] = useState('')
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth < 768 ? true : false
+  )
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
   const {
     services,
     isListLoading,
@@ -162,6 +174,16 @@ const TransportScreen = () => {
   }, [dispatch, services, isListSuccess, isListError, listErrorMessage])
 
   useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(true)
+      } else {
+        setIsMobile(false)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
     return () => {
       dispatch(resetServiceList())
     }
@@ -224,7 +246,7 @@ const TransportScreen = () => {
           </Row>
         )}
 
-        <Card className='mb-3'>
+        {/* <Card className='mb-3'>
           <Row className='d-flex'>
             <Col sm={4} md={3} lg={3}>
               <Card.Img
@@ -286,7 +308,78 @@ const TransportScreen = () => {
               </Card.Body>
             </Col>
           </Row>
-        </Card>
+        </Card> */}
+        <Row>
+          <Col lg={3} md={3} sm={12}>
+            {isMobile ? (
+              <>
+                <Button
+                  className='ms-1'
+                  style={{ backgroundColor: 'green' }}
+                  onClick={handleShow}
+                >
+                  <FaFilter className='me-1' />
+                  Filters
+                </Button>
+                <Modal
+                  show={show}
+                  onHide={handleClose}
+                  backdrop='static'
+                  keyboard={false}
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title>Filters for Bus Services</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Form>
+                      <Form.Group className='mb-3' controlId='busType'>
+                        <Form.Label>Bus Type</Form.Label>
+                        <Form.Select
+                          aria-label='Default select example'
+                          onChange={(e) => setBusType(e.target.value)}
+                        >
+                          <option value=''>All</option>
+                          <option value='AC'>AC</option>
+                          <option value='Non-AC'>Non AC</option>
+                        </Form.Select>
+                      </Form.Group>
+                      <Form.Group className='mb-3' controlId='busProvider'>
+                        <Form.Label>Bus Provider</Form.Label>
+                        <Form.Select
+                          aria-label='Default select example'
+                          onChange={(e) => setBusProvider(e.target.value)}
+                        >
+                          <option value=''>All</option>
+                          {allTransports.map((transport) => (
+                            <option value={transport._id}>
+                              {transport.busProvider}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </Form.Group>
+                      <Form.Group className='mb-3' controlId='priceRange'>
+                        <Form.Label>Price Range: BDT{maxPrice}</Form.Label>
+                        <Form.Range
+                          min={0}
+                          max={10000}
+                          step={100}
+                          value={maxPrice}
+                          onChange={(e) => setMaxPrice(e.target.value)}
+                        />
+                      </Form.Group>
+                    </Form>
+                  </Modal.Body>
+
+                  <Modal.Footer>
+                    <Button variant='secondary' onClick={handleClose}>
+                      Update
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              </>
+            ) : null}
+          </Col>
+        </Row>
       </Container>
     </div>
   )
