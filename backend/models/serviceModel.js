@@ -214,16 +214,16 @@ const transportSchema = new mongoose.Schema({
       'There needs to be a pickupFrom for car',
     ],
   },
-  // dropTo: {
-  //   type: String,
-  //   default: '',
-  //   required: [
-  //     function () {
-  //       return this.transportType === 'car'
-  //     },
-  //     'There needs to be a dropTo for car',
-  //   ],
-  // },
+  dropTo: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a dropTo for car',
+    ],
+  },
   rentDuration: {
     type: Number,
     default: 0,
@@ -234,46 +234,46 @@ const transportSchema = new mongoose.Schema({
       'There needs to be a rentDuration for car',
     ],
   },
-  // rentStartDate: {
-  //   type: Date,
-  //   default: Date.now(),
-  //   required: [
-  //     function () {
-  //       return this.transportType === 'car'
-  //     },
-  //     'There needs to be a rentStartDate for car',
-  //   ],
-  // },
-  // rentEndDate: {
-  //   type: Date,
-  //   default: Date.now(),
-  //   required: [
-  //     function () {
-  //       return this.transportType === 'car'
-  //     },
-  //     'There needs to be a rentEndDate for car',
-  //   ],
-  // },
-  // rentStartTime: {
-  //   type: String,
-  //   default: '',
-  //   required: [
-  //     function () {
-  //       return this.transportType === 'car'
-  //     },
-  //     'There needs to be a rentStartTime for car',
-  //   ],
-  // },
-  // rentEndTime: {
-  //   type: String,
-  //   default: '',
-  //   required: [
-  //     function () {
-  //       return this.transportType === 'car'
-  //     },
-  //     'There needs to be a rentEndTime for car',
-  //   ],
-  // },
+  pickUpDate: {
+    type: Date,
+    default: Date.now(),
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a rentStartDate for car',
+    ],
+  },
+  dropOffDate: {
+    type: Date,
+    default: Date.now(),
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a rentEndDate for car',
+    ],
+  },
+  pickUpTime: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a rentStartTime for car',
+    ],
+  },
+  dropOffTime: {
+    type: String,
+    default: '',
+    required: [
+      function () {
+        return this.transportType === 'car'
+      },
+      'There needs to be a rentEndTime for car',
+    ],
+  },
   driverName: {
     type: String,
     default: '',

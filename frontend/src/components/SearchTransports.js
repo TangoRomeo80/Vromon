@@ -293,7 +293,19 @@ const RentalSearch = ({
   )
 }
 
-const SearchTransports = ({ rental }) => {
+const SearchTransports = ({
+  rental,
+  pick,
+  drop,
+  pickDate,
+  dropDate,
+  pickTime,
+  dropTime,
+  from,
+  to,
+  dep,
+  ret,
+}) => {
   const [isRent, setIsRent] = useState(rental ? rental : false)
 
   return (
@@ -322,10 +334,30 @@ const SearchTransports = ({ rental }) => {
             {isRent ? 'Rent a Car' : 'Book a Bus'}
           </Card.Text>
         </Row>
-        {isRent ? <RentalSearch /> : <TicketSearch />}
+        {isRent ? (
+          <RentalSearch
+            pick={pick}
+            drop={drop}
+            pickDate={pickDate}
+            dropDate={dropDate}
+            pickTime={pickTime}
+            dropTime={dropTime}
+          />
+        ) : (
+          <TicketSearch
+            from={from}
+            to={to}
+            dep={dep}
+            ret={ret}
+          />
+        )}
       </Card>
     </div>
   )
+}
+
+SearchTransports.defaultProps = {
+  rental: false,
 }
 
 export default SearchTransports

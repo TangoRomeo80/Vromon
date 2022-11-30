@@ -45,7 +45,9 @@ const TransportScreen = () => {
   const [dropOffTime, setDropOffTime] = useState(
     searchParams.get('dropTime') || ''
   )
-  const [isRental, setIsRental] = useState(searchParams.get('rental') || false)
+  const [isRental, setIsRental] = useState(
+    searchParams.get('rental') === 'true' ? true : false
+  )
   const [modifySearch, setModifySearch] = useState(false)
   const {
     services,
@@ -60,7 +62,7 @@ const TransportScreen = () => {
       toast.error(listErrorMessage, { position: 'top-center' })
     }
     if (isListSuccess) {
-      if (isRental) {
+      if (!isRental) {
         const filteredServices = services
           .filter((service) => {
             if (departFrom === '') {
@@ -167,88 +169,61 @@ const TransportScreen = () => {
 
   return (
     <div>
-      <Container className='mb-3 pt-5'>
-        <Card className='mb-3 pt-5 bg-light shadow'>
-          <Row>
-            <Card.Text as='h2' className='font-weight-bolder text-center'>
-              Search Transports
+      <Container className='mb-3'>
+        <Row className='mb-2 pt-3'>
+          <Col lg={6} md={6} sm={12} className='d-flex justify-content-center'>
+            <Card.Text>
+              {isRental ? (
+                <>
+                  {pickUpFrom && pickUpDate && dropOffTo && dropOffDate
+                    ? `Rental Pick up from ${pickUpFrom} to ${dropOffTo} on ${pickUpDate} at ${pickUpTime}`
+                    : 'Car rental list'}
+                </>
+              ) : (
+                <>
+                  {departFrom && departDate && departTo
+                    ? `Transport from ${departFrom} to ${departTo} on ${departDate}`
+                    : 'Transport list'}
+                </>
+              )}
             </Card.Text>
-          </Row>
-          <Row className='my-5 mx-3'>
-            <Col>
-              <Card.Text>Depart From</Card.Text>
-              <Form.Group className='mb-3' controlId='departFrom'>
-                <Form.Control
-                  type='text'
-                  placeholder='Depart From'
-                ></Form.Control>
-              </Form.Group>
-            </Col>
+          </Col>
+          <Col lg={6} md={6} sm={12} className='d-flex justify-content-center'>
+            <Button onClick={() => setModifySearch(!modifySearch)}>
+              {modifySearch ? 'Cancel Search' : 'Modify Search'}
+            </Button>
+          </Col>
+        </Row>
 
-            <Col>
-              <Card.Text>Depart To</Card.Text>
-              <Form.Group className='mb-3' controlId='departTo'>
-                <Form.Control
-                  type='text'
-                  placeholder='Depart To'
-                ></Form.Control>
-              </Form.Group>
-            </Col>
-
-            <Col style={{ width: '15px' }}>
-              <Card.Text>Depart On</Card.Text>
-              <Form.Group className='mb-3' controlId='departOn'>
-                <InputGroup>
-                  <div
-                    className='cancle-icon'
-                    style={{
-                      position: 'absolute',
-                      right: '5px',
-                      top: '5px',
-                      zIndex: '9999',
-                      width: '3vh',
-                    }}
-                  ></div>
-                </InputGroup>
-                <Form.Control type='date'></Form.Control>
-              </Form.Group>
-            </Col>
-
-            <Col>
-              <Card.Text>Return On</Card.Text>
-              <Form.Group className='mb-3' controlId='returnOn'>
-                <InputGroup>
-                  <div
-                    className='cancle-icon'
-                    style={{
-                      position: 'absolute',
-                      right: '5px',
-                      top: '5px',
-                      zIndex: '9999',
-                      width: '3vh',
-                    }}
-                  ></div>
-                </InputGroup>
-                <Form.Control type='date'></Form.Control>
-              </Form.Group>
-            </Col>
-
-            <Col>
-              <Card.Text>Category</Card.Text>
-              <Form.Group className='mb-3' controlId='category'>
-                <Form.Control
-                  className='form-select'
-                  as='select'
-                  type='select'
-                  placeholder='Select Category'
-                >
-                  <option value='AC'>AC</option>
-                  <option value='Non AC'>Non AC</option>
-                </Form.Control>
-              </Form.Group>
+        {modifySearch && (
+          <Row className='mb-2 pt-3'>
+            <Col
+              lg={12}
+              md={12}
+              sm={12}
+              className='d-flex justify-content-center align-items-center'
+            >
+              <Card className='text-center w-100 shadow bg-light'>
+                <Card.Body>
+                  <SearchTransports
+                    rental={isRental}
+                    pick={pickUpFrom}
+                    drop={dropOffTo}
+                    pickDate={pickUpDate}
+                    dropDate={dropOffDate}
+                    pickTime={pickUpTime}
+                    dropTime={dropOffTime}
+                    from={departFrom}
+                    to={departTo}
+                    dep={departDate}
+                    ret={returnDate}
+                  />
+                </Card.Body>
+              </Card>
             </Col>
           </Row>
-        </Card>
+        )}
+
         <Card className='mb-3'>
           <Row className='d-flex'>
             <Col sm={4} md={3} lg={3}>

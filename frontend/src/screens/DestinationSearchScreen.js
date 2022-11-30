@@ -98,7 +98,7 @@ const DestinationSearchScreen = () => {
               sm={12}
               className='d-flex justify-content-center align-items-center'
             >
-              <Card className='text-center w-75 shadow bg-light'>
+              <Card className='text-center w-100 shadow bg-light'>
                 <Card.Body>
                   <SearchDestinations
                     district={districtSearch}
