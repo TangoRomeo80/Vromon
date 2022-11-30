@@ -358,7 +358,9 @@ const TransportScreen = () => {
                         </Form.Select>
                       </Form.Group>
                       <Form.Group className='mb-3' controlId='priceRange'>
-                        <Form.Label>Price Range: BDT{maxPrice}</Form.Label>
+                        <Form.Label>
+                          Maximum Price Range: BDT{maxPrice}
+                        </Form.Label>
                         <Form.Range
                           min={0}
                           max={10000}
