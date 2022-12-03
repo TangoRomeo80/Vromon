@@ -203,7 +203,7 @@ const transportSchema = new mongoose.Schema({
     },
   },
 
-  pickupFrom: {
+  pickUpFrom: {
     type: String,
     default: '',
     required: [

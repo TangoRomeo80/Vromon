@@ -154,7 +154,7 @@ const TransportScreen = () => {
             if (pickUpFrom === '') {
               return service
             } else if (
-              service.transportInfo.pickUpFrom
+              service.transportInfo.pickupFrom
                 .toLowerCase()
                 .includes(pickUpFrom.toLowerCase())
             ) {
@@ -165,7 +165,7 @@ const TransportScreen = () => {
             if (dropOffTo === '') {
               return service
             } else if (
-              service.transportInfo.dropOffTo
+              service.transportInfo.dropTo
                 .toLowerCase()
                 .includes(dropOffTo.toLowerCase())
             ) {
@@ -175,14 +175,29 @@ const TransportScreen = () => {
           .filter((service) => {
             if (pickUpDate === null) {
               return service
-            } else if (service.transportInfo.pickUpDate === pickUpDate) {
+            } else if (
+              new Date(service.transportInfo.pickUpDate)
+                .toISOString()
+                .split('T')[0] === pickUpDate
+            ) {
               return service
             }
           })
           .filter((service) => {
             if (dropOffDate === null) {
               return service
-            } else if (service.transportInfo.dropOffDate === dropOffDate) {
+            } else if (
+              new Date(service.transportInfo.dropOffDate)
+                .toISOString()
+                .split('T')[0] === dropOffDate
+            ) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (maxPrice === 5000) {
+              return service
+            } else if (service.price <= maxPrice) {
               return service
             }
           })
@@ -421,6 +436,73 @@ const TransportScreen = () => {
                     </Card>
                   </>
                 )}
+              </Col>
+              <Col lg={9} md={9} sm={12}>
+                <Card className='shadow'>
+                  <Card.Body>
+                    <Card.Title as='h5'>Car Rentals</Card.Title>
+                    {isListLoading ? (
+                      <Loader />
+                    ) : allTransports.length === 0 ? (
+                      <Message variant='info'>No Car rentals Found</Message>
+                    ) : (
+                      <>
+                        {allTransports.map((transport) => (
+                          <Card className='shadow my-2'>
+                            <Card.Body>
+                              <Row>
+                                <Col lg={3} md={3} sm={12}>
+                                  <Image
+                                    src={transport.coverImg}
+                                    alt={transport.serviceName}
+                                    fluid
+                                  />
+                                </Col>
+                                <Col lg={5} md={5} sm={12}>
+                                  <Card.Title as='h5'>
+                                    {transport.serviceName}
+                                  </Card.Title>
+                                  {/* <Card.Text>
+                                    <strong>Bus Type: </strong>
+                                    {transport.transportInfo.busType}
+                                  </Card.Text>
+                                  <Card.Text>
+                                    <strong>Start from: </strong>
+                                    {transport.transportInfo.departFrom}
+                                  </Card.Text>
+                                  <Card.Text>
+                                    <strong>Destination: </strong>
+                                    {transport.transportInfo.departTo}
+                                  </Card.Text>
+                                </Col>
+                                <Col lg={4} md={4} sm={12}>
+                                  <Card.Text>
+                                    <strong>Departure Date: </strong>
+                                    {transport.transportInfo.departDate}
+                                  </Card.Text>
+                                  <Card.Text>
+                                    <strong>Departure time: </strong>
+                                    {transport.transportInfo.departTime}
+                                  </Card.Text>
+                                  <Card.Text style={{ color: 'red' }}>
+                                    <strong>Price: </strong>
+                                    BDT {transport.price}
+                                  </Card.Text> */}
+                                </Col>
+                              </Row>
+                              <Link
+                                to={`#`}
+                                className='btn btn-primary btn-success'
+                              >
+                                Book Now
+                              </Link>
+                            </Card.Body>
+                          </Card>
+                        ))}
+                      </>
+                    )}
+                  </Card.Body>
+                </Card>
               </Col>
             </>
           ) : (
