@@ -203,16 +203,6 @@ const transportSchema = new mongoose.Schema({
     },
   },
 
-  busProvider: {
-    type: String,
-    default: '',
-    required: [
-      function () {
-        return this.transportType === 'bus'
-      },
-      'There needs to be a busProvider for bus',
-    ],
-  },
   pickupFrom: {
     type: String,
     default: '',

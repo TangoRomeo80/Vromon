@@ -11,6 +11,7 @@ import {
   InputGroup,
   Button,
   Modal,
+  Image,
 } from 'react-bootstrap'
 import { MdLocationOn } from 'react-icons/md'
 import { FaFilter } from 'react-icons/fa'
@@ -72,12 +73,11 @@ const TransportScreen = () => {
   useEffect(() => {
     if (isListError) {
       toast.error(listErrorMessage, { position: 'top-center' })
-    }
-    if (isListSuccess) {
+    } else if (isListSuccess) {
       if (!isRental) {
         const filteredServices = services
           .filter((service) => {
-            return service.transportType === 'bus'
+            return service.transportInfo.transportType === 'bus'
           })
           .filter((service) => {
             if (departFrom === '') {
@@ -104,15 +104,43 @@ const TransportScreen = () => {
           .filter((service) => {
             if (departDate === null) {
               return service
-            } else if (service.transportInfo.departDate === departDate) {
+            } else if (
+              new Date(service.transportInfo.departDate)
+                .toISOString()
+                .split('T')[0] === departDate
+            ) {
               return service
             }
           })
           .filter((service) => {
             if (returnDate === null) {
               return service
+            } else if (
+              new Date(service.transportInfo.returnDate)
+                .toISOString()
+                .split('T')[0] === returnDate
+            ) {
+              return service
             }
-            if (service.transportInfo.returnDate === returnDate) {
+          })
+          .filter((service) => {
+            if (busType === '') {
+              return service
+            } else if (service.transportInfo.busType === busType) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (busProvider === '') {
+              return service
+            } else if (service.serviceName === busProvider) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (maxPrice === 5000) {
+              return service
+            } else if (service.price <= maxPrice) {
               return service
             }
           })
@@ -120,7 +148,7 @@ const TransportScreen = () => {
       } else {
         const filteredServices = services
           .filter((service) => {
-            return service.transportType === 'car'
+            return service.transportInfo.transportType === 'car'
           })
           .filter((service) => {
             if (pickUpFrom === '') {
@@ -158,48 +186,47 @@ const TransportScreen = () => {
               return service
             }
           })
-          // .filter((service) => {
-          //   if (pickUpTime === '') {
-          //     return service
-          //   } else if (service.transportInfo.pickUpTime == pickUpTime) {
-          //     return service
-          //   }
-          // })
-          // .filter((service) => {
-          //   if (dropOffTime === '') {
-          //     return service
-          //   } else if (service.transportInfo.dropOffTime == dropOffTime) {
-          //     return service
-          //   }
-          // })
-          .filter((service) => {
-            if (busType === '') {
-              return service
-            } else if (service.transportInfo.busType === busType) {
-              return service
-            }
-          })
-          .filter((service) => {
-            if (busProvider === '') {
-              return service
-            } else if (service.transportInfo.busProvider === busProvider) {
-              return service
-            }
-          })
-          .filter((service) => {
-            if (maxPrice === 5000) {
-              return service
-            } else if (service.price <= maxPrice) {
-              return service
-            }
-          })
+        // .filter((service) => {
+        //   if (pickUpTime === '') {
+        //     return service
+        //   } else if (service.transportInfo.pickUpTime == pickUpTime) {
+        //     return service
+        //   }
+        // })
+        // .filter((service) => {
+        //   if (dropOffTime === '') {
+        //     return service
+        //   } else if (service.transportInfo.dropOffTime == dropOffTime) {
+        //     return service
+        //   }
+        // })
 
         setAllTransports(filteredServices)
       }
     } else {
       dispatch(getAllTransports())
     }
-  }, [dispatch, services, isListSuccess, isListError, listErrorMessage])
+  }, [
+    dispatch,
+    services,
+    isListSuccess,
+    isListError,
+    listErrorMessage,
+    busProvider,
+    busType,
+    maxPrice,
+    departFrom,
+    departTo,
+    departDate,
+    returnDate,
+    pickUpFrom,
+    dropOffTo,
+    pickUpDate,
+    dropOffDate,
+    pickUpTime,
+    dropOffTime,
+    isRental,
+  ])
 
   useEffect(() => {
     window.addEventListener('resize', () => {
@@ -321,7 +348,7 @@ const TransportScreen = () => {
                               <option value=''>All</option>
                               {allTransports.map((transport) => (
                                 <option value={transport._id}>
-                                  {transport.busProvider}
+                                  {transport.serviceName}
                                 </option>
                               ))}
                             </Form.Select>
@@ -373,7 +400,7 @@ const TransportScreen = () => {
                             <option value=''>All</option>
                             {allTransports.map((transport) => (
                               <option value={transport._id}>
-                                {transport.busProvider}
+                                {transport.serviceName}
                               </option>
                             ))}
                           </Form.Select>
@@ -408,12 +435,52 @@ const TransportScreen = () => {
                         {allTransports.map((transport) => (
                           <Card className='shadow my-2'>
                             <Card.Body>
-                              <Card.Title as='h5'>
-                                {transport.transportInfo.busProvider}
-                              </Card.Title>
-                              <Card.Subtitle className='mb-2 text-muted'>
-                                {transport.transportInfo.busType}
-                              </Card.Subtitle>
+                              <Row>
+                                <Col lg={3} md={3} sm={12}>
+                                  <Image
+                                    src={transport.coverImg}
+                                    alt={transport.serviceName}
+                                    fluid
+                                  />
+                                </Col>
+                                <Col lg={5} md={5} sm={12}>
+                                  <Card.Title as='h5'>
+                                    {transport.serviceName}
+                                  </Card.Title>
+                                  <Card.Text>
+                                    <strong>Bus Type: </strong>
+                                    {transport.transportInfo.busType}
+                                  </Card.Text>
+                                  <Card.Text>
+                                    <strong>Start from: </strong>
+                                    {transport.transportInfo.departFrom}
+                                  </Card.Text>
+                                  <Card.Text>
+                                    <strong>Destination: </strong>
+                                    {transport.transportInfo.departTo}
+                                  </Card.Text>
+                                </Col>
+                                <Col lg={4} md={4} sm={12}>
+                                  <Card.Text>
+                                    <strong>Departure Date: </strong>
+                                    {transport.transportInfo.departDate}
+                                  </Card.Text>
+                                  <Card.Text>
+                                    <strong>Departure time: </strong>
+                                    {transport.transportInfo.departTime}
+                                  </Card.Text>
+                                  <Card.Text style={{ color: 'red' }}>
+                                    <strong>Price: </strong>
+                                    BDT {transport.price}
+                                  </Card.Text>
+                                </Col>
+                              </Row>
+                              <Link
+                                to={`#`}
+                                className='btn btn-primary btn-success'
+                              >
+                                Book Now
+                              </Link>
                             </Card.Body>
                           </Card>
                         ))}

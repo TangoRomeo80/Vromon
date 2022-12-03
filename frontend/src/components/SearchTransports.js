@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { Row, Col, Card, Form, ListGroup, Button } from 'react-bootstrap'
 import districts from '../staticData/districts'
-import moment from 'moment'
-import { useDispatch, useSelector } from 'react-redux'
-import { useSearchParams, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const TicketSearch = ({ from, to, dep, ret }) => {
   const [departFrom, setDepartFrom] = useState(from ? from : '')
@@ -121,9 +119,11 @@ const TicketSearch = ({ from, to, dep, ret }) => {
         className='mb-3 mx-2 d-grid gap-3'
         href={`/transportSearch?from=${departFrom}&to=${departTo}&dep=${departOn}&ret=${returnOn}&rental=false`}
         onClick={(e) => {
-          if (!departFrom || !departTo || !departOn || !returnOn) {
+          if (!departFrom || !departTo || !departOn) {
             e.preventDefault()
-            alert('Please fill all the fields')
+            toast.error('Please fill all the fields required', {
+              position: 'top-center',
+            })
           }
         }}
       >
@@ -344,12 +344,7 @@ const SearchTransports = ({
             dropTime={dropTime}
           />
         ) : (
-          <TicketSearch
-            from={from}
-            to={to}
-            dep={dep}
-            ret={ret}
-          />
+          <TicketSearch from={from} to={to} dep={dep} ret={ret} />
         )}
       </Card>
     </div>
