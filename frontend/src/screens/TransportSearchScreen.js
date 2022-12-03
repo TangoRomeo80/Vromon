@@ -303,7 +303,126 @@ const TransportScreen = () => {
 
         <Row>
           {isRental ? (
-            <h1>Hello</h1>
+            <>
+              <Col lg={3} md={3} sm={12}>
+                {isMobile ? (
+                  <>
+                    <Button
+                      className='ms-1'
+                      style={{ backgroundColor: 'green' }}
+                      onClick={handleShow}
+                    >
+                      <FaFilter className='me-1' />
+                      Filters
+                    </Button>
+                    <Modal
+                      show={show}
+                      onHide={handleClose}
+                      backdrop='static'
+                      keyboard={false}
+                    >
+                      <Modal.Header closeButton>
+                        <Modal.Title>Filters for Car Rental</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <Form>
+                          {/* <Form.Group className='mb-3' controlId='busType'>
+                            <Form.Label>Bus Type</Form.Label>
+                            <Form.Select
+                              aria-label='Default select example'
+                              onChange={(e) => setBusType(e.target.value)}
+                            >
+                              <option value=''>All</option>
+                              <option value='AC'>AC</option>
+                              <option value='Non-AC'>Non AC</option>
+                            </Form.Select>
+                          </Form.Group>
+                          <Form.Group className='mb-3' controlId='busProvider'>
+                            <Form.Label>Bus Provider</Form.Label>
+                            <Form.Select
+                              aria-label='Default select example'
+                              onChange={(e) => setBusProvider(e.target.value)}
+                            >
+                              <option value=''>All</option>
+                              {allTransports.map((transport) => (
+                                <option value={transport._id}>
+                                  {transport.serviceName}
+                                </option>
+                              ))}
+                            </Form.Select>
+                          </Form.Group> */}
+                          <Form.Group className='mb-3' controlId='priceRange'>
+                            <Form.Label>
+                              Maximum Price Range: BDT{maxPrice}
+                            </Form.Label>
+                            <Form.Range
+                              min={0}
+                              max={10000}
+                              step={100}
+                              value={maxPrice}
+                              onChange={(e) => setMaxPrice(e.target.value)}
+                            />
+                          </Form.Group>
+                        </Form>
+                      </Modal.Body>
+
+                      <Modal.Footer>
+                        <Button variant='secondary' onClick={handleClose}>
+                          Update
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </>
+                ) : (
+                  <>
+                    <Card className='shadow'>
+                      <Card.Body>
+                        <Card.Title as='h5'>Filters for Car Rentals</Card.Title>
+                        <Form>
+                          {/* <Form.Group className='mb-3' controlId='busType'>
+                            <Form.Label>Bus Type</Form.Label>
+                            <Form.Select
+                              aria-label='Default select example'
+                              onChange={(e) => setBusType(e.target.value)}
+                            >
+                              <option value=''>All</option>
+                              <option value='AC'>AC</option>
+                              <option value='Non-AC'>Non AC</option>
+                            </Form.Select>
+                          </Form.Group>
+                          <Form.Group className='mb-3' controlId='busProvider'>
+                            <Form.Label>Bus Provider</Form.Label>
+                            <Form.Select
+                              aria-label='Default select example'
+                              onChange={(e) => setBusProvider(e.target.value)}
+                            >
+                              <option value=''>All</option>
+                              {allTransports.map((transport) => (
+                                <option value={transport._id}>
+                                  {transport.serviceName}
+                                </option>
+                              ))}
+                            </Form.Select>
+                          </Form.Group> */}
+                          <Form.Group className='mb-3' controlId='priceRange'>
+                            <Form.Label>
+                              Maximum Price Range: BDT{maxPrice}
+                            </Form.Label>
+                            <Form.Range
+                              min={0}
+                              max={10000}
+                              step={100}
+                              value={maxPrice}
+                              onChange={(e) => setMaxPrice(e.target.value)}
+                            />
+                          </Form.Group>
+                        </Form>
+                      </Card.Body>
+                    </Card>
+                  </>
+                )}
+              </Col>
+            </>
           ) : (
             <>
               <Col lg={3} md={3} sm={12}>
