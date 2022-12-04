@@ -4,7 +4,6 @@ import { Navbar, Nav, Container, NavDropdown, Button } from 'react-bootstrap'
 import {
   FaMapMarkerAlt,
   FaCar,
-  FaPlane,
   FaUmbrellaBeach,
   FaUserCircle,
   FaSignOutAlt,
