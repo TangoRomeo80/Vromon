@@ -331,7 +331,7 @@ const TransportScreen = () => {
                 {isMobile ? (
                   <>
                     <Button
-                      className='ms-1'
+                      className='ms-1 mb-2'
                       style={{ backgroundColor: 'green' }}
                       onClick={handleShow}
                     >
@@ -494,7 +494,7 @@ const TransportScreen = () => {
                 {isMobile ? (
                   <>
                     <Button
-                      className='ms-1'
+                      className='ms-1 mb-2'
                       style={{ backgroundColor: 'green' }}
                       onClick={handleShow}
                     >
