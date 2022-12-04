@@ -37,7 +37,7 @@ const StaysSearchScreen = () => {
   const [modifySearch, setModifySearch] = useState(false)
 
   const {
-    services,
+    accomodations,
     isListLoading,
     isListSuccess,
     isListError,
@@ -48,32 +48,32 @@ const StaysSearchScreen = () => {
     if (isListError) {
       toast.error(listErrorMessage, { position: 'top-center' })
     } else if (isListSuccess) {
-      const filteredServices = services
+      const filteredServices = accomodations
         .filter((service) => {
           if (checkinDateSearch === '') {
             return service
-          } else if (service.checkinDate === checkinDateSearch) {
+          } else if (service.accomodationInfo.checkinDate === checkinDateSearch) {
             return service
           }
         })
         .filter((service) => {
           if (checkoutDateSearch === '') {
             return service
-          } else if (service.checkoutDate === checkoutDateSearch) {
+          } else if (service.accomodationInfo.checkoutDate === checkoutDateSearch) {
             return service
           }
         })
         .filter((service) => {
           if (guestCountSearch === 0) {
             return service
-          } else if (service.guestCount === guestCountSearch) {
+          } else if (service.accomodationInfo.maxGuests === guestCountSearch) {
             return service
           }
         })
         .filter((service) => {
           if (roomCountSearch === 0) {
             return service
-          } else if (service.roomCount === roomCountSearch) {
+          } else if (service.accomodationInfo.rooms === roomCountSearch) {
             return service
           }
         })
@@ -81,7 +81,7 @@ const StaysSearchScreen = () => {
     } else {
       dispatch(getAllAcomodations())
     }
-  }, [dispatch, isListError, isListSuccess, services, listErrorMessage])
+  }, [dispatch, isListError, isListSuccess, accomodations, listErrorMessage])
 
   useEffect(() => {
     return () => {
@@ -199,11 +199,11 @@ const StaysSearchScreen = () => {
                       </Col>
                       <Col sm={4} md={6} lg={6}>
                         <Card.Body>
-                          <Card.Title as='h5'>{accomodation.house}</Card.Title>
+                          <Card.Title as='h5'>{accomodation.accomodationInfo.address.house}</Card.Title>
                           <Card.Text>
-                            <MdLocationOn /> &nbsp;{accomodation.street}
-                            {accomodation.area}
-                            {accomodation.city}, Bangladesh
+                            <MdLocationOn /> &nbsp;{accomodation.accomodationInfo.address.street}
+                            {accomodation.accomodationInfo.address.area}
+                            {accomodation.accomodationInfo.address.city}, Bangladesh
                           </Card.Text>
                           <Card.Text>*Rating Here</Card.Text>
                           <Card.Text>*Trip Coin</Card.Text>
@@ -217,8 +217,8 @@ const StaysSearchScreen = () => {
                         className='d-flex justify-content-end'
                       >
                         <Card.Body>
-                          <Card.Text className='my-3'>Starts From</Card.Text>
-                          <Card.Text>BDT 12,000/Night</Card.Text>
+                          <Card.Text className='my-3'>Price</Card.Text>
+                          <Card.Text>BDT {accomodation.price}</Card.Text>
 
                           <Button className='mt-4'>Book Now</Button>
                         </Card.Body>
