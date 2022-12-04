@@ -530,10 +530,15 @@ const TransportScreen = () => {
                               onChange={(e) => setBusProvider(e.target.value)}
                             >
                               <option value=''>All</option>
-                              {allTransports.map((transport) => (
-                                <option value={transport._id}>
-                                  {transport.serviceName}
-                                </option>
+                              {services.map((transport) => (
+                                <>
+                                  {transport.transportInfo.transportType ===
+                                    'bus' && (
+                                    <option value={transport.serviceName}>
+                                      {transport.serviceName}
+                                    </option>
+                                  )}
+                                </>
                               ))}
                             </Form.Select>
                           </Form.Group>
@@ -582,10 +587,15 @@ const TransportScreen = () => {
                             onChange={(e) => setBusProvider(e.target.value)}
                           >
                             <option value=''>All</option>
-                            {allTransports.map((transport) => (
-                              <option value={transport._id}>
-                                {transport.serviceName}
-                              </option>
+                            {services.map((transport) => (
+                              <>
+                                {transport.transportInfo.transportType ===
+                                  'bus' && (
+                                  <option value={transport.serviceName}>
+                                    {transport.serviceName}
+                                  </option>
+                                )}
+                              </>
                             ))}
                           </Form.Select>
                         </Form.Group>
