@@ -344,6 +344,14 @@ const transportSchema = new mongoose.Schema({
       'There needs to be a carModel for car',
     ],
   },
+  carType: {
+    type: String,
+    default: '4 seater',
+    enum: {
+      values: ['4 seater', '6 seater', '8 seater'],
+      message: 'Car type must be Sedan or microBus',
+    },
+  },
 })
 
 //create tour Schema

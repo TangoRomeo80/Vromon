@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import Moment from 'moment'
 import { toast } from 'react-toastify'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import {
   Row,
   Col,
   Container,
   Card,
   Form,
-  InputGroup,
   Button,
   Modal,
   Image,
 } from 'react-bootstrap'
-import { MdLocationOn } from 'react-icons/md'
+
 import { FaFilter } from 'react-icons/fa'
-import { LinkContainer } from 'react-router-bootstrap'
+
 import { useDispatch, useSelector } from 'react-redux'
 import {
   getAllTransports,
@@ -55,6 +54,7 @@ const TransportScreen = () => {
   const [maxPrice, setMaxPrice] = useState(5000)
   const [busType, setBusType] = useState('')
   const [busProvider, setBusProvider] = useState('')
+  const [carType, setCarType] = useState('')
   const [isMobile, setIsMobile] = useState(
     window.innerWidth < 768 ? true : false
   )
@@ -195,6 +195,13 @@ const TransportScreen = () => {
             }
           })
           .filter((service) => {
+            if (carType === '') {
+              return service
+            } else if (service.transportInfo.carType === carType) {
+              return service
+            }
+          })
+          .filter((service) => {
             if (maxPrice === 5000) {
               return service
             } else if (service.price <= maxPrice) {
@@ -240,6 +247,7 @@ const TransportScreen = () => {
     dropOffDate,
     pickUpTime,
     dropOffTime,
+    carType,
     isRental,
   ])
 
@@ -341,31 +349,19 @@ const TransportScreen = () => {
                       </Modal.Header>
                       <Modal.Body>
                         <Form>
-                          {/* <Form.Group className='mb-3' controlId='busType'>
-                            <Form.Label>Bus Type</Form.Label>
+                          <Form.Group className='mb-3' controlId='busType'>
+                            <Form.Label>Car Type</Form.Label>
                             <Form.Select
                               aria-label='Default select example'
-                              onChange={(e) => setBusType(e.target.value)}
+                              onChange={(e) => setCarType(e.target.value)}
                             >
                               <option value=''>All</option>
-                              <option value='AC'>AC</option>
-                              <option value='Non-AC'>Non AC</option>
+                              <option value='4 seater'>4 Seater</option>
+                              <option value='6 seater'>6 Seater</option>
+                              <option value='8 seater'>8 Seater</option>
                             </Form.Select>
                           </Form.Group>
-                          <Form.Group className='mb-3' controlId='busProvider'>
-                            <Form.Label>Bus Provider</Form.Label>
-                            <Form.Select
-                              aria-label='Default select example'
-                              onChange={(e) => setBusProvider(e.target.value)}
-                            >
-                              <option value=''>All</option>
-                              {allTransports.map((transport) => (
-                                <option value={transport._id}>
-                                  {transport.serviceName}
-                                </option>
-                              ))}
-                            </Form.Select>
-                          </Form.Group> */}
+
                           <Form.Group className='mb-3' controlId='priceRange'>
                             <Form.Label>
                               Maximum Price Range: BDT{maxPrice}
@@ -394,31 +390,18 @@ const TransportScreen = () => {
                       <Card.Body>
                         <Card.Title as='h5'>Filters for Car Rentals</Card.Title>
                         <Form>
-                          {/* <Form.Group className='mb-3' controlId='busType'>
-                            <Form.Label>Bus Type</Form.Label>
+                          <Form.Group className='mb-3' controlId='busType'>
+                            <Form.Label>Car Type</Form.Label>
                             <Form.Select
                               aria-label='Default select example'
-                              onChange={(e) => setBusType(e.target.value)}
+                              onChange={(e) => setCarType(e.target.value)}
                             >
                               <option value=''>All</option>
-                              <option value='AC'>AC</option>
-                              <option value='Non-AC'>Non AC</option>
+                              <option value='4 seater'>4 Seater</option>
+                              <option value='6 seater'>6 Seater</option>
+                              <option value='8 seater'>8 Seater</option>
                             </Form.Select>
                           </Form.Group>
-                          <Form.Group className='mb-3' controlId='busProvider'>
-                            <Form.Label>Bus Provider</Form.Label>
-                            <Form.Select
-                              aria-label='Default select example'
-                              onChange={(e) => setBusProvider(e.target.value)}
-                            >
-                              <option value=''>All</option>
-                              {allTransports.map((transport) => (
-                                <option value={transport._id}>
-                                  {transport.serviceName}
-                                </option>
-                              ))}
-                            </Form.Select>
-                          </Form.Group> */}
                           <Form.Group className='mb-3' controlId='priceRange'>
                             <Form.Label>
                               Maximum Price Range: BDT{maxPrice}
@@ -664,11 +647,21 @@ const TransportScreen = () => {
                                 <Col lg={4} md={4} sm={12}>
                                   <Card.Text>
                                     <strong>Departure Date: </strong>
-                                    {transport.transportInfo.departDate}
+                                    {Moment(
+                                      transport.transportInfo.departDate
+                                    ).format('DD-MM-YYYY')}
                                   </Card.Text>
                                   <Card.Text>
                                     <strong>Departure time: </strong>
-                                    {transport.transportInfo.departTime}
+                                    {transport.transportInfo.departTime.split(
+                                      ':'
+                                    )[0] *
+                                      1 >=
+                                    12
+                                      ? transport.transportInfo.departTime +
+                                        ' PM'
+                                      : transport.transportInfo.departTime +
+                                        ' AM'}
                                   </Card.Text>
                                   <Card.Text style={{ color: 'red' }}>
                                     <strong>Price: </strong>
