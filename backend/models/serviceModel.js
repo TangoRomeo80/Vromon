@@ -367,6 +367,11 @@ const tourSchema = new mongoose.Schema({
     min: 1,
     max: 10,
   },
+  travelDate: {
+    type: Date,
+    default: Date.now(),
+    required: [true, 'Please Select Your Travel Date'],
+  },
   maxGroupSize: {
     type: Number,
     required: [true, 'Tour must have a maximum group size'],
