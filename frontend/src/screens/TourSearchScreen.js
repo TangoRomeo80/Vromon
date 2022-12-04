@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Container, Card, Form, Button, Image } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Container,
+  Card,
+  Form,
+  Button,
+  Image,
+} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { MdDateRange, MdLocationOn } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import Moment from 'moment'
+import Moment from "moment";
 import {
   getAllServices,
   resetServiceList,
@@ -128,35 +136,66 @@ const TourSearchScreen = () => {
               Reset Search
             </Link>
           </Row>
+          <Card className="shadow">
+            <Card.Body>
+              <Row className="">
+                <Card.Header as="h5">Price Range</Card.Header>
+
+                <Col sm={6} md={3} lg={6}>
+                  <Form.Group className="mb-3" controlId="">
+                    <Form.Label className="small mb-1">
+                      Minimum Price
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={minPrice}
+                      onChange={(e) => setMinPrice(e.target.value)}
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col sm={6} md={3} lg={6}>
+                  <Form.Group className="mb-3" controlId="">
+                    <Form.Label className="small mb-1">
+                      Maximum Price
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={maxPrice}
+                      onChange={(e) => setMaxPrice(e.target.value)}
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col>For Slider</Col>
+              </Row>
+
+              <Row className="mt-5">
+                <Card.Header as="h5">Package Duration</Card.Header>
+
+                <Col className="mt-3">
+                  <Form.Group className="mb-3" controlId="">
+                    <Form.Control
+                      className="form-select"
+                      as="select"
+                      type="select"
+                      placeholder="Select Duration"
+                      value={duration}
+                      onChange={(e) => setDuration(e.target.value)}
+                    >
+                      <option>{duration}</option>
+                      <option value="2days">2 days</option>
+                      <option value="3days">3 days</option>
+                      <option value="4days">4 days</option>
+                      <option value="5days">5 days</option>
+                      <option value="6days">6 days</option>
+                      <option value="7days">7 days</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Card.Body>
+          </Card>
 
           {/* Row For Price Range */}
-          <Row className="my-4">
-            <Card>
-              <Card.Header as="h5">Price Range</Card.Header>
-            </Card>
-
-            <Col sm={6} md={3} lg={6}>
-              <Form.Group className="mb-3" controlId="">
-                <Form.Label className="small mb-1">Minimum Price</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={minPrice}
-                  onChange={(e) => setMinPrice(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
-            <Col sm={6} md={3} lg={6}>
-              <Form.Group className="mb-3" controlId="">
-                <Form.Label className="small mb-1">Maximum Price</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
-            <Col>For Slider</Col>
-          </Row>
 
           {/* Row For Package Search */}
           {/* <Row className="my-4">
@@ -177,32 +216,6 @@ const TourSearchScreen = () => {
           </Row> */}
 
           {/* Row For Duration */}
-          <Row className="my-4">
-            <Card>
-              <Card.Header as="h5">Package Duration</Card.Header>
-            </Card>
-
-            <Col className="mt-3">
-              <Form.Group className="mb-3" controlId="">
-                <Form.Control
-                  className="form-select"
-                  as="select"
-                  type="select"
-                  placeholder="Select Duration"
-                  value={duration}
-                  onChange={(e) => setDuration(e.target.value)}
-                >
-                  <option>{duration}</option>
-                  <option value="2days">2 days</option>
-                  <option value="3days">3 days</option>
-                  <option value="4days">4 days</option>
-                  <option value="5days">5 days</option>
-                  <option value="6days">6 days</option>
-                  <option value="7days">7 days</option>
-                </Form.Control>
-              </Form.Group>
-            </Col>
-          </Row>
         </Col>
 
         {/* Right Colomn/Package Images Card */}
@@ -246,7 +259,9 @@ const TourSearchScreen = () => {
                             </Card.Text> */}
                             <Card.Text>
                               <strong>District: </strong>
-                              {tour.destination.district === district ? district : 'No Tour Packages Found in That District'}
+                              {tour.destination.district === district
+                                ? district
+                                : "No Tour Packages Found in That District"}
                             </Card.Text>
                             <Card.Text>
                               <strong>Max Travelers Count</strong>
@@ -256,14 +271,14 @@ const TourSearchScreen = () => {
                           <Col lg={4} md={4} sm={12}>
                             <Card.Text>
                               <strong>Travel Date</strong>
-                              {Moment(
-                                tour.tourInfo.travelDate
-                              ).format("DD-MM-YYYY")}
+                              {Moment(tour.tourInfo.travelDate).format(
+                                "DD-MM-YYYY"
+                              )}
                             </Card.Text>
                             <Card.Text>
                               <strong>Lead Tour Guide</strong>
                               {tour.tourInfo.leadGuideName}
-                            </Card.Text> 
+                            </Card.Text>
                             <Card.Text style={{ color: "red" }}>
                               <strong>Price: </strong>
                               BDT {tour.price}
@@ -287,7 +302,3 @@ const TourSearchScreen = () => {
 };
 
 export default TourSearchScreen;
-
-
-
-
