@@ -1,12 +1,23 @@
 import React, { useState } from "react";
-import { Row, Col, Card, Button, Form, InputGroup } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Card,
+  Button,
+  Form,
+  InputGroup,
+  ListGroup,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import districts from "../staticData/districts";
 
-const SearchTours = ({ city, travel, traveler }) => {
-  const [searchTourCity, setSearchTourCity] = useState(city ? city : "");
+const SearchTours = ({ district, travel, traveler }) => {
+  const [searchTourDistrict, setSearchTourDistrict] = useState(
+    district ? district : ""
+  );
   const [travelDate, setTravelDate] = useState(travel ? travel : "");
   const [travelerCount, setTravelerCount] = useState(traveler ? traveler : 1);
 
@@ -22,15 +33,39 @@ const SearchTours = ({ city, travel, traveler }) => {
 
       <Row className="my-5 mx-3">
         <Col>
-          <Card.Text>Enter City</Card.Text>
-          <Form.Group className="mb-3" controlId="searchTourCity">
+          <Card.Text>Enter District</Card.Text>
+          <Form.Group className="mb-3" controlId="searchTourDistrict">
             <Form.Control
               type="text"
-              placeholder="Enter The City Name"
-              value={searchTourCity}
-              onChange={(e) => setSearchTourCity(e.target.value)}
+              placeholder="Enter District Name"
+              value={searchTourDistrict}
+              onChange={(e) => {
+                setSearchTourDistrict(e.target.value);
+                setSearchSelected(false);
+              }}
             ></Form.Control>
           </Form.Group>
+          {searchTourDistrict && !searchSelected && (
+            <ListGroup style={{ position: "absolute", zIndex: "9999" }}>
+              {districts
+                .filter((district) =>
+                  district
+                    .toLowerCase()
+                    .startsWith(searchTourDistrict.toLowerCase())
+                )
+                .map((district, index) => (
+                  <ListGroup.Item
+                    key={index}
+                    onClick={(e) => {
+                      setSearchTourDistrict(e.target.innerText);
+                      setSearchSelected(true);
+                    }}
+                  >
+                    {district}
+                  </ListGroup.Item>
+                ))}
+            </ListGroup>
+          )}
         </Col>
 
         <Col>
@@ -76,14 +111,16 @@ const SearchTours = ({ city, travel, traveler }) => {
       <a
         className="mb-3 mx-2 d-grid gap-3"
         href={
-          searchTourCity && travelDate && travelerCount
-            ? `/tourSearch?city=${searchTourCity}&travelDate=${travelDate}&traveler=${travelerCount}`
+          searchTourDistrict && travelDate && travelerCount
+            ? `/tourSearch?district=${searchTourDistrict}&travelDate=${travelDate}&traveler=${travelerCount}`
             : "/tourSearch"
         }
         onClick={(e) => {
-          if(!searchTourCity || !travelDate || !travelerCount) {
+          if (!searchTourDistrict || !travelDate || !travelerCount) {
             e.preventDefault();
-            toast.error("Please Fill All The Fields", {position: "top-center"});
+            toast.error("Please Fill All The Fields", {
+              position: "top-center",
+            });
           }
         }}
       >
