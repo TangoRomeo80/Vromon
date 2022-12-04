@@ -1,29 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Container, Card, Form } from "react-bootstrap";
+import { Row, Col, Container, Card, Form, Button} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { MdDateRange, MdLocationOn } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllServices } from "../features/service/serviceSlice";
+import { getAllServices, resetServiceList } from "../features/service/serviceSlice";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
+import SearchTours from '../components/SearchTours'
+import { toast } from "react-toastify";
 
 const TourSearchScreen = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  // const [searchParams] = useState(new URLSearchParams(location.search));
+  const [searchParams] = useSearchParams()
 
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
   const [searchPackage, setSearchPackage] = useState("");
   const [duration, setDuration] = useState("");
-  const [city, setCity] = useState(
-    location.state ? location.state.searchTourCity : ""
+  const [district, setDistrict] = useState(
+    searchParams.get("district") || ""
   );
   const [travelDate, setTravelDate] = useState(
-    location.state ? location.state.travelDate : ""
+    searchParams.get("travelDate") || ""
   );
   const [travelerCount, setTravelerCount] = useState(
-    location.state ? location.state.travelerCount : ""
+    searchParams.get("travelerCount") || ""
   );
-  const [searchedServices, setSearchedServices] = useState([]);
+
+  const [allTours, setAllTours] = useState([])
+  const [searchedServices, setSearchedServices] = useState([])
+  const [modifySearch, setModifySearch] = useState(false);
 
   const {
     services,
@@ -33,36 +42,91 @@ const TourSearchScreen = () => {
     listErrorMessage,
   } = useSelector((state) => state.service);
 
-  console.log(city, travelDate, travelerCount);
+  console.log(district, travelDate, travelerCount);
 
   useEffect(() => {
-    if (!isListSuccess) {
-      dispatch(getAllServices());
-    }
+    // if (!isListSuccess) {
+    //   dispatch(getAllServices());
+    // }
     if (isListError) {
-      alert(listErrorMessage);
+      toast.error(listErrorMessage, { position: "top-center" });
     }
-    const searched = services.filter((service) => {
-      return (
-        service.serviceType === "tours" && service.destination.district === city
-      );
-    });
-    setSearchedServices(searched);
-  }, [services, isListSuccess, isListError, dispatch]);
+    else if(isListSuccess){
+      const filteredServices = services
+        .filter((service) => {
+          if (district === "") {
+            return service;
+          } else if (service.district
+            .toLowerCase()
+            .includes(district.toLowerCase())) {
+            return service;
+          }
+        })
+        .filter((service) => {
+          if (travelDate === "") {
+            return service;
+          } else if (service.travelDate === travelDate) {
+            return service;
+          }
+        })
+        .filter((service) => {
+          if (travelerCount === "") {
+            return service;
+          } else if (service.travelerCount === travelerCount) {
+            return service;
+          }
+        })
+        
+        
+        // .filter((service) => {
+        //   if (minPrice === 0 && maxPrice === 0) {
+        //     return service;
+        //   } else if (service.price >= minPrice && service.price <= maxPrice) {
+        //     return service;
+        //   }
+        // });
+      setAllTours(filteredServices);
+    }
+    else{
+      // dispatch(getAllServices());
+      const searched = services.filter((service) => {
+        return (
+          service.serviceType === "tours" && service.destination.district === district
+        );
+      });
+      setSearchedServices(searched);
+    }
+    
+  }, [services, isListSuccess, isListError, listErrorMessage, dispatch]);
+
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetServiceList());
+    }
+  }, [dispatch])
+
 
   return (
     <Container>
       <Row className="mb-2 pt-3">
-        <Col lg={6} md={6} sm={6}>
-          <Card.Text as="h3">Unga Bunga</Card.Text>
-          <Card.Text>Search by Destination</Card.Text>
+        <Col lg={8} md={8} sm={6}>
+          <Card.Text as="h3">Location Name</Card.Text>
+          <Card.Text>
+            {!district &&
+            !travelDate &&
+            !travelerCount ? 'Find Your Desired Tour Package' :
+            `Tour Package Queries (District : ${district}, Travel Date : ${travelDate}, Traveler Count : ${travelerCount})`}
+          </Card.Text>
         </Col>
-        <Col lg={6} md={6} sm={6} className="d-flex justify-content-end">
-          <Link to="#" className="btn btn-primary mb-5">
-            Modify Search
-          </Link>
+        <Col lg={3} md={3} sm={6} className="d-flex justify-content-end">
+          <Button onClick={() => setModifySearch(!modifySearch)}>
+            {modifySearch ? 'Cancel Search' : 'Modify Search'}
+          </Button>
         </Col>
       </Row>
+
+      <Row className='my-4'>{modifySearch && <SearchTours/>}</Row>
 
       {/* Search Results List */}
       <Row>
