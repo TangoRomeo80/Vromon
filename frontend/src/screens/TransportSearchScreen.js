@@ -225,7 +225,7 @@ const TransportScreen = () => {
 
         setAllTransports(filteredServices)
       }
-    } else {
+    } else if (!isListSuccess) {
       dispatch(getAllTransports())
     }
   }, [
@@ -265,252 +265,327 @@ const TransportScreen = () => {
     return () => {
       dispatch(resetServiceList())
     }
-  }, [dispatch])
+  }, [])
 
   return (
-    <div>
-      <Container className='mb-3'>
-        <Row className='mb-2 pt-3'>
-          <Col lg={6} md={6} sm={12} className='d-flex justify-content-center'>
-            <Card.Text>
-              {isRental ? (
-                <>
-                  {pickUpFrom && pickUpDate && dropOffTo && dropOffDate
-                    ? `Rental Pick up from ${pickUpFrom} to ${dropOffTo} on ${pickUpDate} at ${pickUpTime}`
-                    : 'Car rental list'}
-                </>
-              ) : (
-                <>
-                  {departFrom && departDate && departTo
-                    ? `Transport from ${departFrom} to ${departTo} on ${departDate}`
-                    : 'Transport list'}
-                </>
-              )}
-            </Card.Text>
-          </Col>
-          <Col lg={6} md={6} sm={12} className='d-flex justify-content-center'>
-            <Button onClick={() => setModifySearch(!modifySearch)}>
-              {modifySearch ? 'Cancel Search' : 'Modify Search'}
-            </Button>
-          </Col>
-        </Row>
-
-        {modifySearch && (
+    <>
+      <div>
+        <Container className='mb-3'>
           <Row className='mb-2 pt-3'>
             <Col
-              lg={12}
-              md={12}
+              lg={6}
+              md={6}
               sm={12}
-              className='d-flex justify-content-center align-items-center'
+              className='d-flex justify-content-center'
             >
-              <Card className='text-center w-100 shadow bg-light'>
-                <Card.Body>
-                  <SearchTransports
-                    rental={isRental}
-                    pick={pickUpFrom}
-                    drop={dropOffTo}
-                    pickDate={pickUpDate}
-                    dropDate={dropOffDate}
-                    pickTime={pickUpTime}
-                    dropTime={dropOffTime}
-                    from={departFrom}
-                    to={departTo}
-                    dep={departDate}
-                    ret={returnDate}
-                  />
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        )}
-
-        <Row>
-          {isRental ? (
-            <>
-              <Col lg={3} md={3} sm={12}>
-                {isMobile ? (
+              <Card.Text>
+                {isRental ? (
                   <>
-                    <Button
-                      className='ms-1 mb-2'
-                      style={{ backgroundColor: 'green' }}
-                      onClick={handleShow}
-                    >
-                      <FaFilter className='me-1' />
-                      Filters
-                    </Button>
-                    <Modal
-                      show={show}
-                      onHide={handleClose}
-                      backdrop='static'
-                      keyboard={false}
-                    >
-                      <Modal.Header closeButton>
-                        <Modal.Title>Filters for Car Rental</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <Form>
-                          <Form.Group className='mb-3' controlId='busType'>
-                            <Form.Label>Car Type</Form.Label>
-                            <Form.Select
-                              aria-label='Default select example'
-                              onChange={(e) => setCarType(e.target.value)}
-                            >
-                              <option value=''>All</option>
-                              <option value='4 seater'>4 Seater</option>
-                              <option value='6 seater'>6 Seater</option>
-                              <option value='8 seater'>8 Seater</option>
-                            </Form.Select>
-                          </Form.Group>
-
-                          <Form.Group className='mb-3' controlId='priceRange'>
-                            <Form.Label>
-                              Maximum Price Range: BDT{maxPrice}
-                            </Form.Label>
-                            <Form.Range
-                              min={0}
-                              max={10000}
-                              step={100}
-                              value={maxPrice}
-                              onChange={(e) => setMaxPrice(e.target.value)}
-                            />
-                          </Form.Group>
-                        </Form>
-                      </Modal.Body>
-
-                      <Modal.Footer>
-                        <Button variant='secondary' onClick={handleClose}>
-                          Update
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
+                    {pickUpFrom && pickUpDate && dropOffTo && dropOffDate
+                      ? `Rental Pick up from ${pickUpFrom} to ${dropOffTo} on ${pickUpDate} at ${pickUpTime}`
+                      : 'Car rental list'}
                   </>
                 ) : (
                   <>
-                    <Card className='shadow'>
-                      <Card.Body>
-                        <Card.Title as='h5'>Filters for Car Rentals</Card.Title>
-                        <Form>
-                          <Form.Group className='mb-3' controlId='busType'>
-                            <Form.Label>Car Type</Form.Label>
-                            <Form.Select
-                              aria-label='Default select example'
-                              onChange={(e) => setCarType(e.target.value)}
-                            >
-                              <option value=''>All</option>
-                              <option value='4 seater'>4 Seater</option>
-                              <option value='6 seater'>6 Seater</option>
-                              <option value='8 seater'>8 Seater</option>
-                            </Form.Select>
-                          </Form.Group>
-                          <Form.Group className='mb-3' controlId='priceRange'>
-                            <Form.Label>
-                              Maximum Price Range: BDT{maxPrice}
-                            </Form.Label>
-                            <Form.Range
-                              min={0}
-                              max={10000}
-                              step={100}
-                              value={maxPrice}
-                              onChange={(e) => setMaxPrice(e.target.value)}
-                            />
-                          </Form.Group>
-                        </Form>
-                      </Card.Body>
-                    </Card>
+                    {departFrom && departDate && departTo
+                      ? `Transport from ${departFrom} to ${departTo} on ${departDate}`
+                      : 'Transport list'}
                   </>
                 )}
-              </Col>
-              <Col lg={9} md={9} sm={12}>
-                <Card className='shadow'>
+              </Card.Text>
+            </Col>
+            <Col
+              lg={6}
+              md={6}
+              sm={12}
+              className='d-flex justify-content-center'
+            >
+              <Button onClick={() => setModifySearch(!modifySearch)}>
+                {modifySearch ? 'Cancel Search' : 'Modify Search'}
+              </Button>
+            </Col>
+          </Row>
+
+          {modifySearch && (
+            <Row className='mb-2 pt-3'>
+              <Col
+                lg={12}
+                md={12}
+                sm={12}
+                className='d-flex justify-content-center align-items-center'
+              >
+                <Card className='text-center w-100 shadow bg-light'>
                   <Card.Body>
-                    <Card.Title as='h5'>Car Rentals</Card.Title>
-                    {isListLoading ? (
-                      <Loader />
-                    ) : allTransports.length === 0 ? (
-                      <Message variant='info'>No Car rentals Found</Message>
-                    ) : (
-                      <>
-                        {allTransports.map((transport) => (
-                          <Card className='shadow my-2'>
-                            <Card.Body>
-                              <Row>
-                                <Col lg={3} md={3} sm={12}>
-                                  <Image
-                                    src={transport.coverImg}
-                                    alt={transport.serviceName}
-                                    fluid
-                                  />
-                                </Col>
-                                <Col lg={5} md={5} sm={12}>
-                                  <Card.Title as='h5'>
-                                    {transport.serviceName}
-                                  </Card.Title>
-                                  {/* <Card.Text>
-                                    <strong>Bus Type: </strong>
-                                    {transport.transportInfo.busType}
-                                  </Card.Text>
-                                  <Card.Text>
-                                    <strong>Start from: </strong>
-                                    {transport.transportInfo.departFrom}
-                                  </Card.Text>
-                                  <Card.Text>
-                                    <strong>Destination: </strong>
-                                    {transport.transportInfo.departTo}
-                                  </Card.Text>
-                                </Col>
-                                <Col lg={4} md={4} sm={12}>
-                                  <Card.Text>
-                                    <strong>Departure Date: </strong>
-                                    {transport.transportInfo.departDate}
-                                  </Card.Text>
-                                  <Card.Text>
-                                    <strong>Departure time: </strong>
-                                    {transport.transportInfo.departTime}
-                                  </Card.Text>
-                                  <Card.Text style={{ color: 'red' }}>
-                                    <strong>Price: </strong>
-                                    BDT {transport.price}
-                                  </Card.Text> */}
-                                </Col>
-                              </Row>
-                              <Link
-                                to={`#`}
-                                className='btn btn-primary btn-success'
-                              >
-                                Book Now
-                              </Link>
-                            </Card.Body>
-                          </Card>
-                        ))}
-                      </>
-                    )}
+                    <SearchTransports
+                      rental={isRental}
+                      pick={pickUpFrom}
+                      drop={dropOffTo}
+                      pickDate={pickUpDate}
+                      dropDate={dropOffDate}
+                      pickTime={pickUpTime}
+                      dropTime={dropOffTime}
+                      from={departFrom}
+                      to={departTo}
+                      dep={departDate}
+                      ret={returnDate}
+                    />
                   </Card.Body>
                 </Card>
               </Col>
-            </>
-          ) : (
-            <>
-              <Col lg={3} md={3} sm={12}>
-                {isMobile ? (
-                  <>
-                    <Button
-                      className='ms-1 mb-2'
-                      style={{ backgroundColor: 'green' }}
-                      onClick={handleShow}
-                    >
-                      <FaFilter className='me-1' />
-                      Filters
-                    </Button>
-                    <Modal
-                      show={show}
-                      onHide={handleClose}
-                      backdrop='static'
-                      keyboard={false}
-                    >
-                      <Modal.Header closeButton>
-                        <Modal.Title>Filters for Bus Services</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
+            </Row>
+          )}
+
+          <Row>
+            {isRental ? (
+              <>
+                <Col lg={3} md={3} sm={12}>
+                  {isMobile ? (
+                    <>
+                      <Button
+                        className='ms-1 mb-2'
+                        style={{ backgroundColor: 'green' }}
+                        onClick={handleShow}
+                      >
+                        <FaFilter className='me-1' />
+                        Filters
+                      </Button>
+                      <Modal
+                        show={show}
+                        onHide={handleClose}
+                        backdrop='static'
+                        keyboard={false}
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title>Filters for Car Rental</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <Form>
+                            <Form.Group className='mb-3' controlId='busType'>
+                              <Form.Label>Car Type</Form.Label>
+                              <Form.Select
+                                aria-label='Default select example'
+                                onChange={(e) => setCarType(e.target.value)}
+                              >
+                                <option value=''>All</option>
+                                <option value='4 seater'>4 Seater</option>
+                                <option value='6 seater'>6 Seater</option>
+                                <option value='8 seater'>8 Seater</option>
+                              </Form.Select>
+                            </Form.Group>
+
+                            <Form.Group className='mb-3' controlId='priceRange'>
+                              <Form.Label>
+                                Maximum Price Range: BDT{maxPrice}
+                              </Form.Label>
+                              <Form.Range
+                                min={0}
+                                max={10000}
+                                step={100}
+                                value={maxPrice}
+                                onChange={(e) => setMaxPrice(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Form>
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                          <Button variant='secondary' onClick={handleClose}>
+                            Update
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </>
+                  ) : (
+                    <>
+                      <Card className='shadow'>
+                        <Card.Body>
+                          <Card.Title as='h5'>
+                            Filters for Car Rentals
+                          </Card.Title>
+                          <Form>
+                            <Form.Group className='mb-3' controlId='busType'>
+                              <Form.Label>Car Type</Form.Label>
+                              <Form.Select
+                                aria-label='Default select example'
+                                onChange={(e) => setCarType(e.target.value)}
+                              >
+                                <option value=''>All</option>
+                                <option value='4 seater'>4 Seater</option>
+                                <option value='6 seater'>6 Seater</option>
+                                <option value='8 seater'>8 Seater</option>
+                              </Form.Select>
+                            </Form.Group>
+                            <Form.Group className='mb-3' controlId='priceRange'>
+                              <Form.Label>
+                                Maximum Price Range: BDT{maxPrice}
+                              </Form.Label>
+                              <Form.Range
+                                min={0}
+                                max={10000}
+                                step={100}
+                                value={maxPrice}
+                                onChange={(e) => setMaxPrice(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Form>
+                        </Card.Body>
+                      </Card>
+                    </>
+                  )}
+                </Col>
+                <Col lg={9} md={9} sm={12}>
+                  <Card className='shadow'>
+                    <Card.Body>
+                      <Card.Title as='h5'>Car Rentals</Card.Title>
+                      {isListLoading ? (
+                        <Loader />
+                      ) : allTransports.length === 0 ? (
+                        <Message variant='info'>No Car rentals Found</Message>
+                      ) : (
+                        <>
+                          {allTransports.map((transport) => (
+                            <Card className='shadow my-2'>
+                              <Card.Body>
+                                <Row>
+                                  <Col lg={3} md={3} sm={12}>
+                                    <Image
+                                      src={transport.coverImg}
+                                      alt={transport.serviceName}
+                                      fluid
+                                    />
+                                  </Col>
+                                  <Col lg={5} md={5} sm={12}>
+                                    <Card.Title as='h5'>
+                                      {transport.serviceName}
+                                    </Card.Title>
+                                    {/* <Card.Text>
+                                      <strong>Bus Type: </strong>
+                                      {transport.transportInfo.busType}
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>Start from: </strong>
+                                      {transport.transportInfo.departFrom}
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>Destination: </strong>
+                                      {transport.transportInfo.departTo}
+                                    </Card.Text>
+                                  </Col>
+                                  <Col lg={4} md={4} sm={12}>
+                                    <Card.Text>
+                                      <strong>Departure Date: </strong>
+                                      {transport.transportInfo.departDate}
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>Departure time: </strong>
+                                      {transport.transportInfo.departTime}
+                                    </Card.Text>
+                                    <Card.Text style={{ color: 'red' }}>
+                                      <strong>Price: </strong>
+                                      BDT {transport.price}
+                                    </Card.Text> */}
+                                  </Col>
+                                </Row>
+                                <Link
+                                  to={`#`}
+                                  className='btn btn-primary btn-success'
+                                >
+                                  Book Now
+                                </Link>
+                              </Card.Body>
+                            </Card>
+                          ))}
+                        </>
+                      )}
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </>
+            ) : (
+              <>
+                <Col lg={3} md={3} sm={12}>
+                  {isMobile ? (
+                    <>
+                      <Button
+                        className='ms-1 mb-2'
+                        style={{ backgroundColor: 'green' }}
+                        onClick={handleShow}
+                      >
+                        <FaFilter className='me-1' />
+                        Filters
+                      </Button>
+                      <Modal
+                        show={show}
+                        onHide={handleClose}
+                        backdrop='static'
+                        keyboard={false}
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title>Filters for Bus Services</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          <Form>
+                            <Form.Group className='mb-3' controlId='busType'>
+                              <Form.Label>Bus Type</Form.Label>
+                              <Form.Select
+                                aria-label='Default select example'
+                                onChange={(e) => setBusType(e.target.value)}
+                              >
+                                <option value=''>All</option>
+                                <option value='AC'>AC</option>
+                                <option value='Non-AC'>Non AC</option>
+                              </Form.Select>
+                            </Form.Group>
+                            <Form.Group
+                              className='mb-3'
+                              controlId='busProvider'
+                            >
+                              <Form.Label>Bus Provider</Form.Label>
+                              <Form.Select
+                                aria-label='Default select example'
+                                onChange={(e) => setBusProvider(e.target.value)}
+                              >
+                                <option value=''>All</option>
+                                {services.map((transport) => (
+                                  <>
+                                    {transport.transportInfo.transportType ===
+                                      'bus' && (
+                                      <option value={transport.serviceName}>
+                                        {transport.serviceName}
+                                      </option>
+                                    )}
+                                  </>
+                                ))}
+                              </Form.Select>
+                            </Form.Group>
+                            <Form.Group className='mb-3' controlId='priceRange'>
+                              <Form.Label>
+                                Maximum Price Range: BDT{maxPrice}
+                              </Form.Label>
+                              <Form.Range
+                                min={0}
+                                max={10000}
+                                step={100}
+                                value={maxPrice}
+                                onChange={(e) => setMaxPrice(e.target.value)}
+                              />
+                            </Form.Group>
+                          </Form>
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                          <Button variant='secondary' onClick={handleClose}>
+                            Update
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+                    </>
+                  ) : (
+                    <Card className='shadow'>
+                      <Card.Body>
+                        <Card.Title as='h5'>
+                          Filters for Bus Services
+                        </Card.Title>
                         <Form>
                           <Form.Group className='mb-3' controlId='busType'>
                             <Form.Label>Bus Type</Form.Label>
@@ -555,149 +630,93 @@ const TransportScreen = () => {
                             />
                           </Form.Group>
                         </Form>
-                      </Modal.Body>
-
-                      <Modal.Footer>
-                        <Button variant='secondary' onClick={handleClose}>
-                          Update
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
-                  </>
-                ) : (
+                      </Card.Body>
+                    </Card>
+                  )}
+                </Col>
+                <Col lg={9} md={9} sm={12}>
                   <Card className='shadow'>
                     <Card.Body>
-                      <Card.Title as='h5'>Filters for Bus Services</Card.Title>
-                      <Form>
-                        <Form.Group className='mb-3' controlId='busType'>
-                          <Form.Label>Bus Type</Form.Label>
-                          <Form.Select
-                            aria-label='Default select example'
-                            onChange={(e) => setBusType(e.target.value)}
-                          >
-                            <option value=''>All</option>
-                            <option value='AC'>AC</option>
-                            <option value='Non-AC'>Non AC</option>
-                          </Form.Select>
-                        </Form.Group>
-                        <Form.Group className='mb-3' controlId='busProvider'>
-                          <Form.Label>Bus Provider</Form.Label>
-                          <Form.Select
-                            aria-label='Default select example'
-                            onChange={(e) => setBusProvider(e.target.value)}
-                          >
-                            <option value=''>All</option>
-                            {services.map((transport) => (
-                              <>
-                                {transport.transportInfo.transportType ===
-                                  'bus' && (
-                                  <option value={transport.serviceName}>
-                                    {transport.serviceName}
-                                  </option>
-                                )}
-                              </>
-                            ))}
-                          </Form.Select>
-                        </Form.Group>
-                        <Form.Group className='mb-3' controlId='priceRange'>
-                          <Form.Label>
-                            Maximum Price Range: BDT{maxPrice}
-                          </Form.Label>
-                          <Form.Range
-                            min={0}
-                            max={10000}
-                            step={100}
-                            value={maxPrice}
-                            onChange={(e) => setMaxPrice(e.target.value)}
-                          />
-                        </Form.Group>
-                      </Form>
+                      <Card.Title as='h5'>Bus Services</Card.Title>
+                      {isListLoading ? (
+                        <Loader />
+                      ) : allTransports.length === 0 ? (
+                        <Message variant='info'>No Bus Services Found</Message>
+                      ) : (
+                        <>
+                          {allTransports.map((transport) => (
+                            <Card className='shadow my-2'>
+                              <Card.Body>
+                                <Row>
+                                  <Col lg={3} md={3} sm={12}>
+                                    <Image
+                                      src={transport.coverImg}
+                                      alt={transport.serviceName}
+                                      fluid
+                                    />
+                                  </Col>
+                                  <Col lg={5} md={5} sm={12}>
+                                    <Card.Title as='h5'>
+                                      {transport.serviceName}
+                                    </Card.Title>
+                                    <Card.Text>
+                                      <strong>Bus Type: </strong>
+                                      {transport.transportInfo.busType}
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>Start from: </strong>
+                                      {transport.transportInfo.departFrom}
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>Destination: </strong>
+                                      {transport.transportInfo.departTo}
+                                    </Card.Text>
+                                  </Col>
+                                  <Col lg={4} md={4} sm={12}>
+                                    <Card.Text>
+                                      <strong>Departure Date: </strong>
+                                      {Moment(
+                                        transport.transportInfo.departDate
+                                      ).format('DD-MM-YYYY')}
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>Departure time: </strong>
+                                      {transport.transportInfo.departTime.split(
+                                        ':'
+                                      )[0] *
+                                        1 >=
+                                      12
+                                        ? transport.transportInfo.departTime +
+                                          ' PM'
+                                        : transport.transportInfo.departTime +
+                                          ' AM'}
+                                    </Card.Text>
+                                    <Card.Text style={{ color: 'red' }}>
+                                      <strong>Price: </strong>
+                                      BDT {transport.price}
+                                    </Card.Text>
+                                  </Col>
+                                </Row>
+                                <Link
+                                  to={`#`}
+                                  className='btn btn-primary btn-success'
+                                >
+                                  Book Now
+                                </Link>
+                              </Card.Body>
+                            </Card>
+                          ))}
+                        </>
+                      )}
                     </Card.Body>
                   </Card>
-                )}
-              </Col>
-              <Col lg={9} md={9} sm={12}>
-                <Card className='shadow'>
-                  <Card.Body>
-                    <Card.Title as='h5'>Bus Services</Card.Title>
-                    {isListLoading ? (
-                      <Loader />
-                    ) : allTransports.length === 0 ? (
-                      <Message variant='info'>No Bus Services Found</Message>
-                    ) : (
-                      <>
-                        {allTransports.map((transport) => (
-                          <Card className='shadow my-2'>
-                            <Card.Body>
-                              <Row>
-                                <Col lg={3} md={3} sm={12}>
-                                  <Image
-                                    src={transport.coverImg}
-                                    alt={transport.serviceName}
-                                    fluid
-                                  />
-                                </Col>
-                                <Col lg={5} md={5} sm={12}>
-                                  <Card.Title as='h5'>
-                                    {transport.serviceName}
-                                  </Card.Title>
-                                  <Card.Text>
-                                    <strong>Bus Type: </strong>
-                                    {transport.transportInfo.busType}
-                                  </Card.Text>
-                                  <Card.Text>
-                                    <strong>Start from: </strong>
-                                    {transport.transportInfo.departFrom}
-                                  </Card.Text>
-                                  <Card.Text>
-                                    <strong>Destination: </strong>
-                                    {transport.transportInfo.departTo}
-                                  </Card.Text>
-                                </Col>
-                                <Col lg={4} md={4} sm={12}>
-                                  <Card.Text>
-                                    <strong>Departure Date: </strong>
-                                    {Moment(
-                                      transport.transportInfo.departDate
-                                    ).format('DD-MM-YYYY')}
-                                  </Card.Text>
-                                  <Card.Text>
-                                    <strong>Departure time: </strong>
-                                    {transport.transportInfo.departTime.split(
-                                      ':'
-                                    )[0] *
-                                      1 >=
-                                    12
-                                      ? transport.transportInfo.departTime +
-                                        ' PM'
-                                      : transport.transportInfo.departTime +
-                                        ' AM'}
-                                  </Card.Text>
-                                  <Card.Text style={{ color: 'red' }}>
-                                    <strong>Price: </strong>
-                                    BDT {transport.price}
-                                  </Card.Text>
-                                </Col>
-                              </Row>
-                              <Link
-                                to={`#`}
-                                className='btn btn-primary btn-success'
-                              >
-                                Book Now
-                              </Link>
-                            </Card.Body>
-                          </Card>
-                        ))}
-                      </>
-                    )}
-                  </Card.Body>
-                </Card>
-              </Col>
-            </>
-          )}
-        </Row>
-      </Container>
-    </div>
+                </Col>
+              </>
+            )}
+          </Row>
+        </Container>
+      </div>
+    </>
   )
 }
 
