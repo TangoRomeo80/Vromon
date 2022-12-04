@@ -3,7 +3,13 @@ import serviceService from './serviceService'
 
 const initialState = {
   services: [],
+  transports: [],
+  accomodations: [],
+  tours: [],
   service: null,
+  transport: null,
+  accomodation: null,
+  tour: null,
   isListError: false,
   isListSuccess: false,
   isListLoading: false,
@@ -59,16 +65,19 @@ export const getServiceById = createAsyncThunk(
 )
 
 //get top services
-export const getTopServices= createAsyncThunk(
+export const getTopServices = createAsyncThunk(
   'services/getTopServices',
-  async(_, thunkAPI)=>{
-    try{
+  async (_, thunkAPI) => {
+    try {
       return await serviceService.getTopServices()
-    }catch(err){
-      const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
-      return thunkAPI.rejectWithValue(message);
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
   }
-}
 )
 
 //create service
@@ -123,30 +132,34 @@ export const deleteService = createAsyncThunk(
   }
 )
 
-
 //get all transports
 export const getAllTransports = createAsyncThunk(
   'services/getAllTransports',
-  async(_, thunkAPI)=> {
-    try{
+  async (_, thunkAPI) => {
+    try {
       return await serviceService.getAllTransports()
-    }catch(err){
-      const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
-      return thunkAPI.rejectWithValue(message);
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
     }
   }
 )
 
-
 //get all accomodations
 export const getAllAcomodations = createAsyncThunk(
   'services/getAllAcomodations',
-  async(_, thunkAPI)=> {
-    try{
+  async (_, thunkAPI) => {
+    try {
       return await serviceService.getAllAcomodations()
-    }catch(err){
-      const message = (err.response && err.response.data && err.response.data.message) || err.message || err.toString();
-      return thunkAPI.rejectWithValue(message);
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
     }
   }
 )
@@ -157,6 +170,9 @@ export const serviceSlice = createSlice({
   reducers: {
     resetServiceList: (state) => {
       state.services = []
+      state.transports = []
+      state.accomodations = []
+      state.tours = []
       state.isListError = false
       state.isListSuccess = false
       state.isListLoading = false
@@ -164,6 +180,9 @@ export const serviceSlice = createSlice({
     },
     resetServiceDetails: (state) => {
       state.service = null
+      state.transport = null
+      state.accomodation = null
+      state.tour = null
       state.isDetailsError = false
       state.isDetailsSuccess = false
       state.isDetailsLoading = false
@@ -203,10 +222,10 @@ export const serviceSlice = createSlice({
         state.listErrorMessage = ''
         state.services = action.payload
       })
-      .addCase(getTopServices.rejected, (state, action)=> {
-        state.isListLoading= false
-        state.listErrorMessage= true
-        state.listErrorMessage=action.payload
+      .addCase(getTopServices.rejected, (state, action) => {
+        state.isListLoading = false
+        state.listErrorMessage = true
+        state.listErrorMessage = action.payload
       })
       .addCase(getServiceById.pending, (state) => {
         state.isDetailsLoading = true
@@ -302,7 +321,7 @@ export const serviceSlice = createSlice({
         state.isListSuccess = true
         state.isListError = false
         state.listErrorMessage = ''
-        state.services = action.payload
+        state.transports = action.payload
       })
       .addCase(getAllTransports.rejected, (state, action) => {
         state.isListLoading = false
@@ -320,7 +339,7 @@ export const serviceSlice = createSlice({
         state.isListSuccess = true
         state.isListError = false
         state.listErrorMessage = ''
-        state.services = action.payload
+        state.accomodations = action.payload
       })
       .addCase(getAllAcomodations.rejected, (state, action) => {
         state.isListLoading = false
