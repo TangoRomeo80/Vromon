@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Row, Col, Container, Card, Form, Button } from "react-bootstrap";
 import { MdLocationOn } from "react-icons/md";
+import { TbCurrencyTaka } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import Message from "../components/Message";
@@ -29,10 +30,10 @@ const StaysSearchScreen = () => {
     searchParams.get("checkoutDate") || null
   );
   const [guestCountSearch, setGuestCountSearch] = useState(
-    searchParams.get("guestCount") || 1
+    searchParams.get("guestCount") * 1 || 1
   );
   const [roomCountSearch, setRoomCountSearch] = useState(
-    searchParams.get("roomCount") || 1
+    searchParams.get("roomCount") * 1 || 1
   );
   const [modifySearch, setModifySearch] = useState(false);
 
@@ -64,7 +65,7 @@ const StaysSearchScreen = () => {
           if (checkoutDateSearch === null) {
             return service;
           } else if (
-              new Date(service.accomodationInfo.checkoutDate)
+            new Date(service.accomodationInfo.checkoutDate)
               .toISOString()
               .split("T")[0] === checkoutDateSearch
           ) {
@@ -139,120 +140,113 @@ const StaysSearchScreen = () => {
             </Link>
           </Row>
 
-          <Row className="my-4">
-            <Card>
-              <Card.Header as="h5">Price Range</Card.Header>
-            </Card>
+          <Card className="shadow">
+            <Card.Body>
+              <Row className="">
+                <Card.Header as="h5">Price Range</Card.Header>
 
-            <Col sm={6} md={3} lg={6}>
-              <Form.Group className="mb-3" controlId="">
-                <Form.Label className="small mb-1">Minimum Price</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={minPrice}
-                  onChange={(e) => setMinPrice(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
-            <Col sm={6} md={3} lg={6}>
-              <Form.Group className="mb-3" controlId="">
-                <Form.Label className="small mb-1">Maximum Price</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
-            <Col>For Slider</Col>
-          </Row>
-
-          {/* Row For Hotel Search */}
-          {/* <Row className="my-4">
-            <Card>
-              <Card.Header as="h5">Search Hotels</Card.Header>
-            </Card>
-
-            <Col className="mt-3">
-              <Form.Group className="mb-3" controlId="">
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Hotel Name"
-                  value={searchHotel}
-                  onChange={(e) => setSearchHotel(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
-          </Row> */}
+                <Col sm={6} md={3} lg={6}>
+                  <Form.Group className="mb-3" controlId="">
+                    <Form.Label className="small mb-1">
+                      Minimum Price
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={minPrice}
+                      onChange={(e) => setMinPrice(e.target.value)}
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col sm={6} md={3} lg={6}>
+                  <Form.Group className="mb-3" controlId="">
+                    <Form.Label className="small mb-1">
+                      Maximum Price
+                    </Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={maxPrice}
+                      onChange={(e) => setMaxPrice(e.target.value)}
+                    ></Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col>For Slider</Col>
+              </Row>
+            </Card.Body>
+          </Card>
         </Col>
 
         {/* Right Colomn/Package Images Card */}
         <Col xs={12} md={9} xl={9}>
-          <Row className="my-4">
-            <Card.Header as="h5" className="mx-4">
-              Available Hotels
-            </Card.Header>
-            <Card.Text className="mx-3 mt-2">
-              *Price is per night per room & includes VAT & Taxes
-            </Card.Text>
-          </Row>
+          <Card className="shadow">
+            <Card.Body>
+              <Row className="my-2">
+                <Card.Title as="h5" className="mx-3">
+                  Available Hotels
+                </Card.Title>
+                <Card.Text className="mx-3">
+                  *Price is per night per room & includes VAT & Taxes
+                </Card.Text>
+              </Row>
 
-          {isListLoading ? (
-            <Loader />
-          ) : allAccomodations.length <= 0 ? (
-            <Message variant="danger">
-              No Hotels or Accomodations Found. Please Modify Search Queries!
-            </Message>
-          ) : (
-            <Card>
-              {allAccomodations.map((accomodation) => (
-                <LinkContainer to="">
-                  <Card className="mx-2 my-3" key={accomodation._id}>
-                    <Row className="d-flex">
-                      <Col sm={4} md={3} lg={3}>
-                        <Card.Img
-                          src="/Destinations/Test.jpg"
-                          className="img-fluid rounded-start"
-                          variant="top"
-                          style={{ objectFit: "cover", height: "220px" }}
-                        />
-                      </Col>
-                      <Col sm={4} md={6} lg={6}>
-                        <Card.Body>
-                          <Card.Title as="h5">
-                            {accomodation.accomodationInfo.address.house}
-                          </Card.Title>
-                          <Card.Text>
-                            <MdLocationOn /> &nbsp;
-                            {accomodation.accomodationInfo.address.street}
-                            {accomodation.accomodationInfo.address.area}
-                            {accomodation.accomodationInfo.address.city},
-                            Bangladesh
-                          </Card.Text>
-                          <Card.Text>*Rating Here</Card.Text>
-                          <Card.Text>*Trip Coin</Card.Text>
-                        </Card.Body>
-                      </Col>
+              {isListLoading ? (
+                <Loader />
+              ) : allAccomodations.length <= 0 ? (
+                <Message variant="danger">
+                  No Hotels or Accomodations Found. Please Modify Search
+                  Queries!
+                </Message>
+              ) : (
+                <>
+                  {allAccomodations.map((accomodation) => (
+                    <LinkContainer to="">
+                      <Card className="my-2 shadow" key={accomodation._id}>
+                        <Row className="d-flex">
+                          <Col sm={4} md={3} lg={3}>
+                            <Card.Img
+                              src={accomodation.coverImg}
+                              className="img-fluid rounded-start"
+                              variant="top"
+                              style={{ objectFit: "cover", height: "100%" }}
+                            />
+                          </Col>
+                          <Col sm={4} md={6} lg={6}>
+                            <Card.Body>
+                              <Card.Title as="h5">
+                                {accomodation.serviceName}
+                              </Card.Title>
+                              <Card.Text>
+                                <MdLocationOn /> &nbsp;
+                                {`${accomodation.accomodationInfo.address.house}, ${accomodation.accomodationInfo.address.street}, ${accomodation.accomodationInfo.address.area}, ${accomodation.accomodationInfo.address.city}, `}
+                                Bangladesh
+                              </Card.Text>
+                              <Card.Text><strong>Rooms Available : </strong>{accomodation.accomodationInfo.rooms}</Card.Text>
+                              <Card.Text><strong>Max Guests : </strong>{accomodation.accomodationInfo.maxGuests}</Card.Text>
+                              <Card.Text>*Rating Here</Card.Text>
+                              
+                            </Card.Body>
+                          </Col>
 
-                      <Col
-                        sm={4}
-                        md={3}
-                        lg={3}
-                        className="d-flex justify-content-end"
-                      >
-                        <Card.Body>
-                          <Card.Text className="my-3">Price</Card.Text>
-                          <Card.Text>BDT {accomodation.price}</Card.Text>
+                          <Col
+                            sm={4}
+                            md={3}
+                            lg={3}
+                            className="d-flex justify-content-end"
+                          >
+                            <Card.Body>
+                              <Card.Text className="my-3"><strong>Cost : </strong>BDT {accomodation.price}<TbCurrencyTaka className='mb-1'/></Card.Text>
+                              <Card.Text><strong>**Discount Price Here (If Available)</strong></Card.Text>
 
-                          <Button className="mt-4">Book Now</Button>
-                        </Card.Body>
-                      </Col>
-                    </Row>
-                  </Card>
-                </LinkContainer>
-              ))}
-            </Card>
-          )}
+                              <Button className="mt-4">Book Now</Button>
+                            </Card.Body>
+                          </Col>
+                        </Row>
+                      </Card>
+                    </LinkContainer>
+                  ))}
+                </>
+              )}
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </Container>

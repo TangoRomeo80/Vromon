@@ -14,7 +14,7 @@ import { MdDateRange, MdLocationOn } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "moment";
 import {
-  getAllServices,
+  getAllTours,
   resetServiceList,
 } from "../features/service/serviceSlice";
 import Message from "../components/Message";
@@ -61,7 +61,9 @@ const TourSearchScreen = () => {
           if (district === "") {
             return service;
           } else if (
-            service.destination.district.toLowerCase().includes(district.toLowerCase())
+            service.destination.district
+              .toLowerCase()
+              .includes(district.toLowerCase())
           ) {
             return service;
           }
@@ -69,14 +71,16 @@ const TourSearchScreen = () => {
         .filter((service) => {
           if (travelDate === null) {
             return service;
-          } else if (new Date(service.tourInfo.travelDate)
-            .toISOString()
-            .split("T")[0] === travelDate) {
+          } else if (
+            new Date(service.tourInfo.travelDate)
+              .toISOString()
+              .split("T")[0] === travelDate
+          ) {
             return service;
           }
         })
         .filter((service) => {
-          if (travelerCount === "") {
+          if (travelerCount === 0) {
             return service;
           } else if (service.tourInfo.maxGroupSize >= travelerCount) {
             return service;
@@ -92,16 +96,25 @@ const TourSearchScreen = () => {
       // });
       setAllTours(filteredServices);
     } else {
-      // dispatch(getAllServices());
-      const searched = tours.filter((service) => {
-        return (
-          service.serviceType === "tours" &&
-          service.destination.district === district
-        );
-      });
-      setSearchedServices(searched);
+      dispatch(getAllTours());
+      // const searched = tours.filter((service) => {
+      //   return (
+      //     service.serviceType === "tours" &&
+      //     service.destination.district === district
+      //   );
+      // });
+      // setSearchedServices(searched);
     }
-  }, [tours, travelDate, travelerCount, district, isListSuccess, isListError, listErrorMessage, dispatch]);
+  }, [
+    tours,
+    travelDate,
+    travelerCount,
+    district,
+    isListSuccess,
+    isListError,
+    listErrorMessage,
+    dispatch,
+  ]);
 
   useEffect(() => {
     return () => {
@@ -115,7 +128,7 @@ const TourSearchScreen = () => {
         <Col lg={8} md={8} sm={6}>
           <Card.Text as="h3">Location Name</Card.Text>
           <Card.Text>
-            {!district && !travelDate && !travelerCount
+            {!district && travelDate === null && travelerCount === 1
               ? "Find Your Desired Tour Package"
               : `Tour Package Queries (District : ${district}, Travel Date : ${travelDate}, Traveler Count : ${travelerCount})`}
           </Card.Text>
