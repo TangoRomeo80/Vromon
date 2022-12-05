@@ -164,6 +164,22 @@ export const getAllAcomodations = createAsyncThunk(
   }
 )
 
+//get all tours
+export const getAllTours = createAsyncThunk(
+  'services/getAllTours',
+  async (_, thunkAPI) => {
+    try {
+      return await serviceService.getAllTours()
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const serviceSlice = createSlice({
   name: 'service',
   initialState,
@@ -342,6 +358,24 @@ export const serviceSlice = createSlice({
         state.accomodations = action.payload
       })
       .addCase(getAllAcomodations.rejected, (state, action) => {
+        state.isListLoading = false
+        state.isListError = true
+        state.listErrorMessage = action.payload
+      })
+      .addCase(getAllTours.pending, (state) => {
+        state.isListLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
+      })
+      .addCase(getAllTours.fulfilled, (state, action) => {
+        state.isListLoading = false
+        state.isListSuccess = true
+        state.isListError = false
+        state.listErrorMessage = ''
+        state.tours = action.payload
+      })
+      .addCase(getAllTours.rejected, (state, action) => {
         state.isListLoading = false
         state.isListError = true
         state.listErrorMessage = action.payload
