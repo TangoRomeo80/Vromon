@@ -34,7 +34,7 @@ const TourSearchScreen = () => {
   const [duration, setDuration] = useState("");
   const [district, setDistrict] = useState(searchParams.get("district") || "");
   const [travelDate, setTravelDate] = useState(
-    searchParams.get("travelDate") || ""
+    searchParams.get("travelDate") || null
   );
   const [travelerCount, setTravelerCount] = useState(
     searchParams.get("traveler") * 1 || 1
@@ -67,16 +67,18 @@ const TourSearchScreen = () => {
           }
         })
         .filter((service) => {
-          if (travelDate === "") {
+          if (travelDate === null) {
             return service;
-          } else if (service.tourInfo.travelDate === travelDate) {
+          } else if (new Date(service.tourInfo.travelDate)
+            .toISOString()
+            .split("T")[0] === travelDate) {
             return service;
           }
         })
         .filter((service) => {
           if (travelerCount === "") {
             return service;
-          } else if (service.tourInfo.maxGroupSize === travelerCount) {
+          } else if (service.tourInfo.maxGroupSize >= travelerCount) {
             return service;
           }
         });
