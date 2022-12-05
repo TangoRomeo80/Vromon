@@ -113,10 +113,10 @@ const StaysSearchScreen = () => {
         <Col lg={8} md={8} sm={6}>
           <Card.Text as="h3">Location Name</Card.Text>
           <Card.Text>
-            {!checkinDateSearch &&
-            !checkoutDateSearch &&
-            !guestCountSearch &&
-            !roomCountSearch
+            {checkinDateSearch === null &&
+            checkoutDateSearch === null &&
+            guestCountSearch === 1 &&
+            roomCountSearch === 1
               ? "Find Your Desired Accomodations or Hotels"
               : `Search Queries (Check In Date : ${checkinDateSearch}, Check Out Date : ${checkoutDateSearch}, Guest(s) : ${guestCountSearch}, Room(s) : ${roomCountSearch})`}
           </Card.Text>
