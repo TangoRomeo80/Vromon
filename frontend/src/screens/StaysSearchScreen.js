@@ -81,7 +81,7 @@ const StaysSearchScreen = () => {
     } else {
       dispatch(getAllAcomodations())
     }
-  }, [dispatch, isListError, isListSuccess, accomodations, listErrorMessage])
+  }, [dispatch, checkinDateSearch, checkoutDateSearch, guestCountSearch, roomCountSearch, isListError, isListSuccess, accomodations, listErrorMessage])
 
   useEffect(() => {
     return () => {

@@ -37,7 +37,7 @@ const TourSearchScreen = () => {
     searchParams.get("travelDate") || ""
   );
   const [travelerCount, setTravelerCount] = useState(
-    searchParams.get("travelerCount") || ""
+    searchParams.get("traveler") * 1 || 1
   );
 
   const [allTours, setAllTours] = useState([]);
@@ -47,7 +47,7 @@ const TourSearchScreen = () => {
   const { tours, isListSuccess, isListError, isListLoading, listErrorMessage } =
     useSelector((state) => state.service);
 
-  console.log(district, travelDate, travelerCount);
+  // console.log(district, travelDate, travelerCount);
 
   useEffect(() => {
     // if (!isListSuccess) {
@@ -61,7 +61,7 @@ const TourSearchScreen = () => {
           if (district === "") {
             return service;
           } else if (
-            service.district.toLowerCase().includes(district.toLowerCase())
+            service.destination.district.toLowerCase().includes(district.toLowerCase())
           ) {
             return service;
           }
@@ -69,14 +69,14 @@ const TourSearchScreen = () => {
         .filter((service) => {
           if (travelDate === "") {
             return service;
-          } else if (service.travelDate === travelDate) {
+          } else if (service.tourInfo.travelDate === travelDate) {
             return service;
           }
         })
         .filter((service) => {
           if (travelerCount === "") {
             return service;
-          } else if (service.travelerCount === travelerCount) {
+          } else if (service.tourInfo.maxGroupSize === travelerCount) {
             return service;
           }
         });
@@ -99,7 +99,7 @@ const TourSearchScreen = () => {
       });
       setSearchedServices(searched);
     }
-  }, [tours, isListSuccess, isListError, listErrorMessage, dispatch]);
+  }, [tours, travelDate, travelerCount, district, isListSuccess, isListError, listErrorMessage, dispatch]);
 
   useEffect(() => {
     return () => {
