@@ -76,153 +76,155 @@ const TransportScreen = () => {
     } else if (isListSuccess) {
       console.log(isRental)
       if (!isRental) {
-        const filteredServices = transports.filter((service) => {
-          console.log(service)
-          return service.transportInfo.transportType === 'bus'
-        })
-        .filter((service) => {
-          if (departFrom === '') {
-            return service
-          } else if (
-            service.transportInfo.departFrom
-              .toLowerCase()
-              .includes(departFrom.toLowerCase())
-          ) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (departTo === '') {
-            return service
-          } else if (
-            service.transportInfo.departTo
-              .toLowerCase()
-              .includes(departTo.toLowerCase())
-          ) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (departDate === null) {
-            return service
-          } else if (
-            new Date(service.transportInfo.departDate)
-              .toISOString()
-              .split('T')[0] === departDate
-          ) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (returnDate === null) {
-            return service
-          } else if (
-            new Date(service.transportInfo.returnDate)
-              .toISOString()
-              .split('T')[0] === returnDate
-          ) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (busType === '') {
-            return service
-          } else if (service.transportInfo.busType === busType) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (busProvider === '') {
-            return service
-          } else if (service.serviceName === busProvider) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (maxPrice === 5000) {
-            return service
-          } else if (service.price <= maxPrice) {
-            return service
-          }
-        })
+        const filteredServices = transports
+          .filter((service) => {
+            console.log(service)
+            return service.transportInfo.transportType === 'bus'
+          })
+          .filter((service) => {
+            if (departFrom === '') {
+              return service
+            } else if (
+              service.transportInfo.departFrom
+                .toLowerCase()
+                .includes(departFrom.toLowerCase())
+            ) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (departTo === '') {
+              return service
+            } else if (
+              service.transportInfo.departTo
+                .toLowerCase()
+                .includes(departTo.toLowerCase())
+            ) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (departDate === null) {
+              return service
+            } else if (
+              new Date(service.transportInfo.departDate)
+                .toISOString()
+                .split('T')[0] === departDate
+            ) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (returnDate === null) {
+              return service
+            } else if (
+              new Date(service.transportInfo.returnDate)
+                .toISOString()
+                .split('T')[0] === returnDate
+            ) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (busType === '') {
+              return service
+            } else if (service.transportInfo.busType === busType) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (busProvider === '') {
+              return service
+            } else if (service.serviceName === busProvider) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (maxPrice === 5000) {
+              return service
+            } else if (service.price <= maxPrice) {
+              return service
+            }
+          })
         setAllTransports(filteredServices)
       } else {
-        const filteredServices = transports.filter((service) => {
-          console.log(service)
-          return service.transportInfo.transportType === 'car'
-        })
-        .filter((service) => {
-          if (pickUpFrom === '') {
-            return service
-          } else if (
-            service.transportInfo.pickupFrom
-              .toLowerCase()
-              .includes(pickUpFrom.toLowerCase())
-          ) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (dropOffTo === '') {
-            return service
-          } else if (
-            service.transportInfo.dropTo
-              .toLowerCase()
-              .includes(dropOffTo.toLowerCase())
-          ) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (pickUpDate === null) {
-            return service
-          } else if (
-            new Date(service.transportInfo.pickUpDate)
-              .toISOString()
-              .split('T')[0] === pickUpDate
-          ) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (dropOffDate === null) {
-            return service
-          } else if (
-            new Date(service.transportInfo.dropOffDate)
-              .toISOString()
-              .split('T')[0] === dropOffDate
-          ) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (carType === '') {
-            return service
-          } else if (service.transportInfo.carType === carType) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (maxPrice === 5000) {
-            return service
-          } else if (service.price <= maxPrice) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (pickUpTime === '') {
-            return service
-          } else if (service.transportInfo.pickUpTime == pickUpTime) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (dropOffTime === '') {
-            return service
-          } else if (service.transportInfo.dropOffTime == dropOffTime) {
-            return service
-          }
-        })
+        const filteredServices = transports
+          .filter((service) => {
+            console.log(service)
+            return service.transportInfo.transportType === 'car'
+          })
+          .filter((service) => {
+            if (pickUpFrom === '') {
+              return service
+            } else if (
+              service.transportInfo.pickUpFrom
+                .toLowerCase()
+                .includes(pickUpFrom.toLowerCase())
+            ) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (dropOffTo === '') {
+              return service
+            } else if (
+              service.transportInfo.dropTo
+                .toLowerCase()
+                .includes(dropOffTo.toLowerCase())
+            ) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (pickUpDate === null) {
+              return service
+            } else if (
+              new Date(service.transportInfo.pickUpDate)
+                .toISOString()
+                .split('T')[0] === pickUpDate
+            ) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (dropOffDate === null) {
+              return service
+            } else if (
+              new Date(service.transportInfo.dropOffDate)
+                .toISOString()
+                .split('T')[0] === dropOffDate
+            ) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (carType === '') {
+              return service
+            } else if (service.transportInfo.carType === carType) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (maxPrice === 5000) {
+              return service
+            } else if (service.price <= maxPrice) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (pickUpTime === '') {
+              return service
+            } else if (service.transportInfo.pickUpTime == pickUpTime) {
+              return service
+            }
+          })
+          .filter((service) => {
+            if (dropOffTime === '') {
+              return service
+            } else if (service.transportInfo.dropOffTime == dropOffTime) {
+              return service
+            }
+          })
 
         setAllTransports(filteredServices)
       }
@@ -459,6 +461,90 @@ const TransportScreen = () => {
                                     <Card.Title as='h5'>
                                       {transport.serviceName}
                                     </Card.Title>
+                                    <Card.Text>
+                                      <strong>Car Type: </strong>
+                                      {transport.transportInfo.carType}
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>Car Model: </strong>
+                                      {transport.transportInfo.carModel}
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>Pick from: </strong>
+                                      {transport.transportInfo.pickUpFrom}
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>Drop to: </strong>
+                                      {transport.transportInfo.dropTo}
+                                    </Card.Text>
+                                  </Col>
+                                  <Col lg={4} md={4} sm={12}>
+                                    <Card.Text>
+                                      <strong>Pick Date: </strong>
+                                      {Moment(
+                                        transport.transportInfo.pickUpDate
+                                      ).format('DD-MM-YYYY')}
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>Drop Date: </strong>
+                                      {Moment(
+                                        transport.transportInfo.dropOffDate
+                                      ).format('DD-MM-YYYY')}
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>Pick time: </strong>
+                                      {transport.transportInfo.pickUpTime.split(
+                                        ':'
+                                      )[0] *
+                                        1 >=
+                                        12 &&
+                                      transport.transportInfo.pickUpTime.split(
+                                        ':'
+                                      )[1] *
+                                        1 >=
+                                        0
+                                        ? ((transport.transportInfo.pickUpTime.split(
+                                            ':'
+                                          )[0] *
+                                            1) %
+                                            12 || 12) +
+                                          ':' +
+                                          transport.transportInfo.pickUpTime.split(
+                                            ':'
+                                          )[1] +
+                                          ' PM'
+                                        : transport.transportInfo.pickUpTime +
+                                          ' AM'}
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>Drop time: </strong>
+                                      {transport.transportInfo.dropOffTime.split(
+                                        ':'
+                                      )[0] *
+                                        1 >=
+                                        12 &&
+                                      transport.transportInfo.dropOffTime.split(
+                                        ':'
+                                      )[1] *
+                                        1 >=
+                                        0
+                                        ? ((transport.transportInfo.dropOffTime.split(
+                                            ':'
+                                          )[0] *
+                                            1) %
+                                            12 || 12) +
+                                          ':' +
+                                          transport.transportInfo.dropOffTime.split(
+                                            ':'
+                                          )[1] +
+                                          ' PM'
+                                        : transport.transportInfo.dropOffTime +
+                                          ' AM'}
+                                    </Card.Text>
+                                    <Card.Text style={{ color: 'red' }}>
+                                      <strong>Price: </strong>
+                                      BDT {transport.price}
+                                    </Card.Text>
                                   </Col>
                                 </Row>
                                 <Link
@@ -660,8 +746,21 @@ const TransportScreen = () => {
                                         ':'
                                       )[0] *
                                         1 >=
-                                      12
-                                        ? transport.transportInfo.departTime +
+                                        12 &&
+                                      transport.transportInfo.departTime.split(
+                                        ':'
+                                      )[1] *
+                                        1 >=
+                                        0
+                                        ? ((transport.transportInfo.departTime.split(
+                                            ':'
+                                          )[0] *
+                                            1) %
+                                            12 || 12) +
+                                          ':' +
+                                          transport.transportInfo.departTime.split(
+                                            ':'
+                                          )[1] +
                                           ' PM'
                                         : transport.transportInfo.departTime +
                                           ' AM'}
