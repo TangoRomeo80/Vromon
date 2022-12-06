@@ -4,14 +4,14 @@ import { LinkContainer } from "react-router-bootstrap";
 import { MdLocationOn } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
 
-const StaysBookingScreen = () => {
+const TransportBookingScreen = () => {
   return (
     <Container className="pt-4">
       {/* Header Card */}
       <Card className="mb-2 shadow">
         <Card.Body>
           <Row>
-            <h3 className="text-center">Hotel Name</h3>
+            <h3 className="text-center">Transport Name</h3>
           </Row>
         </Card.Body>
       </Card>
@@ -108,8 +108,8 @@ const StaysBookingScreen = () => {
                 </Col>
 
                 <Col lg={8} md={12} sm={12}>
-                  <Card.Title className="small">Hotel Name</Card.Title>
-                  <Card.Text className="small"><MdLocationOn/>Hotel Address</Card.Text>
+                  <Card.Title className="small">Transport Name</Card.Title>
+                  <Card.Text className="small"><MdLocationOn/> Dhaka to Modonpur</Card.Text>
                 </Col>
               </Row>
 
@@ -123,22 +123,32 @@ const StaysBookingScreen = () => {
                     <Card.Text className='d-flex justify-content-end small'><strong>1 Night</strong></Card.Text>
                 </Col>
 
-                <Form className="my-3">
+                <Col lg={6} md={6} sm={6}>
                   <Row>
-                    <Col lg={6} md={12} sm={12}>
-                      <Form.Group className="mb-3" controlId="checkinDate">
-                        <Form.Label className="">Check-in Date</Form.Label>
-                        <Form.Control type="date" />
-                      </Form.Group>
-                    </Col>
-                    <Col lg={6} md={12} sm={12}>
-                      <Form.Group className="mb-3" controlId="checkinDate">
-                        <Form.Label className="">Check-Out Date</Form.Label>
-                        <Form.Control type="date" />
-                      </Form.Group>
-                    </Col>
+                    <Card.Text>
+                      <strong>Departure Date</strong>
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Departure Time</strong>
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Type</strong>
+                    </Card.Text>
                   </Row>
-                </Form>
+                </Col>
+                <Col lg={6} md={6} sm={6}>
+                  <Row>
+                    <Card.Text className="d-flex justify-content-end">
+                      12-14-2022
+                    </Card.Text>
+                    <Card.Text className="d-flex justify-content-end">
+                      15:00 PM
+                    </Card.Text>
+                    <Card.Text className="d-flex justify-content-end">
+                      Air Conditioned
+                    </Card.Text>
+                  </Row>
+                </Col>
               </Row>
 
                 {/* Total Price Row */}
@@ -147,7 +157,7 @@ const StaysBookingScreen = () => {
 
                 <Col lg={6} md={6} sm={6}>
                     <Row>
-                        <Card.Text><strong>Total Rate</strong></Card.Text>
+                        <Card.Text><strong>Route Fare</strong></Card.Text>
                         <Card.Text><strong>Discount</strong></Card.Text>
                         <Card.Text><strong>Price To Be Paid</strong></Card.Text>
                     </Row>
@@ -168,4 +178,7 @@ const StaysBookingScreen = () => {
   );
 };
 
-export default StaysBookingScreen;
+export default TransportBookingScreen;
+
+
+// TransportBookingScreen

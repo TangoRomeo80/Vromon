@@ -772,7 +772,7 @@ const TransportScreen = () => {
                                   </Col>
                                 </Row>
                                 <Link
-                                  to={`#`}
+                                  to='/transportBooking'
                                   className='btn btn-primary btn-success'
                                 >
                                   Book Now
