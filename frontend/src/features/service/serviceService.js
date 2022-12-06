@@ -62,7 +62,7 @@ const getAllAcomodations = async () => {
 
 //get all tours
 const getAllTours = async () => {
-  const response = await axios.get('/api/services?serviceType=tour')
+  const response = await axios.get('/api/services?serviceType=tours')
   return response.data.data
 }
 
