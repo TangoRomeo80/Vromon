@@ -3237,6 +3237,18 @@
    background-color: #3b6fc9;
    border-color: #3768bd;
  }
+
+ .btn-blue {
+  color: #fff;
+  background-color: #023286;
+  border-color: #4582ec;
+}
+
+.btn-blue:hover {
+  color: #fff;
+  background-color: #024ed3;
+  border-color: #3768bd;
+}
  
  .btn-check:focus + .btn-primary,
  .btn-primary:focus {

@@ -11,6 +11,7 @@ import {
   FaTag,
   FaRoute,
   FaBusinessTime,
+  FaMoneyBill,
 } from 'react-icons/fa'
 import { GoDashboard } from 'react-icons/go'
 import { BiLocationPlus, BiHotel } from 'react-icons/bi'
@@ -105,6 +106,13 @@ const Header = () => {
                         <Nav.Link>
                           <FaBusinessTime className='me-1' />
                           My Businesses
+                        </Nav.Link>
+                      </LinkContainer>
+
+                      <LinkContainer to='/businessPayments'>
+                        <Nav.Link>
+                          <FaMoneyBill className='me-1' />
+                          Payments
                         </Nav.Link>
                       </LinkContainer>
 
