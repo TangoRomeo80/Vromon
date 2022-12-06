@@ -297,7 +297,7 @@ const TourSearchScreen = () => {
                               <TbCurrencyTaka className='mb-1' />
                             </Card.Text>
 
-                            <Link to={`#`} className="btn btn-primary">
+                            <Link to='/toursBooking' className="btn btn-primary">
                               Book Now
                             </Link>
                           </Card.Body>
