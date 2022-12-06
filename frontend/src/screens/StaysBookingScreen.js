@@ -16,8 +16,66 @@ const StaysBookingScreen = () => {
         </Card.Body>
       </Card>
 
-      {/* Booking Card */}
+      <Row className="my-3 d-flex">
+        <Col lg={7} md={7} sm={12}>
+          <Card>
+            <Card.Img
+              className="img-fluid"
+              cascade
+              src="/uploads/stays-2.jpg"
+              style={{ height: "53vh" }}
+            />
+          </Card>
+        </Col>
 
+        <Col lg={5} md={5} sm={12}>
+          <Row>
+            <Col lg={6} md={12} sm={12} className="mb-4">
+              <Card>
+                <Card.Img
+                  className="img-fluid"
+                  cascade
+                  src="/uploads/stays-2.jpg"
+                  style={{ height: "25vh" }}
+                />
+              </Card>
+            </Col>
+            <Col lg={6} md={12} sm={12}>
+              <Card>
+                <Card.Img
+                  className="img-fluid"
+                  cascade
+                  src="/uploads/stays-2.jpg"
+                  style={{ height: "25vh" }}
+                />
+              </Card>
+            </Col>
+            <Col lg={6} md={12} sm={12}>
+              <Card>
+                <Card.Img
+                  className="img-fluid"
+                  cascade
+                  src="/uploads/stays-2.jpg"
+                  style={{ height: "25vh" }}
+                />
+              </Card>
+            </Col>
+            <Col lg={6} md={12} sm={12}>
+              <Card>
+                <Card.Img
+                  className="img-fluid"
+                  cascade
+                  src="/uploads/stays-2.jpg"
+                  style={{ height: "25vh" }}
+                />
+              </Card>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+
+
+      {/* Booking Card */}
       <Row className='mt-4'>
         {/* Left Column For Personal Information */}
         <Col lg={8} md={6} sm={12}>
