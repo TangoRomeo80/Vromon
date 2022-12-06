@@ -32,6 +32,7 @@ import DestinationCreateScreen from './screens/DestinationCreateScreen'
 import TransportSearchByDestinationScreen from './screens/TransportSearchByDestinationScreen'
 import StaysSearchByDestinationScreen from './screens/StaysSearchByDestinationScreen'
 import TourSearchByDestinationScreen from './screens/TourSearchByDestinationScreen'
+import BusinessListScreen from './screens/BusinessListScreen'
 
 const App = () => {
   return (
@@ -101,6 +102,7 @@ const App = () => {
                 element={<AdminDestinationListScreen />}
               />
               <Route path='/serviceList' element={<ServiceListScreen />} />
+              <Route path='/businessList' element={<BusinessListScreen />} />
               <Route
                 path='/bookingRequestList'
                 element={<BookingRequestsScreen />}

@@ -10,6 +10,7 @@ import {
   FaSignInAlt,
   FaTag,
   FaRoute,
+  FaBusinessTime,
 } from 'react-icons/fa'
 import { GoDashboard } from 'react-icons/go'
 import { BiLocationPlus, BiHotel } from 'react-icons/bi'
@@ -100,6 +101,13 @@ const Header = () => {
                         </Nav.Link>
                       </LinkContainer>
 
+                      <LinkContainer to='/businessList'>
+                        <Nav.Link>
+                          <FaBusinessTime className='me-1' />
+                          My Businesses
+                        </Nav.Link>
+                      </LinkContainer>
+
                       <LinkContainer to='/bookingRequestList'>
                         <Nav.Link>
                           <FaTag className='me-1' />
@@ -110,7 +118,7 @@ const Header = () => {
                       <LinkContainer to='/businessOwnerAnalytics'>
                         <Nav.Link>
                           <GoDashboard className='me-1' />
-                          My Analytics
+                          Analytics
                         </Nav.Link>
                       </LinkContainer>
 
