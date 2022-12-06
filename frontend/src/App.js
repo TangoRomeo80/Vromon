@@ -34,6 +34,7 @@ import StaysSearchByDestinationScreen from './screens/StaysSearchByDestinationSc
 import TourSearchByDestinationScreen from './screens/TourSearchByDestinationScreen'
 import BusinessListScreen from './screens/BusinessListScreen'
 import BusinessPaymentScreen from './screens/BusinessPaymentScreen'
+import StaysBookingScreen from './screens/StaysBookingScreen'
 
 const App = () => {
   return (
@@ -113,6 +114,12 @@ const App = () => {
               <Route path='/*' element={<ErrorScreen />} />
 
               <Route path='/testNav' element={<TestNavbar />} />
+
+
+              {/* Booking Requests */}
+              <Route path='/staysBooking' element={<StaysBookingScreen />} />
+
+              
             </Routes>
           </Container>
         </main>
