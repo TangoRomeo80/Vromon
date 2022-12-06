@@ -11,6 +11,7 @@ import {
 import { LinkContainer } from "react-router-bootstrap";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import { MdDateRange, MdLocationOn } from "react-icons/md";
+import { TbCurrencyTaka } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import Moment from "moment";
 import {
@@ -251,59 +252,57 @@ const TourSearchScreen = () => {
                 <>
                   {allTours.map((tour) => (
                     <Card className="shadow my-2">
-                      <Card.Body>
-                        <Row>
-                          <Col lg={3} md={3} sm={12}>
-                            <Image
-                              src={tour.coverImg}
-                              alt={tour.serviceName}
-                              fluid
-                            />
-                          </Col>
-                          <Col lg={5} md={5} sm={12}>
+                      <Row>
+                        <Col lg={3} md={3} sm={12}>
+                          <Card.Img
+                            className="img-fluid rounded-start"
+                            src={tour.coverImg}
+                            alt={tour.serviceName}
+                            style={{ objectFit: "cover", height: "100%" }}
+                          />
+                        </Col>
+                        <Col lg={5} md={5} sm={12}>
+                          <Card.Body>
                             <Card.Title as="h5">
                               {tour.tourInfo.name}
                             </Card.Title>
-                            {/* <Card.Text>
-                              <strong>Bus Type: </strong>
-                              {transport.transportInfo.busType}
-                            </Card.Text>
                             <Card.Text>
-                              <strong>Start from: </strong>
-                              {transport.transportInfo.departFrom}
-                            </Card.Text> */}
-                            <Card.Text>
+                              <MdLocationOn /> &nbsp;
                               <strong>District: </strong>
                               {tour.destination.district === district
                                 ? district
                                 : "No Tour Packages Found in That District"}
                             </Card.Text>
                             <Card.Text>
-                              <strong>Max Travelers Count</strong>
+                              <strong>Max Travelers Count : </strong>
                               {tour.tourInfo.maxGroupSize}
                             </Card.Text>
-                          </Col>
-                          <Col lg={4} md={4} sm={12}>
+                          </Card.Body>
+                        </Col>
+                        <Col lg={4} md={4} sm={12}>
+                          <Card.Body>
                             <Card.Text>
-                              <strong>Travel Date</strong>
+                              <strong>Travel Date : </strong>
                               {Moment(tour.tourInfo.travelDate).format(
                                 "DD-MM-YYYY"
                               )}
                             </Card.Text>
                             <Card.Text>
-                              <strong>Lead Tour Guide</strong>
+                              <strong>Lead Tour Guide : </strong>
                               {tour.tourInfo.leadGuideName}
                             </Card.Text>
                             <Card.Text style={{ color: "red" }}>
-                              <strong>Price: </strong>
+                              <strong>Price : </strong>
                               BDT {tour.price}
+                              <TbCurrencyTaka className='mb-1' />
                             </Card.Text>
-                          </Col>
-                        </Row>
-                        <Link to={`#`} className="btn btn-primary btn-success">
-                          Book Now
-                        </Link>
-                      </Card.Body>
+
+                            <Link to={`#`} className="btn btn-primary">
+                              Book Now
+                            </Link>
+                          </Card.Body>
+                        </Col>
+                      </Row>
                     </Card>
                   ))}
                 </>
