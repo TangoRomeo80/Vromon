@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Row, Col, Card, Form, ListGroup, Button } from 'react-bootstrap'
 import districts from '../staticData/districts'
 import { toast } from 'react-toastify'
+import Moment from 'moment'
 
 const TicketSearch = ({ from, to, dep, ret }) => {
   const [departFrom, setDepartFrom] = useState(from ? from : '')
@@ -117,7 +118,9 @@ const TicketSearch = ({ from, to, dep, ret }) => {
       </Row>
       <a
         className='mb-3 mx-2 d-grid gap-3'
-        href={`/transportSearch?from=${departFrom}&to=${departTo}&dep=${departOn}&ret=${returnOn}&rental=false`}
+        href={`https://www.shohoz.com/booking/bus/search?fromcity=${departFrom}&tocity=${departTo}&doj=${Moment(
+          departOn
+        ).format('DD-MMM-YYYY')}`}
         onClick={(e) => {
           if (!departFrom || !departTo || !departOn) {
             e.preventDefault()
@@ -127,7 +130,7 @@ const TicketSearch = ({ from, to, dep, ret }) => {
           }
         }}
       >
-        <Button>Search</Button>
+        <Button>Search Online</Button>
       </a>
     </>
   )
@@ -306,7 +309,7 @@ const SearchTransports = ({
   dep,
   ret,
 }) => {
-  const [isRent, setIsRent] = useState(rental ? rental : false)
+  const [isRent, setIsRent] = useState(rental ? rental : true)
 
   return (
     <div>
@@ -352,7 +355,7 @@ const SearchTransports = ({
 }
 
 SearchTransports.defaultProps = {
-  rental: false,
+  rental: true,
 }
 
 export default SearchTransports
