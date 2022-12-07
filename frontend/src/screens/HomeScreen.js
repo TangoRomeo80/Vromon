@@ -8,11 +8,11 @@ import Quicklinks from '../components/Quicklinks'
 const HomeScreen = () => {
   return (
     <div>
-      <Navbar/>
-      <LightningDeals/>
-      <PopularDestinations/>
-      <TopAirlines/>
-      <Quicklinks/>
+      <Navbar />
+      <LightningDeals />
+      <PopularDestinations />
+      {/* <TopAirlines/>
+      <Quicklinks/> */}
     </div>
   )
 }
