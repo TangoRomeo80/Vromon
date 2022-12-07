@@ -290,7 +290,7 @@ const RentalSearch = ({
           }
         }}
       >
-        <Button>Search</Button>
+        <Button>Submit Search</Button>
       </a>
     </>
   )
