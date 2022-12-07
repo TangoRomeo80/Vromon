@@ -121,7 +121,7 @@ const App = () => {
               {/* Booking Requests */}
               <Route path='/staysBooking' element={<StaysBookingScreen />} />
               <Route path='/toursBooking' element={<ToursBookingScreen />} />
-              <Route path='/transportBooking' element={<TransportBookingScreen />} />
+              <Route path='/transportBooking/:id' element={<TransportBookingScreen />} />
 
             </Routes>
           </Container>

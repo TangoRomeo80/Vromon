@@ -74,11 +74,9 @@ const TransportScreen = () => {
     if (isListError) {
       toast.error(listErrorMessage, { position: 'top-center' })
     } else if (isListSuccess) {
-      console.log(isRental)
       if (!isRental) {
         const filteredServices = transports
           .filter((service) => {
-            console.log(service)
             return service.transportInfo.transportType === 'bus'
           })
           .filter((service) => {
@@ -150,7 +148,6 @@ const TransportScreen = () => {
       } else {
         const filteredServices = transports
           .filter((service) => {
-            console.log(service)
             return service.transportInfo.transportType === 'car'
           })
           .filter((service) => {
@@ -214,14 +211,14 @@ const TransportScreen = () => {
           .filter((service) => {
             if (pickUpTime === '') {
               return service
-            } else if (service.transportInfo.pickUpTime == pickUpTime) {
+            } else if (service.transportInfo.pickUpTime === pickUpTime) {
               return service
             }
           })
           .filter((service) => {
             if (dropOffTime === '') {
               return service
-            } else if (service.transportInfo.dropOffTime == dropOffTime) {
+            } else if (service.transportInfo.dropOffTime === dropOffTime) {
               return service
             }
           })
@@ -772,7 +769,7 @@ const TransportScreen = () => {
                                   </Col>
                                 </Row>
                                 <Link
-                                  to='/transportBooking'
+                                  to={`/transportBooking/${transport._id}`}
                                   className='btn btn-primary btn-success'
                                 >
                                   Book Now
