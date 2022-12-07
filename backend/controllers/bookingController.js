@@ -1,5 +1,5 @@
 /* This file contains the logic for handling requests and communicating with the Business data model*/
-import SSLCommerzPayment from 'sslcommerz'
+import { SslCommerzPayment } from 'sslcommerz'
 
 import Booking from '../models/bookingModel.js'
 import Service from '../models/serviceModel.js'
@@ -91,7 +91,7 @@ export const sslRequest = catchAsync(async (req, res) => {
     ipn_url: `${process.env.ROOT}/ssl-payment-notification`,
   }
 
-  const sslcommerz = new SSLCommerzPayment(
+  const sslcommerz = new SslCommerzPayment(
     process.env.SSL_STORE_ID,
     process.env.SSL_STORE_PASSWORD,
     false
