@@ -38,6 +38,7 @@
     "passport-google-oauth20": "^2.0.0",
     "react-icons": "^4.7.1",
     "redux": "^4.2.0",
+    "sslcommerz": "^1.7.0",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
   },
