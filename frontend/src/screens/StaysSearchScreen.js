@@ -111,7 +111,7 @@ const StaysSearchScreen = () => {
   return (
     <Container>
       <Row className="mb-2 pt-3">
-        <Col lg={8} md={8} sm={6}>
+        <Col lg={8} md={8} sm={12}>
           <Card.Text as="h3">Location Name</Card.Text>
           <Card.Text>
             {checkinDateSearch === null &&
@@ -122,7 +122,7 @@ const StaysSearchScreen = () => {
               : `Search Queries (Check In Date : ${checkinDateSearch}, Check Out Date : ${checkoutDateSearch}, Guest(s) : ${guestCountSearch}, Room(s) : ${roomCountSearch})`}
           </Card.Text>
         </Col>
-        <Col lg={3} md={3} sm={6} className="d-flex justify-content-end">
+        <Col lg={4} md={4} sm={12} className="d-flex justify-content-end">
           <Button onClick={() => setModifySearch(!modifySearch)}>
             {modifySearch ? "Cancel Search" : "Modify Search"}
           </Button>
