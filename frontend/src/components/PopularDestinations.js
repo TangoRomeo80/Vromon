@@ -80,7 +80,7 @@ const PopularDestinations = () => {
         </Row>
 
         <Row className='py-4'>
-          <LinkContainer to='/destinations'>
+          <LinkContainer to='/destinationSearch'>
             <Button variant='outline-dark' size='md'>
               <b>Show More</b>
             </Button>
