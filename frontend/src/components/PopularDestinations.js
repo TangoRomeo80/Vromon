@@ -56,7 +56,7 @@ const PopularDestinations = () => {
                     cascade
                     className='img-fluid'
                     src={destination.coverImg}
-                    style={{ maxHeight: '40vh', objectFit: 'cover'}}
+                    style={{ height: '40vh', objectFit: 'cover'}}
                   />
 
                   <Card.Body cascade>
