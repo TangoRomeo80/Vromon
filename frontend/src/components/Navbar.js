@@ -47,7 +47,7 @@ const Navbar = () => {
     <div
       style={{
         minHeight: '80vh',
-        backgroundImage: 'url("/Nav/test2.jpg")',
+        backgroundImage: 'url("/Nav/nav.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
