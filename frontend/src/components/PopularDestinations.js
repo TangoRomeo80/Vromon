@@ -55,8 +55,8 @@ const PopularDestinations = () => {
                   <Card.Img
                     cascade
                     className='img-fluid'
-                    src='/LightningDeals/test.jpg'
-                    style={{ maxHeight: '40vh', objectFit: 'cover' }}
+                    src={destination.coverImg}
+                    style={{ maxHeight: '40vh', objectFit: 'cover'}}
                   />
 
                   <Card.Body cascade>

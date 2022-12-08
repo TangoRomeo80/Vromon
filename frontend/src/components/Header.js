@@ -34,7 +34,7 @@ const Header = () => {
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>
-              <img style={{ maxWidth: '150px' }} src='/Nav/logp.png' />
+              <img style={{ maxWidth: '150px' }} src='/Nav/logo.png' />
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='responsive-navbar-nav' />
