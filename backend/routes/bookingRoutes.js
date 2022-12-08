@@ -17,10 +17,10 @@ import {
 const router = express.Router() //create router instance
 
 router.route('/ssl-request').get(sslRequest)
-router.route('/ssl-payment-success').get(sslPaymentSuccess)
-router.route('/ssl-payment-fail').get(sslPaymentFail)
-router.route('/ssl-payment-cancel').get(sslPaymentCancel)
-router.route('/ssl-payment-notification').get(sslPaymentNotification)
+router.route('/ssl-payment-success').post(sslPaymentSuccess)
+router.route('/ssl-payment-fail').post(sslPaymentFail)
+router.route('/ssl-payment-cancel').post(sslPaymentCancel)
+router.route('/ssl-payment-notification').post(sslPaymentNotification)
 router.route('/').get(getAllBookings).post(createBooking)
 router
   .route('/:id')
