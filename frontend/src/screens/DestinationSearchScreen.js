@@ -38,8 +38,7 @@ const DestinationSearchScreen = () => {
   useEffect(() => {
     if (isListError) {
       toast.error(listErrorMessage, { position: 'top-center' })
-    }
-    else if (isListSuccess) {
+    } else if (isListSuccess) {
       const filteredDestinations = destinations
         .filter((destination) => {
           if (divisionSearch === '') {
@@ -81,12 +80,16 @@ const DestinationSearchScreen = () => {
       <Container>
         <Row className='mb-2 pt-3'>
           <Col lg={6} md={6} sm={12} className='d-flex justify-content-center'>
-            <Card.Text>  
-              {!districtSearch && !divisionSearch ? 'Search Destinations for All Districts & Divisions' : `Search Destinations for ${districtSearch}, ${divisionSearch}`}
+            <Card.Text>
+              {!districtSearch && !divisionSearch
+                ? 'Search Destinations for All Districts & Divisions'
+                : `Search Destinations for ${districtSearch}, ${divisionSearch}`}
             </Card.Text>
           </Col>
           <Col lg={6} md={6} sm={12} className='d-flex justify-content-center'>
-            <Button onClick={() => setModifySearch(!modifySearch)}>{ modifySearch ? 'Cancel Search' : 'Modify Search'}</Button>
+            <Button onClick={() => setModifySearch(!modifySearch)}>
+              {modifySearch ? 'Cancel Search' : 'Modify Search'}
+            </Button>
           </Col>
         </Row>
 
@@ -122,12 +125,15 @@ const DestinationSearchScreen = () => {
               <Row className='my-4'>
                 {allDestinations.map((destination) => (
                   <Col xs={12} md={3}>
-                    <LinkContainer to={`/destinationDetails/${destination._id}`}>
+                    <LinkContainer
+                      to={`/destinationDetails/${destination._id}`}
+                    >
                       <Card key={destination._id} className='mb-2'>
                         <Card.Img
                           cascade
                           className='img-fluid'
-                          src='/LightningDeals/test.jpg'
+                          src={destination.coverImg}
+                          style={{ objectFit: 'cover', height: '200px' }}
                         />
 
                         <Card.Body cascade>
