@@ -23,6 +23,7 @@ import {
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import SearchTransports from '../components/SearchTransports'
+import Rating from '../components/Rating'
 
 const TransportScreen = () => {
   const dispatch = useDispatch()
@@ -398,6 +399,13 @@ const TransportScreen = () => {
                                       <strong>Drop to: </strong>
                                       {transport.transportInfo.dropTo}
                                     </Card.Text>
+                                    <Card.Text>
+                                      <Rating
+                                        value={transport.rating}
+                                        text={`${transport.numOfRatings} reviews`}
+                                        num={transport.numOfRatings}
+                                      />
+                                    </Card.Text>
                                   </Col>
                                   <Col lg={4} md={4} sm={12}>
                                     <Card.Text>
@@ -466,14 +474,14 @@ const TransportScreen = () => {
                                       <strong>Price: </strong>
                                       BDT {transport.price}
                                     </Card.Text>
+                                    <Link
+                                      to={`/transportBooking/${transport._id}`}
+                                      className='btn btn-success'
+                                    >
+                                      Book Now
+                                    </Link>
                                   </Col>
                                 </Row>
-                                <Link
-                                  to={`/transportBooking/${transport._id}`}
-                                  className='btn btn-primary btn-success'
-                                >
-                                  Book Now
-                                </Link>
                               </Card.Body>
                             </Card>
                           ))}

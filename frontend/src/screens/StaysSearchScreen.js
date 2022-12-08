@@ -13,6 +13,7 @@ import {
   resetServiceList,
 } from '../features/service/serviceSlice'
 import SearchStays from '../components/SearchStays'
+import Rating from '../components/Rating'
 
 const StaysSearchScreen = () => {
   const [maxPrice, setMaxPrice] = useState(5000)
@@ -232,7 +233,13 @@ const StaysSearchScreen = () => {
                                 <strong>Max Guests : </strong>
                                 {accomodation.accomodationInfo.maxGuests}
                               </Card.Text>
-                              <Card.Text>*Rating Here</Card.Text>
+                              <Card.Text>
+                                <Rating
+                                  value={accomodation.rating}
+                                  text={`${accomodation.numOfRatings} reviews`}
+                                  num={accomodation.numOfRatings}
+                                />
+                              </Card.Text>
                             </Card.Body>
                           </Col>
 
@@ -254,7 +261,9 @@ const StaysSearchScreen = () => {
                               </Card.Text>
 
                               <LinkContainer to='/staysBooking'>
-                                <Button className='mt-4'>Book Now</Button>
+                                <Button className='btn btn-success'>
+                                  Book Now
+                                </Button>
                               </LinkContainer>
                             </Card.Body>
                           </Col>

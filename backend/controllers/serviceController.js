@@ -15,7 +15,7 @@ import {
 */
 
 export const getMostPopularServices = async (req, res, next) => {
-  req.query.limit = '10'
+  req.query.limit = '4'
   req.query.sort = '-rating'
   next()
 }

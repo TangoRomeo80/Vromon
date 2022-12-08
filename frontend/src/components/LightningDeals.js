@@ -5,34 +5,27 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { MdDateRange, MdLocationOn } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  getTopServices,
-  resetServiceList,
-} from '../features/service/serviceSlice'
+import { getAllTours, resetServiceList } from '../features/service/serviceSlice'
+import Rating from './Rating'
 
 const LightningDeals = () => {
   const dispatch = useDispatch()
 
   const [topServices, setTopServices] = useState([])
 
-  const {
-    services,
-    isListLoading,
-    isListSuccess,
-    isListError,
-    listErrorMessage,
-  } = useSelector((state) => state.service)
+  const { tours, isListLoading, isListSuccess, isListError, listErrorMessage } =
+    useSelector((state) => state.service)
 
   useEffect(() => {
     if (isListError) {
       toast.error(listErrorMessage, { position: 'top-center' })
     }
     if (isListSuccess) {
-      setTopServices(services)
+      setTopServices(tours)
     } else {
-      dispatch(getTopServices())
+      dispatch(getAllTours())
     }
-  }, [dispatch, services, isListSuccess, isListError, listErrorMessage])
+  }, [dispatch, tours, isListSuccess, isListError, listErrorMessage])
 
   useEffect(() => {
     return () => {
@@ -48,102 +41,48 @@ const LightningDeals = () => {
         </h2>
 
         <Row className='my-4'>
-          <Col xs={12} md={3}>
-            <LinkContainer to=''>
-              <Card>
-                <Card.Img
-                  cascade
-                  className='img-fluid'
-                  src='/LightningDeals/test.jpg'
-                />
-                <Card.Body cascade>
-                  <Card.Title>Fly, Baby! Fly!</Card.Title>
-                  <Card.Text>
-                    <MdDateRange /> &nbsp;4 day <br />
-                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
-                  </Card.Text>
-                  <Card.Text style={{ fontWeight: 'bold' }}>
-                    BDT 15,500/Person
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </LinkContainer>
-          </Col>
-
-          <Col xs={12} md={3}>
-            <LinkContainer to=''>
-              <Card>
-                <Card.Img
-                  cascade
-                  className='img-fluid'
-                  src='/LightningDeals/test.jpg'
-                />
-
-                <Card.Body cascade>
-                  <Card.Title>Fly, Baby! Fly!</Card.Title>
-                  <Card.Text>
-                    <MdDateRange /> &nbsp;4 day <br />
-                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
-                  </Card.Text>
-                  <Card.Text style={{ fontWeight: 'bold' }}>
-                    BDT 15,500/Person
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </LinkContainer>
-          </Col>
-
-          <Col xs={12} md={3}>
-            <LinkContainer to=''>
-              <Card>
-                <Card.Img
-                  cascade
-                  className='img-fluid'
-                  src='/LightningDeals/test.jpg'
-                />
-
-                <Card.Body cascade>
-                  <Card.Title>Fly, Baby! Fly!</Card.Title>
-                  <Card.Text>
-                    <MdDateRange /> &nbsp;4 day <br />
-                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
-                  </Card.Text>
-                  <Card.Text style={{ fontWeight: 'bold' }}>
-                    BDT 15,500/Person
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </LinkContainer>
-          </Col>
-
-          <Col xs={12} md={3}>
-            <LinkContainer to=''>
-              <Card>
-                <Card.Img
-                  cascade
-                  className='img-fluid'
-                  src='/LightningDeals/test.jpg'
-                />
-
-                <Card.Body cascade>
-                  <Card.Title>Fly, Baby! Fly!</Card.Title>
-                  <Card.Text>
-                    <MdDateRange /> &nbsp;4 day <br />
-                    <MdLocationOn /> &nbsp;Kathmundu, Nepal
-                  </Card.Text>
-                  <Card.Text style={{ fontWeight: 'bold' }}>
-                    BDT 15,500/Person
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </LinkContainer>
-          </Col>
+          {tours.map(
+            (service, idx) =>
+              idx < 10 && (
+                <Col sm={12} md={3} lg={3}>
+                  <Card>
+                    <Card.Img
+                      cascade
+                      className='img-fluid'
+                      src={service.coverImg}
+                      style={{ height: '40vh', objectFit: 'cover' }}
+                    />
+                    <Card.Body cascade>
+                      <Card.Title>{service.tourInfo.name}</Card.Title>
+                      <Card.Text>
+                        <MdDateRange /> &nbsp;{service.tourInfo.duration} days{' '}
+                        <br />
+                        <MdLocationOn /> &nbsp;{service.destination.name},{' '}
+                        {service.destination.district}
+                      </Card.Text>
+                      <Card.Text style={{ fontWeight: 'bold' }}>
+                        BDT {service.price}
+                      </Card.Text>
+                      <Card.Text>
+                        <Rating
+                          value={service.rating}
+                          text={`${service.numOfRatings} reviews`}
+                          num={service.numOfRatings}
+                        />
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              )
+          )}
         </Row>
 
         <Row className='py-4'>
-          <Button variant='outline-dark' size='md'>
-            <b>Show More</b>
-          </Button>
+          <LinkContainer to='/tourSearch'>
+            <Button variant='outline-dark' size='md'>
+              <b>Show More</b>
+            </Button>
+          </LinkContainer>
         </Row>
       </Container>
     </div>

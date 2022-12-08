@@ -11,6 +11,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import SearchTours from '../components/SearchTours'
 import { toast } from 'react-toastify'
+import Rating from '../components/Rating'
 
 const TourSearchScreen = () => {
   const dispatch = useDispatch()
@@ -180,28 +181,6 @@ const TourSearchScreen = () => {
               </Form>
             </Card.Body>
           </Card>
-
-          {/* Row For Price Range */}
-
-          {/* Row For Package Search */}
-          {/* <Row className="my-4">
-            <Card>
-              <Card.Header as="h5">Package Search</Card.Header>
-            </Card>
-
-            <Col className="mt-3">
-              <Form.Group className="mb-3" controlId="">
-                <Form.Control
-                  type="text"
-                  placeholder="Search For Packages"
-                  value={searchPackage}
-                  onChange={(e) => setSearchPackage(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
-            </Col>
-          </Row> */}
-
-          {/* Row For Duration */}
         </Col>
 
         {/* Right Colomn/Package Images Card */}
@@ -247,6 +226,13 @@ const TourSearchScreen = () => {
                               <strong>Max Travelers Count : </strong>
                               {tour.tourInfo.maxGroupSize}
                             </Card.Text>
+                            <Card.Text>
+                              <Rating
+                                value={tour.rating}
+                                text={`${tour.numOfRatings} reviews`}
+                                num={tour.numOfRatings}
+                              />
+                            </Card.Text>
                           </Card.Body>
                         </Col>
                         <Col lg={4} md={4} sm={12}>
@@ -269,7 +255,7 @@ const TourSearchScreen = () => {
 
                             <Link
                               to='/toursBooking'
-                              className='btn btn-primary'
+                              className='btn btn-success'
                             >
                               Book Now
                             </Link>
