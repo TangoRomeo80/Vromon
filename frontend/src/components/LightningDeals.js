@@ -140,6 +140,7 @@ const LightningDeals = () => {
             </LinkContainer>
           </Col>
         </Row>
+    
 
         <Row className="py-4">
           <Button variant="outline-dark" size="md">
