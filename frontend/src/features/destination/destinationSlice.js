@@ -180,6 +180,24 @@ const destinationSlice = createSlice({
       state.isReviewLoading = false
       state.reviewErrorMessage = ''
     },
+    resetDestinationCreate: (state) => {
+      state.isCreateError = false
+      state.isCreateSuccess = false
+      state.isCreateLoading = false
+      state.createErrorMessage = ''
+    },
+    resetDestinationUpdate: (state) => {
+      state.isUpdateError = false
+      state.isUpdateSuccess = false
+      state.isUpdateLoading = false
+      state.updateErrorMessage = ''
+    },
+    resetDestinationDelete: (state) => {
+      state.isDeleteError = false
+      state.isDeleteSuccess = false
+      state.isDeleteLoading = false
+      state.deleteErrorMessage = ''
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -334,5 +352,8 @@ export const {
   resetDestinationList,
   resetDestinationDetails,
   resetDestinationReview,
+  resetDestinationCreate,
+  resetDestinationUpdate,
+  resetDestinationDelete,
 } = destinationSlice.actions
 export default destinationSlice.reducer

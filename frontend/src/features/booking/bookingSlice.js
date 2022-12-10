@@ -130,6 +130,24 @@ const bookingSlice = createSlice({
       state.isDetailsLoading = false
       state.detailsErrorMessage = ''
     },
+    resetBookingCreate: (state) => {
+      state.isCreateError = false
+      state.isCreateSuccess = false
+      state.isCreateLoading = false
+      state.createErrorMessage = ''
+    },
+    resetBookingUpdate: (state) => {
+      state.isUpdateError = false
+      state.isUpdateSuccess = false
+      state.isUpdateLoading = false
+      state.updateErrorMessage = ''
+    },
+    resetBookingDelete: (state) => {
+      state.isDeleteError = false
+      state.isDeleteSuccess = false
+      state.isDeleteLoading = false
+      state.deleteErrorMessage = ''
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -237,5 +255,11 @@ const bookingSlice = createSlice({
   },
 })
 
-export const { resetBookingList, resetBookingDetails } = bookingSlice.actions
+export const {
+  resetBookingList,
+  resetBookingDetails,
+  resetBookingCreate,
+  resetBookingUpdate,
+  resetBookingDelete,
+} = bookingSlice.actions
 export default bookingSlice.reducer

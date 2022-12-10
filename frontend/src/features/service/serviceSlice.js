@@ -220,6 +220,24 @@ export const serviceSlice = createSlice({
       state.isDetailsLoading = false
       state.detailsErrorMessage = ''
     },
+    resetServiceCreate: (state) => {
+      state.isCreateError = false
+      state.isCreateSuccess = false
+      state.isCreateLoading = false
+      state.createErrorMessage = ''
+    },
+    resetServiceUpdate: (state) => {
+      state.isUpdateError = false
+      state.isUpdateSuccess = false
+      state.isUpdateLoading = false
+      state.updateErrorMessage = ''
+    },
+    resetServiceDelete: (state) => {
+      state.isDeleteError = false
+      state.isDeleteSuccess = false
+      state.isDeleteLoading = false
+      state.deleteErrorMessage = ''
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -417,5 +435,11 @@ export const serviceSlice = createSlice({
   },
 })
 
-export const { resetServiceList, resetServiceDetails } = serviceSlice.actions
+export const {
+  resetServiceList,
+  resetServiceDetails,
+  resetServiceCreate,
+  resetServiceDelete,
+  resetServiceUpdate,
+} = serviceSlice.actions
 export default serviceSlice.reducer

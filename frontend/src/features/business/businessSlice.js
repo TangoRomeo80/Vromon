@@ -130,6 +130,24 @@ const businessSlice = createSlice({
       state.isDetailsLoading = false
       state.detailsErrorMessage = ''
     },
+    resetBusinessCreate: (state) => {
+      state.isCreateError = false
+      state.isCreateSuccess = false
+      state.isCreateLoading = false
+      state.createErrorMessage = ''
+    },
+    resetBusinessUpdate: (state) => {
+      state.isUpdateError = false
+      state.isUpdateSuccess = false
+      state.isUpdateLoading = false
+      state.updateErrorMessage = ''
+    },
+    resetBusinessDelete: (state) => {
+      state.isDeleteError = false
+      state.isDeleteSuccess = false
+      state.isDeleteLoading = false
+      state.deleteErrorMessage = ''
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -221,5 +239,11 @@ const businessSlice = createSlice({
   },
 })
 
-export const { resetBusinessList, resetBusinessDetails } = businessSlice.actions
+export const {
+  resetBusinessList,
+  resetBusinessDetails,
+  resetBusinessCreate,
+  resetBusinessUpdate,
+  resetBusinessDelete,
+} = businessSlice.actions
 export default businessSlice.reducer

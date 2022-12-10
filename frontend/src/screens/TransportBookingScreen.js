@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap'
+import { Container, Row, Col, Card, Button, Form, Modal } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { MdLocationOn } from 'react-icons/md'
+import { MdLocationOn, MdDateRange } from 'react-icons/md'
 import { TbCurrencyTaka } from 'react-icons/tb'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,9 +11,13 @@ import {
   resetServiceDetails,
 } from '../features/service/serviceSlice'
 import {
-  getBookingById,
+  updateBooking,
   createBooking,
+  deleteBooking,
   resetBookingDetails,
+  resetBookingCreate,
+  resetBookingUpdate,
+  resetBookingDelete,
 } from '../features/booking/bookingSlice'
 import { toast } from 'react-toastify'
 import Loader from '../components/Loader'
@@ -36,13 +40,14 @@ const TransportBookingScreen = () => {
 
   const {
     booking,
-    isDetailsLoading: isBookingDetailsLoading,
-    isDetailsSuccess: isBookingDetailsSuccess,
-    isDetailsError: isBookingDetailsError,
-    detailsErrorMessage: bookingDetailsErrorMessage,
+    isCreateLoading: isBookingCreateLoading,
     isCreateSuccess: isBookingCreateSuccess,
     isCreateError: isBookingCreateError,
     createErrorMessage: bookingCreateErrorMessage,
+    isUpdateLoading: isBookingUpdateLoading,
+    isUpdateSuccess: isBookingUpdateSuccess,
+    isUpdateError: isBookingUpdateError,
+    updateErrorMessage: bookingUpdateErrorMessage,
   } = useSelector((state) => state.booking)
 
   const [transportDetail, setTransportDetail] = useState({})
@@ -51,6 +56,11 @@ const TransportBookingScreen = () => {
   const [customerPhone, setCustomerPhone] = useState('')
   const [remarks, setRemarks] = useState('')
   const [alert, setAlert] = useState(false)
+  const [showBookingModal, setShowBookingModal] = useState(true)
+  const [paymentMethod, setPaymentMethod] = useState('')
+
+  const handleClose = () => setShowBookingModal(false)
+  const handleShow = () => setShowBookingModal(true)
 
   useEffect(() => {
     if (isTransportDetailsError) {
@@ -66,10 +76,9 @@ const TransportBookingScreen = () => {
     if (isBookingCreateError) {
       toast.error(bookingCreateErrorMessage, { position: 'top-center' })
     } else if (isBookingCreateSuccess) {
-      toast.success('Booking Created Successfully', { position: 'top-center' })
+      handleShow()
     }
   }, [dispatch, isBookingCreateError, isBookingCreateSuccess])
-
 
   useEffect(() => {
     return () => {
@@ -94,9 +103,25 @@ const TransportBookingScreen = () => {
     dispatch(createBooking(bookingData))
   }
 
+  const handleConfirm = () => {
+    toast.success('Booking Confirmed', { position: 'top-center' })
+    handleClose()
+  }
+
+  const handleCancel = () => {
+    dispatch(deleteBooking(booking._id))
+    toast.error('Booking Cancelled', { position: 'top-center' })
+    handleClose()
+  }
+
+  const handlePayment = () => {
+    toast.success('Payment Confirmed', { position: 'top-center' })
+    handleClose()
+  }
+
   return (
     <>
-      {isTransportDetailsLoading ? (
+      {isTransportDetailsLoading || isBookingCreateLoading ? (
         <Loader />
       ) : isTransportDetailsError ? (
         <Message variant='danger'>{transportDetailsErrorMessage}</Message>
@@ -210,6 +235,93 @@ const TransportBookingScreen = () => {
                   </Card>
                 </Form>
               </Col>
+
+              <Modal
+                show={showBookingModal}
+                onHide={handleClose}
+                backdrop='static'
+                keyboard={false}
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>
+                    Booking Information for {transport.serviceName}
+                  </Modal.Title>
+                </Modal.Header>
+                {isBookingCreateLoading ? (
+                  <Loader />
+                ) : isBookingCreateError ? (
+                  <Message variant='danger'>
+                    {bookingCreateErrorMessage}
+                  </Message>
+                ) : (
+                  <Modal.Body>
+                    <Row>
+                      <Col lg={12} md={12} sm={12}>
+                        <Card.Title className=''>
+                          {transport.transportInfo.carModel},{' '}
+                          {transport.transportInfo.carType}
+                        </Card.Title>
+                        <Card.Text className='small'>
+                          <MdLocationOn /> {transport.transportInfo.pickupFrom}{' '}
+                          to {transport.transportInfo.dropTo} on <MdDateRange />{' '}
+                          {Moment(transport.transportInfo.pickUpDate).format(
+                            'DD-MM-YYYY'
+                          )}{' '}
+                          to <MdDateRange />{' '}
+                          {Moment(transport.transportInfo.dropOffDate).format(
+                            'DD-MM-YYYY'
+                          )}
+                        </Card.Text>
+                        <Card.Text className='small'>
+                          Customer Name: {customerName}
+                          <br />
+                          Customer Phone: {customerPhone}
+                          <br />
+                          Guest Count: {guestCount}
+                          <br />
+                          Remarks: {remarks}
+                          <br />
+                        </Card.Text>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={12} md={12} sm={12}>
+                        <Form>
+                          <Form.Group
+                            className='mb-3'
+                            controlId='paymentMethod'
+                          >
+                            <Form.Label className=''>Payment Method</Form.Label>
+                            <Form.Control
+                              as='select'
+                              className='shadow'
+                              value={paymentMethod}
+                              onChange={(e) => setPaymentMethod(e.target.value)}
+                            >
+                              <option value=''>Select Payment Method</option>
+                              <option value='cash'>Cash</option>
+                              <option value='card'>Card/Mobile Banking</option>
+                            </Form.Control>
+                          </Form.Group>
+                        </Form>
+                      </Col>
+                    </Row>
+                  </Modal.Body>
+                )}
+                <Modal.Footer>
+                  <Button variant='success' onClick={handleConfirm}>
+                    Confirm
+                  </Button>
+                  <Button variant='danger' onClick={handleCancel}>
+                    Cancel
+                  </Button>
+                  {paymentMethod !== 'cash' && paymentMethod !== '' && (
+                    <Button variant='primary' onClick={handlePayment}>
+                      Make Payment
+                    </Button>
+                  )}
+                </Modal.Footer>
+              </Modal>
 
               {/* Right Column For Booking Information */}
               <Col lg={4} md={6} sm={12}>
