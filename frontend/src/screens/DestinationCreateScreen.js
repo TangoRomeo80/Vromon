@@ -1,21 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { Container, Card, Row, Col, Form, Button } from "react-bootstrap";
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { createDestination } from "../features/destination/destinationSlice.js";
 
 const DestinationCreateScreen = () => {
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
-    // const navigate = useNavigate()
+  // const {
+  //   destinationName,
+  //   destinationDistrict,
+  //   destinationDivision,
+  //   derstinationAddress,
+  //   destinationDescription,
+  //   destinationCoverImg,
+  //   destinationImages,
+  // } = useSelector((state) => state.destinationCreate);
 
-    // const [name, setName] = useState('')
-    // const [district, setDistrict] = useState('')
-    // const [division, setDivision] = useState('')
-    // const [address, setAddress] = useState('')
-    // const [description, setDescription] = useState('')
-    // const [coverImg, setCoverImg] = useState('')
-    // const [images, setImages] = useState('')
+  // const [name, setName] = useState("");
+  // const [district, setDistrict] = useState("");
+  // const [division, setDivision] = useState("");
+  // const [address, setAddress] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [coverImg, setCoverImg] = useState("");
+  // const [images, setImages] = useState("");
 
-    // const useDispatch=useDispatch()
+  const useDispatch = useDispatch();
   return (
     <Container className="pt-5">
       <Row className="pb-5">
@@ -142,16 +153,14 @@ const DestinationCreateScreen = () => {
                   </Col>
                 </Row>
                 <Row className="py-4">
-            <Button variant="outline-dark" size="md">
-              <b>Create Destination</b>
-            </Button>
-        </Row>
-
+                  <Button variant="outline-dark" size="md">
+                    <b>Create Destination</b>
+                  </Button>
+                </Row>
               </Card.Body>
             </Card>
           </Col>
         </Row>
-
       </Form>
     </Container>
   );
