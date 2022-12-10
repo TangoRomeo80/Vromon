@@ -81,7 +81,7 @@ export const createBooking = createAsyncThunk(
 export const updateBooking = createAsyncThunk(
   'booking/updateBooking',
   async (data, thunkAPI) => {
-    const {id, bookingData} = data
+    const { id, bookingData } = data
     try {
       const token = thunkAPI.getState().auth.userInfo.token
       return await bookingService.updateBooking(id, bookingData, token)
@@ -135,6 +135,9 @@ const bookingSlice = createSlice({
     builder
       .addCase(getAllBookings.pending, (state) => {
         state.isListLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
       })
       .addCase(getAllBookings.fulfilled, (state, action) => {
         state.isListLoading = false
@@ -150,6 +153,9 @@ const bookingSlice = createSlice({
       })
       .addCase(getBookingById.pending, (state) => {
         state.isDetailsLoading = true
+        state.isDetailsError = false
+        state.isDetailsSuccess = false
+        state.detailsErrorMessage = ''
       })
       .addCase(getBookingById.fulfilled, (state, action) => {
         state.isDetailsLoading = false
@@ -165,6 +171,9 @@ const bookingSlice = createSlice({
       })
       .addCase(createBooking.pending, (state) => {
         state.isCreateLoading = true
+        state.isCreateError = false
+        state.isCreateSuccess = false
+        state.createErrorMessage = ''
       })
       .addCase(createBooking.fulfilled, (state, action) => {
         state.isCreateLoading = false
@@ -172,6 +181,7 @@ const bookingSlice = createSlice({
         state.isCreateError = false
         state.createErrorMessage = ''
         state.bookings.push(action.payload)
+        state.booking = action.payload
       })
       .addCase(createBooking.rejected, (state, action) => {
         state.isCreateLoading = false
@@ -180,6 +190,9 @@ const bookingSlice = createSlice({
       })
       .addCase(updateBooking.pending, (state) => {
         state.isUpdateLoading = true
+        state.isUpdateError = false
+        state.isUpdateSuccess = false
+        state.updateErrorMessage = ''
       })
       .addCase(updateBooking.fulfilled, (state, action) => {
         state.isUpdateLoading = false
@@ -201,6 +214,9 @@ const bookingSlice = createSlice({
       })
       .addCase(deleteBooking.pending, (state) => {
         state.isDeleteLoading = true
+        state.isDeleteError = false
+        state.isDeleteSuccess = false
+        state.deleteErrorMessage = ''
       })
       .addCase(deleteBooking.fulfilled, (state, action) => {
         state.isDeleteLoading = false

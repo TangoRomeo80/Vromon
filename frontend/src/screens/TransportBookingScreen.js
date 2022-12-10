@@ -10,6 +10,11 @@ import {
   getTransportById,
   resetServiceDetails,
 } from '../features/service/serviceSlice'
+import {
+  getBookingById,
+  createBooking,
+  resetBookingDetails,
+} from '../features/booking/bookingSlice'
 import { toast } from 'react-toastify'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -35,9 +40,17 @@ const TransportBookingScreen = () => {
     isDetailsSuccess: isBookingDetailsSuccess,
     isDetailsError: isBookingDetailsError,
     detailsErrorMessage: bookingDetailsErrorMessage,
+    isCreateSuccess: isBookingCreateSuccess,
+    isCreateError: isBookingCreateError,
+    createErrorMessage: bookingCreateErrorMessage,
   } = useSelector((state) => state.booking)
 
   const [transportDetail, setTransportDetail] = useState({})
+  const [customerName, setCustomerName] = useState('')
+  const [guestCount, setGuestCount] = useState(1)
+  const [customerPhone, setCustomerPhone] = useState('')
+  const [remarks, setRemarks] = useState('')
+  const [alert, setAlert] = useState(false)
 
   useEffect(() => {
     if (isTransportDetailsError) {
@@ -50,10 +63,36 @@ const TransportBookingScreen = () => {
   }, [dispatch, trannsportId])
 
   useEffect(() => {
+    if (isBookingCreateError) {
+      toast.error(bookingCreateErrorMessage, { position: 'top-center' })
+    } else if (isBookingCreateSuccess) {
+      toast.success('Booking Created Successfully', { position: 'top-center' })
+    }
+  }, [dispatch, isBookingCreateError, isBookingCreateSuccess])
+
+
+  useEffect(() => {
     return () => {
       dispatch(resetServiceDetails())
     }
   }, [dispatch])
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+
+    const bookingData = {
+      user: userInfo._id,
+      service: transport._id,
+      customerInfo: {
+        customerName,
+        customerPhone,
+        remarks,
+        alert,
+      },
+    }
+
+    dispatch(createBooking(bookingData))
+  }
 
   return (
     <>
@@ -80,7 +119,7 @@ const TransportBookingScreen = () => {
             <Row className='mt-4'>
               {/* Left Column For Personal Information */}
               <Col lg={8} md={6} sm={12}>
-                <Form>
+                <Form onSubmit={submitHandler}>
                   <Card className='shadow'>
                     <Card.Header as='h5' className='my-2'>
                       Customer Information
@@ -98,11 +137,14 @@ const TransportBookingScreen = () => {
                       <Row>
                         <Col lg={6} md={12} sm={12}>
                           <Form.Group className='mb-3' controlId='bookingName'>
-                            <Form.Label className=''>Booking Name</Form.Label>
+                            <Form.Label className=''>Customer Name</Form.Label>
                             <Form.Control
+                              required
                               type='text'
                               className='shadow'
                               placeholder='Please Enter Your Name'
+                              value={customerName}
+                              onChange={(e) => setCustomerName(e.target.value)}
                             />
                           </Form.Group>
                         </Col>
@@ -111,9 +153,12 @@ const TransportBookingScreen = () => {
                           <Form.Group className='mb-3' controlId='guestCounts'>
                             <Form.Label className=''>Guest Counts</Form.Label>
                             <Form.Control
+                              required
                               type='text'
                               className='shadow'
                               placeholder='Please Enter Number of Guest(s)'
+                              value={guestCount}
+                              onChange={(e) => setGuestCount(e.target.value)}
                             />
                           </Form.Group>
                         </Col>
@@ -122,9 +167,12 @@ const TransportBookingScreen = () => {
                           <Form.Group className='mb-3' controlId='bookingName'>
                             <Form.Label className=''>Phone Number</Form.Label>
                             <Form.Control
+                              required
                               type='text'
                               className='shadow'
                               placeholder='Please Enter Your Contact Number'
+                              value={customerPhone}
+                              onChange={(e) => setCustomerPhone(e.target.value)}
                             />
                           </Form.Group>
                         </Col>
@@ -137,6 +185,8 @@ const TransportBookingScreen = () => {
                               rows={3}
                               className='shadow'
                               placeholder='Please write if you have any remarks regarding your booking'
+                              value={remarks}
+                              onChange={(e) => setRemarks(e.target.value)}
                             />
                           </Form.Group>
                         </Col>
@@ -147,14 +197,14 @@ const TransportBookingScreen = () => {
                           <Form.Check
                             type='checkbox'
                             label='Receive text alerts about this trip. Message and data rates may apply'
+                            checked={alert}
+                            onChange={(e) => setAlert(e.target.checked)}
                           />
                         </Form.Group>
                       </Row>
 
                       <Row className='py-3'>
-                        <LinkContainer to='#'>
-                          <Button>Confirm Booking</Button>
-                        </LinkContainer>
+                        <Button type='submit'>Confirm Booking</Button>
                       </Row>
                     </Card.Body>
                   </Card>
@@ -340,5 +390,3 @@ const TransportBookingScreen = () => {
 }
 
 export default TransportBookingScreen
-
-// TransportBookingScreen
