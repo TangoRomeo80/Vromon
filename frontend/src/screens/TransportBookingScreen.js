@@ -23,18 +23,26 @@ const TransportBookingScreen = () => {
 
   const {
     transport,
-    isDetailsLoading,
-    isDetailsSuccess,
-    isDetailsError,
-    detailsErrorMessage,
+    isDetailsLoading: isTransportDetailsLoading,
+    isDetailsSuccess: isTransportDetailsSuccess,
+    isDetailsError: isTransportDetailsError,
+    detailsErrorMessage: transportDetailsErrorMessage,
   } = useSelector((state) => state.service)
+
+  const {
+    booking,
+    isDetailsLoading: isBookingDetailsLoading,
+    isDetailsSuccess: isBookingDetailsSuccess,
+    isDetailsError: isBookingDetailsError,
+    detailsErrorMessage: bookingDetailsErrorMessage,
+  } = useSelector((state) => state.booking)
 
   const [transportDetail, setTransportDetail] = useState({})
 
   useEffect(() => {
-    if (isDetailsError) {
-      toast.error(detailsErrorMessage, { position: 'top-center' })
-    } else if (isDetailsSuccess) {
+    if (isTransportDetailsError) {
+      toast.error(transportDetailsErrorMessage, { position: 'top-center' })
+    } else if (isTransportDetailsSuccess) {
       setTransportDetail(transport)
     } else {
       dispatch(getTransportById(trannsportId))
@@ -49,10 +57,10 @@ const TransportBookingScreen = () => {
 
   return (
     <>
-      {isDetailsLoading ? (
+      {isTransportDetailsLoading ? (
         <Loader />
-      ) : isDetailsError ? (
-        <Message variant='danger'>{detailsErrorMessage}</Message>
+      ) : isTransportDetailsError ? (
+        <Message variant='danger'>{transportDetailsErrorMessage}</Message>
       ) : (
         transport && (
           <Container Container className='pt-4'>
