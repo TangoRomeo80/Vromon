@@ -8,6 +8,7 @@ import {
   Form,
   Button,
   ListGroup,
+  Carousel,
 } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
@@ -117,8 +118,27 @@ const DestinationCreateScreen = () => {
         formData,
         config
       )
-
       setCoverImg(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const uploadImageFileHandler = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+
+      const { data } = await axios.post(`/api/upload/`, formData, config)
+
+      setImages([...images, data])
     } catch (error) {
       console.error(error)
     }
@@ -172,18 +192,36 @@ const DestinationCreateScreen = () => {
                 <Card className='mb-4'>
                   <Card.Header>Other Images</Card.Header>
                   <Card.Body className='text-center'>
-                    <img
-                      className='mb-2'
-                      alt='Other Images'
-                      style={{ height: '10rem', borderRadius: '50%' }}
-                    />
+                    {images.length <= 0 ? (
+                      <Card.Img
+                        cascade
+                        className='img-fluid'
+                        src='/destinations/test.png'
+                        style={{ height: '20vh', objectFit: 'cover' }}
+                      />
+                    ) : (
+                      <Carousel>
+                        {images.map((image, index) => (
+                          <Carousel.Item>
+                            <img
+                              className='d-block w-100'
+                              src={image}
+                              alt={`Image-${index}`}
+                              style={{ maxHeight: '20vh', objectFit: 'cover' }}
+                            />
+                          </Carousel.Item>
+                        ))}
+                      </Carousel>
+                    )}
+
                     <Form.Group controlId='image 1'>
                       <Form.Label>Upload New Image</Form.Label>
                       <Form.Control
                         className='mb-3'
                         type='file'
                         id='image-file'
-                        label='Cover Image'
+                        label='Images'
+                        onChange={uploadImageFileHandler}
                       ></Form.Control>
                     </Form.Group>
                   </Card.Body>
