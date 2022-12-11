@@ -3,7 +3,7 @@ import { Container, Row, Col, Card, Button, Form, Modal } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { MdLocationOn, MdDateRange } from 'react-icons/md'
 import { TbCurrencyTaka } from 'react-icons/tb'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Moment from 'moment'
 import {
@@ -24,6 +24,8 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 
 const TransportBookingScreen = () => {
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
   const trannsportId = useParams().id
 
   const dispatch = useDispatch()
@@ -48,6 +50,10 @@ const TransportBookingScreen = () => {
     isUpdateSuccess: isBookingUpdateSuccess,
     isUpdateError: isBookingUpdateError,
     updateErrorMessage: bookingUpdateErrorMessage,
+    isDeleteLoading: isBookingDeleteLoading,
+    isDeleteSuccess: isBookingDeleteSuccess,
+    isDeleteError: isBookingDeleteError,
+    deleteErrorMessage: bookingDeleteErrorMessage,
   } = useSelector((state) => state.booking)
 
   const [transportDetail, setTransportDetail] = useState({})
@@ -56,11 +62,38 @@ const TransportBookingScreen = () => {
   const [customerPhone, setCustomerPhone] = useState('')
   const [remarks, setRemarks] = useState('')
   const [alert, setAlert] = useState(false)
-  const [showBookingModal, setShowBookingModal] = useState(true)
+  const [showBookingModal, setShowBookingModal] = useState(false)
   const [paymentMethod, setPaymentMethod] = useState('')
 
   const handleClose = () => setShowBookingModal(false)
   const handleShow = () => setShowBookingModal(true)
+
+  useEffect(() => {
+    if (searchParams.get('status')) {
+      if (searchParams.get('status') === 'success') {
+        updateBooking({
+          id: searchParams.get('bookingId'),
+          bookingData: {
+            paymentStatus: 'paid',
+            paymentAmount: searchParams.get('amount') * 1,
+          },
+        })
+        toast.success('Payment Successful, booking Completed', {
+          position: 'top-center',
+        })
+      } else if (searchParams.get('status') === 'fail') {
+        deleteBooking(searchParams.get('bookingId'))
+        toast.error('Payment Failed, booking Cancelled', {
+          position: 'top-center',
+        })
+      } else if (searchParams.get('status') === 'cancel') {
+        deleteBooking(searchParams.get('bookingId'))
+        toast.error('Payment Cancelled, booking Cancelled', {
+          position: 'top-center',
+        })
+      }
+    }
+  }, [])
 
   useEffect(() => {
     if (isTransportDetailsError) {
@@ -75,6 +108,10 @@ const TransportBookingScreen = () => {
   useEffect(() => {
     if (isBookingCreateError) {
       toast.error(bookingCreateErrorMessage, { position: 'top-center' })
+    } else if (isBookingUpdateError) {
+      toast.error(bookingUpdateErrorMessage, { position: 'top-center' })
+    } else if (isBookingDeleteError) {
+      toast.error(bookingDeleteErrorMessage, { position: 'top-center' })
     } else if (isBookingCreateSuccess) {
       handleShow()
     }
@@ -104,8 +141,12 @@ const TransportBookingScreen = () => {
   }
 
   const handleConfirm = () => {
-    toast.success('Booking Confirmed', { position: 'top-center' })
+    const bookingData = {
+      paymentMethod,
+    }
+    updateBooking({ id: booking._id, bookingData })
     handleClose()
+    toast.success('Booking Confirmed', { position: 'top-center' })
   }
 
   const handleCancel = () => {
@@ -115,13 +156,22 @@ const TransportBookingScreen = () => {
   }
 
   const handlePayment = () => {
-    toast.success('Payment Confirmed', { position: 'top-center' })
+    const bookingData = {
+      paymentMethod,
+    }
+    updateBooking({ id: booking._id, bookingData })
+    window.open(
+      `http://localhost:5000/api/bookings/ssl-request?bookingId=${booking._id}`,
+      '_self'
+    )
     handleClose()
   }
 
   return (
     <>
-      {isTransportDetailsLoading || isBookingCreateLoading ? (
+      {isTransportDetailsLoading ||
+      isBookingCreateLoading ||
+      isBookingDeleteLoading ? (
         <Loader />
       ) : isTransportDetailsError ? (
         <Message variant='danger'>{transportDetailsErrorMessage}</Message>
@@ -236,92 +286,103 @@ const TransportBookingScreen = () => {
                 </Form>
               </Col>
 
-              <Modal
-                show={showBookingModal}
-                onHide={handleClose}
-                backdrop='static'
-                keyboard={false}
-              >
-                <Modal.Header closeButton>
-                  <Modal.Title>
-                    Booking Information for {transport.serviceName}
-                  </Modal.Title>
-                </Modal.Header>
-                {isBookingCreateLoading ? (
-                  <Loader />
-                ) : isBookingCreateError ? (
-                  <Message variant='danger'>
-                    {bookingCreateErrorMessage}
-                  </Message>
-                ) : (
-                  <Modal.Body>
-                    <Row>
-                      <Col lg={12} md={12} sm={12}>
-                        <Card.Title className=''>
-                          {transport.transportInfo.carModel},{' '}
-                          {transport.transportInfo.carType}
-                        </Card.Title>
-                        <Card.Text className='small'>
-                          <MdLocationOn /> {transport.transportInfo.pickupFrom}{' '}
-                          to {transport.transportInfo.dropTo} on <MdDateRange />{' '}
-                          {Moment(transport.transportInfo.pickUpDate).format(
-                            'DD-MM-YYYY'
-                          )}{' '}
-                          to <MdDateRange />{' '}
-                          {Moment(transport.transportInfo.dropOffDate).format(
-                            'DD-MM-YYYY'
-                          )}
-                        </Card.Text>
-                        <Card.Text className='small'>
-                          Customer Name: {customerName}
-                          <br />
-                          Customer Phone: {customerPhone}
-                          <br />
-                          Guest Count: {guestCount}
-                          <br />
-                          Remarks: {remarks}
-                          <br />
-                        </Card.Text>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col lg={12} md={12} sm={12}>
-                        <Form>
-                          <Form.Group
-                            className='mb-3'
-                            controlId='paymentMethod'
-                          >
-                            <Form.Label className=''>Payment Method</Form.Label>
-                            <Form.Control
-                              as='select'
-                              className='shadow'
-                              value={paymentMethod}
-                              onChange={(e) => setPaymentMethod(e.target.value)}
+              {!isBookingCreateLoading && (
+                <Modal
+                  show={showBookingModal}
+                  onHide={handleClose}
+                  backdrop='static'
+                  keyboard={false}
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title>
+                      Booking Information for {transport.serviceName}
+                    </Modal.Title>
+                  </Modal.Header>
+                  {isBookingCreateLoading ? (
+                    <Loader />
+                  ) : isBookingCreateError ? (
+                    <Message variant='danger'>
+                      {bookingCreateErrorMessage}
+                    </Message>
+                  ) : (
+                    <Modal.Body>
+                      <Row>
+                        <Col lg={12} md={12} sm={12}>
+                          <Card.Title className=''>
+                            {transport.transportInfo.carModel},{' '}
+                            {transport.transportInfo.carType}
+                          </Card.Title>
+                          <Card.Text className='small'>
+                            <MdLocationOn />{' '}
+                            {transport.transportInfo.pickupFrom} to{' '}
+                            {transport.transportInfo.dropTo} on <MdDateRange />{' '}
+                            {Moment(transport.transportInfo.pickUpDate).format(
+                              'DD-MM-YYYY'
+                            )}{' '}
+                            to <MdDateRange />{' '}
+                            {Moment(transport.transportInfo.dropOffDate).format(
+                              'DD-MM-YYYY'
+                            )}
+                          </Card.Text>
+                          <Card.Text className='small'>
+                            Customer Name: {customerName}
+                            <br />
+                            Customer Phone: {customerPhone}
+                            <br />
+                            Guest Count: {guestCount}
+                            <br />
+                            Remarks: {remarks}
+                            <br />
+                          </Card.Text>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col lg={12} md={12} sm={12}>
+                          <Form>
+                            <Form.Group
+                              className='mb-3'
+                              controlId='paymentMethod'
                             >
-                              <option value=''>Select Payment Method</option>
-                              <option value='cash'>Cash</option>
-                              <option value='card'>Card/Mobile Banking</option>
-                            </Form.Control>
-                          </Form.Group>
-                        </Form>
-                      </Col>
-                    </Row>
-                  </Modal.Body>
-                )}
-                <Modal.Footer>
-                  <Button variant='success' onClick={handleConfirm}>
-                    Confirm
-                  </Button>
-                  <Button variant='danger' onClick={handleCancel}>
-                    Cancel
-                  </Button>
-                  {paymentMethod !== 'cash' && paymentMethod !== '' && (
-                    <Button variant='primary' onClick={handlePayment}>
-                      Make Payment
-                    </Button>
+                              <Form.Label className=''>
+                                Payment Method
+                              </Form.Label>
+                              <Form.Control
+                                as='select'
+                                className='shadow'
+                                value={paymentMethod}
+                                onChange={(e) =>
+                                  setPaymentMethod(e.target.value)
+                                }
+                              >
+                                <option value=''>Select Payment Method</option>
+                                <option value='cash'>Cash</option>
+                                <option value='card'>
+                                  Card/Mobile Banking
+                                </option>
+                              </Form.Control>
+                            </Form.Group>
+                          </Form>
+                        </Col>
+                      </Row>
+                    </Modal.Body>
                   )}
-                </Modal.Footer>
-              </Modal>
+                  <Modal.Footer>
+                    {paymentMethod === 'cash' && (
+                      <Button variant='success' onClick={handleConfirm}>
+                        Confirm Booking
+                      </Button>
+                    )}
+                    {paymentMethod === 'card' && (
+                      <Button variant='primary' onClick={handlePayment}>
+                        Make Payment and Confirm
+                      </Button>
+                    )}
+                    <Button variant='danger' onClick={handleCancel}>
+                      Cancel Booking
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
+              )}
 
               {/* Right Column For Booking Information */}
               <Col lg={4} md={6} sm={12}>

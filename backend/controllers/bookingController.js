@@ -2,8 +2,6 @@
 import { SslCommerzPayment } from 'sslcommerz'
 
 import Booking from '../models/bookingModel.js'
-import Service from '../models/serviceModel.js'
-import User from '../models/userModel.js'
 import catchAsync from '../utils/catchAsync.js'
 // import AppError from '../utils/appError.js'
 import {
@@ -53,36 +51,41 @@ export const getBooking = getOne(Booking, [
 
 export const sslRequest = catchAsync(async (req, res) => {
   const queryString = req.query
-  const { serviceId, userId } = queryString
+  const { bookingId } = queryString
 
-  const service = await Service.findById(serviceId)
-  const user = await User.findById(userId)
+  const booking = await Booking.findById(bookingId)
+  const serviceType =
+    booking.service.serviceType === 'accomodation'
+      ? 'stays'
+      : booking.service.serviceType === 'transportation'
+      ? 'transport'
+      : 'tours'
 
   /**
    * Create ssl session request
    */
 
   const data = {
-    total_amount: service.price,
+    total_amount: booking.service.price,
     currency: 'BDT',
     tran_id: 'REF123',
-    success_url: `${process.env.ROOT}/api/bookings/ssl-payment-success?serviceId=${serviceId}&userId=${userId}`,
-    fail_url: `${process.env.ROOT}/api/bookings/ssl-payment-fail`,
-    cancel_url: `${process.env.ROOT}/api/bookings/ssl-payment-cancel`,
+    success_url: `${process.env.ROOT}/api/bookings/ssl-payment-success?bookingId=${bookingId}&serviceType=${serviceType}&status=success&amount=${booking.service.price}&serviceId=${booking.service._id}`,
+    fail_url: `${process.env.ROOT}/api/bookings/ssl-payment-fail?bookingId=${bookingId}&&serviceType=${serviceType}&status=fail&serviceId=${booking.service._id}`,
+    cancel_url: `${process.env.ROOT}/api/bookings/ssl-payment-cancel?bookingId=${bookingId}&&serviceType=${serviceType}&status=cancel&serviceId=${booking.service._id}`,
     shipping_method: 'No',
-    product_name: service.serviceName,
-    product_category: service.serviceType,
+    product_name: booking.service.serviceName,
+    product_category: booking.service.serviceType,
     product_profile: 'general',
-    cus_name: user.userName,
-    cus_email: user.email,
-    cus_add1: user.touristInfo.address.house,
-    cus_add2: user.touristInfo.address.street,
-    cus_city: user.touristInfo.address.area,
-    cus_state: user.touristInfo.address.city,
+    cus_name: booking.user.userName,
+    cus_email: booking.user.email,
+    cus_add1: booking.user.touristInfo.address.house,
+    cus_add2: booking.user.touristInfo.address.street,
+    cus_city: booking.user.touristInfo.address.area,
+    cus_state: booking.user.touristInfo.address.city,
     cus_postcode: '1000',
     cus_country: 'Bangladesh',
-    cus_phone: user.mobile,
-    cus_fax: user.mobile,
+    cus_phone: booking.user.mobile,
+    cus_fax: booking.user.mobile,
     multi_card_name: 'mastercard',
     value_a: 'ref001_A',
     value_b: 'ref002_B',
@@ -116,11 +119,13 @@ export const sslRequest = catchAsync(async (req, res) => {
 
 export const sslPaymentSuccess = catchAsync(async (req, res) => {
   //Handle payment success
+  const { bookingId, status, serviceType, amount, serviceId } = req.query
 
-  res.status(200).json({
-    data: req.body,
-    message: 'Payment success',
-  })
+  res
+    .status(200)
+    .redirect(
+      `${process.env.CLIENT}/${serviceType}Booking/${serviceId}?bookingId=${bookingId}&status=${status}&amount=${amount}`
+    )
 })
 
 // Request type: POST
@@ -129,11 +134,13 @@ export const sslPaymentSuccess = catchAsync(async (req, res) => {
 
 export const sslPaymentFail = catchAsync(async (req, res) => {
   //Handle payment fail
+  const { bookingId, serviceType, status, serviceId } = req.query
 
-  res.status(200).json({
-    data: req.body,
-    message: 'Payment fail',
-  })
+  res
+    .status(200)
+    .redirect(
+      `${process.env.CLIENT}/${serviceType}Booking/${serviceId}?bookingId=${bookingId}&status=${status}`
+    )
 })
 
 // Request type: POST
@@ -142,11 +149,13 @@ export const sslPaymentFail = catchAsync(async (req, res) => {
 
 export const sslPaymentCancel = catchAsync(async (req, res) => {
   //Handle payment cancel
+  const { bookingId, serviceType, status, serviceId } = req.query
 
-  res.status(200).json({
-    data: req.body,
-    message: 'Payment cancel',
-  })
+  res
+    .status(200)
+    .redirect(
+      `${process.env.CLIENT}/${serviceType}Booking/${serviceId}?bookingId=${bookingId}&status=${status}`
+    )
 })
 
 // Request type: POST

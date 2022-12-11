@@ -69,6 +69,7 @@ const bookingSchema = new mongoose.Schema(
     },
     paymentAmount: {
       type: Number,
+      default: 0,
       required: [
         function () {
           return this.paymentStatus === 'paid'
@@ -78,21 +79,20 @@ const bookingSchema = new mongoose.Schema(
       trim: true,
       maxlength: [10, 'Amount Number Cannot be More Than 10 Digits'],
     },
-    // paymentMethod: {
-    //   type: String,
-    //   required: [
-    //     function () {
-    //       return this.paymentStatus === 'paid'
-    //     },
-    //     'Payment Method is Required',
-    //   ],
-    //   trim: true,
-    //   enum: {
-    //     values: ['cash', 'card', 'bkash', 'rocket', 'nagad'],
-    //     message:
-    //       'Payment Method needs to be cash, card, bkash, rocket or nagad',
-    //   },
-    // },
+    paymentMethod: {
+      type: String,
+      required: [
+        function () {
+          return this.paymentStatus === 'paid'
+        },
+        'Payment Method is Required',
+      ],
+      trim: true,
+      enum: {
+        values: ['cash', 'card'],
+        message: 'Payment Method needs to be cash or card',
+      },
+    },
     bookingStatus: {
       type: String,
       required: [true, 'Booking status is Required'],
