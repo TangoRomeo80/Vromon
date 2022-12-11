@@ -73,8 +73,14 @@ const destinationSchema = new mongoose.Schema(
         'A destination must have a cover image',
       ],
     },
-    images: [String],
-    reviews: [reviewSchema],
+    images: {
+      type: [String],
+      default: [],
+    },
+    reviews: {
+      type: [reviewSchema],
+      default: [],
+    },
     rating: {
       type: Number,
       default: 4.5,

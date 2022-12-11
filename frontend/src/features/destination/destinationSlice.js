@@ -269,6 +269,7 @@ const destinationSlice = createSlice({
         state.isCreateError = false
         state.createErrorMessage = ''
         state.destinations.push(action.payload)
+        state.destination = action.payload
       })
       .addCase(createDestination.rejected, (state, action) => {
         state.isCreateLoading = false
