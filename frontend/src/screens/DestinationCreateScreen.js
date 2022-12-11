@@ -78,7 +78,8 @@ const DestinationCreateScreen = () => {
       division !== '' &&
       district !== '' &&
       address !== '' &&
-      description !== ''
+      description !== '' &&
+      coverImg !== ''
     ) {
       dispatch(
         createDestination({
@@ -92,6 +93,10 @@ const DestinationCreateScreen = () => {
           mapEmbed,
         })
       )
+    } else {
+      toast.error('Please fill all the required fields and coverImage', {
+        position: 'top-center',
+      })
     }
   }
 
