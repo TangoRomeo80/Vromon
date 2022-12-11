@@ -124,6 +124,10 @@ const TransportBookingScreen = () => {
   useEffect(() => {
     return () => {
       dispatch(resetServiceDetails())
+      dispatch(resetBookingDetails())
+      dispatch(resetBookingCreate())
+      dispatch(resetBookingUpdate())
+      dispatch(resetBookingDelete())
     }
   }, [dispatch])
 
