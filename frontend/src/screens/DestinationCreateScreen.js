@@ -138,7 +138,7 @@ const DestinationCreateScreen = () => {
                       cascade
                       className='img-fluid'
                       src={
-                        coverImg !== '' ? coverImg : '/destinations/test.jpg'
+                        coverImg !== '' ? coverImg : '/destinations/test.png'
                       }
                       style={{ height: '20vh', objectFit: 'cover' }}
                     />
