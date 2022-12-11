@@ -1,17 +1,13 @@
 import React from 'react'
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 const Quicklinks = () => {
   return (
     <div>
       <Container>
-        <h4 className="font-weight-bold text-center pt-4">
-          {" "}
-          Quick Links{" "}
-        </h4>
 
-        <Row>
+        <Row className='mb-5 '>
           <Col xs={12} md={3}>
             <h6
               style={{ color: "black" }}
@@ -19,6 +15,9 @@ const Quicklinks = () => {
             >
               Company
             </h6>
+            <Nav className="flex-column text-center">
+              <Nav.Link href="#">About Us</Nav.Link>
+            </Nav>
           </Col>
           <Col xs={12} md={3}>
             <h6
@@ -27,6 +26,11 @@ const Quicklinks = () => {
             >
               Explore
             </h6>
+            <Nav className="flex-column text-center">
+              <Nav.Link href="#">Destinations</Nav.Link>
+              <Nav.Link href="#">Where can Stay</Nav.Link>
+              <Nav.Link href="#">Relevent Transport</Nav.Link>
+            </Nav>
           </Col>
           <Col xs={12} md={3}>
             <h6
@@ -35,6 +39,12 @@ const Quicklinks = () => {
             >
               Help
             </h6>
+            <Nav className="flex-column text-center">
+              <Nav.Link href="#">FAQ</Nav.Link>
+              <Nav.Link href="#">Support Center</Nav.Link>
+              <Nav.Link href="#">Payment Info</Nav.Link>
+              <Nav.Link href="#">Privacy Policy</Nav.Link>
+            </Nav>
           </Col>
           <Col xs={12} md={3}>
             <h6
@@ -43,6 +53,10 @@ const Quicklinks = () => {
             >
               Terms & Condition
             </h6>
+            <Nav className="flex-column text-center">
+              <Nav.Link href="#">General</Nav.Link>
+              <Nav.Link href="#">Offers</Nav.Link>
+            </Nav>
           </Col>
         </Row>
       </Container>

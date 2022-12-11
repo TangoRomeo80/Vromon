@@ -11,8 +11,8 @@ const HomeScreen = () => {
       <Navbar />
       <LightningDeals />
       <PopularDestinations />
-      {/* <TopAirlines/>
-      <Quicklinks/> */}
+      {/* <TopAirlines/> */}
+      <Quicklinks/>
     </div>
   )
 }
