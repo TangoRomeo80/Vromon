@@ -113,7 +113,7 @@ const DestinationCreateScreen = () => {
     const mapEmbed = e.target.value
     let rx = /(?<=src=").*?(?=[\*"])/g
     let filterEmbed = mapEmbed.match(rx)
-    setMapEmbed(filterEmbed)
+    setMapEmbed(filterEmbed[0])
   }
 
   return (
@@ -134,10 +134,13 @@ const DestinationCreateScreen = () => {
                 <Card className='mb-4'>
                   <Card.Header>Cover Image</Card.Header>
                   <Card.Body className='text-center'>
-                    <img
-                      className='mb-2'
-                      alt='Other Images'
-                      style={{ height: '10rem', borderRadius: '50%' }}
+                    <Card.Img
+                      cascade
+                      className='img-fluid'
+                      src={
+                        coverImg !== '' ? coverImg : '/destinations/test.jpg'
+                      }
+                      style={{ height: '20vh', objectFit: 'cover' }}
                     />
                     <Form.Group controlId='image 1'>
                       <Form.Label>Upload New Image</Form.Label>
@@ -146,6 +149,7 @@ const DestinationCreateScreen = () => {
                         type='file'
                         id='image-file'
                         label='Cover Image'
+                        onChange={uploadCoverImageFileHandler}
                       ></Form.Control>
                     </Form.Group>
                   </Card.Body>
