@@ -71,23 +71,27 @@ const TransportBookingScreen = () => {
   useEffect(() => {
     if (searchParams.get('status')) {
       if (searchParams.get('status') === 'success') {
-        updateBooking({
-          id: searchParams.get('bookingId'),
-          bookingData: {
-            paymentStatus: 'paid',
-            paymentAmount: searchParams.get('amount') * 1,
-          },
-        })
+        dispatch(
+          updateBooking({
+            id: searchParams.get('bookingId'),
+            bookingData: {
+              paymentStatus: 'paid',
+              paymentAmount: searchParams.get('amount') * 1,
+              paymentMethod: 'card',
+              bookingStatus: 'booked',
+            },
+          })
+        )
         toast.success('Payment Successful, booking Completed', {
           position: 'top-center',
         })
       } else if (searchParams.get('status') === 'fail') {
-        deleteBooking(searchParams.get('bookingId'))
+        dispatch(deleteBooking(searchParams.get('bookingId')))
         toast.error('Payment Failed, booking Cancelled', {
           position: 'top-center',
         })
       } else if (searchParams.get('status') === 'cancel') {
-        deleteBooking(searchParams.get('bookingId'))
+        dispatch(deleteBooking(searchParams.get('bookingId')))
         toast.error('Payment Cancelled, booking Cancelled', {
           position: 'top-center',
         })
@@ -143,8 +147,9 @@ const TransportBookingScreen = () => {
   const handleConfirm = () => {
     const bookingData = {
       paymentMethod,
+      bookingStatus: 'booked',
     }
-    updateBooking({ id: booking._id, bookingData })
+    dispatch(updateBooking({ id: booking._id, bookingData }))
     handleClose()
     toast.success('Booking Confirmed', { position: 'top-center' })
   }

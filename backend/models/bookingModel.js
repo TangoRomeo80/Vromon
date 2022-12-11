@@ -81,6 +81,7 @@ const bookingSchema = new mongoose.Schema(
     },
     paymentMethod: {
       type: String,
+      default: 'cash',
       required: [
         function () {
           return this.paymentStatus === 'paid'
