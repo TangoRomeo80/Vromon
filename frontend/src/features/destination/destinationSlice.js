@@ -12,10 +12,12 @@ const initialState = {
   isDetailsSuccess: false,
   isDetailsLoading: false,
   detailsErrorMessage: '',
+
   isCreateError: false,
   isCreateSuccess: false,
   isCreateLoading: false,
   createErrorMessage: '',
+  
   isUpdateError: false,
   isUpdateSuccess: false,
   isUpdateLoading: false,

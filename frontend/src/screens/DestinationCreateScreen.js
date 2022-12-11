@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Container, Card, Row, Col, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { createDestination } from "../features/destination/destinationSlice.js";
+import {
+  createDestination,
+  resetDestinationCreate,
+} from "../features/destination/destinationSlice.js";
 
 const DestinationCreateScreen = () => {
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // const {
   //   destinationName,
@@ -18,15 +21,47 @@ const DestinationCreateScreen = () => {
   //   destinationImages,
   // } = useSelector((state) => state.destinationCreate);
 
-  // const [name, setName] = useState("");
-  // const [district, setDistrict] = useState("");
-  // const [division, setDivision] = useState("");
-  // const [address, setAddress] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [coverImg, setCoverImg] = useState("");
-  // const [images, setImages] = useState("");
+  const {
+    destination,
+    isCreateError,
+    isCreateSuccess,
+    isCreateLoading,
+    createErrorMessage,
+  } = useSelector((state) => state.destination);
 
-  const useDispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [district, setDistrict] = useState("");
+  const [division, setDivision] = useState("");
+  const [address, setAddress] = useState("");
+  const [description, setDescription] = useState("");
+  const [coverImg, setCoverImg] = useState("");
+  const [images, setImages] = useState("");
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (
+      name !== "" &&
+      division !== "" &&
+      district !== "" &&
+      address !== "" &&
+      description !== "" &&
+      coverImg !== "" &&
+      images !== ""
+    ) {
+      dispatch(
+        createDestination({
+          name,
+          division,
+          district,
+          address,
+          description,
+          coverImg,
+          images,
+        })
+      )
+    }
+  };
+
   return (
     <Container className="pt-5">
       <Row className="pb-5">
@@ -88,7 +123,16 @@ const DestinationCreateScreen = () => {
                       <Form.Label className="small mb-1">
                         Destination Name
                       </Form.Label>
-                      <Form.Control type="text"></Form.Control>
+                      <Form.Control
+                        type="text"
+                        placeholder={
+                          name === ""
+                            ? "Destination Name is Required"
+                            : "Enter Destination Name"
+                        }
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      ></Form.Control>
                     </Form.Group>
                   </Col>
 
@@ -101,7 +145,13 @@ const DestinationCreateScreen = () => {
                         className="form-select"
                         as="select"
                         type="select"
-                        placeholder="Select Division"
+                        placeholder={
+                          division === ""
+                            ? "Division is Required"
+                            : "Select Division"
+                        }
+                        value={division}
+                        onChange={(e) => setDivision(e.target.value)}
                       >
                         <option disabled selected value="">
                           Select Division
@@ -125,7 +175,16 @@ const DestinationCreateScreen = () => {
                       <Form.Label className="small mb-1">
                         District Name
                       </Form.Label>
-                      <Form.Control type="text"></Form.Control>
+                      <Form.Control
+                        type="text"
+                        placeholder={
+                          district === ""
+                            ? "District Name is Required"
+                            : "Enter District Name"
+                        }
+                        value={district}
+                        onChange={(e) => setDistrict(e.target.value)}
+                      ></Form.Control>
                     </Form.Group>
                   </Col>
 
@@ -134,7 +193,17 @@ const DestinationCreateScreen = () => {
                       <Form.Label className="small mb-1">
                         Destination Address
                       </Form.Label>
-                      <Form.Control as="textarea" rows={2}></Form.Control>
+                      <Form.Control
+                        as="textarea"
+                        rows={2}
+                        placeholder={
+                          address === ""
+                            ? "Address is Required"
+                            : "Enter Destination Address"
+                        }
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                      ></Form.Control>
                     </Form.Group>
                   </Col>
                 </Row>
@@ -148,7 +217,17 @@ const DestinationCreateScreen = () => {
                       <Form.Label className="small mb-1">
                         Destination Description
                       </Form.Label>
-                      <Form.Control as="textarea" rows={4}></Form.Control>
+                      <Form.Control
+                        as="textarea"
+                        rows={4}
+                        placeholder={
+                          description === ""
+                            ? "Description is Required"
+                            : "Detailed Description of Destination"
+                        }
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                      ></Form.Control>
                     </Form.Group>
                   </Col>
                 </Row>
