@@ -41,8 +41,7 @@ const DestinationDetails = () => {
   useEffect(() => {
     if (isDetailsError) {
       toast.error(detailsErrorMessage, { position: 'top-center' })
-    }
-    if (isDetailsSuccess) {
+    } else if (isDetailsSuccess) {
       setDestinationDetails(destination)
     } else {
       dispatch(getDestinationById(params.id)) //id
@@ -95,7 +94,10 @@ const DestinationDetails = () => {
                         />
                       </Card.Text>
                       <Card.Text>
-                        <AddDestinationReview reset={reFetchDestiantion} id={params.id} />
+                        <AddDestinationReview
+                          reset={reFetchDestiantion}
+                          id={params.id}
+                        />
                         <ReadReviews destination={destination} user />
                       </Card.Text>
                     </Card.Body>
