@@ -9,7 +9,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { toast } from 'react-toastify'
 import {
-  getAllAcomodations,
+  getAllAccomodations,
   resetServiceList,
 } from '../features/service/serviceSlice'
 import SearchStays from '../components/SearchStays'
@@ -95,7 +95,7 @@ const StaysSearchScreen = () => {
         })
       setAllAccomodations(filteredServices)
     } else {
-      dispatch(getAllAcomodations())
+      dispatch(getAllAccomodations())
     }
   }, [
     dispatch,

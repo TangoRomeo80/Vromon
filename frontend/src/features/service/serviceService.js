@@ -61,13 +61,13 @@ const getTransportById = async (id) => {
 }
 
 //get all accomodations
-const getAllAcomodations = async () => {
+const getAllAccomodations = async () => {
   const response = await axios.get('/api/services?serviceType=accomodation')
   return response.data.data
 }
 
 //get accomodation by id
-const getAcomodationById = async (id) => {
+const getAccomodationById = async (id) => {
   const response = await axios.get(`/api/services/${id}`)
   return response.data.data
 }
@@ -87,7 +87,8 @@ const serviceService = {
   getTopServices,
   getAllTransports,
   getTransportById,
-  getAllAcomodations,
+  getAllAccomodations,
+  getAccomodationById,
   getAllTours,
 }
 

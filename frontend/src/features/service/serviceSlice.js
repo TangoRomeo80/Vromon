@@ -165,7 +165,7 @@ export const getTransportById = createAsyncThunk(
 )
 
 //get all accomodations
-export const getAllAcomodations = createAsyncThunk(
+export const getAllAccomodations = createAsyncThunk(
   'services/getAllAcomodations',
   async (_, thunkAPI) => {
     try {
@@ -181,7 +181,7 @@ export const getAllAcomodations = createAsyncThunk(
 )
 
 //get accomodation by id
-export const getAcomodationById = createAsyncThunk(
+export const getAccomodationById = createAsyncThunk(
   'service/getAcomodationById',
   async (id, thunkAPI) => {
     try {
@@ -412,23 +412,41 @@ export const serviceSlice = createSlice({
         state.isDetailsError = true
         state.detailsErrorMessage = action.payload
       })
-      .addCase(getAllAcomodations.pending, (state) => {
+      .addCase(getAllAccomodations.pending, (state) => {
         state.isListLoading = true
         state.isListError = false
         state.isListSuccess = false
         state.listErrorMessage = ''
       })
-      .addCase(getAllAcomodations.fulfilled, (state, action) => {
+      .addCase(getAllAccomodations.fulfilled, (state, action) => {
         state.isListLoading = false
         state.isListSuccess = true
         state.isListError = false
         state.listErrorMessage = ''
         state.accomodations = action.payload
       })
-      .addCase(getAllAcomodations.rejected, (state, action) => {
+      .addCase(getAllAccomodations.rejected, (state, action) => {
         state.isListLoading = false
         state.isListError = true
         state.listErrorMessage = action.payload
+      })
+      .addCase(getAccomodationById.pending, (state) => {
+        state.isDetailsLoading = true
+        state.isDetailsError = false
+        state.isDetailsSuccess = false
+        state.detailsErrorMessage = ''
+      })
+      .addCase(getAccomodationById.fulfilled, (state, action) => {
+        state.isDetailsLoading = false
+        state.isDetailsSuccess = true
+        state.isDetailsError = false
+        state.detailsErrorMessage = ''
+        state.transport = action.payload
+      })
+      .addCase(getAccomodationById.rejected, (state, action) => {
+        state.isDetailsLoading = false
+        state.isDetailsError = true
+        state.detailsErrorMessage = action.payload
       })
       .addCase(getAllTours.pending, (state) => {
         state.isListLoading = true

@@ -37,7 +37,7 @@ const SearchStays = ({ checkin, checkout, guests, rooms }) => {
         <Col>
           <Card.Text>Check-In Date</Card.Text>
           <Form.Group className="mb-3" controlId="checkinDate">
-            <InputGroup>
+            {/* <InputGroup>
               <div
                 onClick={(e) => {
                   setCheckinDate("");
@@ -51,7 +51,7 @@ const SearchStays = ({ checkin, checkout, guests, rooms }) => {
                   width: "3vh",
                 }}
               ></div>
-            </InputGroup>
+            </InputGroup> */}
             <Form.Control
               type="date"
               placeholder={checkinDate === "Select Check-In Date"}
@@ -64,7 +64,7 @@ const SearchStays = ({ checkin, checkout, guests, rooms }) => {
         <Col>
           <Card.Text>Check-Out Date</Card.Text>
           <Form.Group className="mb-3" controlId="checkoutDate">
-            <InputGroup>
+            {/* <InputGroup>
               <div
                 onClick={(e) => {
                   setCheckoutDate("");
@@ -78,7 +78,7 @@ const SearchStays = ({ checkin, checkout, guests, rooms }) => {
                   width: "3vh",
                 }}
               ></div>
-            </InputGroup>
+            </InputGroup> */}
             <Form.Control
               type="date"
               placeholder={checkoutDate === "Select Check-Out Date"}
