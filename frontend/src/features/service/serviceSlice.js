@@ -441,7 +441,7 @@ export const serviceSlice = createSlice({
         state.isDetailsSuccess = true
         state.isDetailsError = false
         state.detailsErrorMessage = ''
-        state.transport = action.payload
+        state.accomodation = action.payload
       })
       .addCase(getAccomodationById.rejected, (state, action) => {
         state.isDetailsLoading = false
