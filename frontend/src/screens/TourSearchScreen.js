@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col, Container, Card, Form, Button, Image } from 'react-bootstrap'
+import {
+  Row,
+  Col,
+  Container,
+  Card,
+  Form,
+  Button,
+  Image,
+  Modal,
+} from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { MdDateRange, MdLocationOn } from 'react-icons/md'
+import { FaFilter } from 'react-icons/fa'
 import { TbCurrencyTaka } from 'react-icons/tb'
 import { useDispatch, useSelector } from 'react-redux'
 import Moment from 'moment'
@@ -32,6 +42,12 @@ const TourSearchScreen = () => {
   const [allTours, setAllTours] = useState([])
   const [searchedServices, setSearchedServices] = useState([])
   const [modifySearch, setModifySearch] = useState(false)
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth < 768 ? true : false
+  )
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   const { tours, isListSuccess, isListError, isListLoading, listErrorMessage } =
     useSelector((state) => state.service)
@@ -115,6 +131,16 @@ const TourSearchScreen = () => {
   ])
 
   useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(true)
+      } else {
+        setIsMobile(false)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
     return () => {
       dispatch(resetServiceList())
     }
@@ -144,43 +170,112 @@ const TourSearchScreen = () => {
       <Row>
         {/* Left Colomn */}
         <Col sm={12} md={3} lg={3}>
-          <Card className='shadow'>
-            <Card.Body>
-              <Card.Title as='h5'>Filters for Tours</Card.Title>
-              <Form>
-                <Form.Group className='mb-3' controlId='busType'>
-                  <Form.Label>Number of Travellers</Form.Label>
-                  <Form.Control
-                    type='text'
-                    className='shadow'
-                    placeholder='Enter Number of Travellers'
-                    value={travelerCount}
-                    onChange={(e) => setTravelerCount(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group className='mb-3' controlId='busType'>
-                  <Form.Label>Tour Duration (in days)</Form.Label>
-                  <Form.Control
-                    type='text'
-                    className='shadow'
-                    placeholder='Enter Tour Duration'
-                    value={duration}
-                    onChange={(e) => setDuration(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group className='mb-3' controlId='priceRange'>
-                  <Form.Label>Maximum Price Range: BDT{maxPrice}</Form.Label>
-                  <Form.Range
-                    min={0}
-                    max={10000}
-                    step={100}
-                    value={maxPrice}
-                    onChange={(e) => setMaxPrice(e.target.value)}
-                  />
-                </Form.Group>
-              </Form>
-            </Card.Body>
-          </Card>
+          {isMobile ? (
+            <>
+              <Button
+                className='ms-1 mb-2'
+                style={{ backgroundColor: 'green' }}
+                onClick={handleShow}
+              >
+                <FaFilter className='me-1' />
+                Filters
+              </Button>
+              <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop='static'
+                keyboard={false}
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>Filters for Tours</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form>
+                    <Form.Group className='mb-3' controlId='busType'>
+                      <Form.Label>Number of Travellers</Form.Label>
+                      <Form.Control
+                        type='text'
+                        className='shadow'
+                        placeholder='Enter Number of Travellers'
+                        value={travelerCount}
+                        onChange={(e) => setTravelerCount(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group className='mb-3' controlId='busType'>
+                      <Form.Label>Tour Duration (in days)</Form.Label>
+                      <Form.Control
+                        type='text'
+                        className='shadow'
+                        placeholder='Enter Tour Duration'
+                        value={duration}
+                        onChange={(e) => setDuration(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group className='mb-3' controlId='priceRange'>
+                      <Form.Label>
+                        Maximum Price Range: BDT{maxPrice}
+                      </Form.Label>
+                      <Form.Range
+                        min={0}
+                        max={10000}
+                        step={100}
+                        value={maxPrice}
+                        onChange={(e) => setMaxPrice(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Form>
+                </Modal.Body>
+
+                <Modal.Footer>
+                  <Button variant='secondary' onClick={handleClose}>
+                    Update
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </>
+          ) : (
+            <>
+              <Card className='shadow'>
+                <Card.Body>
+                  <Card.Title as='h5'>Filters for Tours</Card.Title>
+                  <Form>
+                    <Form.Group className='mb-3' controlId='busType'>
+                      <Form.Label>Number of Travellers</Form.Label>
+                      <Form.Control
+                        type='text'
+                        className='shadow'
+                        placeholder='Enter Number of Travellers'
+                        value={travelerCount}
+                        onChange={(e) => setTravelerCount(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group className='mb-3' controlId='busType'>
+                      <Form.Label>Tour Duration (in days)</Form.Label>
+                      <Form.Control
+                        type='text'
+                        className='shadow'
+                        placeholder='Enter Tour Duration'
+                        value={duration}
+                        onChange={(e) => setDuration(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group className='mb-3' controlId='priceRange'>
+                      <Form.Label>
+                        Maximum Price Range: BDT{maxPrice}
+                      </Form.Label>
+                      <Form.Range
+                        min={0}
+                        max={10000}
+                        step={100}
+                        value={maxPrice}
+                        onChange={(e) => setMaxPrice(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Form>
+                </Card.Body>
+              </Card>
+            </>
+          )}
         </Col>
 
         {/* Right Colomn/Package Images Card */}

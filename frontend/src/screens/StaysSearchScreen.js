@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { Row, Col, Container, Card, Form, Button } from 'react-bootstrap'
+import { Row, Col, Container, Card, Form, Button, Modal } from 'react-bootstrap'
 import { MdLocationOn } from 'react-icons/md'
+import { FaFilter } from 'react-icons/fa'
 import { TbCurrencyTaka } from 'react-icons/tb'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
@@ -36,6 +37,12 @@ const StaysSearchScreen = () => {
     searchParams.get('roomCount') * 1 || 1
   )
   const [modifySearch, setModifySearch] = useState(false)
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth < 768 ? true : false
+  )
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   const {
     accomodations,
@@ -111,6 +118,16 @@ const StaysSearchScreen = () => {
   ])
 
   useEffect(() => {
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(true)
+      } else {
+        setIsMobile(false)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
     return () => {
       dispatch(resetServiceList())
     }
@@ -141,44 +158,113 @@ const StaysSearchScreen = () => {
 
       <Row>
         {/* Left Column */}
-        <Col sm={12} md={3} xl={3}>
-          <Card className='shadow'>
-            <Card.Body>
-              <Card.Title as='h5'>Filters for Stays Services</Card.Title>
-              <Form>
-                <Form.Group className='mb-3' controlId='busType'>
-                  <Form.Label>Number of Rooms</Form.Label>
-                  <Form.Control
-                    type='text'
-                    className='shadow'
-                    placeholder='Enter Number of Rooms'
-                    value={roomCountSearch}
-                    onChange={(e) => setRoomCountSearch(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group className='mb-3' controlId='busType'>
-                  <Form.Label>Number of Guests</Form.Label>
-                  <Form.Control
-                    type='text'
-                    className='shadow'
-                    placeholder='Enter Number of Guest'
-                    value={guestCountSearch}
-                    onChange={(e) => setGuestCountSearch(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group className='mb-3' controlId='priceRange'>
-                  <Form.Label>Maximum Price Range: BDT{maxPrice}</Form.Label>
-                  <Form.Range
-                    min={0}
-                    max={10000}
-                    step={100}
-                    value={maxPrice}
-                    onChange={(e) => setMaxPrice(e.target.value)}
-                  />
-                </Form.Group>
-              </Form>
-            </Card.Body>
-          </Card>
+        <Col sm={12} md={3} lg={3}>
+          {isMobile ? (
+            <>
+              <Button
+                className='ms-1 mb-2'
+                style={{ backgroundColor: 'green' }}
+                onClick={handleShow}
+              >
+                <FaFilter className='me-1' />
+                Filters
+              </Button>
+              <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop='static'
+                keyboard={false}
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>Filters for Stays Services</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form>
+                    <Form.Group className='mb-3' controlId='busType'>
+                      <Form.Label>Number of Rooms</Form.Label>
+                      <Form.Control
+                        type='text'
+                        className='shadow'
+                        placeholder='Enter Number of Rooms'
+                        value={roomCountSearch}
+                        onChange={(e) => setRoomCountSearch(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group className='mb-3' controlId='busType'>
+                      <Form.Label>Number of Guests</Form.Label>
+                      <Form.Control
+                        type='text'
+                        className='shadow'
+                        placeholder='Enter Number of Guest'
+                        value={guestCountSearch}
+                        onChange={(e) => setGuestCountSearch(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group className='mb-3' controlId='priceRange'>
+                      <Form.Label>
+                        Maximum Price Range: BDT{maxPrice}
+                      </Form.Label>
+                      <Form.Range
+                        min={0}
+                        max={10000}
+                        step={100}
+                        value={maxPrice}
+                        onChange={(e) => setMaxPrice(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Form>
+                </Modal.Body>
+
+                <Modal.Footer>
+                  <Button variant='secondary' onClick={handleClose}>
+                    Update
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </>
+          ) : (
+            <>
+              <Card className='shadow'>
+                <Card.Body>
+                  <Card.Title as='h5'>Filters for Stays Services</Card.Title>
+                  <Form>
+                    <Form.Group className='mb-3' controlId='busType'>
+                      <Form.Label>Number of Rooms</Form.Label>
+                      <Form.Control
+                        type='text'
+                        className='shadow'
+                        placeholder='Enter Number of Rooms'
+                        value={roomCountSearch}
+                        onChange={(e) => setRoomCountSearch(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group className='mb-3' controlId='busType'>
+                      <Form.Label>Number of Guests</Form.Label>
+                      <Form.Control
+                        type='text'
+                        className='shadow'
+                        placeholder='Enter Number of Guest'
+                        value={guestCountSearch}
+                        onChange={(e) => setGuestCountSearch(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group className='mb-3' controlId='priceRange'>
+                      <Form.Label>
+                        Maximum Price Range: BDT{maxPrice}
+                      </Form.Label>
+                      <Form.Range
+                        min={0}
+                        max={10000}
+                        step={100}
+                        value={maxPrice}
+                        onChange={(e) => setMaxPrice(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Form>
+                </Card.Body>
+              </Card>
+            </>
+          )}
         </Col>
 
         {/* Right Colomn/Package Images Card */}
@@ -251,7 +337,8 @@ const StaysSearchScreen = () => {
                           >
                             <Card.Body>
                               <Card.Text className='my-3'>
-                                <strong>Cost : </strong> BDT {accomodation.price}
+                                <strong>Cost : </strong> BDT{' '}
+                                {accomodation.price}
                                 <TbCurrencyTaka className='mb-1' />
                               </Card.Text>
                               <Card.Text>
@@ -260,7 +347,9 @@ const StaysSearchScreen = () => {
                                 </strong>
                               </Card.Text>
 
-                              <LinkContainer to={`/staysBooking/${accomodation._id}`}>
+                              <LinkContainer
+                                to={`/staysBooking/${accomodation._id}`}
+                              >
                                 <Button className='btn btn-success'>
                                   Book Now
                                 </Button>
