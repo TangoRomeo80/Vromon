@@ -475,7 +475,7 @@ const StaysBookingScreen = () => {
                     <Row className="mb-5">
                       <Col lg={4} md={12} sm={12}>
                         <Card.Img
-                          src={accomodation.coverImage}
+                          src={accomodation.coverImg}
                           className="img-fluid"
                         />
                       </Col>
