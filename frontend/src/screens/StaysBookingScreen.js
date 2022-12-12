@@ -11,7 +11,7 @@ import {
 import { LinkContainer } from "react-router-bootstrap";
 import { MdLocationOn, MdDateRange } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
-import moment from "moment";
+import Moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams, useNavigate, useParams } from "react-router-dom";
 import {
@@ -30,7 +30,6 @@ import {
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { toast } from "react-toastify";
-import Moment from "moment";
 
 const StaysBookingScreen = () => {
   const [searchParams] = useState();
@@ -92,15 +91,15 @@ const StaysBookingScreen = () => {
             },
           })
         );
-        toast.suucess("Payment Successfull, Booking Completed", {
+        toast.success("Payment Successful, Booking Completed", {
           position: "top-center",
         });
-      } else if (searchParams.get("status") === "failed") {
+      } else if (searchParams.get("status") === "fail") {
         dispatch(deleteBooking(searchParams.get("bookingId")));
         toast.error("Payment Failed, Booking Cancelled", {
           position: "top-center",
         });
-      } else if (searchParams.get("status") === "cancelled") {
+      } else if (searchParams.get("status") === "cancel") {
         dispatch(deleteBooking(searchParams.get("bookingId")));
         toast.error("Payment Cancelled, Booking Cancelled", {
           position: "top-center",
@@ -142,9 +141,9 @@ const StaysBookingScreen = () => {
   useEffect(() => {
     return () => {
       dispatch(resetServiceDetails());
+      dispatch(resetBookingDetails());
       dispatch(resetBookingCreate());
       dispatch(resetBookingUpdate());
-      dispatch(resetBookingDetails());
       dispatch(resetBookingDelete());
     };
   }, [dispatch]);
@@ -277,7 +276,7 @@ const StaysBookingScreen = () => {
             <Row className="mt-4">
               {/* Left Column For Personal Information */}
               <Col lg={8} md={6} sm={12}>
-                <Form>
+                <Form onSubmit={submitHandler}>
                   <Card className="shadow">
                     <Card.Header as="h5" className="my-2">
                       Customer Information

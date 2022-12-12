@@ -90,7 +90,7 @@ const TransportBookingScreen = () => {
             },
           })
         );
-        toast.success("Payment Successful, booking Completed", {
+        toast.success("Payment Successful, Booking Completed", {
           position: "top-center",
         });
       } else if (searchParams.get("status") === "fail") {
