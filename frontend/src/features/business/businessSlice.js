@@ -190,6 +190,7 @@ const businessSlice = createSlice({
         state.isCreateError = false
         state.createErrorMessage = ''
         state.businesses.push(action.payload)
+        state.business = action.payload
       })
       .addCase(createBusiness.rejected, (state, action) => {
         state.isCreateLoading = false
