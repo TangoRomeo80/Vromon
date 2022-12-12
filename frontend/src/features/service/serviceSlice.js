@@ -166,10 +166,10 @@ export const getTransportById = createAsyncThunk(
 
 //get all accomodations
 export const getAllAccomodations = createAsyncThunk(
-  'services/getAllAcomodations',
+  'services/getAllAccomodations',
   async (_, thunkAPI) => {
     try {
-      return await serviceService.getAllAcomodations()
+      return await serviceService.getAllAccomodations()
     } catch (err) {
       const message =
         (err.response && err.response.data && err.response.data.message) ||
@@ -185,7 +185,7 @@ export const getAccomodationById = createAsyncThunk(
   'service/getAcomodationById',
   async (id, thunkAPI) => {
     try {
-      return await serviceService.getAcomodationById(id)
+      return await serviceService.getAccomodationById(id)
     } catch (err) {
       const message =
         (err.response && err.response.data && err.response.data.message) ||
