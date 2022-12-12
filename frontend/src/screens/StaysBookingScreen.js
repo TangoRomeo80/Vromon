@@ -32,7 +32,7 @@ import Message from "../components/Message";
 import { toast } from "react-toastify";
 
 const StaysBookingScreen = () => {
-  const [searchParams] = useState();
+  const [searchParams] = useSearchParams();
 
   const accomodationId = useParams().id;
 

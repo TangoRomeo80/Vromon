@@ -182,7 +182,7 @@ export const getAllAccomodations = createAsyncThunk(
 
 //get accomodation by id
 export const getAccomodationById = createAsyncThunk(
-  'service/getAcomodationById',
+  'service/getAccomodationById',
   async (id, thunkAPI) => {
     try {
       return await serviceService.getAccomodationById(id)
