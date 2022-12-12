@@ -251,7 +251,7 @@ const StaysSearchScreen = () => {
                           >
                             <Card.Body>
                               <Card.Text className='my-3'>
-                                <strong>Cost : </strong>BDT {accomodation.price}
+                                <strong>Cost : </strong> BDT {accomodation.price}
                                 <TbCurrencyTaka className='mb-1' />
                               </Card.Text>
                               <Card.Text>
@@ -260,7 +260,7 @@ const StaysSearchScreen = () => {
                                 </strong>
                               </Card.Text>
 
-                              <LinkContainer to='/staysBooking'>
+                              <LinkContainer to={`/staysBooking/${accomodation._id}`}>
                                 <Button className='btn btn-success'>
                                   Book Now
                                 </Button>

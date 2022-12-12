@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState, useEffect }from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { MdLocationOn } from "react-icons/md";
 import { TbCurrencyTaka } from "react-icons/tb";
+import moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { getAccomodationById, resetServiceDetails } from "../features/service/serviceSlice";
 
 const StaysBookingScreen = () => {
   return (

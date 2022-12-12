@@ -119,7 +119,7 @@ const App = () => {
 
 
               {/* Booking Requests */}
-              <Route path='/staysBooking' element={<StaysBookingScreen />} />
+              <Route path='/staysBooking/:id' element={<StaysBookingScreen />} />
               <Route path='/toursBooking' element={<ToursBookingScreen />} />
               <Route path='/transportBooking/:id' element={<TransportBookingScreen />} />
 

@@ -180,6 +180,22 @@ export const getAllAcomodations = createAsyncThunk(
   }
 )
 
+//get accomodation by id
+export const getAcomodationById = createAsyncThunk(
+  'service/getAcomodationById',
+  async (id, thunkAPI) => {
+    try {
+      return await serviceService.getAcomodationById(id)
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 //get all tours
 export const getAllTours = createAsyncThunk(
   'services/getAllTours',

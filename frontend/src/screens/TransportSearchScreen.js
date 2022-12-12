@@ -14,6 +14,7 @@ import {
 } from 'react-bootstrap'
 
 import { FaFilter } from 'react-icons/fa'
+import { TbCurrencyTaka } from 'react-icons/tb'
 
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -472,7 +473,7 @@ const TransportScreen = () => {
                                     </Card.Text>
                                     <Card.Text style={{ color: 'red' }}>
                                       <strong>Price: </strong>
-                                      BDT {transport.price}
+                                      BDT {transport.price} <TbCurrencyTaka />
                                     </Card.Text>
                                     <Link
                                       to={`/transportBooking/${transport._id}`}
