@@ -142,14 +142,14 @@ const TransportScreen = () => {
         .filter((service) => {
           if (pickUpTime === '') {
             return service
-          } else if (service.transportInfo.pickUpTime == pickUpTime) {
+          } else if (service.transportInfo.pickUpTime === pickUpTime) {
             return service
           }
         })
         .filter((service) => {
           if (dropOffTime === '') {
             return service
-          } else if (service.transportInfo.dropOffTime == dropOffTime) {
+          } else if (service.transportInfo.dropOffTime === dropOffTime) {
             return service
           }
         })
