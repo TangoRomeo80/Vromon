@@ -294,7 +294,7 @@ const StaysBookingScreen = () => {
                     <Card.Body>
                       <Row>
                         <Col lg={6} md={12} sm={12}>
-                          <Form.Group className="mb-3" controlId="bookingName">
+                          <Form.Group className="mb-3" controlId="customerName">
                             <Form.Label className="">Customer Name</Form.Label>
                             <Form.Control
                               required
@@ -322,7 +322,7 @@ const StaysBookingScreen = () => {
                         </Col>
 
                         <Col lg={6} md={12} sm={12}>
-                          <Form.Group className="mb-3" controlId="bookingName">
+                          <Form.Group className="mb-3" controlId="phone">
                             <Form.Label className="">Phone Number</Form.Label>
                             <Form.Control
                               required
@@ -336,7 +336,7 @@ const StaysBookingScreen = () => {
                         </Col>
 
                         <Col lg={6} md={12} sm={12}>
-                          <Form.Group className="mb-3" controlId="bookingName">
+                          <Form.Group className="mb-3" controlId="remarks">
                             <Form.Label className="">Remarks</Form.Label>
                             <Form.Control
                               as="textarea"
@@ -369,6 +369,7 @@ const StaysBookingScreen = () => {
                 </Form>
               </Col>
 
+              {/* Payment Modal */}
               {!isBookingCreateLoading && (
                 <Modal
                   show={showBookingModal}
