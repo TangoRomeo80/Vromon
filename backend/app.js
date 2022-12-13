@@ -30,6 +30,7 @@ import userRouter from './routes/userRoutes.js' //import user routes
 import destinationRouter from './routes/destinationRoutes.js' //import destination routes
 import businessRouter from './routes/businessRoutes.js'
 import bookingRouter from './routes/bookingRoutes.js'
+import paymentRouter from './routes/paymentRoutes.js'
 import uploadRouter from './routes/uploadRoutes.js'
 
 const app = express() //create an instance of express
@@ -60,6 +61,7 @@ app.use('/api/users', userRouter) //use user routes
 app.use('/api/destinations', destinationRouter) //destination routes
 app.use('/api/businesses', businessRouter) //use businesses routes
 app.use('/api/bookings', bookingRouter) //use booking routes
+app.use('/api/payments', paymentRouter) //use payment routes
 app.use('/api/upload', uploadRouter)
 
 const __dirname = path.resolve()
