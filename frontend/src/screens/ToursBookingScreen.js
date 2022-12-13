@@ -154,8 +154,8 @@ const ToursBookingScreen = () => {
       user: userInfo._id,
       service: tour._id,
       customerInfo: {
-        travelerName,
-        travelerPhone,
+        customerName: travelerName,
+        customerPhone: travelerPhone,
         remarks,
         alert,
       },
@@ -365,7 +365,7 @@ const ToursBookingScreen = () => {
                       </Row>
 
                       <Row className="py-3">
-                        <Button>Confirm Booking</Button>
+                        <Button type='submit'>Confirm Booking</Button>
                       </Row>
                     </Card.Body>
                   </Card>
@@ -397,22 +397,22 @@ const ToursBookingScreen = () => {
                       <Row>
                         <Col lg={12} md={12} sm={12}>
                           <Card.Title className="">
-                            Location
+                            {tour.serviceName}
                           </Card.Title>
                           <Card.Text className="small">
                             <MdLocationOn />{" "}
-                            City
+                            {tour.destination.district}
                             <MdDateRange />{" "}
                             {Moment(
                               tour.tourInfo.travelDate
                             ).format("DD MMM YYYY")}
                           </Card.Text>
                           <Card.Text className="small">
-                            Customer Name : {travelerName}
+                            Traveler Name : {travelerName}
                             <br />
-                            Customer Phone: {travelerPhone}
+                            Traveler Phone: {travelerPhone}
                             <br />
-                            Guest Count: {travelerCount}
+                            Traveler Count: {travelerCount}
                             <br />
                             Remarks: {remarks}
                             <br />
