@@ -61,7 +61,7 @@ const BusinessOwnerDashoard = () => {
   useEffect(() => {
     if (!userInfo) {
       navigate('/login')
-    } else if (userInfo.userType !== 'businessOwner') {
+    } else if (userInfo.userType !== 'businessowner') {
       navigate('/')
     }
   }, [userInfo, navigate])
@@ -76,6 +76,7 @@ const BusinessOwnerDashoard = () => {
             booking.service.business.businessOwner._id === userInfo._id
         )
       )
+      console.log(ownedBookings)
     } else {
       dispatch(getAllBookings())
     }
@@ -97,6 +98,7 @@ const BusinessOwnerDashoard = () => {
           (business) => business.businessOwner._id === userInfo._id
         )
       )
+      console.log(ownedBusinesses)
     } else {
       dispatch(getAllBusinesses())
     }
@@ -118,6 +120,7 @@ const BusinessOwnerDashoard = () => {
           (service) => service.business.businessOwner._id === userInfo._id
         )
       )
+      console.log(ownedServices)
     } else {
       dispatch(getAllServices())
     }
@@ -129,6 +132,14 @@ const BusinessOwnerDashoard = () => {
     userInfo,
     dispatch,
   ])
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetBookingList())
+      dispatch(resetBusinessList())
+      dispatch(resetServiceList())
+    }
+  }, [dispatch])
 
   return (
     <Container className='py-3'>
