@@ -212,6 +212,22 @@ export const getAllTours = createAsyncThunk(
   }
 )
 
+//get tour by id
+export const getTourById = createAsyncThunk(
+  'service/getTourById',
+  async (id, thunkAPI) => {
+    try {
+      return await serviceService.getTourById(id)
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const serviceSlice = createSlice({
   name: 'service',
   initialState,
@@ -465,6 +481,24 @@ export const serviceSlice = createSlice({
         state.isListLoading = false
         state.isListError = true
         state.listErrorMessage = action.payload
+      })
+      .addCase(getTourById.pending, (state) => {
+        state.isDetailsLoading = true
+        state.isDetailsError = false
+        state.isDetailsSuccess = false
+        state.detailsErrorMessage = ''
+      })
+      .addCase(getTourById.fulfilled, (state, action) => {
+        state.isDetailsLoading = false
+        state.isDetailsSuccess = true
+        state.isDetailsError = false
+        state.detailsErrorMessage = ''
+        state.tour = action.payload
+      })
+      .addCase(getTourById.rejected, (state, action) => {
+        state.isDetailsLoading = false
+        state.isDetailsError = true
+        state.detailsErrorMessage = action.payload
       })
   },
 })
