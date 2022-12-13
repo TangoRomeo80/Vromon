@@ -55,6 +55,7 @@ const BusinessOwnerDashoard = () => {
   } = useSelector((state) => state.service)
 
   const [ownedServices, setOwnedServices] = useState([])
+  const [newBookings, setNewBookings] = useState([])
   const [ownedBookings, setOwnedBookings] = useState([])
   const [ownedBusinesses, setOwnedBusinesses] = useState([])
 
@@ -76,7 +77,13 @@ const BusinessOwnerDashoard = () => {
             booking.service.business.businessOwner._id === userInfo._id
         )
       )
-      console.log(ownedBookings)
+      setNewBookings(
+        bookings.filter(
+          (booking) =>
+            booking.service.business.businessOwner._id === userInfo._id &&
+            booking.bookingStatus === 'booked'
+        )
+      )
     } else {
       dispatch(getAllBookings())
     }
@@ -98,7 +105,6 @@ const BusinessOwnerDashoard = () => {
           (business) => business.businessOwner._id === userInfo._id
         )
       )
-      console.log(ownedBusinesses)
     } else {
       dispatch(getAllBusinesses())
     }
@@ -120,7 +126,6 @@ const BusinessOwnerDashoard = () => {
           (service) => service.business.businessOwner._id === userInfo._id
         )
       )
-      console.log(ownedServices)
     } else {
       dispatch(getAllServices())
     }
