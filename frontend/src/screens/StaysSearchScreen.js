@@ -210,7 +210,7 @@ const StaysSearchScreen = () => {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="priceRange">
                       <Form.Label>
-                        Maximum Price Range: BDT{maxPrice}
+                        Maximum Price Range: BDT{' '}{maxPrice}
                       </Form.Label>
                       <Form.Range
                         min={0}

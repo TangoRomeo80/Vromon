@@ -67,6 +67,7 @@ const StaysBookingScreen = () => {
 
   const [accomodationDetails, setAccomodationDetails] = useState({});
   const [customerName, setCustomerName] = useState("");
+  // const [guestCount, setGuestCount] = useState(1);
   const [guestCount, setGuestCount] = useState(1);
   const [customerPhone, setCustomerPhone] = useState("");
   const [remarks, setRemarks] = useState("");
@@ -293,7 +294,7 @@ const StaysBookingScreen = () => {
                     <Card.Body>
                       <Row>
                         <Col lg={6} md={12} sm={12}>
-                          <Form.Group className="mb-3" controlId="bookingName">
+                          <Form.Group className="mb-3" controlId="customerName">
                             <Form.Label className="">Customer Name</Form.Label>
                             <Form.Control
                               required
@@ -321,7 +322,7 @@ const StaysBookingScreen = () => {
                         </Col>
 
                         <Col lg={6} md={12} sm={12}>
-                          <Form.Group className="mb-3" controlId="bookingName">
+                          <Form.Group className="mb-3" controlId="phone">
                             <Form.Label className="">Phone Number</Form.Label>
                             <Form.Control
                               required
@@ -335,7 +336,7 @@ const StaysBookingScreen = () => {
                         </Col>
 
                         <Col lg={6} md={12} sm={12}>
-                          <Form.Group className="mb-3" controlId="bookingName">
+                          <Form.Group className="mb-3" controlId="remarks">
                             <Form.Label className="">Remarks</Form.Label>
                             <Form.Control
                               as="textarea"
@@ -368,6 +369,7 @@ const StaysBookingScreen = () => {
                 </Form>
               </Col>
 
+              {/* Payment Modal */}
               {!isBookingCreateLoading && (
                 <Modal
                   show={showBookingModal}
@@ -393,11 +395,11 @@ const StaysBookingScreen = () => {
                         <Col lg={12} md={12} sm={12}>
                           <Card.Title className="">
                             {accomodation.accomodationInfo.address.house},{" "}
-                            {accomodation.accomodationInfo.rooms}
+                            {accomodation.accomodationInfo.rooms}{' '}{'Rooms'}
                           </Card.Title>
                           <Card.Text className="small">
                             <MdLocationOn />{" "}
-                            {accomodation.accomodationInfo.address.city},{" "}
+                            {accomodation.accomodationInfo.address.city}{" "}
                             <MdDateRange />{" "}
                             {Moment(
                               accomodation.accomodationInfo.checkinDate
@@ -419,7 +421,7 @@ const StaysBookingScreen = () => {
                           </Card.Text>
                         </Col>
                       </Row>
-                      <Row>
+                      <Row className='mt-3'>
                         <Col lg={12} md={12} sm={12}>
                           <Form>
                             <Form.Group
@@ -511,6 +513,12 @@ const StaysBookingScreen = () => {
                           <Card.Text>
                             <strong>Check-Out Date</strong>
                           </Card.Text>
+                          <Card.Text>
+                            <strong>Guest(s)</strong>
+                          </Card.Text>
+                          <Card.Text>
+                            <strong>Room(s)</strong>
+                          </Card.Text>
                         </Row>
                       </Col>
                       <Col lg={6} md={6} sm={6}>
@@ -520,6 +528,12 @@ const StaysBookingScreen = () => {
                           </Card.Text>
                           <Card.Text className="d-flex justify-content-end">
                             {Moment(accomodation.accomodationInfo.checkoutDate).format("DD MMM YYYY")}
+                          </Card.Text>
+                          <Card.Text className="d-flex justify-content-end">
+                            {guestCount}
+                          </Card.Text>
+                          <Card.Text className="d-flex justify-content-end">
+                            {accomodation.accomodationInfo.rooms}
                           </Card.Text>
                         </Row>
                       </Col>

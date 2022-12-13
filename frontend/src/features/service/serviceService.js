@@ -78,6 +78,12 @@ const getAllTours = async () => {
   return response.data.data
 }
 
+//get tour by id
+const getTourById = async (id) => {
+  const response = await axios.get(`/api/services/${id}`)
+  return response.data.data
+}
+
 const serviceService = {
   getAllServices,
   getServiceById,
@@ -90,6 +96,7 @@ const serviceService = {
   getAllAccomodations,
   getAccomodationById,
   getAllTours,
+  getTourById,
 }
 
 export default serviceService
