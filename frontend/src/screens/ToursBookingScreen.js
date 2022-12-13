@@ -143,7 +143,7 @@ const ToursBookingScreen = () => {
       dispatch(resetBookingDetails());
       dispatch(resetBookingCreate());
       dispatch(resetBookingUpdate());
-      dispatch(resetBookingDelete());  
+      dispatch(resetBookingDelete());
     };
   }, [dispatch]);
 
@@ -207,7 +207,7 @@ const ToursBookingScreen = () => {
             <Card className="mb-2 shadow">
               <Card.Body>
                 <Row>
-                  <h3 className="text-center">Tour Package Name</h3>
+                  <h3 className="text-center">{tour.serviceName}{' '}Tour Package(s)</h3>
                 </Row>
               </Card.Body>
             </Card>
@@ -397,19 +397,14 @@ const ToursBookingScreen = () => {
                       <Row>
                         <Col lg={12} md={12} sm={12}>
                           <Card.Title className="">
-                            {tour.tourInfo.address.house},{" "}
-                            {tour.tourInfo.rooms} {"Rooms"}
+                            Location
                           </Card.Title>
                           <Card.Text className="small">
                             <MdLocationOn />{" "}
-                            {tour.tourInfo.address.city}{" "}
+                            City
                             <MdDateRange />{" "}
                             {Moment(
-                              tour.tourInfo.checkinDate
-                            ).format("DD MMM YYYY")}
-                            to <MdDateRange />{" "}
-                            {Moment(
-                              tour.tourInfo.checkoutDate
+                              tour.tourInfo.travelDate
                             ).format("DD MMM YYYY")}
                           </Card.Text>
                           <Card.Text className="small">
@@ -487,11 +482,11 @@ const ToursBookingScreen = () => {
 
                       <Col lg={8} md={12} sm={12}>
                         <Card.Title className="small">
-                          Tour Package Name
+                          {tour.tourInfo.name}
                         </Card.Title>
                         <Card.Text className="small">
                           <MdLocationOn />
-                          Address
+                          {tour.destination.district}
                         </Card.Text>
                       </Col>
                     </Row>
@@ -502,11 +497,11 @@ const ToursBookingScreen = () => {
                         <Card.Title as="h5">Booking Summary</Card.Title>
                       </Col>
 
-                      <Col sm={12} md={4} lg={4}>
+                      {/* <Col sm={12} md={4} lg={4}>
                         <Card.Text className="d-flex justify-content-end small">
                           <strong>1 Night</strong>
                         </Card.Text>
-                      </Col>
+                      </Col> */}
 
                       <Col lg={6} md={6} sm={6}>
                         <Row>
@@ -524,13 +519,13 @@ const ToursBookingScreen = () => {
                       <Col lg={6} md={6} sm={6}>
                         <Row>
                           <Card.Text className="d-flex justify-content-end">
-                            12-14-2022
+                            {Moment(tour.tourInfo.travelDate).format("DD MMM YYYY")}
                           </Card.Text>
                           <Card.Text className="d-flex justify-content-end">
-                            15 Person(s)
+                            {travelerCount}
                           </Card.Text>
                           <Card.Text className="d-flex justify-content-end">
-                            Ailshe Tripura
+                            {tour.tourInfo.leadGuideName}
                           </Card.Text>
                         </Row>
                       </Col>
@@ -558,13 +553,13 @@ const ToursBookingScreen = () => {
                       <Col lg={6} md={6} sm={6}>
                         <Row>
                           <Card.Text className="d-flex justify-content-end">
-                            BDT 5000 <TbCurrencyTaka className="mt-1" />
+                            BDT{' '}{tour.price}  <TbCurrencyTaka className="mt-1" />
                           </Card.Text>
                           <Card.Text className="d-flex justify-content-end">
-                            0%
+                            {tour.priceDiscount}{'%'}
                           </Card.Text>
                           <Card.Text className="d-flex justify-content-end">
-                            BDT 5000 <TbCurrencyTaka className="mt-1" />
+                            BDT{' '}{tour.price} <TbCurrencyTaka className="mt-1" />
                           </Card.Text>
                         </Row>
                       </Col>

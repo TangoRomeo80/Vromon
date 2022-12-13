@@ -316,9 +316,7 @@ const TourSearchScreen = () => {
                             <Card.Text>
                               <MdLocationOn /> &nbsp;
                               <strong>District: </strong>
-                              {tour.destination.district === district
-                                ? district
-                                : "No Tour Packages Found in That District"}
+                              {tour.destination.district}
                             </Card.Text>
                             <Card.Text>
                               <strong>Max Travelers Count : </strong>
