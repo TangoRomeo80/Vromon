@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Row,
@@ -6,13 +6,110 @@ import {
   Card,
   Button,
   Form,
-  Table,
+  Modal,
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { MdLocationOn } from "react-icons/md";
+import { MdLocationOn, MdDateRange} from "react-icons/md";
 import {TbCurrencyTaka} from 'react-icons/tb';
+import Moment from "moment";
+import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams, useNavigate, useParams} from "react-router-dom";
+import { getTourById, resetServiceDetails } from "../features/service/serviceSlice";
+import {
+  createBooking,
+  updateBooking,
+  deleteBooking,
+  resetBookingCreate,
+  resetBookingUpdate,
+  resetBookingDetails,
+  resetBookingDelete,
+} from "../features/booking/bookingSlice";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import { toast } from "react-toastify";
 
 const ToursBookingScreen = () => {
+
+  const [searchParams] = useSearchParams();
+  const tourId = useParams().id
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const { userInfo } = useSelector((state) => state.auth)
+
+  const {
+    tour,
+    isDetailsLoading: isTourDetailsLoading,
+    isDetailsError: isTourDetailsError,
+    detailsErrorMessage: tourDetailsErrorMessage,
+    isDetailsSuccess: isTourDetailsSuccess,
+  } = useSelector((state) => state.service)
+
+  const {
+    booking,
+    isCreateLoading: isBookingCreateLoading,
+    isCreateError: isBookingCreateError,
+    isCreateSuccess: isBookingCreateSuccess,
+    createErrorMessage: bookingCreateErrorMessage,
+    isUpdateLoading: isBookingUpdateLoading,
+    isUpdateError: isBookingUpdateError,
+    isUpdateSuccess: isBookingUpdateSuccess,
+    updateErrorMessage: bookingUpdateErrorMessage,
+    isDeleteLoading: isBookingDeleteLoading,
+    isDeleteError: isBookingDeleteError,
+    isDeleteSuccess: isBookingDeleteSuccess,
+    deleteErrorMessage: bookingDeleteErrorMessage,
+  } = useSelector((state) => state.booking)
+
+  const [tourDetails, setTourDetails] = useState({})
+  const [travelerName, setTravelerName] = useState("")
+  const [travelerCount, setTravelerCount] = useState(1)
+  const [travelerPhone, setTravelerPhone] = useState("")
+  const [remarks, setRemarks] = useState("")
+  const [alert, setAlert] = useState(false)
+  const [showBookingModal, setShowBookingModal] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState("")
+
+  const handleClose = () => setShowBookingModal(false)
+  const handleShow = () => setShowBookingModal(true)
+
+  useEffect(() => {
+    if(searchParams.get('status')){
+      if(searchParams.get('status') === 'success'){
+        dispatch(
+          updateBooking({
+            id: searchParams.get('bookingId'),
+            bookingData: {
+              paymentStatus: 'paid',
+              paymentMethod: 'card',
+              paymentAmount: searchParams.get('amount') * 1,
+              bookingStatus: "booked",
+            },
+          })
+        )
+        toast.success('Payment Successful, Booking Confirmed',
+        {position: 'top-center'})
+      }
+      else if(searchParams.get('status') === 'fail'){
+        dispatch(deleteBooking(searchParams.get('bookingId')))
+        toast.error('Payment Failed, Booking Cancelled',{
+          position: 'top-center'
+        })
+      }
+      else if(searchParams.get('status') === 'cancel'){
+        dispatch(deleteBooking(searchParams.get('bookingId')))
+        toast.error('Payment Cancelled, Booking Cancelled',{
+          position: 'top-center'
+        })
+      }
+    }
+  },[])
+
+  // Start From Here
+
+
+
   return (
     <Container className="pt-4">
       {/* Header Card */}
