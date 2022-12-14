@@ -80,13 +80,6 @@ paymentSchema.pre(/^find/, function (next) {
   this.populate([
     {
       path: 'paymentFrom',
-      select: function () {
-        if (this.paymentParties === 'C2B') {
-          return '-password'
-        } else {
-          return ''
-        }
-      },
     },
     {
       path: 'paymentForBusiness',
