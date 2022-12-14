@@ -9,7 +9,8 @@ const paymentSchema = new mongoose.Schema(
     paymentParties: {
       type: String,
       required: [true, 'Payment Party is Required'],
-      enum: ['B2V', 'C2B'],
+      enum: ['C2B', 'B2V'],
+      default: 'C2B',
     },
     paymentFrom: {
       type: mongoose.Schema.Types.ObjectId,
@@ -21,20 +22,6 @@ const paymentSchema = new mongoose.Schema(
         }
       },
       required: [true, 'Payment From User is Required'],
-    },
-    paymentToService: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Service',
-      required: [
-        function () {
-          if (this.paymentParties === 'C2B') {
-            return true
-          } else {
-            return false
-          }
-        },
-        'Payment To Service is Required',
-      ],
     },
     paymentForBooking: {
       type: mongoose.Schema.Types.ObjectId,
@@ -50,6 +37,20 @@ const paymentSchema = new mongoose.Schema(
         'Payment For Booking is Required',
       ],
     },
+    paymentForBusiness: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Business',
+      required: [
+        function () {
+          if (this.paymentParties === 'B2V') {
+            return true
+          } else {
+            return false
+          }
+        },
+        'Payment For Business is Required',
+      ],
+    },
     paymentAmount: {
       type: Number,
       required: [true, 'Payment Amount is Required'],
@@ -57,6 +58,16 @@ const paymentSchema = new mongoose.Schema(
         validator: function (val) {
           return val > 0
         },
+      },
+    },
+    paymentMethod: {
+      type: String,
+      default: 'cash',
+      required: [true, 'Payment Method is Required'],
+      trim: true,
+      enum: {
+        values: ['cash', 'card'],
+        message: 'Payment Method needs to be cash or card',
       },
     },
   },
@@ -69,16 +80,9 @@ paymentSchema.pre(/^find/, function (next) {
   this.populate([
     {
       path: 'paymentFrom',
-      select: function () {
-        if (this.paymentParties === 'C2B') {
-          return '-password'
-        } else {
-          return ''
-        }
-      },
     },
     {
-      path: 'paymentToService',
+      path: 'paymentForBusiness',
     },
     {
       path: 'paymentForBooking',
