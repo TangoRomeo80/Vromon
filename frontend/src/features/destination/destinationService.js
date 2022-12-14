@@ -2,7 +2,7 @@ import axios from 'axios'
 
 //get all destinations
 const getAllDestinations = async (token) => {
-  const response = await axios.get('/api/destinations')
+  const response = await axios.get('/api/destinations?sort=-createdAt')
   return response.data.data
 }
 

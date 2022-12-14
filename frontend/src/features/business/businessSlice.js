@@ -153,6 +153,9 @@ const businessSlice = createSlice({
     builder
       .addCase(getAllBusinesses.pending, (state) => {
         state.isListLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
       })
       .addCase(getAllBusinesses.fulfilled, (state, action) => {
         state.isListLoading = false
@@ -168,6 +171,9 @@ const businessSlice = createSlice({
       })
       .addCase(getBusinessById.pending, (state) => {
         state.isDetailsLoading = true
+        state.isDetailsSuccess = false
+        state.isDetailsError = false
+        state.detailsErrorMessage = ''
       })
       .addCase(getBusinessById.fulfilled, (state, action) => {
         state.isDetailsLoading = false
@@ -183,6 +189,9 @@ const businessSlice = createSlice({
       })
       .addCase(createBusiness.pending, (state) => {
         state.isCreateLoading = true
+        state.isCreateSuccess = false
+        state.isCreateError = false
+        state.createErrorMessage = ''
       })
       .addCase(createBusiness.fulfilled, (state, action) => {
         state.isCreateLoading = false
@@ -199,6 +208,9 @@ const businessSlice = createSlice({
       })
       .addCase(updateBusiness.pending, (state) => {
         state.isUpdateLoading = true
+        state.isUpdateSuccess = false
+        state.isUpdateError = false
+        state.updateErrorMessage = ''
       })
       .addCase(updateBusiness.fulfilled, (state, action) => {
         state.isUpdateLoading = false
@@ -220,6 +232,9 @@ const businessSlice = createSlice({
       })
       .addCase(deleteBusiness.pending, (state) => {
         state.isDeleteLoading = true
+        state.isDeleteSuccess = false
+        state.isDeleteError = false
+        state.deleteErrorMessage = ''
       })
       .addCase(deleteBusiness.fulfilled, (state, action) => {
         state.isDeleteLoading = false

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 //get all bookings
 const getAllBookings = async (token) => {
-  const response = await axios.get('/api/bookings', {
+  const response = await axios.get('/api/bookings?sort=-createdAt', {
     headers: {
       Authorization: `Bearer ${token}`,
     },

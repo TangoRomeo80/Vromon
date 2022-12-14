@@ -2,7 +2,7 @@ import axios from 'axios'
 
 //get all users
 const getAllUsers = async (token) => {
-  const response = await axios.get('/api/users', {
+  const response = await axios.get('/api/users?sort=-createdAt', {
     headers: {
       Authorization: `Bearer ${token}`,
     },

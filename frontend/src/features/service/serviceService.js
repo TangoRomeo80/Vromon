@@ -2,7 +2,7 @@ import axios from 'axios'
 
 //get all services
 const getAllServices = async () => {
-  const response = await axios.get('/api/services')
+  const response = await axios.get('/api/services?sort=-createdAt')
   return response.data.data
 }
 
@@ -56,7 +56,9 @@ const deleteService = async (id, token) => {
 
 //get all transports
 const getAllTransports = async () => {
-  const response = await axios.get('/api/services?serviceType=transportation')
+  const response = await axios.get(
+    '/api/services?serviceType=transportation&sort=-createdAt'
+  )
   return response.data.data
 }
 
@@ -68,7 +70,9 @@ const getTransportById = async (id) => {
 
 //get all accomodations
 const getAllAccomodations = async () => {
-  const response = await axios.get('/api/services?serviceType=accomodation')
+  const response = await axios.get(
+    '/api/services?serviceType=accomodation&sort=-createdAt'
+  )
   return response.data.data
 }
 
@@ -80,7 +84,9 @@ const getAccomodationById = async (id) => {
 
 //get all tours
 const getAllTours = async () => {
-  const response = await axios.get('/api/services?serviceType=tours')
+  const response = await axios.get(
+    '/api/services?serviceType=tours&sort=-createdAt'
+  )
   return response.data.data
 }
 

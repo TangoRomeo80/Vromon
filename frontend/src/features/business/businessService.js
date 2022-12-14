@@ -2,7 +2,7 @@ import axios from 'axios'
 
 //get all businesses
 const getAllBusinesses = async (token) => {
-  const response = await axios.get('/api/businesses', {
+  const response = await axios.get('/api/businesses?sort=-createdAt', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
