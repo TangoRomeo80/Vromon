@@ -155,7 +155,7 @@ const BusinessOwnerDashoard = () => {
       <Row className='my-4'>
         <Col>
           <Card>
-            <Card.Header as="h5" className='d-flex justify-content-center'>New Bookings</Card.Header>
+            <Card.Header as="h5" className='d-flex justify-content-center mb-3'>New Bookings</Card.Header>
             <Table bordered hover responsive className='table-sm'>
               <thead>
                 <tr>
