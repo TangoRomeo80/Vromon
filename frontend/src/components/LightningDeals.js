@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { MdDateRange, MdLocationOn } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllTours, resetServiceList } from '../features/service/serviceSlice'
+import { getCheapestTours, resetServiceList } from '../features/service/serviceSlice'
 import Rating from './Rating'
 
 const LightningDeals = () => {
@@ -23,7 +23,7 @@ const LightningDeals = () => {
     if (isListSuccess) {
       setTopServices(tours)
     } else {
-      dispatch(getAllTours())
+      dispatch(getCheapestTours())
     }
   }, [dispatch, tours, isListSuccess, isListError, listErrorMessage])
 

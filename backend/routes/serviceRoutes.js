@@ -9,12 +9,14 @@ import {
   updateService,
   deleteService,
   getMostPopularServices,
+  getCheapestTours,
 } from '../controllers/serviceController.js' //import service controller
 
 const router = express.Router() //create router instance
 
 router.route('/').get(getAllServices).post(createService)
 router.route('/most-popular').get(getMostPopularServices, getAllServices)
+router.route('/cheapest-tours').get(getCheapestTours, getAllServices)
 router
   .route('/:id')
   .get(getService)

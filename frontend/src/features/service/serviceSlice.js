@@ -80,6 +80,22 @@ export const getTopServices = createAsyncThunk(
   }
 )
 
+//get cheapest tours
+export const getCheapestTours = createAsyncThunk(
+  'services/getCheapestTours',
+  async (_, thunkAPI) => {
+    try {
+      return await serviceService.getCheapestTours()
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 //create service
 export const createService = createAsyncThunk(
   'service/createService',
@@ -307,6 +323,24 @@ export const serviceSlice = createSlice({
       .addCase(getTopServices.rejected, (state, action) => {
         state.isListLoading = false
         state.listErrorMessage = true
+        state.listErrorMessage = action.payload
+      })
+      .addCase(getCheapestTours.pending, (state) => {
+        state.isListLoading = true
+        state.isListError = false
+        state.isListSuccess = false
+        state.listErrorMessage = ''
+      })
+      .addCase(getCheapestTours.fulfilled, (state, action) => {
+        state.isListLoading = false
+        state.isListSuccess = true
+        state.isListError = false
+        state.listErrorMessage = ''
+        state.tours = action.payload
+      })
+      .addCase(getCheapestTours.rejected, (state, action) => {
+        state.isListLoading = false
+        state.isListError = true
         state.listErrorMessage = action.payload
       })
       .addCase(getServiceById.pending, (state) => {

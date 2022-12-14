@@ -21,6 +21,16 @@ export const getMostPopularServices = async (req, res, next) => {
 }
 
 /*
+  Alias middleware for getting cheapest tours
+*/
+export const getCheapestTours = async (req, res, next) => {
+  req.query.limit = '8'
+  req.query.sort = 'price'
+  req.query.serviceType = 'tours'
+  next()
+}
+
+/*
   Request type: GET
   Endpoint: /api/services/
   Description: This endpoint returns all services

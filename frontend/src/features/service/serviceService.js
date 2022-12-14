@@ -12,6 +12,12 @@ const getTopServices = async (token) => {
   return response.data.data
 }
 
+//get cheapest tours
+const getCheapestTours = async (token) => {
+  const response = await axios.get('/api/services/cheapest-tours')
+  return response.data.data
+}
+
 //get service by id
 const getServiceById = async (id) => {
   const response = await axios.get(`/api/services/${id}`)
@@ -97,6 +103,7 @@ const serviceService = {
   getAccomodationById,
   getAllTours,
   getTourById,
+  getCheapestTours,
 }
 
 export default serviceService
