@@ -196,18 +196,27 @@ const BusinessOwnerDashoard = () => {
                         <td>{booking.user.userName}</td>
                         <td>{booking.service.serviceType}</td>
                         <td>{booking.service.serviceName}</td>
-                        <td>{Moment(booking.bookingDate).format('DD-MM-YYYY')}</td>
-                        <td>BDT{' '}{booking.service.price}<TbCurrencyTaka className="mb-1"/></td>
                         <td>
-                          <Button variant="info">
+                          {Moment(booking.bookingDate).format("DD-MM-YYYY")}
+                        </td>
+                        <td>
+                          BDT {booking.service.price}
+                          <TbCurrencyTaka className="mb-1" />
+                        </td>
+                        <td>
+                          <Button variant="info" className="btn-sm">
                             <FaEdit />
                           </Button>
                         </td>
                         <td>
-                          <Button variant="success">Accept</Button>
+                          <Button variant="success" className="btn-sm">
+                            Accept
+                          </Button>
                         </td>
                         <td>
-                          <Button variant="danger">Cancel</Button>
+                          <Button variant="danger" className="btn-sm">
+                            Cancel
+                          </Button>
                         </td>
                       </tr>
                     ))}
@@ -226,30 +235,43 @@ const BusinessOwnerDashoard = () => {
             <Card.Header as="h5" className="d-flex justify-content-center my-3">
               Recent Service List
             </Card.Header>
-            <Table bordered hover responsive className="table-sm">
-              <thead>
-                <tr>
-                  <th>Service Type</th>
-                  <th>Service Name</th>
-                  <th>Location</th>
-                  <th>Contact</th>
-                  <th>Edit</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr key="">
-                  <td>Transportation</td>
-                  <td>Bashundhara Transportation Service</td>
-                  <td>Rangamati, Bandarban</td>
-                  <td>01765468115</td>
-                  <td>
-                    <Button variant="info">
-                      <FaEdit />
-                    </Button>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
+            {isServiceListLoading ? (
+              <Loader />
+            ) : isServiceListError ? (
+              <Message variant="danger">{serviceListErrorMessage}</Message>
+            ) : (
+              services && (
+                <Table bordered hover responsive className="table-sm">
+                  <thead>
+                    <tr>
+                      <th>Service Type</th>
+                      <th>Service Name</th>
+                      <th>Location</th>
+                      <th>Contact</th>
+                      <th>Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {services.map((service) => (
+                      <tr key={service._id}>
+                        <td>{service.serviceType}</td>
+                        <td>{service.serviceName}</td>
+                        <td>
+                          {service.destination.district},
+                          {service.destination.division}
+                        </td>
+                        <td>{service.serviceMobileNumber}</td>
+                        <td>
+                          <Button variant="info" className="btn-sm">
+                            <FaEdit />
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              )
+            )}
           </Card>
         </Col>
 
@@ -259,32 +281,42 @@ const BusinessOwnerDashoard = () => {
             <Card.Header as="h5" className="d-flex justify-content-center my-3">
               Recent Business List
             </Card.Header>
-            <Table bordered hover responsive className="table-sm">
-              <thead>
-                <tr>
-                  <th>Business Name</th>
-                  <th>Address</th>
-                  <th>Contact</th>
-                  <th>Website</th>
-                  <th>TIN Number</th>
-                  <th>Edit</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr key="">
-                  <td>Sheraton Bus</td>
-                  <td>Baridhara</td>
-                  <td>01532183551</td>
-                  <td>www.unga.com</td>
-                  <td>196854813118441</td>
-                  <td>
-                    <Button variant="info">
-                      <FaEdit />
-                    </Button>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
+            {isBusinessListLoading ? (
+              <Loader />
+            ) : isBusinessListError ? (
+              <Message variant="danger">{businessListErrorMessage}</Message>
+            ) : (
+              businesses && (
+                <Table bordered hover responsive className="table-sm">
+                  <thead>
+                    <tr>
+                      <th>Business Name</th>
+                      <th>Address</th>
+                      <th>Contact</th>
+                      <th>Website</th>
+                      <th>TIN Number</th>
+                      <th>Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {businesses.map((business) => (
+                      <tr key={business._id}>
+                        <td>{business.businessName}</td>
+                        <td>{business.businessAddress}</td>
+                        <td>{business.businessPhone}</td>
+                        <td>{business.businessWebsite}</td>
+                        <td>{business.businessTIN}</td>
+                        <td>
+                          <Button variant="info" className="btn-sm">
+                            <FaEdit />
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              )
+            )}
           </Card>
         </Col>
       </Row>
