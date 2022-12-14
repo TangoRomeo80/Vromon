@@ -155,6 +155,7 @@ const TransportBookingScreen = () => {
       dispatch(resetBookingCreate())
       dispatch(resetBookingUpdate())
       dispatch(resetBookingDelete())
+      dispatch(resetPaymentCreate())
     }
   }, [dispatch])
 
