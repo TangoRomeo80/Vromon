@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 //get all payments
-const getAllPayments = async () => {
+const getAllPayments = async (token) => {
   const response = await axios.get('/api/payments?sort=-createdAt', {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -11,7 +11,7 @@ const getAllPayments = async () => {
 }
 
 //get payment by id
-const getPaymentById = async (id) => {
+const getPaymentById = async (id, token) => {
   const response = await axios.get(`/api/payments/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
