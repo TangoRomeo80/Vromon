@@ -228,7 +228,7 @@ const BusinessOwnerDashoard = () => {
         </Col>
       </Row>
 
-      <Row className="mt-4">
+      <Row className="mt-5">
         {/* Left Table */}
         <Col lg={6} md={6} sm={12}>
           <Card>
