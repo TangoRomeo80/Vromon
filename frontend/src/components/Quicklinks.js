@@ -28,7 +28,7 @@ const Quicklinks = () => {
             </h6>
             <Nav className="flex-column text-center">
               <Nav.Link href="#">Destinations</Nav.Link>
-              <Nav.Link href="#">Where can Stay</Nav.Link>
+              <Nav.Link href="#">Where to Stay</Nav.Link>
               <Nav.Link href="#">Relevent Transport</Nav.Link>
             </Nav>
           </Col>
@@ -42,7 +42,6 @@ const Quicklinks = () => {
             <Nav className="flex-column text-center">
               <Nav.Link href="#">FAQ</Nav.Link>
               <Nav.Link href="#">Support Center</Nav.Link>
-              <Nav.Link href="#">Payment Info</Nav.Link>
               <Nav.Link href="#">Privacy Policy</Nav.Link>
             </Nav>
           </Col>
