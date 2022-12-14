@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card, Button, Form, Table } from "react-bootstrap";
-import { FaUser, FaServicestack, FaEdit } from "react-icons/fa";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Button,
+  Form,
+  Table,
+} from "react-bootstrap";
+import { FaUser, FaServicestack, FaEdit, FaTrash } from "react-icons/fa";
+import { TbCurrencyTaka } from "react-icons/tb";
+import { FcCancel } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import {
   MdBusiness,
@@ -23,6 +33,9 @@ import {
   resetServiceList,
 } from "../features/service/serviceSlice";
 import { toast } from "react-toastify";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import Moment from "moment";
 
 const BusinessOwnerDashoard = () => {
   const dispatch = useDispatch();
@@ -152,48 +165,68 @@ const BusinessOwnerDashoard = () => {
         <h1 className="text-center">Dashboard</h1>
       </Row>
 
-      <Row className='my-4'>
+      <Row className="my-4">
         <Col>
           <Card>
-            <Card.Header as="h5" className='d-flex justify-content-center mb-3'>New Bookings</Card.Header>
-            <Table bordered hover responsive className='table-sm'>
-              <thead>
-                <tr>
-                  <th>Customer Name</th>
-                  <th>Booking Type/Service Type</th>
-                  <th>Service Name</th>
-                  <th>Service Availed Date</th>
-                  <th>Service End Date</th>
-                  <th>Service Fare</th>
-                  <th>Edit</th>
-                  <th>Accept</th>
-                  <th>Cancel</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr key=''>
-                  <td>Kashem Boyati</td>
-                  <td>Stays</td>
-                  <td>Bashundhara Stays</td>
-                  <td>15-12-2022</td>
-                  <td>19-12-2022</td>
-                  <td>5500 BDT</td>
-                  <td>Button</td>
-                  <td>Button</td>
-                  <td>Button</td>
-                </tr>
-              </tbody>
-            </Table>
+            <Card.Header as="h5" className="d-flex justify-content-center mb-3">
+              New Bookings
+            </Card.Header>
+            {isBookingListLoading ? (
+              <Loader />
+            ) : isBookingListError ? (
+              <Message variant="danger">{bookingListErrorMessage}</Message>
+            ) : (
+              bookings && (
+                <Table bordered hover responsive className="table-sm">
+                  <thead>
+                    <tr>
+                      <th>Customer Name</th>
+                      <th>Service Type</th>
+                      <th>Service Name</th>
+                      <th>Booking Date</th>
+                      <th>Booking Fare</th>
+                      <th>Edit</th>
+                      <th>Accept</th>
+                      <th>Cancel</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {bookings.map((booking) => (
+                      <tr key={booking._id}>
+                        <td>{booking.user.userName}</td>
+                        <td>{booking.service.serviceType}</td>
+                        <td>{booking.service.serviceName}</td>
+                        <td>{Moment(booking.bookingDate).format('DD-MM-YYYY')}</td>
+                        <td>BDT{' '}{booking.service.price}<TbCurrencyTaka className="mb-1"/></td>
+                        <td>
+                          <Button variant="info">
+                            <FaEdit />
+                          </Button>
+                        </td>
+                        <td>
+                          <Button variant="success">Accept</Button>
+                        </td>
+                        <td>
+                          <Button variant="danger">Cancel</Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              )
+            )}
           </Card>
         </Col>
       </Row>
 
-      <Row className='mt-4'>
+      <Row className="mt-4">
         {/* Left Table */}
         <Col lg={6} md={6} sm={12}>
           <Card>
-            <Card.Header as="h5" className='d-flex justify-content-center my-3'>Recent Service List</Card.Header>
-            <Table bordered hover responsive className='table-sm'>
+            <Card.Header as="h5" className="d-flex justify-content-center my-3">
+              Recent Service List
+            </Card.Header>
+            <Table bordered hover responsive className="table-sm">
               <thead>
                 <tr>
                   <th>Service Type</th>
@@ -204,12 +237,16 @@ const BusinessOwnerDashoard = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr key=''>
+                <tr key="">
                   <td>Transportation</td>
                   <td>Bashundhara Transportation Service</td>
                   <td>Rangamati, Bandarban</td>
                   <td>01765468115</td>
-                  <td>Button</td>
+                  <td>
+                    <Button variant="info">
+                      <FaEdit />
+                    </Button>
+                  </td>
                 </tr>
               </tbody>
             </Table>
@@ -219,8 +256,10 @@ const BusinessOwnerDashoard = () => {
         {/* Right Table */}
         <Col lg={6} md={6} sm={12}>
           <Card>
-            <Card.Header as="h5" className='d-flex justify-content-center my-3'>Recent Business List</Card.Header>
-            <Table bordered hover responsive className='table-sm'>
+            <Card.Header as="h5" className="d-flex justify-content-center my-3">
+              Recent Business List
+            </Card.Header>
+            <Table bordered hover responsive className="table-sm">
               <thead>
                 <tr>
                   <th>Business Name</th>
@@ -232,13 +271,17 @@ const BusinessOwnerDashoard = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr key=''>
+                <tr key="">
                   <td>Sheraton Bus</td>
                   <td>Baridhara</td>
                   <td>01532183551</td>
                   <td>www.unga.com</td>
                   <td>196854813118441</td>
-                  <td>Button</td>
+                  <td>
+                    <Button variant="info">
+                      <FaEdit />
+                    </Button>
+                  </td>
                 </tr>
               </tbody>
             </Table>

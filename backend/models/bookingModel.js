@@ -100,9 +100,9 @@ const bookingSchema = new mongoose.Schema(
       default: 'pending',
       trim: true,
       enum: {
-        values: ['pending', 'booked', 'availed', 'completed'],
+        values: ['pending', 'booked', 'availed', 'completed', 'cancelled'],
         message:
-          'Service type needs to be pending, booked, availed or completed',
+          'Service type needs to be pending, booked, availed, completed or cancelled',
       },
     },
   },
