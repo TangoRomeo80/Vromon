@@ -104,7 +104,9 @@ const NewBookingDetails = () => {
                         value={serviceType}
                         onChange={(e) => setServiceType(e.target.value)}
                       >
-                        <option disabled selected value=''>Select Service Type</option>
+                        <option disabled selected value="">
+                          Select Service Type
+                        </option>
                         <option value="Transportation">Transport</option>
                         <option value="Stays">Stays</option>
                         <option value="Tours">Tours</option>
@@ -184,7 +186,9 @@ const NewBookingDetails = () => {
                         value={bookingStatus}
                         onChange={(e) => setBookingStatus(e.target.value)}
                       >
-                        <option disabled selected value=''>Select Booking Status</option>
+                        <option disabled selected value="">
+                          Select Booking Status
+                        </option>
                         <option value="pending">Pending</option>
                         <option value="booked">Booked</option>
                         <option value="availed">Availed</option>
@@ -211,7 +215,9 @@ const NewBookingDetails = () => {
                         value={paymentMethod}
                         onChange={(e) => setPaymentMethod(e.target.value)}
                       >
-                        <option disabled selected value=''>Select Payment Method</option>
+                        <option disabled selected value="">
+                          Select Payment Method
+                        </option>
                         <option value="cash">Cash</option>
                         <option value="card">Card</option>
                       </Form.Control>
@@ -229,7 +235,9 @@ const NewBookingDetails = () => {
                         value={paymentStatus}
                         onChange={(e) => setPaymentStatus(e.target.value)}
                       >
-                        <option disabled selected value=''>Select Payment Status</option>
+                        <option disabled selected value="">
+                          Select Payment Status
+                        </option>
                         <option value="pending">Pending</option>
                         <option value="paid">Paid</option>
                       </Form.Control>
@@ -238,9 +246,20 @@ const NewBookingDetails = () => {
                 </Row>
 
                 <Row className="py-4">
-                  <Button variant="outline-dark" size="md" type="submit">
-                    <b>Update Transportation</b>
-                  </Button>
+                  <Col lg={6} md={6} sm={12}>
+                    <Button
+                      className="d-flex justify-content-start"
+                      variant="outline-success"
+                      type="submit"
+                    >
+                      Confirm Booking
+                    </Button>
+                  </Col>
+                  <Col lg={6} md={6} sm={12} className="d-flex justify-content-end">
+                    <Button variant="outline-danger" type="submit">
+                      Cancel Booking
+                    </Button>
+                  </Col>
                 </Row>
               </Card.Body>
             </Card>
