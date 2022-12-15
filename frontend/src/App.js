@@ -41,6 +41,8 @@ import TransportDetailBusiness from "./screens/TransportDetailBusiness";
 import TransportDetailsTourist from "./screens/TransportDetailsTourist";
 import StayDetailsBusiness from "./screens/StayDetailsBusiness";
 import StayDetailsTourist from "./screens/StayDetailsTourist";
+import TourDetailsTourist from "./screens/TourDetailsTourist";
+import TourDetailsBusiness from "./screens/TourDetailsBusiness";
 
 const App = () => {
   return (
@@ -61,7 +63,6 @@ const App = () => {
               <Route path="/profile" element={<ProfileScreen />} />
               <Route path="/tourSearch" element={<TourSearchScreen />} />
               <Route path="/myBookings" element={<TouristBookingScreen />} />
-              
 
               <Route path="/businessDash" element={<BusinessOwnerDashoard />} />
               <Route
@@ -122,7 +123,6 @@ const App = () => {
 
               <Route path="/testNav" element={<TestNavbar />} />
 
-
               {/* Booking Requests */}
               <Route
                 path="/staysBooking/:id"
@@ -136,7 +136,6 @@ const App = () => {
                 path="/transportBooking/:id"
                 element={<TransportBookingScreen />}
               />
-
 
               {/* Details Page */}
               <Route
@@ -158,6 +157,14 @@ const App = () => {
               <Route
                 path="/destinationDetails/:id"
                 element={<DestinationDetailsScreen />}
+              />
+              <Route
+                path="/tourDetailsTourist"
+                element={<TourDetailsTourist />}
+              />
+              <Route
+                path="/tourDetailsBusiness"
+                element={<TourDetailsBusiness />}
               />
             </Routes>
           </Container>
