@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Card, Row, Col, Form, Button } from "react-bootstrap";
 
 
 const TransportDetailsTourist = () => {
+
+  const [transportType, setTransportType] = useState("");
+  const [departFrom, setDepartFrom] = useState("");
+  const [departTo, setDepartTo] = useState("");
+  const [departDate, setDepartDate] = useState("");
+  const [departTime, setDepartTime] = useState("");
+  const [arrivalTime, setArrivalTime] = useState("");
+  const [returnDate, setReturnDate] = useState("");
+  const [returnTime, setReturnTime] = useState("");
+  const [busType, setBusType] = useState("");
+  const [pickupFrom, setPickupFrom] = useState("");
+  const [dropTo, setDropTo] = useState("");
+  const [rentDuration, setRentDuration] = useState("");
+  const [pickUpDate, setPickUpDate] = useState("");
+  const [dropOffDate, setDropOffDate] = useState("");
+  const [pickUpTime, setPickUpTime] = useState("");
+  const [dropOffTime, setDropOffTime]= useState("");
+  const [driverName, setDriverName] = useState("");
+  const [driverContact, setDriverContact] = useState("");
+  const [driverLicense, setDriverLicense] = useState("");
+  const [carRegistration, setCarRegistration] = useState("");
+  const [carRegistrationImage, setCarRegistrationImage] = useState("");
+  const [carModel, setCarModel] = useState("");
+  const [carType, setCarType] = useState("");
+
+
   return (
     <Container className="pt-5">
     <Row className="pb-5">

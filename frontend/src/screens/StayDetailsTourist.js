@@ -3,6 +3,8 @@ import { Container, Card, Row, Col, Form, Button } from "react-bootstrap";
 
 
 const StayDetailsTourist = () => {
+
+  
   return (
     <Container className="pt-5">
     <Row className="pb-5">
