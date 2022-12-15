@@ -243,6 +243,20 @@ const NewBookingDetails = () => {
                       </Form.Control>
                     </Form.Group>
                   </Col>
+                  <Col lg={12} md={12} sm={12}>
+                    <Form.Group className="mb-3" controlId="remarks">
+                      <Form.Label className="small mb-1">
+                        Remarks
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={4}
+                        placeholder="Remarks Regarding The Booking"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                      ></Form.Control>
+                    </Form.Group>
+                  </Col>
                 </Row>
 
                 <Row className="py-4">
@@ -255,7 +269,12 @@ const NewBookingDetails = () => {
                       Confirm Booking
                     </Button>
                   </Col>
-                  <Col lg={6} md={6} sm={12} className="d-flex justify-content-end">
+                  <Col
+                    lg={6}
+                    md={6}
+                    sm={12}
+                    className="d-flex justify-content-end"
+                  >
                     <Button variant="outline-danger" type="submit">
                       Cancel Booking
                     </Button>
