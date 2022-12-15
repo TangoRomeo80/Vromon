@@ -61,26 +61,7 @@ const App = () => {
               <Route path="/profile" element={<ProfileScreen />} />
               <Route path="/tourSearch" element={<TourSearchScreen />} />
               <Route path="/myBookings" element={<TouristBookingScreen />} />
-              <Route
-                path="/destinationDetails/:id"
-                element={<DestinationDetailsScreen />}
-              />
-              <Route
-                path="/transportDetailsBusiness"
-                element={<TransportDetailBusiness />}
-              />
-              <Route
-                path="/transportDetailsTourist"
-                element={<TransportDetailsTourist />}
-              />
-              <Route
-                path="/staysDetailsBusiness"
-                element={<StayDetailsBusiness />}
-              />
-              <Route
-                path="/stayDetailsTourist"
-                element={<StayDetailsTourist />}
-              />
+              
 
               <Route path="/businessDash" element={<BusinessOwnerDashoard />} />
               <Route
@@ -141,6 +122,7 @@ const App = () => {
 
               <Route path="/testNav" element={<TestNavbar />} />
 
+
               {/* Booking Requests */}
               <Route
                 path="/staysBooking/:id"
@@ -153,6 +135,29 @@ const App = () => {
               <Route
                 path="/transportBooking/:id"
                 element={<TransportBookingScreen />}
+              />
+
+
+              {/* Details Page */}
+              <Route
+                path="/transportDetailsBusiness"
+                element={<TransportDetailBusiness />}
+              />
+              <Route
+                path="/transportDetailsTourist"
+                element={<TransportDetailsTourist />}
+              />
+              <Route
+                path="/staysDetailsBusiness"
+                element={<StayDetailsBusiness />}
+              />
+              <Route
+                path="/staysDetailsTourist"
+                element={<StayDetailsTourist />}
+              />
+              <Route
+                path="/destinationDetails/:id"
+                element={<DestinationDetailsScreen />}
               />
             </Routes>
           </Container>
