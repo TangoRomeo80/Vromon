@@ -29,7 +29,6 @@ import AdminUserListScreen from "./screens/AdminUserListScreen";
 import AdminServiceListScreen from "./screens/AdminServiceListScreen";
 import AdminDestinationListScreen from "./screens/AdminDestinationListScreen";
 import DestinationCreateScreen from "./screens/DestinationCreateScreen";
-import TransportSearchByDestinationScreen from "./screens/TransportSearchByDestinationScreen";
 import StaysSearchByDestinationScreen from "./screens/StaysSearchByDestinationScreen";
 import TourSearchByDestinationScreen from "./screens/TourSearchByDestinationScreen";
 import BusinessListScreen from "./screens/BusinessListScreen";
@@ -77,10 +76,6 @@ const App = () => {
               <Route
                 path="/transportSearch"
                 element={<TransportSearchScreen />}
-              />
-              <Route
-                path="/transportByDestination"
-                element={<TransportSearchByDestinationScreen />}
               />
               <Route
                 path="/staysByDestination"
