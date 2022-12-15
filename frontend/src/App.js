@@ -42,6 +42,7 @@ import StayDetailsBusiness from "./screens/StayDetailsBusiness";
 import StayDetailsTourist from "./screens/StayDetailsTourist";
 import TourDetailsTourist from "./screens/TourDetailsTourist";
 import TourDetailsBusiness from "./screens/TourDetailsBusiness";
+import NewBookingDetails from "./screens/NewBookingDetails";
 
 const App = () => {
   return (
@@ -161,6 +162,7 @@ const App = () => {
                 path="/tourDetailsBusiness"
                 element={<TourDetailsBusiness />}
               />
+              <Route path="/newBookings" element={<NewBookingDetails />} />
             </Routes>
           </Container>
         </main>
