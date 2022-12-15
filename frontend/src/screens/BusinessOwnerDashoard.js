@@ -8,6 +8,7 @@ import {
   Form,
   Table,
 } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import { FaUser, FaServicestack, FaEdit, FaTrash } from "react-icons/fa";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { FcCancel } from "react-icons/fc";
@@ -193,21 +194,35 @@ const BusinessOwnerDashoard = () => {
                   <tbody>
                     {bookings.map((booking) => (
                       <tr key={booking._id}>
-                        <td>{booking.user.userName}</td>
-                        <td>{booking.service.serviceType}</td>
-                        <td>{booking.service.serviceName}</td>
-                        <td>
-                          {Moment(booking.bookingDate).format("DD-MM-YYYY")}
-                        </td>
-                        <td>
-                          BDT {booking.service.price}
-                          <TbCurrencyTaka className="mb-1" />
-                        </td>
-                        <td>
-                          <Button variant="info" className="btn-sm">
-                            <FaEdit />
-                          </Button>
-                        </td>
+                        <LinkContainer to="/newBookings">
+                          <td>{booking.user.userName}</td>
+                        </LinkContainer>
+                        <LinkContainer to="/newBookings">
+                          <td>{booking.service.serviceType}</td>
+                        </LinkContainer>
+                        <LinkContainer to="/newBookings">
+                          <td>{booking.service.serviceName}</td>
+                        </LinkContainer>
+                        <LinkContainer to="/newBookings">
+                          <td>
+                            {Moment(booking.bookingDate).format("DD-MM-YYYY")}
+                          </td>
+                        </LinkContainer>
+                        <LinkContainer to="/newBookings">
+                          <td>
+                            BDT {booking.service.price}
+                            <TbCurrencyTaka className="mb-1" />
+                          </td>
+                        </LinkContainer>
+
+                        <LinkContainer to="/newBookings">
+                          <td>
+                            <Button variant="info" className="btn-sm">
+                              <FaEdit />
+                            </Button>
+                          </td>
+                        </LinkContainer>
+
                         <td>
                           <Button variant="success" className="btn-sm">
                             Accept
@@ -254,18 +269,32 @@ const BusinessOwnerDashoard = () => {
                   <tbody>
                     {services.map((service) => (
                       <tr key={service._id}>
-                        <td>{service.serviceType}</td>
-                        <td>{service.serviceName}</td>
-                        <td>
-                          {service.destination.district},
-                          {service.destination.division}
-                        </td>
-                        <td>{service.serviceMobileNumber}</td>
-                        <td>
-                          <Button variant="info" className="btn-sm">
-                            <FaEdit />
-                          </Button>
-                        </td>
+                        <LinkContainer to="/serviceDetails">
+                          <td>{service.serviceType}</td>
+                        </LinkContainer>
+
+                        <LinkContainer to="/serviceDetails">
+                          <td>{service.serviceName}</td>
+                        </LinkContainer>
+
+                        <LinkContainer to="/serviceDetails">
+                          <td>
+                            {service.destination.district},
+                            {service.destination.division}
+                          </td>
+                        </LinkContainer>
+
+                        <LinkContainer to="/serviceDetails">
+                          <td>{service.serviceMobileNumber}</td>
+                        </LinkContainer>
+
+                        <LinkContainer to="/serviceDetails">
+                          <td>
+                            <Button variant="info" className="btn-sm">
+                              <FaEdit />
+                            </Button>
+                          </td>
+                        </LinkContainer>
                       </tr>
                     ))}
                   </tbody>
