@@ -54,8 +54,7 @@ const bookingSchema = new mongoose.Schema(
     },
     availedDate: {
       type: Date,
-      default: Date.now,
-      required: [true, 'Service Availing Date is Required'],
+      default: null,
     },
     paymentStatus: {
       type: String,

@@ -63,6 +63,7 @@ const BusinessOwnerDashoard = () => {
 
   const [ownedServices, setOwnedServices] = useState([])
   const [newBookings, setNewBookings] = useState([])
+  const [confirmedBookings, setConfirmedBookings] = useState([])
   const [ownedBookings, setOwnedBookings] = useState([])
   const [ownedBusinesses, setOwnedBusinesses] = useState([])
 
@@ -89,6 +90,13 @@ const BusinessOwnerDashoard = () => {
           (booking) =>
             booking.service.business.businessOwner._id === userInfo._id &&
             booking.bookingStatus === 'booked'
+        )
+      )
+      setConfirmedBookings(
+        bookings.filter(
+          (booking) =>
+            booking.service.business.businessOwner._id === userInfo._id &&
+            booking.bookingStatus === 'availed'
         )
       )
     } else {
@@ -171,7 +179,7 @@ const BusinessOwnerDashoard = () => {
         <Col lg={6} sm={12} md={12}>
           <Card>
             <Card.Header as='h5' className='d-flex justify-content-center mb-3'>
-              New Bookings Info
+              New Bookings List
             </Card.Header>
             {isBookingListLoading ? (
               <Loader />
@@ -192,6 +200,66 @@ const BusinessOwnerDashoard = () => {
                   </thead>
                   <tbody>
                     {newBookings.map((booking) => (
+                      <LinkContainer
+                        to={`/bookingDetailsBusiness/${booking._id}`}
+                      >
+                        <tr key={booking._id} style={{ cursor: 'pointer' }}>
+                          <td>{booking.user.userName}</td>
+
+                          <td>{booking.service.serviceType}</td>
+
+                          <td>{booking.service.serviceName}</td>
+
+                          <td>
+                            {Moment(booking.bookingDate).format('DD-MM-YYYY')}
+                          </td>
+
+                          <td>
+                            BDT {booking.service.price}
+                            <TbCurrencyTaka className='mb-1' />
+                          </td>
+
+                          <td>
+                            <Button variant='success' className='btn-sm'>
+                              Accept/Cancel
+                            </Button>
+                          </td>
+                        </tr>
+                      </LinkContainer>
+                    ))}
+                  </tbody>
+                </Table>
+              )
+            )}
+          </Card>
+        </Col>
+      </Row>
+
+      <Row className='my-4'>
+        <Col lg={12} sm={12} md={12}>
+          <Card>
+            <Card.Header as='h5' className='d-flex justify-content-center mb-3'>
+              Confired Bookings List
+            </Card.Header>
+            {isBookingListLoading ? (
+              <Loader />
+            ) : isBookingListError ? (
+              <Message variant='danger'>{bookingListErrorMessage}</Message>
+            ) : (
+              bookings && (
+                <Table bordered hover responsive className='table-sm'>
+                  <thead>
+                    <tr>
+                      <th>Customer Name</th>
+                      <th>Service Type</th>
+                      <th>Service Name</th>
+                      <th>Booking Date</th>
+                      <th>Booking Fare</th>
+                      <th>Cancel</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {confirmedBookings.map((booking) => (
                       <LinkContainer
                         to={`/bookingDetailsBusiness/${booking._id}`}
                       >
