@@ -316,7 +316,72 @@ const ServiceListScreen = () => {
                       ))}
                     </>
                   ) : (
-                    <h1>Hello tours</h1>
+                    <>
+                      <Card.Title as='h5'>Tour Services</Card.Title>
+                      {ownedTours.map((tour) => (
+                        <Card className='shadow my-2'>
+                          <Row>
+                            <Col lg={3} md={3} sm={12}>
+                              <Card.Img
+                                className='img-fluid rounded-start'
+                                src={tour.coverImg}
+                                alt={tour.serviceName}
+                                style={{ objectFit: 'cover', height: '100%' }}
+                              />
+                            </Col>
+                            <Col lg={5} md={5} sm={12}>
+                              <Card.Body>
+                                <Card.Title as='h5'>
+                                  {tour.tourInfo.name}
+                                </Card.Title>
+                                <Card.Text>
+                                  <MdLocationOn /> &nbsp;
+                                  <strong>District: </strong>
+                                  {tour.destination.district}
+                                </Card.Text>
+                                <Card.Text>
+                                  <strong>Max Travelers Count : </strong>
+                                  {tour.tourInfo.maxGroupSize}
+                                </Card.Text>
+                                <Card.Text>
+                                  <Rating
+                                    value={tour.rating}
+                                    text={`${tour.numOfRatings} reviews`}
+                                    num={tour.numOfRatings}
+                                  />
+                                </Card.Text>
+                              </Card.Body>
+                            </Col>
+                            <Col lg={4} md={4} sm={12}>
+                              <Card.Body>
+                                <Card.Text>
+                                  <strong>Travel Date : </strong>
+                                  {Moment(tour.tourInfo.travelDate).format(
+                                    'DD-MM-YYYY'
+                                  )}
+                                </Card.Text>
+                                <Card.Text>
+                                  <strong>Lead Tour Guide : </strong>
+                                  {tour.tourInfo.leadGuideName}
+                                </Card.Text>
+                                <Card.Text style={{ color: 'red' }}>
+                                  <strong>Price : </strong>
+                                  BDT {tour.price}
+                                  <TbCurrencyTaka className='mb-1' />
+                                </Card.Text>
+
+                                <Link
+                                  to={`/tourDetailsBusiness/${tour._id}`}
+                                  className='btn btn-warning'
+                                >
+                                  See details
+                                </Link>
+                              </Card.Body>
+                            </Col>
+                          </Row>
+                        </Card>
+                      ))}
+                    </>
                   )}
                 </Card.Body>
               </Card>

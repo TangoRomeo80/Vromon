@@ -161,7 +161,7 @@ const BusinessOwnerDashoard = () => {
             linkTo='/bookingRequestList'
             data={bookings ? newBookings.length : 0}
             description='New Booking Requests'
-            bgColor='secondary'
+            bgColor='success'
             width='30'
             loading={isBookingListLoading ? true : false}
             error={isBookingListError ? bookingListErrorMessage : null}
