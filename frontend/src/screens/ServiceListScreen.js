@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Card, Button, Form, Image } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { TbCurrencyTaka } from 'react-icons/tb'
+import { MdLocationOn } from 'react-icons/md'
 import { toast } from 'react-toastify'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -243,7 +244,77 @@ const ServiceListScreen = () => {
                       ))}
                     </>
                   ) : serviceType === 'accomodation' ? (
-                    <h1>Hello accomodation</h1>
+                    <>
+                      <Card.Title as='h5'>Accomodation Services</Card.Title>
+                      {ownedAccomodations.map((accomodation) => (
+                        <Card className='my-2 shadow' key={accomodation._id}>
+                          <Row className='d-flex'>
+                            <Col sm={4} md={3} lg={3}>
+                              <Card.Img
+                                src={accomodation.coverImg}
+                                className='img-fluid rounded-start'
+                                variant='top'
+                                style={{ objectFit: 'cover', height: '100%' }}
+                              />
+                            </Col>
+                            <Col sm={4} md={6} lg={6}>
+                              <Card.Body>
+                                <Card.Title as='h5'>
+                                  {accomodation.serviceName}
+                                </Card.Title>
+                                <Card.Text>
+                                  <MdLocationOn /> &nbsp;
+                                  {`${accomodation.accomodationInfo.address.house}, ${accomodation.accomodationInfo.address.street}, ${accomodation.accomodationInfo.address.area}, ${accomodation.accomodationInfo.address.city}, `}
+                                  Bangladesh
+                                </Card.Text>
+                                <Card.Text>
+                                  <strong>Rooms Available : </strong>
+                                  {accomodation.accomodationInfo.rooms}
+                                </Card.Text>
+                                <Card.Text>
+                                  <strong>Max Guests : </strong>
+                                  {accomodation.accomodationInfo.maxGuests}
+                                </Card.Text>
+                                <Card.Text>
+                                  <Rating
+                                    value={accomodation.rating}
+                                    text={`${accomodation.numOfRatings} reviews`}
+                                    num={accomodation.numOfRatings}
+                                  />
+                                </Card.Text>
+                              </Card.Body>
+                            </Col>
+
+                            <Col
+                              sm={4}
+                              md={3}
+                              lg={3}
+                              className='d-flex justify-content-end'
+                            >
+                              <Card.Body>
+                                <Card.Text className='my-3'>
+                                  <strong>Cost : </strong> BDT{' '}
+                                  {accomodation.price}
+                                  <TbCurrencyTaka className='mb-1' />
+                                </Card.Text>
+                                <Card.Text>
+                                  <strong>
+                                    **Discount Price Here (If Available)
+                                  </strong>
+                                </Card.Text>
+
+                                <Link
+                                  to={`/staysDetailsBusiness/${accomodation._id}`}
+                                  className='btn btn-warning'
+                                >
+                                  See details
+                                </Link>
+                              </Card.Body>
+                            </Col>
+                          </Row>
+                        </Card>
+                      ))}
+                    </>
                   ) : (
                     <h1>Hello tours</h1>
                   )}
