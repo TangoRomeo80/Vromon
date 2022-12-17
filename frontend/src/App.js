@@ -45,6 +45,7 @@ import TourDetailsBusiness from './screens/TourDetailsBusiness'
 import ServiceDetailsBusinessScreen from './screens/ServiceDetailsBusinessScreen'
 import BookingDetailsTouristScreen from './screens/BookingDetailsTouristScreen'
 import BookingDetailsBusinessScreen from './screens/BookingDetailsBusinessScreen'
+import BusinessDetailsScreen from './screens/BusinessDetailsScreen'
 
 const App = () => {
   return (
@@ -173,6 +174,11 @@ const App = () => {
               <Route
                 path='/bookingDetailsTourist/:id'
                 element={<BookingDetailsTouristScreen />}
+              />
+
+<Route
+                path='/businessDetails/:id'
+                element={<BusinessDetailsScreen />}
               />
 
               <Route

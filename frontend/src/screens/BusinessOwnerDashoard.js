@@ -192,47 +192,32 @@ const BusinessOwnerDashoard = () => {
                   </thead>
                   <tbody>
                     {newBookings.map((booking) => (
-                      <tr key={booking._id}>
-                        <LinkContainer
-                          to={`/bookingDetailsBusiness/${booking._id}`}
-                        >
+                      <LinkContainer
+                        to={`/bookingDetailsBusiness/${booking._id}`}
+                      >
+                        <tr key={booking._id} style={{ cursor: 'pointer' }}>
                           <td>{booking.user.userName}</td>
-                        </LinkContainer>
-                        <LinkContainer
-                          to={`/bookingDetailsBusiness/${booking._id}`}
-                        >
+
                           <td>{booking.service.serviceType}</td>
-                        </LinkContainer>
-                        <LinkContainer
-                          to={`/bookingDetailsBusiness/${booking._id}`}
-                        >
+
                           <td>{booking.service.serviceName}</td>
-                        </LinkContainer>
-                        <LinkContainer
-                          to={`/bookingDetailsBusiness/${booking._id}`}
-                        >
+
                           <td>
                             {Moment(booking.bookingDate).format('DD-MM-YYYY')}
                           </td>
-                        </LinkContainer>
-                        <LinkContainer
-                          to={`/bookingDetailsBusiness/${booking._id}`}
-                        >
+
                           <td>
                             BDT {booking.service.price}
                             <TbCurrencyTaka className='mb-1' />
                           </td>
-                        </LinkContainer>
-                        <LinkContainer
-                          to={`/bookingDetailsBusiness/${booking._id}`}
-                        >
+
                           <td>
                             <Button variant='success' className='btn-sm'>
                               Accept/Cancel
                             </Button>
                           </td>
-                        </LinkContainer>
-                      </tr>
+                        </tr>
+                      </LinkContainer>
                     ))}
                   </tbody>
                 </Table>
@@ -267,34 +252,34 @@ const BusinessOwnerDashoard = () => {
                   </thead>
                   <tbody>
                     {ownedServices.map((service) => (
-                      <tr key={service._id}>
-                        <LinkContainer to='/serviceDetails'>
+                      <LinkContainer
+                        to={
+                          service.serviceType === 'transportation'
+                            ? `/transportDetailsBusiness/${service._id}`
+                            : service.serviceType === 'accomodation'
+                            ? `/staysDetailsBusiness/${service._id}`
+                            : `/tourDetailsBusiness/${service._id}`
+                        }
+                      >
+                        <tr key={service._id} style={{ cursor: 'pointer' }}>
                           <td>{service.serviceType}</td>
-                        </LinkContainer>
 
-                        <LinkContainer to='/serviceDetails'>
                           <td>{service.serviceName}</td>
-                        </LinkContainer>
 
-                        <LinkContainer to='/serviceDetails'>
                           <td>
                             {service.destination.district},
                             {service.destination.division}
                           </td>
-                        </LinkContainer>
 
-                        <LinkContainer to='/serviceDetails'>
                           <td>{service.serviceMobileNumber}</td>
-                        </LinkContainer>
 
-                        <LinkContainer to='/serviceDetails'>
                           <td>
                             <Button variant='info' className='btn-sm'>
                               <FaEdit />
                             </Button>
                           </td>
-                        </LinkContainer>
-                      </tr>
+                        </tr>
+                      </LinkContainer>
                     ))}
                   </tbody>
                 </Table>
@@ -328,18 +313,20 @@ const BusinessOwnerDashoard = () => {
                   </thead>
                   <tbody>
                     {ownedBusinesses.map((business) => (
-                      <tr key={business._id}>
-                        <td>{business.businessName}</td>
-                        <td>{business.businessAddress}</td>
-                        <td>{business.businessPhone}</td>
-                        <td>{business.businessWebsite}</td>
-                        <td>{business.businessTIN}</td>
-                        <td>
-                          <Button variant='info' className='btn-sm'>
-                            <FaEdit />
-                          </Button>
-                        </td>
-                      </tr>
+                      <LinkContainer to={`/businessDetails/${business._id}`}>
+                        <tr key={business._id} style={{ cursor: 'pointer' }}>
+                          <td>{business.businessName}</td>
+                          <td>{business.businessAddress}</td>
+                          <td>{business.businessPhone}</td>
+                          <td>{business.businessWebsite}</td>
+                          <td>{business.businessTIN}</td>
+                          <td>
+                            <Button variant='info' className='btn-sm'>
+                              <FaEdit />
+                            </Button>
+                          </td>
+                        </tr>
+                      </LinkContainer>
                     ))}
                   </tbody>
                 </Table>
