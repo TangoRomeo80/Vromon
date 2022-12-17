@@ -137,19 +137,19 @@ const App = () => {
 
               {/* Details Page */}
               <Route
-                path='/transportDetailsBusiness'
+                path='/transportDetailsBusiness/:id'
                 element={<TransportDetailBusiness />}
               />
               <Route
-                path='/transportDetailsTourist'
+                path='/transportDetailsTourist/:id'
                 element={<TransportDetailsTourist />}
               />
               <Route
-                path='/staysDetailsBusiness'
+                path='/staysDetailsBusiness/:id'
                 element={<StayDetailsBusiness />}
               />
               <Route
-                path='/staysDetailsTourist'
+                path='/staysDetailsTourist/:id'
                 element={<StayDetailsTourist />}
               />
               <Route
@@ -157,11 +157,11 @@ const App = () => {
                 element={<DestinationDetailsScreen />}
               />
               <Route
-                path='/tourDetailsTourist'
+                path='/tourDetailsTourist/:id'
                 element={<TourDetailsTourist />}
               />
               <Route
-                path='/tourDetailsBusiness'
+                path='/tourDetailsBusiness/:id'
                 element={<TourDetailsBusiness />}
               />
 
