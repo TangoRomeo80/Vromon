@@ -1,170 +1,184 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Container } from "react-bootstrap";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import HomeScreen from "./screens/HomeScreen";
-import LoginScreen from "./screens/LoginScreen";
-import NewUserScreen from "./screens/NewUserScreen";
-import ProfileScreen from "./screens/ProfileScreen";
-import TourSearchScreen from "./screens/TourSearchScreen";
-import BusinessOwnerInfoScreen from "./screens/BusinessOwnerInfoScreen";
-import ErrorScreen from "./screens/ErrorScreen";
-import TestScreen from "./screens/TestScreen";
-import TestNavbar from "./screens/TestNavbar";
-import DestinationSearchScreen from "./screens/DestinationSearchScreen";
-import DestinationDetailsScreen from "./screens/DestinationDetailsScreen";
-import StaysSearchScreen from "./screens/StaysSearchScreen";
-import TransportSearchScreen from "./screens/TransportSearchScreen";
-import RegistrationScreen from "./screens/RegistrationScreen";
-import TouristBookingScreen from "./screens/TouristBookingScreen";
-import ServiceListScreen from "./screens/ServiceListScreen";
-import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
-import BusinessOwnerDashoard from "./screens/BusinessOwnerDashoard";
-import BookingRequestsScreen from "./screens/BookingRequestsScreen";
-import BusinessOwnerAnalyticsScreen from "./screens/BusinessOwnerAnalyticsScreen";
-import AdminDashboard from "./screens/AdminDashboard";
-import AdminUserListScreen from "./screens/AdminUserListScreen";
-import AdminServiceListScreen from "./screens/AdminServiceListScreen";
-import AdminDestinationListScreen from "./screens/AdminDestinationListScreen";
-import DestinationCreateScreen from "./screens/DestinationCreateScreen";
-import StaysSearchByDestinationScreen from "./screens/StaysSearchByDestinationScreen";
-import TourSearchByDestinationScreen from "./screens/TourSearchByDestinationScreen";
-import BusinessListScreen from "./screens/BusinessListScreen";
-import BusinessPaymentScreen from "./screens/BusinessPaymentScreen";
-import StaysBookingScreen from "./screens/StaysBookingScreen";
-import ToursBookingScreen from "./screens/ToursBookingScreen";
-import TransportBookingScreen from "./screens/TransportBookingScreen";
-import TransportDetailBusiness from "./screens/TransportDetailBusiness";
-import TransportDetailsTourist from "./screens/TransportDetailsTourist";
-import StayDetailsBusiness from "./screens/StayDetailsBusiness";
-import StayDetailsTourist from "./screens/StayDetailsTourist";
-import TourDetailsTourist from "./screens/TourDetailsTourist";
-import TourDetailsBusiness from "./screens/TourDetailsBusiness";
-import NewBookingDetails from "./screens/NewBookingDetails";
-import ServiceDetails from "./screens/ServiceDetails";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { Container } from 'react-bootstrap'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import HomeScreen from './screens/HomeScreen'
+import LoginScreen from './screens/LoginScreen'
+import NewUserScreen from './screens/NewUserScreen'
+import ProfileScreen from './screens/ProfileScreen'
+import TourSearchScreen from './screens/TourSearchScreen'
+import BusinessOwnerInfoScreen from './screens/BusinessOwnerInfoScreen'
+import ErrorScreen from './screens/ErrorScreen'
+import TestScreen from './screens/TestScreen'
+import TestNavbar from './screens/TestNavbar'
+import DestinationSearchScreen from './screens/DestinationSearchScreen'
+import DestinationDetailsScreen from './screens/DestinationDetailsScreen'
+import StaysSearchScreen from './screens/StaysSearchScreen'
+import TransportSearchScreen from './screens/TransportSearchScreen'
+import RegistrationScreen from './screens/RegistrationScreen'
+import TouristBookingScreen from './screens/TouristBookingScreen'
+import ServiceListScreen from './screens/ServiceListScreen'
+import ForgotPasswordScreen from './screens/ForgotPasswordScreen'
+import BusinessOwnerDashoard from './screens/BusinessOwnerDashoard'
+import BookingRequestsScreen from './screens/BookingRequestsScreen'
+import BusinessOwnerAnalyticsScreen from './screens/BusinessOwnerAnalyticsScreen'
+import AdminDashboard from './screens/AdminDashboard'
+import AdminUserListScreen from './screens/AdminUserListScreen'
+import AdminServiceListScreen from './screens/AdminServiceListScreen'
+import AdminDestinationListScreen from './screens/AdminDestinationListScreen'
+import DestinationCreateScreen from './screens/DestinationCreateScreen'
+import StaysSearchByDestinationScreen from './screens/StaysSearchByDestinationScreen'
+import TourSearchByDestinationScreen from './screens/TourSearchByDestinationScreen'
+import BusinessListScreen from './screens/BusinessListScreen'
+import BusinessPaymentScreen from './screens/BusinessPaymentScreen'
+import StaysBookingScreen from './screens/StaysBookingScreen'
+import ToursBookingScreen from './screens/ToursBookingScreen'
+import TransportBookingScreen from './screens/TransportBookingScreen'
+import TransportDetailBusiness from './screens/TransportDetailBusiness'
+import TransportDetailsTourist from './screens/TransportDetailsTourist'
+import StayDetailsBusiness from './screens/StayDetailsBusiness'
+import StayDetailsTourist from './screens/StayDetailsTourist'
+import TourDetailsTourist from './screens/TourDetailsTourist'
+import TourDetailsBusiness from './screens/TourDetailsBusiness'
+import ServiceDetailsBusinessScreen from './screens/ServiceDetailsBusinessScreen'
+import BookingDetailsTouristScreen from './screens/BookingDetailsTouristScreen'
+import BookingDetailsBusinessScreen from './screens/BookingDetailsBusinessScreen'
 
 const App = () => {
   return (
     <>
       <Router>
         <Header />
-        <main className="mt-6">
-          <Container fluid className="px-0">
+        <main className='mt-6'>
+          <Container fluid className='px-0'>
             <Routes>
-              <Route path="/" element={<HomeScreen />} />
-              <Route path="/login" element={<LoginScreen />} />
-              <Route path="/registration" element={<RegistrationScreen />} />
+              <Route path='/' element={<HomeScreen />} />
+              <Route path='/login' element={<LoginScreen />} />
+              <Route path='/registration' element={<RegistrationScreen />} />
               <Route
-                path="/forgotPassword/:token"
+                path='/forgotPassword/:token'
                 element={<ForgotPasswordScreen />}
               />
-              <Route path="/newUser" element={<NewUserScreen />} />
-              <Route path="/profile" element={<ProfileScreen />} />
-              <Route path="/tourSearch" element={<TourSearchScreen />} />
-              <Route path="/myBookings" element={<TouristBookingScreen />} />
+              <Route path='/newUser' element={<NewUserScreen />} />
+              <Route path='/profile' element={<ProfileScreen />} />
+              <Route path='/tourSearch' element={<TourSearchScreen />} />
+              <Route path='/myBookings' element={<TouristBookingScreen />} />
 
-              <Route path="/businessDash" element={<BusinessOwnerDashoard />} />
+              <Route path='/businessDash' element={<BusinessOwnerDashoard />} />
               <Route
-                path="/destinationSearch"
+                path='/destinationSearch'
                 element={<DestinationSearchScreen />}
               />
               <Route
-                path="/destinationCreate"
+                path='/destinationCreate'
                 element={<DestinationCreateScreen />}
               />
-              <Route path="/staysSearch" element={<StaysSearchScreen />} />
+              <Route path='/staysSearch' element={<StaysSearchScreen />} />
               <Route
-                path="/transportSearch"
+                path='/transportSearch'
                 element={<TransportSearchScreen />}
               />
               <Route
-                path="/staysByDestination"
+                path='/staysByDestination'
                 element={<StaysSearchByDestinationScreen />}
               />
               <Route
-                path="/tourByDestination"
+                path='/tourByDestination'
                 element={<TourSearchByDestinationScreen />}
               />
               <Route
-                path="/businessOwnerInfo"
+                path='/businessOwnerInfo'
                 element={<BusinessOwnerInfoScreen />}
               />
               <Route
-                path="/businessOwnerAnalytics"
+                path='/businessOwnerAnalytics'
                 element={<BusinessOwnerAnalyticsScreen />}
               />
-              <Route path="/adminDash" element={<AdminDashboard />} />
-              <Route path="/adminUserList" element={<AdminUserListScreen />} />
+              <Route path='/adminDash' element={<AdminDashboard />} />
+              <Route path='/adminUserList' element={<AdminUserListScreen />} />
               <Route
-                path="/adminServiceList"
+                path='/adminServiceList'
                 element={<AdminServiceListScreen />}
               />
               <Route
-                path="/adminDestinationList"
+                path='/adminDestinationList'
                 element={<AdminDestinationListScreen />}
               />
-              <Route path="/serviceList" element={<ServiceListScreen />} />
-              <Route path="/businessList" element={<BusinessListScreen />} />
+              <Route path='/serviceList' element={<ServiceListScreen />} />
+              <Route path='/businessList' element={<BusinessListScreen />} />
               <Route
-                path="/businessPayments"
+                path='/businessPayments'
                 element={<BusinessPaymentScreen />}
               />
               <Route
-                path="/bookingRequestList"
+                path='/bookingRequestList'
                 element={<BookingRequestsScreen />}
               />
-              <Route path="/test" element={<TestScreen />} />
-              <Route path="/*" element={<ErrorScreen />} />
+              <Route path='/test' element={<TestScreen />} />
+              <Route path='/*' element={<ErrorScreen />} />
 
-              <Route path="/testNav" element={<TestNavbar />} />
+              <Route path='/testNav' element={<TestNavbar />} />
 
               {/* Booking Requests */}
               <Route
-                path="/staysBooking/:id"
+                path='/staysBooking/:id'
                 element={<StaysBookingScreen />}
               />
               <Route
-                path="/toursBooking/:id"
+                path='/toursBooking/:id'
                 element={<ToursBookingScreen />}
               />
               <Route
-                path="/transportBooking/:id"
+                path='/transportBooking/:id'
                 element={<TransportBookingScreen />}
               />
 
               {/* Details Page */}
               <Route
-                path="/transportDetailsBusiness"
+                path='/transportDetailsBusiness'
                 element={<TransportDetailBusiness />}
               />
               <Route
-                path="/transportDetailsTourist"
+                path='/transportDetailsTourist'
                 element={<TransportDetailsTourist />}
               />
               <Route
-                path="/staysDetailsBusiness"
+                path='/staysDetailsBusiness'
                 element={<StayDetailsBusiness />}
               />
               <Route
-                path="/staysDetailsTourist"
+                path='/staysDetailsTourist'
                 element={<StayDetailsTourist />}
               />
               <Route
-                path="/destinationDetails/:id"
+                path='/destinationDetails/:id'
                 element={<DestinationDetailsScreen />}
               />
               <Route
-                path="/tourDetailsTourist"
+                path='/tourDetailsTourist'
                 element={<TourDetailsTourist />}
               />
               <Route
-                path="/tourDetailsBusiness"
+                path='/tourDetailsBusiness'
                 element={<TourDetailsBusiness />}
               />
-              <Route path="/newBookings" element={<NewBookingDetails />} />
-              <Route path="/serviceDetails" element={<ServiceDetails/>}/>
+
+              <Route
+                path='/bookingDetailsBusiness/:id'
+                element={<BookingDetailsBusinessScreen />}
+              />
+
+              <Route
+                path='/bookingDetailsTourist/:id'
+                element={<BookingDetailsTouristScreen />}
+              />
+
+              <Route
+                path='/serviceDetailsBusiness/:id'
+                element={<ServiceDetailsBusinessScreen />}
+              />
             </Routes>
           </Container>
         </main>
@@ -172,7 +186,7 @@ const App = () => {
       </Router>
       <ToastContainer />
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App

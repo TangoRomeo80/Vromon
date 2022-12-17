@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-const ServiceDetails = () => {
+const ServiceDetailsBusinessScreen = () => {
   const [serviceType, setServiceType] = useState("");
   const [serviceName, setServiceName] = useState("");
   const [coverImg, setCoverImg] = useState("");
@@ -136,4 +136,4 @@ const ServiceDetails = () => {
   );
 };
 
-export default ServiceDetails;
+export default ServiceDetailsBusinessScreen
