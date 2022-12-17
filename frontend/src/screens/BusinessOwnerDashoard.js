@@ -191,7 +191,7 @@ const BusinessOwnerDashoard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {bookings.map((booking) => (
+                    {newBookings.map((booking) => (
                       <tr key={booking._id}>
                         <LinkContainer
                           to={`/bookingDetailsBusiness/${booking._id}`}
@@ -266,7 +266,7 @@ const BusinessOwnerDashoard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {services.map((service) => (
+                    {ownedServices.map((service) => (
                       <tr key={service._id}>
                         <LinkContainer to='/serviceDetails'>
                           <td>{service.serviceType}</td>
@@ -327,7 +327,7 @@ const BusinessOwnerDashoard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {businesses.map((business) => (
+                    {ownedBusinesses.map((business) => (
                       <tr key={business._id}>
                         <td>{business.businessName}</td>
                         <td>{business.businessAddress}</td>
