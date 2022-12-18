@@ -119,7 +119,7 @@ const Header = () => {
                       <LinkContainer to='/bookingRequestList'>
                         <Nav.Link>
                           <FaTag className='me-1' />
-                          Booking Requests
+                          Bookings
                         </Nav.Link>
                       </LinkContainer>
 
