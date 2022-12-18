@@ -215,7 +215,7 @@ const DestinationCreateScreen = () => {
                     )}
 
                     <Form.Group controlId='image 1'>
-                      <Form.Label>Upload New Image</Form.Label>
+                      <Form.Label>Upload New Images</Form.Label>
                       <Form.Control
                         className='mb-3'
                         type='file'
