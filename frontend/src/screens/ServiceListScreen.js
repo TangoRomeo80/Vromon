@@ -15,6 +15,7 @@ import {
 } from '../features/service/serviceSlice'
 import Rating from '../components/Rating'
 import Moment from 'moment'
+import { LinkContainer } from 'react-router-bootstrap'
 
 const ServiceListScreen = () => {
   const dispatch = useDispatch()
@@ -107,6 +108,15 @@ const ServiceListScreen = () => {
                 </Row>
                 <Row className='my-2' onClick={() => setServiceType('tours')}>
                   <Button>Tours</Button>
+                </Row>
+              </Card.Body>
+            </Card>
+            <Card className='mb-1 shadow'>
+              <Card.Body>
+                <Row>
+                  <LinkContainer to='/serviceCreate'>
+                    <Button variant='success'>Create New Service</Button>
+                  </LinkContainer>
                 </Row>
               </Card.Body>
             </Card>

@@ -46,6 +46,7 @@ import ServiceDetailsBusinessScreen from './screens/ServiceDetailsBusinessScreen
 import BookingDetailsTouristScreen from './screens/BookingDetailsTouristScreen'
 import BookingDetailsBusinessScreen from './screens/BookingDetailsBusinessScreen'
 import BusinessDetailsScreen from './screens/BusinessDetailsScreen'
+import ServiceCreateScreen from './screens/ServiceCreateScreen'
 
 const App = () => {
   return (
@@ -176,7 +177,7 @@ const App = () => {
                 element={<BookingDetailsTouristScreen />}
               />
 
-<Route
+              <Route
                 path='/businessDetails/:id'
                 element={<BusinessDetailsScreen />}
               />
@@ -185,6 +186,8 @@ const App = () => {
                 path='/serviceDetailsBusiness/:id'
                 element={<ServiceDetailsBusinessScreen />}
               />
+
+              <Route path='/serviceCreate' element={<ServiceCreateScreen />} />
             </Routes>
           </Container>
         </main>

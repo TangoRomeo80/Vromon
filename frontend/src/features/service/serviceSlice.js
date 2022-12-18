@@ -373,6 +373,7 @@ export const serviceSlice = createSlice({
         state.isCreateError = false
         state.createErrorMessage = ''
         state.services.push(action.payload)
+        state.service = action.payload
       })
       .addCase(createService.rejected, (state, action) => {
         state.isCreateLoading = false
