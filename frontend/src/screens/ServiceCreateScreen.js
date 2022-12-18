@@ -13,6 +13,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../components/Loader'
+import districts from '../staticData/districts'
 import Message from '../components/Message'
 import { toast } from 'react-toastify'
 import {
@@ -67,6 +68,9 @@ const ServiceCreateScreen = () => {
   const [priceDiscount, setPriceDiscount] = useState(0)
   const [destination, setDestination] = useState('')
   const [business, setBusiness] = useState('')
+  const [pickUpFrom, setPickUpFrom] = useState('')
+  const [dropTo, setDropTo] = useState('')
+  const [searchSelected, setSearchSelected] = useState(true)
 
   useEffect(() => {
     if (isDestinationListError) {
@@ -428,6 +432,105 @@ const ServiceCreateScreen = () => {
                             <h5 className='font-weight-bolder text-muted mb-3'>
                               Transportation Details
                             </h5>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='pickupFrom'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Pickup Location
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    pickUpFrom === ''
+                                      ? 'Pickup Location is Required'
+                                      : 'Select Pickup Location'
+                                  }
+                                  value={pickUpFrom}
+                                  onChange={(e) => {
+                                    setPickUpFrom(e.target.value)
+                                    setSearchSelected(false)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+
+                              {pickUpFrom && !searchSelected && (
+                                <ListGroup
+                                  style={{
+                                    position: 'absolute',
+                                    zIndex: '9999',
+                                  }}
+                                >
+                                  {districts
+                                    .filter((districtName) =>
+                                      districtName
+                                        .toLowerCase()
+                                        .startsWith(pickUpFrom.toLowerCase())
+                                    )
+                                    .map((districtName, index) => (
+                                      <ListGroup.Item
+                                        key={index}
+                                        onClick={(e) => {
+                                          setPickUpFrom(e.target.innerText)
+                                          setSearchSelected(true)
+                                        }}
+                                      >
+                                        {districtName}
+                                      </ListGroup.Item>
+                                    ))}
+                                </ListGroup>
+                              )}
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group className='mb-3' controlId='dropTo'>
+                                <Form.Label className='small mb-1'>
+                                  DropOff Location
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    dropTo === ''
+                                      ? 'DropOff Location is Required'
+                                      : 'Select DropOff Location'
+                                  }
+                                  value={dropTo}
+                                  onChange={(e) => {
+                                    setDropTo(e.target.value)
+                                    setSearchSelected(false)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+
+                              {dropTo && !searchSelected && (
+                                <ListGroup
+                                  style={{
+                                    position: 'absolute',
+                                    zIndex: '9999',
+                                  }}
+                                >
+                                  {districts
+                                    .filter((districtName) =>
+                                      districtName
+                                        .toLowerCase()
+                                        .startsWith(dropTo.toLowerCase())
+                                    )
+                                    .map((districtName, index) => (
+                                      <ListGroup.Item
+                                        key={index}
+                                        onClick={(e) => {
+                                          setDropTo(e.target.innerText)
+                                          setSearchSelected(true)
+                                        }}
+                                      >
+                                        {districtName}
+                                      </ListGroup.Item>
+                                    ))}
+                                </ListGroup>
+                              )}
+                            </Col>
                           </Row>
                         ) : serviceType === 'accomodation' ? (
                           <Row>
