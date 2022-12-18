@@ -61,6 +61,12 @@ const ServiceCreateScreen = () => {
   const [ownedBusinesses, setOwnedBusinesses] = useState([])
   const [coverImg, setCoverImg] = useState('')
   const [images, setImages] = useState([])
+  const [serviceName, setServiceName] = useState('')
+  const [serviceType, setServiceType] = useState('')
+  const [price, setPrice] = useState(0)
+  const [priceDiscount, setPriceDiscount] = useState(0)
+  const [destination, setDestination] = useState('')
+  const [business, setBusiness] = useState('')
 
   useEffect(() => {
     if (isDestinationListError) {
@@ -242,7 +248,203 @@ const ServiceCreateScreen = () => {
               <Col xs={12} md={8} xl={9}>
                 <Card className='mb-4'>
                   <Card.Header>Service Information</Card.Header>
-                  <Card.Body></Card.Body>
+                  <Card.Body>
+                    <Row>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group
+                          className='mb-3'
+                          controlId='destinationName'
+                        >
+                          <Form.Label className='small mb-1'>
+                            Service Name
+                          </Form.Label>
+                          <Form.Control
+                            required
+                            type='text'
+                            placeholder={
+                              serviceName === ''
+                                ? 'Service Name is Required'
+                                : 'Enter Service Name'
+                            }
+                            value={serviceName}
+                            onChange={(e) => setServiceName(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Label className='small mb-1'>
+                          Select Service Type
+                        </Form.Label>
+                        <Form.Group className='mb-3' controlId='searchDivision'>
+                          <Form.Control
+                            required
+                            className='form-select'
+                            as='select'
+                            type='select'
+                            placeholder={
+                              serviceType === ''
+                                ? 'Service Type is Required'
+                                : 'Select Service Type'
+                            }
+                            value={serviceType}
+                            onChange={(e) => setServiceType(e.target.value)}
+                          >
+                            <option disabled selected value=''>
+                              Select Service Type
+                            </option>
+                            <option value='transportation'>
+                              transportation
+                            </option>
+                            <option value='accomodation'>accomodation</option>
+                            <option value='tours'>tours</option>
+                          </Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Label className='small mb-1'>
+                          Select Destinaiton
+                        </Form.Label>
+                        <Form.Group className='mb-3' controlId='destination'>
+                          <Form.Control
+                            required
+                            className='form-select'
+                            as='select'
+                            type='select'
+                            placeholder={
+                              destination === ''
+                                ? 'Destination is Required'
+                                : 'Select Destination'
+                            }
+                            value={destination}
+                            onChange={(e) => {
+                              setDestination(e.target.value)
+                            }}
+                          >
+                            <option disabled selected value=''>
+                              Select Destination
+                            </option>
+                            {destinations.map((destination) => (
+                              <option
+                                value={destination._id}
+                                key={destination._id}
+                              >
+                                {destination.name}
+                              </option>
+                            ))}
+                          </Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Label className='small mb-1'>
+                          Select Business
+                        </Form.Label>
+                        <Form.Group className='mb-3' controlId='business'>
+                          <Form.Control
+                            required
+                            className='form-select'
+                            as='select'
+                            type='select'
+                            placeholder={
+                              business === ''
+                                ? 'Business is Required'
+                                : 'Select Business'
+                            }
+                            value={business}
+                            onChange={(e) => {
+                              setBusiness(e.target.value)
+                            }}
+                          >
+                            <option disabled selected value=''>
+                              Select Business
+                            </option>
+                            {ownedBusinesses.map((business) => (
+                              <option value={business._id} key={business._id}>
+                                {business.businessName}
+                              </option>
+                            ))}
+                          </Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Label className='small mb-1'>
+                          Price of service (BDT)
+                        </Form.Label>
+                        <Form.Group className='mb-3' controlId='price'>
+                          <Form.Control
+                            required
+                            type='text'
+                            placeholder={
+                              price <= 0
+                                ? 'Price is Required and cannot be less than 0'
+                                : 'Enter Price'
+                            }
+                            value={price <= 0 ? '' : price}
+                            onChange={(e) => {
+                              if (e.target.value < 0 || isNaN(e.target.value)) {
+                                setPrice(0)
+                              } else setPrice(e.target.value * 1)
+                            }}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Label className='small mb-1'>
+                          Discount percentage (If any)
+                        </Form.Label>
+                        <Form.Group className='mb-3' controlId='price'>
+                          <Form.Control
+                            type='text'
+                            placeholder={
+                              priceDiscount <= 0
+                                ? 'Price discountneeds to be between 0 and 100'
+                                : 'Enter Price'
+                            }
+                            value={
+                              priceDiscount <= 0 || priceDiscount > 100
+                                ? ''
+                                : priceDiscount
+                            }
+                            onChange={(e) => {
+                              if (
+                                e.target.value < 0 ||
+                                e.target.value > 100 ||
+                                isNaN(e.target.value)
+                              ) {
+                                setPriceDiscount(0)
+                              } else setPriceDiscount(e.target.value * 1)
+                            }}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    {serviceType !== '' && (
+                      <>
+                        {serviceType === 'transportation' ? (
+                          <Row>
+                            <h5 className='font-weight-bolder text-muted mb-3'>
+                              Transportation Details
+                            </h5>
+                          </Row>
+                        ) : serviceType === 'accomodation' ? (
+                          <Row>
+                            <h5 className='font-weight-bolder text-muted mb-3'>
+                              Accomodation Details
+                            </h5>
+                          </Row>
+                        ) : (
+                          <Row>
+                            <h5 className='font-weight-bolder text-muted mb-3'>
+                              Tour Details
+                            </h5>
+                          </Row>
+                        )}
+                      </>
+                    )}
+                  </Card.Body>
                 </Card>
               </Col>
             </Row>

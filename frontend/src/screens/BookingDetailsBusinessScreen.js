@@ -129,7 +129,7 @@ const BookingDetailsBusinessScreen = () => {
 
           <Form>
             <Row>
-              <Col xs={12} md={4} xl={3}>
+              {/* <Col xs={12} md={4} xl={3}>
                 <Card className='mb-4'>
                   <Card.Header>Requested Service Image</Card.Header>
                   <Card.Body className='text-center'>
@@ -158,9 +158,9 @@ const BookingDetailsBusinessScreen = () => {
                     </Form.Group>
                   </Card.Body>
                 </Card>
-              </Col>
+              </Col> */}
 
-              <Col xs={12} md={8} xl={9}>
+              <Col xs={12} md={12} xl={12}>
                 <Card className='mb-4'>
                   <Card.Header>Booking Information</Card.Header>
                   <Card.Body>
