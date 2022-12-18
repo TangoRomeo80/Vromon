@@ -239,7 +239,7 @@ const BusinessOwnerDashoard = () => {
         <Col lg={12} sm={12} md={12}>
           <Card>
             <Card.Header as='h5' className='d-flex justify-content-center mb-3'>
-              Confired Bookings List
+              Confirmed Bookings List
             </Card.Header>
             {isBookingListLoading ? (
               <Loader />
