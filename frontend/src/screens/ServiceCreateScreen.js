@@ -68,9 +68,20 @@ const ServiceCreateScreen = () => {
   const [priceDiscount, setPriceDiscount] = useState(0)
   const [destination, setDestination] = useState('')
   const [business, setBusiness] = useState('')
+
   const [pickUpFrom, setPickUpFrom] = useState('')
   const [dropTo, setDropTo] = useState('')
+  const [description, setDescription] = useState('')
   const [searchSelected, setSearchSelected] = useState(true)
+  const [rentDuration, setRentDuration] = useState(0)
+  const [carModel, setCarModel] = useState('')
+  const [pickUpDate, setPickUpDate] = useState(null)
+  const [dropOffDate, setDropOffDate] = useState(null)
+  const [driverName, setDriverName] = useState('')
+  const [driverContact, setDriverContact] = useState('')
+  const [driverLicense, setDriverLicense] = useState('')
+  const [carRegistration, setCarRegistration] = useState('')
+  const [carType, setCarType] = useState('')
 
   useEffect(() => {
     if (isDestinationListError) {
@@ -531,6 +542,220 @@ const ServiceCreateScreen = () => {
                                 </ListGroup>
                               )}
                             </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='rentDuration'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Max Rent Duration(optional)
+                                </Form.Label>
+                                <Form.Control
+                                  type='text'
+                                  placeholder={
+                                    rentDuration <= 0
+                                      ? 'Rent Duration cannot be less than 1'
+                                      : 'Enter Rent Duration'
+                                  }
+                                  value={rentDuration <= 0 ? '' : rentDuration}
+                                  onChange={(e) => {
+                                    if (
+                                      e.target.value < 0 ||
+                                      isNaN(e.target.value)
+                                    ) {
+                                      setRentDuration(0)
+                                    } else {
+                                      setRentDuration(e.target.value * 1)
+                                    }
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group className='mb-3' controlId='carModel'>
+                                <Form.Label className='small mb-1'>
+                                  Car Model
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    carModel === ''
+                                      ? 'Car Model is Required'
+                                      : 'Enter Car Model'
+                                  }
+                                  value={carModel}
+                                  onChange={(e) => {
+                                    setCarModel(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='pickUpDate'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  PickUp Date
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='date'
+                                  placeholder={
+                                    pickUpDate === null
+                                      ? 'PickUp Date is Required'
+                                      : 'Select PickUp Date'
+                                  }
+                                  value={pickUpDate}
+                                  onChange={(e) => {
+                                    setPickUpDate(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='dropOffDate'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  DropOff Date
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='date'
+                                  placeholder={
+                                    dropOffDate === null
+                                      ? 'DropOff Date is Required'
+                                      : 'Select DropOff Date'
+                                  }
+                                  value={dropOffDate}
+                                  onChange={(e) => {
+                                    setDropOffDate(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='driverName'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Driver Name
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    driverName === ''
+                                      ? 'Driver Name is Required'
+                                      : 'Enter Driver Name'
+                                  }
+                                  value={driverName}
+                                  onChange={(e) => {
+                                    setDriverName(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='driverContact'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Driver Contact
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    driverContact === ''
+                                      ? 'Driver Contact is Required'
+                                      : 'Enter Driver Contact'
+                                  }
+                                  value={driverContact}
+                                  onChange={(e) => {
+                                    setDriverContact(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='driverLicense'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Driver License
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    driverLicense === ''
+                                      ? 'Driver License is Required'
+                                      : 'Enter Driver License'
+                                  }
+                                  value={driverLicense}
+                                  onChange={(e) => {
+                                    setDriverLicense(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='carRegistration'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Car registration number
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    carRegistration === ''
+                                      ? 'Car Registration Number is Required'
+                                      : 'Enter Car Registration Number'
+                                  }
+                                  value={carRegistration}
+                                  onChange={(e) => {
+                                    setCarRegistration(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group className='mb-3' controlId='carType'>
+                                <Form.Label className='small mb-1'>
+                                  Car Type
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  as='select'
+                                  placeholder={
+                                    carType === ''
+                                      ? 'Car Type is Required'
+                                      : 'Select Car Type'
+                                  }
+                                  value={carType}
+                                  onChange={(e) => {
+                                    setCarType(e.target.value)
+                                  }}
+                                >
+                                  <option disabled selected value=''>
+                                    Select Car Type
+                                  </option>
+                                  <option value='4 seater'>4 Seater</option>
+                                  <option value='6 seater'>6 Seater</option>
+                                  <option value='8 seater'>8 Seater</option>
+                                </Form.Control>
+                              </Form.Group>
+                            </Col>
                           </Row>
                         ) : serviceType === 'accomodation' ? (
                           <Row>
@@ -547,14 +772,35 @@ const ServiceCreateScreen = () => {
                         )}
                       </>
                     )}
+                    <Row>
+                      <Col lg={12} md={12} sm={12}>
+                        <Form.Group className='mb-3' controlId='description'>
+                          <Form.Label className='small mb-1'>
+                            Description
+                          </Form.Label>
+                          <Form.Control
+                            required
+                            as='textarea'
+                            rows={3}
+                            placeholder={
+                              description === ''
+                                ? 'Description is Required'
+                                : 'Enter Description'
+                            }
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row className='py-4'>
+                      <Button variant='outline-dark' size='md' type='submit'>
+                        <b>Create Service</b>
+                      </Button>
+                    </Row>
                   </Card.Body>
                 </Card>
               </Col>
-            </Row>
-            <Row className='py-4'>
-              <Button variant='outline-dark' size='md' type='submit'>
-                <b>Create Service</b>
-              </Button>
             </Row>
           </Form>
         </Container>

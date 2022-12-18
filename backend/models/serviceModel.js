@@ -253,26 +253,26 @@ const transportSchema = new mongoose.Schema({
       'There needs to be a rentEndDate for car',
     ],
   },
-  pickUpTime: {
-    type: String,
-    default: '',
-    required: [
-      function () {
-        return this.transportType === 'car'
-      },
-      'There needs to be a rentStartTime for car',
-    ],
-  },
-  dropOffTime: {
-    type: String,
-    default: '',
-    required: [
-      function () {
-        return this.transportType === 'car'
-      },
-      'There needs to be a rentEndTime for car',
-    ],
-  },
+  // pickUpTime: {
+  //   type: String,
+  //   default: '',
+  //   required: [
+  //     function () {
+  //       return this.transportType === 'car'
+  //     },
+  //     'There needs to be a rentStartTime for car',
+  //   ],
+  // },
+  // dropOffTime: {
+  //   type: String,
+  //   default: '',
+  //   required: [
+  //     function () {
+  //       return this.transportType === 'car'
+  //     },
+  //     'There needs to be a rentEndTime for car',
+  //   ],
+  // },
   driverName: {
     type: String,
     default: '',
@@ -322,16 +322,6 @@ const transportSchema = new mongoose.Schema({
         return this.transportType === 'car'
       },
       'There needs to be a carRegistration for car',
-    ],
-  },
-  carRegistrationImage: {
-    type: String,
-    default: '',
-    required: [
-      function () {
-        return this.transportType === 'car'
-      },
-      'There needs to be a carRegistrationImage for car',
     ],
   },
   carModel: {

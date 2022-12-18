@@ -139,20 +139,20 @@ const TransportScreen = () => {
             return service
           }
         })
-        .filter((service) => {
-          if (pickUpTime === '') {
-            return service
-          } else if (service.transportInfo.pickUpTime === pickUpTime) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (dropOffTime === '') {
-            return service
-          } else if (service.transportInfo.dropOffTime === dropOffTime) {
-            return service
-          }
-        })
+        // .filter((service) => {
+        //   if (pickUpTime === '') {
+        //     return service
+        //   } else if (service.transportInfo.pickUpTime === pickUpTime) {
+        //     return service
+        //   }
+        // })
+        // .filter((service) => {
+        //   if (dropOffTime === '') {
+        //     return service
+        //   } else if (service.transportInfo.dropOffTime === dropOffTime) {
+        //     return service
+        //   }
+        // })
 
       setAllTransports(filteredServices)
     } else {
