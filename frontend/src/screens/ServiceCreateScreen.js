@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import { toast } from 'react-toastify'
 import {
   createService,
   resetServiceCreate,
@@ -57,7 +58,42 @@ const ServiceCreateScreen = () => {
     listErrorMessage: destinationListErrorMessage,
   } = useSelector((state) => state.destination)
 
-  return <div>ServiceCreateScreen</div>
+  const [ownedBusinesses, setOwnedBusinesses] = useState([])
+
+  useEffect(() => {
+    if (isBusinessListError) {
+      toast.error(businessListErrorMessage, { position: 'top-center' })
+    } else if (isBusinessListSuccess) {
+      setOwnedBusinesses(
+        businesses.filter(
+          (business) => business.businessOwner._id === userInfo._id
+        )
+      )
+    } else {
+      dispatch(getAllBusinesses())
+    }
+  }, [
+    isBusinessListError,
+    businessListErrorMessage,
+    isBusinessListSuccess,
+    businesses,
+    userInfo,
+    dispatch,
+  ])
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/login')
+    } else if (userInfo.userType !== 'businessowner') {
+      navigate('/')
+    }
+  }, [userInfo, navigate])
+
+  return (
+    <>
+      <h1>Create service</h1>
+    </>
+  )
 }
 
 export default ServiceCreateScreen
