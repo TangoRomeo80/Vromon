@@ -286,7 +286,9 @@ const RentalSearch = ({
             !dropOffTime
           ) {
             e.preventDefault()
-            alert('Please fill all the fields')
+            toast.error('Please fill all the fields', {
+              position: 'top-center',
+            })
           }
         }}
       >

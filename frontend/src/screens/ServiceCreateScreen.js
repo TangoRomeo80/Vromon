@@ -70,6 +70,7 @@ const ServiceCreateScreen = () => {
   const [description, setDescription] = useState('')
   const [destination, setDestination] = useState('')
   const [business, setBusiness] = useState('')
+  const [serviceMobileNumber, setServiceMobileNumber] = useState('')
 
   const [pickUpFrom, setPickUpFrom] = useState('')
   const [dropTo, setDropTo] = useState('')
@@ -224,6 +225,7 @@ const ServiceCreateScreen = () => {
         serviceType,
         price,
         priceDiscount,
+        serviceMobileNumber,
         description,
         destination,
         business,
@@ -250,6 +252,7 @@ const ServiceCreateScreen = () => {
         serviceType,
         price,
         priceDiscount,
+        serviceMobileNumber,
         description,
         destination,
         business,
@@ -278,6 +281,7 @@ const ServiceCreateScreen = () => {
         serviceType,
         price,
         priceDiscount,
+        serviceMobileNumber,
         description,
         destination,
         business,
@@ -304,8 +308,6 @@ const ServiceCreateScreen = () => {
     <>
       {isServiceCreateLoading ? (
         <Loader />
-      ) : isServiceCreateError ? (
-        <Message variant='danger'>{serviceCreateErrorMessage}</Message>
       ) : (
         <Container className='pt-5'>
           <Row className='pb-5'>
@@ -552,6 +554,29 @@ const ServiceCreateScreen = () => {
                               ) {
                                 setPriceDiscount(0)
                               } else setPriceDiscount(e.target.value * 1)
+                            }}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Label className='small mb-1'>
+                          Select Service Mobile Number
+                        </Form.Label>
+                        <Form.Group
+                          className='mb-3'
+                          controlId='serviceMobileNumber'
+                        >
+                          <Form.Control
+                            required
+                            type='text'
+                            placeholder={
+                              serviceMobileNumber === ''
+                                ? 'Mobile Number is Required'
+                                : 'Enter Mobile Number'
+                            }
+                            value={serviceMobileNumber}
+                            onChange={(e) => {
+                              setServiceMobileNumber(e.target.value)
                             }}
                           ></Form.Control>
                         </Form.Group>

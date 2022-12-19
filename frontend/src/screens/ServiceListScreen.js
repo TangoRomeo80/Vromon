@@ -187,7 +187,7 @@ const ServiceListScreen = () => {
                                     transport.transportInfo.dropOffDate
                                   ).format('DD-MM-YYYY')}
                                 </Card.Text>
-                                <Card.Text>
+                                {/* <Card.Text>
                                   <strong>Pick time: </strong>
                                   {transport.transportInfo.pickUpTime.split(
                                     ':'
@@ -236,7 +236,7 @@ const ServiceListScreen = () => {
                                       ' PM'
                                     : transport.transportInfo.dropOffTime +
                                       ' AM'}
-                                </Card.Text>
+                                </Card.Text> */}
                                 <Card.Text style={{ color: 'red' }}>
                                   <strong>Price: </strong>
                                   BDT {transport.price} <TbCurrencyTaka />

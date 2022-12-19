@@ -78,7 +78,6 @@ const TransportScreen = () => {
     } else if (isListSuccess) {
       const filteredServices = transports
         .filter((service) => {
-          console.log(service)
           return service.transportInfo.transportType === 'car'
         })
         .filter((service) => {
