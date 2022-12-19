@@ -95,7 +95,16 @@ const ServiceCreateScreen = () => {
   const [checkoutDate, setCheckoutDate] = useState(null)
   const [maxGuests, setMaxGuests] = useState(0)
 
-  
+  const [tourName, setTourName] = useState('')
+  const [duration, setDuration] = useState(0)
+  const [travelDate, setTravelDate] = useState(null)
+  const [maxGroupSize, setMaxGroupSize] = useState(0)
+  const [startLocation, setStartLocation] = useState('')
+  const [locations, setLocations] = useState([])
+  const [leadGuideName, setLeadGuideName] = useState('')
+  const [guideNames, setGuideNames] = useState([])
+  const [leadGuideNid, setLeadGuideNid] = useState('')
+  const [leadGuideContact, setLeadGuideContact] = useState('')
 
   useEffect(() => {
     if (isDestinationListError) {
@@ -1026,6 +1035,238 @@ const ServiceCreateScreen = () => {
                             <h5 className='font-weight-bolder text-muted mb-3'>
                               Tour Details
                             </h5>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group className='mb-3' controlId='tourName'>
+                                <Form.Label className='small mb-1'>
+                                  Tour Name
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    tourName === ''
+                                      ? 'Name is Required'
+                                      : 'Enter Name'
+                                  }
+                                  value={tourName}
+                                  onChange={(e) => setTourName(e.target.value)}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group className='mb-3' controlId='duration'>
+                                '
+                                <Form.Label className='small mb-1'>
+                                  Tour Duration (min: 1)
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    duration <= 0
+                                      ? 'Duration is Required'
+                                      : 'Enter Duration'
+                                  }
+                                  value={duration <= 0 ? '' : duration}
+                                  onChange={(e) => {
+                                    if (e.target.value <= 0) {
+                                      setDuration(1)
+                                    } else {
+                                      setDuration(e.target.value * 1)
+                                    }
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='travelDate'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Travel start Date
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='date'
+                                  placeholder={
+                                    travelDate === null
+                                      ? 'Travel Date is Required'
+                                      : 'Enter Travel Date'
+                                  }
+                                  value={travelDate}
+                                  onChange={(e) =>
+                                    setTravelDate(new Date(e.target.value))
+                                  }
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='maxGroupSize'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Maximum Group Size
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    maxGroupSize <= 0
+                                      ? 'Maximum Group Size is Required(min: 1)'
+                                      : 'Enter Maximum Group Size'
+                                  }
+                                  value={maxGroupSize <= 0 ? '' : maxGroupSize}
+                                  onChange={(e) => {
+                                    if (e.target.value <= 0) {
+                                      setMaxGroupSize(1)
+                                    } else {
+                                      setMaxGroupSize(e.target.value * 1)
+                                    }
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='startLocation'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Start Location
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    startLocation === ''
+                                      ? 'Start Location is Required'
+                                      : 'Enter Start Location'
+                                  }
+                                  value={startLocation}
+                                  onChange={(e) =>
+                                    setStartLocation(e.target.value)
+                                  }
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='locations'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Locations(Write locations seperated by comma)
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    locations === []
+                                      ? 'Locations is Required'
+                                      : 'Enter Locations'
+                                  }
+                                  value={String(locations)}
+                                  onChange={(e) => {
+                                    setLocations(e.target.value.split(','))
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='leadGuideName'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Lead Guide Name
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    leadGuideName === ''
+                                      ? 'Lead Guide Name is Required'
+                                      : 'Enter Lead Guide Name'
+                                  }
+                                  value={leadGuideName}
+                                  onChange={(e) =>
+                                    setLeadGuideName(e.target.value)
+                                  }
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='guideNames'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Guide Names(Write Guide Names seperated by
+                                  comma)
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    guideNames === []
+                                      ? 'Guide Names is Required'
+                                      : 'Enter Guide Names'
+                                  }
+                                  value={String(guideNames)}
+                                  onChange={(e) => {
+                                    setGuideNames(e.target.value.split(','))
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='leadGuideNid'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Lead Guide NID
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    leadGuideNid === ''
+                                      ? 'Lead Guide NID is Required'
+                                      : 'Enter Lead Guide NID'
+                                  }
+                                  value={leadGuideNid}
+                                  onChange={(e) =>
+                                    setLeadGuideNid(e.target.value)
+                                  }
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='leadGuideContact'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Lead Guide Contact No
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    leadGuideContact === ''
+                                      ? 'Lead Guide Contact No is Required'
+                                      : 'Enter Lead Guide Contact No'
+                                  }
+                                  value={leadGuideContact}
+                                  onChange={(e) =>
+                                    setLeadGuideContact(e.target.value)
+                                  }
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
                           </Row>
                         )}
                       </>
