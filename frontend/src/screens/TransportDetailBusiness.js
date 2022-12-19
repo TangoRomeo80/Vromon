@@ -39,24 +39,31 @@ const TransportDetailBusiness = () => {
   } = useSelector((state) => state.service);
 
   const [transportType, setTransportType] = useState("");
+  const [serviceName, setServiceName] = useState("");
+
   const [departFrom, setDepartFrom] = useState("");
   const [departTo, setDepartTo] = useState("");
   const [departDate, setDepartDate] = useState("");
   const [departTime, setDepartTime] = useState("");
+
   const [arrivalTime, setArrivalTime] = useState("");
+
   const [returnDate, setReturnDate] = useState("");
   const [returnTime, setReturnTime] = useState("");
-  const [busType, setBusType] = useState("");
+
   const [pickupFrom, setPickupFrom] = useState("");
-  const [dropTo, setDropTo] = useState("");
-  const [rentDuration, setRentDuration] = useState("");
   const [pickUpDate, setPickUpDate] = useState("");
-  const [dropOffDate, setDropOffDate] = useState("");
   const [pickUpTime, setPickUpTime] = useState("");
+  const [dropTo, setDropTo] = useState("");
+  const [dropOffDate, setDropOffDate] = useState("");
   const [dropOffTime, setDropOffTime] = useState("");
+
+  const [rentDuration, setRentDuration] = useState("");
+  
   const [driverName, setDriverName] = useState("");
   const [driverContact, setDriverContact] = useState("");
   const [driverLicense, setDriverLicense] = useState("");
+
   const [carRegistration, setCarRegistration] = useState("");
   const [carRegistrationImage, setCarRegistrationImage] = useState("");
   const [carModel, setCarModel] = useState("");
@@ -67,6 +74,7 @@ const TransportDetailBusiness = () => {
       toast.error(detailsErrorMessage, { position: "top-center" });
     } else if (isDetailsSuccess) {
       setTransportType(transport.transportInfo.transportType);
+      setServiceName(transport.serviceName);
       setDepartFrom(transport.transportInfo.departFrom);
       setDepartTo(transport.transportInfo.departTo);
       setDepartDate(transport.transportInfo.departDate);
@@ -183,72 +191,284 @@ const TransportDetailBusiness = () => {
 
               <Col xs={12} md={8} xl={9}>
                 <Card className="mb-4">
-                  <Card.Header>Transport Information</Card.Header>
+                  <Card.Header>Transport Details</Card.Header>
                   <Card.Body>
+                    <h5 className='font-weight-bolder text-muted mb-3'>
+                      Transport Information
+                    </h5>
                     <Row>
-                      <Col lg={6} md={6} sm={12}>
-                        <Form.Group className="mb-3" controlId="transportName">
+                      <Col lg={12} md={12} sm={12}>
+                        <Form.Group className="mb-3" controlId="serviceName">
                           <Form.Label className="small mb-1">
-                            Transport Name
+                            Transport Service Name
                           </Form.Label>
-                          <Form.Control required type="text"></Form.Control>
+                          <Form.Control
+                          
+                          type='text'
+                          value={serviceName}
+                          onChange={(e) => setServiceName(e.target.value)}></Form.Control>
                         </Form.Group>
                       </Col>
+                    </Row>
+                    <Row>
                       <Col lg={6} md={6} sm={12}>
-                        <Form.Group className="mb-3" controlId="transportName">
+                        <Form.Group className="mb-3" controlId="carType">
                           <Form.Label className="small mb-1">
                             Car Type
                           </Form.Label>
-                          <Form.Control required type="text"></Form.Control>
+                          <Form.Control
+                            as="select"
+                            type="select"
+                            value={carType}
+                            onChange={(e) => setCarType(e.target.value)}
+                          >
+                            <option disabled selected value=''>Select Car Type</option>
+                            <option value="4 Seater">4 Seater</option>
+                            <option value="6 Seater">6 Seater</option>
+                            <option value="8 Seater">8 Seater</option>
+                          </Form.Control>
                         </Form.Group>
                       </Col>
-                    </Row>
 
-                    <Row>
-                      <Col lg={12} md={12} sm={12}>
-                        <Form.Group className="mb-3" controlId="transportName">
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className="mb-3" controlId="carModel">
                           <Form.Label className="small mb-1">
                             Car Model
                           </Form.Label>
-                          <Form.Control required type="text"></Form.Control>
+                          <Form.Control
+                            
+                            type="text"
+                            value={carModel}
+                            onChange={(e) => setCarModel(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={12} md={12} sm={12}>
+                        <Form.Group className="mb-3" controlId="carRegistration">
+                          <Form.Label className="small mb-1">
+                            Car Registration Number
+                          </Form.Label>
+                          <Form.Control
+                          
+                          type='text'
+                          value={carRegistration}
+                          onChange={(e) => setCarRegistration(e.target.value)}></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    <h5 className='font-weight-bolder text-muted mb-3'>
+                      Departure Information
+                    </h5>
+                    <Row>
+                      {/* departFrom, departTo, departDate, departTime */}
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className="mb-3" controlId="departFrom">
+                          <Form.Label className="small mb-1">
+                            Depart From
+                          </Form.Label>
+                          <Form.Control
+                          
+                          type='text'
+                          value={departFrom}
+                          onChange={(e) => setDepartFrom(e.target.value)}></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className="mb-3" controlId="departTo">
+                          <Form.Label className="small mb-1">
+                            Depart To
+                          </Form.Label>
+                          <Form.Control
+                          
+                          type='text'
+                          value={departTo}
+                          onChange={(e) => setDepartTo(e.target.value)}></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className="mb-3" controlId="departDate">
+                          <Form.Label className="small mb-1">
+                            Depart Date
+                          </Form.Label>
+                          <Form.Control
+                          
+                          type='date'
+                          value={departDate}
+                          onChange={(e) => setDepartDate(e.target.value)}></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className="mb-3" controlId="departTime">
+                          <Form.Label className="small mb-1">
+                            Depart Time
+                          </Form.Label>
+                          <Form.Control
+                          
+                          type='time'
+                          value={departTime}
+                          onChange={(e) => setDepartTime(e.target.value)}></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    <h5 className='font-weight-bolder text-muted mb-3'>
+                      Return Information
+                    </h5>
+                    <Row>
+                      {/* returnDate, returnTime */}
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className="mb-3" controlId="returnDate">
+                          <Form.Label className="small mb-1">
+                            Return Date
+                          </Form.Label>
+                          <Form.Control
+                          
+                          type='date'
+                          value={returnDate}
+                          onChange={(e) => setReturnDate(e.target.value)}></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className="mb-3" controlId="returnTime">
+                          <Form.Label className="small mb-1">
+                            Return Time
+                          </Form.Label>
+                          <Form.Control
+                          
+                          type='time'
+                          value={returnTime}
+                          onChange={(e) => setReturnTime(e.target.value)}></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    <h5 className='font-weight-bolder text-muted mb-3'>
+                      Pick & Drop Information
+                    </h5>
+                    <Row>
+                      {/* pickupFrom, pickUpDate, pickUpTime, dropTo, dropOffDate, dropOffTime */}
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className="mb-3" controlId="pickupFrom">
+                          <Form.Label className="small mb-1">
+                            Pick-Up From
+                          </Form.Label>
+                          <Form.Control 
+                          
+                          type="text"
+                          value={pickupFrom}
+                          onChange={(e) => setPickupFrom(e.target.value)}></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className="mb-3" controlId="pickUpDate">
+                          <Form.Label className="small mb-1">
+                            Pick-Up Date
+                          </Form.Label>
+                          <Form.Control 
+                          
+                          type="date"
+                          value={pickUpDate}
+                          onChange={(e) => setPickUpDate(e.target.value)}></Form.Control>
                         </Form.Group>
                       </Col>
                     </Row>
 
                     <Row>
                       <Col lg={6} md={6} sm={12}>
-                        <Form.Group className="mb-3" controlId="transportName">
+                        <Form.Group className="mb-3" controlId="pickUpTime">
                           <Form.Label className="small mb-1">
-                            Pick From
+                            Pick-Up Time
                           </Form.Label>
-                          <Form.Control required type="text"></Form.Control>
+                          <Form.Control
+                          
+                          type='time'
+                          value={pickUpTime}
+                          onChange={(e) => setPickUpTime(e.target.value)}></Form.Control>
                         </Form.Group>
                       </Col>
                       <Col lg={6} md={6} sm={12}>
-                        <Form.Group className="mb-3" controlId="transportName">
+                        <Form.Group className="mb-3" controlId="dropTo">
                           <Form.Label className="small mb-1">
                             Drop To
                           </Form.Label>
-                          <Form.Control required type="text"></Form.Control>
+                          <Form.Control
+                          
+                          type='text'
+                          value={dropTo}
+                          onChange={(e) => setDropTo(e.target.value)}></Form.Control>
                         </Form.Group>
                       </Col>
                     </Row>
 
                     <Row>
                       <Col lg={6} md={6} sm={12}>
-                        <Form.Group className="mb-3" controlId="transportName">
-                          <Form.Label className="small mb-1">
-                            Pick Time
+                        <Form.Group className='mb-3' controlId='dropOffDate'>
+                          <Form.Label className='small mb-1'>
+                            Drop-Off Date
                           </Form.Label>
-                          <Form.Control required type="text"></Form.Control>
+                          <Form.Control
+                          
+                          type='date'
+                          value={dropOffDate}
+                          onChange={(e) => setDropOffDate(e.target.value)}></Form.Control>
                         </Form.Group>
                       </Col>
                       <Col lg={6} md={6} sm={12}>
-                        <Form.Group className="mb-3" controlId="transportName">
+                        <Form.Group className="mb-3" controlId="dropOffTime">
                           <Form.Label className="small mb-1">
-                            Drop Ttime
+                            Drop-Off Time
                           </Form.Label>
-                          <Form.Control required type="text"></Form.Control>
+                          <Form.Control
+                          type="time"
+                          value={dropOffTime}
+                          onChange={(e) => setDropOffTime(e.target.value)}></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    <h5 className='font-weight-bolder text-muted mb-3'>
+                      Driver Information
+                    </h5>
+                    <Row>
+                      {/* driverName, driverContact, driverLicense */}
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='driverName'>
+                          <Form.Label className='small mb-1'>
+                            Driver Name
+                          </Form.Label>
+                          <Form.Control
+                          type='text'
+                          value={driverName}
+                          onChange={(e) => setDriverName(e.target.value)}></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='driverContact'>
+                          <Form.Label className='small mb-1'>
+                            Driver Contact
+                          </Form.Label>
+                          <Form.Control
+                          type='text'
+                          value={driverContact}
+                          onChange={(e) => setDriverContact(e.target.value)}></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg={12} md={12} sm={12}>
+                        <Form.Group className='mb-3' controlId='driverLicense'>
+                          <Form.Label className='small mb-1'>
+                            Driver License
+                          </Form.Label>
+                          <Form.Control
+                          type='text'
+                          value={driverLicense}
+                          onChange={(e) => setDriverLicense(e.target.value)}></Form.Control>
                         </Form.Group>
                       </Col>
                     </Row>
@@ -259,6 +479,7 @@ const TransportDetailBusiness = () => {
                           variant="outline-success"
                           size="md"
                           type="submit"
+                          onClick={updateHandler}
                         >
                           Update Transportation Information
                         </Button>
@@ -269,7 +490,7 @@ const TransportDetailBusiness = () => {
                         sm={12}
                         className="d-flex justify-content-end"
                       >
-                        <Button variant="outline-danger">Delete Service</Button>
+                        <Button variant="outline-danger" onClick={deleteHandler}>Delete Service</Button>
                       </Col>
                     </Row>
                   </Card.Body>
