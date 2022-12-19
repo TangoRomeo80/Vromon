@@ -138,20 +138,20 @@ const TransportScreen = () => {
             return service
           }
         })
-        // .filter((service) => {
-        //   if (pickUpTime === '') {
-        //     return service
-        //   } else if (service.transportInfo.pickUpTime === pickUpTime) {
-        //     return service
-        //   }
-        // })
-        // .filter((service) => {
-        //   if (dropOffTime === '') {
-        //     return service
-        //   } else if (service.transportInfo.dropOffTime === dropOffTime) {
-        //     return service
-        //   }
-        // })
+      // .filter((service) => {
+      //   if (pickUpTime === '') {
+      //     return service
+      //   } else if (service.transportInfo.pickUpTime === pickUpTime) {
+      //     return service
+      //   }
+      // })
+      // .filter((service) => {
+      //   if (dropOffTime === '') {
+      //     return service
+      //   } else if (service.transportInfo.dropOffTime === dropOffTime) {
+      //     return service
+      //   }
+      // })
 
       setAllTransports(filteredServices)
     } else {
@@ -420,7 +420,7 @@ const TransportScreen = () => {
                                         transport.transportInfo.dropOffDate
                                       ).format('DD-MM-YYYY')}
                                     </Card.Text>
-                                    <Card.Text>
+                                    {/* <Card.Text>
                                       <strong>Pick time: </strong>
                                       {transport.transportInfo.pickUpTime.split(
                                         ':'
@@ -469,7 +469,7 @@ const TransportScreen = () => {
                                           ' PM'
                                         : transport.transportInfo.dropOffTime +
                                           ' AM'}
-                                    </Card.Text>
+                                    </Card.Text> */}
                                     <Card.Text style={{ color: 'red' }}>
                                       <strong>Price: </strong>
                                       BDT {transport.price} <TbCurrencyTaka />
