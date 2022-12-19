@@ -61,6 +61,7 @@ const ServiceCreateScreen = () => {
 
   const [ownedBusinesses, setOwnedBusinesses] = useState([])
 
+  // For Base Service
   const [coverImg, setCoverImg] = useState('')
   const [images, setImages] = useState([])
   const [serviceName, setServiceName] = useState('')
@@ -72,6 +73,7 @@ const ServiceCreateScreen = () => {
   const [business, setBusiness] = useState('')
   const [serviceMobileNumber, setServiceMobileNumber] = useState('')
 
+  // For Transport Services
   const [pickUpFrom, setPickUpFrom] = useState('')
   const [dropTo, setDropTo] = useState('')
   const [searchSelected, setSearchSelected] = useState(true)
@@ -85,6 +87,7 @@ const ServiceCreateScreen = () => {
   const [carRegistration, setCarRegistration] = useState('')
   const [carType, setCarType] = useState('')
 
+  // For Accomodation Services
   const [house, setHouse] = useState('')
   const [street, setStreet] = useState('')
   const [area, setArea] = useState('')
@@ -97,6 +100,7 @@ const ServiceCreateScreen = () => {
   const [checkoutDate, setCheckoutDate] = useState(null)
   const [maxGuests, setMaxGuests] = useState(0)
 
+  // For Tour Service
   const [tourName, setTourName] = useState('')
   const [duration, setDuration] = useState(0)
   const [travelDate, setTravelDate] = useState(null)
