@@ -60,20 +60,21 @@ const ServiceCreateScreen = () => {
   } = useSelector((state) => state.destination)
 
   const [ownedBusinesses, setOwnedBusinesses] = useState([])
+
   const [coverImg, setCoverImg] = useState('')
   const [images, setImages] = useState([])
   const [serviceName, setServiceName] = useState('')
   const [serviceType, setServiceType] = useState('')
   const [price, setPrice] = useState(0)
   const [priceDiscount, setPriceDiscount] = useState(0)
+  const [description, setDescription] = useState('')
   const [destination, setDestination] = useState('')
   const [business, setBusiness] = useState('')
 
   const [pickUpFrom, setPickUpFrom] = useState('')
   const [dropTo, setDropTo] = useState('')
-  const [description, setDescription] = useState('')
   const [searchSelected, setSearchSelected] = useState(true)
-  const [rentDuration, setRentDuration] = useState(0)
+  const [rentDuration, setRentDuration] = useState(10)
   const [carModel, setCarModel] = useState('')
   const [pickUpDate, setPickUpDate] = useState(null)
   const [dropOffDate, setDropOffDate] = useState(null)
@@ -141,6 +142,20 @@ const ServiceCreateScreen = () => {
   ])
 
   useEffect(() => {
+    if (isServiceCreateError) {
+      toast.error(serviceCreateErrorMessage, { position: 'top-center' })
+    } else if (isServiceCreateSuccess) {
+      toast.success('Service created successfully', { position: 'top-center' })
+      navigate(`/serviceList`)
+    }
+  }, [
+    isServiceCreateError,
+    serviceCreateErrorMessage,
+    isServiceCreateSuccess,
+    navigate,
+  ])
+
+  useEffect(() => {
     if (!userInfo) {
       navigate('/login')
     } else if (userInfo.userType !== 'businessowner') {
@@ -201,7 +216,88 @@ const ServiceCreateScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log('submit')
+    if (serviceType === 'transportation') {
+      const serviceData = {
+        coverImg,
+        images,
+        serviceName,
+        serviceType,
+        price,
+        priceDiscount,
+        description,
+        destination,
+        business,
+        transportInfo: {
+          pickUpFrom,
+          dropTo,
+          rentDuration,
+          carModel,
+          pickUpDate,
+          dropOffDate,
+          driverName,
+          driverContact,
+          driverLicense,
+          carRegistration,
+          carType,
+        },
+      }
+      dispatch(createService(serviceData))
+    } else if (serviceType === 'accomodation') {
+      const serviceData = {
+        coverImg,
+        images,
+        serviceName,
+        serviceType,
+        price,
+        priceDiscount,
+        description,
+        destination,
+        business,
+        accomodationInfo: {
+          address: {
+            house,
+            street,
+            area,
+            city,
+          },
+          ownerName,
+          ownerContact,
+          ownerNid,
+          rooms,
+          checkinDate,
+          checkoutDate,
+          maxGuests,
+        },
+      }
+      dispatch(createService(serviceData))
+    } else if (serviceType === 'tours') {
+      const serviceData = {
+        coverImg,
+        images,
+        serviceName,
+        serviceType,
+        price,
+        priceDiscount,
+        description,
+        destination,
+        business,
+        tourInfo: {
+          name: tourName,
+          duration,
+          travelDate,
+          maxGroupSize,
+          startLocation,
+          locations,
+          leadGuideName,
+          guideNames,
+          leadGuideNid,
+          leadGuideContact,
+        },
+      }
+      dispatch(createService(serviceData))
+    } else {
+      toast.error('Please select a service type', { position: 'top-center' })
+    }
   }
 
   return (
@@ -437,9 +533,9 @@ const ServiceCreateScreen = () => {
                           <Form.Control
                             type='text'
                             placeholder={
-                              priceDiscount <= 0
-                                ? 'Price discountneeds to be between 0 and 100'
-                                : 'Enter Price'
+                              priceDiscount < 0
+                                ? 'Price discount needs to be between 1 and 100'
+                                : 'Enter Discount Percentage'
                             }
                             value={
                               priceDiscount <= 0 || priceDiscount > 100
@@ -630,7 +726,6 @@ const ServiceCreateScreen = () => {
                                       ? 'PickUp Date is Required'
                                       : 'Select PickUp Date'
                                   }
-                                  value={pickUpDate}
                                   onChange={(e) => {
                                     setPickUpDate(new Date(e.target.value))
                                   }}
@@ -653,7 +748,6 @@ const ServiceCreateScreen = () => {
                                       ? 'DropOff Date is Required'
                                       : 'Select DropOff Date'
                                   }
-                                  value={dropOffDate}
                                   onChange={(e) => {
                                     setDropOffDate(new Date(e.target.value))
                                   }}
@@ -870,6 +964,9 @@ const ServiceCreateScreen = () => {
                                 ></Form.Control>
                               </Form.Group>
                             </Col>
+                            <h6 className='font-weight-bolder text-muted mb-3'>
+                              Other Information
+                            </h6>
                             <Col lg={6} md={6} sm={12}>
                               <Form.Group
                                 className='mb-3'
@@ -972,7 +1069,6 @@ const ServiceCreateScreen = () => {
                                       ? 'Checkin Date is Required'
                                       : 'Enter Checkin Date'
                                   }
-                                  value={checkinDate}
                                   onChange={(e) => {
                                     setCheckinDate(e.target.value)
                                   }}
@@ -995,7 +1091,6 @@ const ServiceCreateScreen = () => {
                                       ? 'Checkout Date is Required'
                                       : 'Enter Checkout Date'
                                   }
-                                  value={checkoutDate}
                                   onChange={(e) => {
                                     setCheckoutDate(e.target.value)
                                   }}
@@ -1055,7 +1150,6 @@ const ServiceCreateScreen = () => {
                             </Col>
                             <Col lg={6} md={6} sm={12}>
                               <Form.Group className='mb-3' controlId='duration'>
-                                '
                                 <Form.Label className='small mb-1'>
                                   Tour Duration (min: 1)
                                 </Form.Label>
@@ -1094,7 +1188,6 @@ const ServiceCreateScreen = () => {
                                       ? 'Travel Date is Required'
                                       : 'Enter Travel Date'
                                   }
-                                  value={travelDate}
                                   onChange={(e) =>
                                     setTravelDate(new Date(e.target.value))
                                   }
