@@ -83,6 +83,20 @@ const ServiceCreateScreen = () => {
   const [carRegistration, setCarRegistration] = useState('')
   const [carType, setCarType] = useState('')
 
+  const [house, setHouse] = useState('')
+  const [street, setStreet] = useState('')
+  const [area, setArea] = useState('')
+  const [city, setCity] = useState('')
+  const [ownerName, setOwnerName] = useState('')
+  const [ownerContact, setOwnerContact] = useState('')
+  const [ownerNid, setOwnerNid] = useState('')
+  const [rooms, setRooms] = useState(0)
+  const [checkinDate, setCheckinDate] = useState(null)
+  const [checkoutDate, setCheckoutDate] = useState(null)
+  const [maxGuests, setMaxGuests] = useState(0)
+
+  
+
   useEffect(() => {
     if (isDestinationListError) {
       toast.error(destinationListErrorMessage, { position: 'top-center' })
@@ -609,7 +623,7 @@ const ServiceCreateScreen = () => {
                                   }
                                   value={pickUpDate}
                                   onChange={(e) => {
-                                    setPickUpDate(e.target.value)
+                                    setPickUpDate(new Date(e.target.value))
                                   }}
                                 ></Form.Control>
                               </Form.Group>
@@ -632,7 +646,7 @@ const ServiceCreateScreen = () => {
                                   }
                                   value={dropOffDate}
                                   onChange={(e) => {
-                                    setDropOffDate(e.target.value)
+                                    setDropOffDate(new Date(e.target.value))
                                   }}
                                 ></Form.Control>
                               </Form.Group>
@@ -736,7 +750,9 @@ const ServiceCreateScreen = () => {
                                 </Form.Label>
                                 <Form.Control
                                   required
+                                  className='form-select'
                                   as='select'
+                                  type='select'
                                   placeholder={
                                     carType === ''
                                       ? 'Car Type is Required'
@@ -762,6 +778,248 @@ const ServiceCreateScreen = () => {
                             <h5 className='font-weight-bolder text-muted mb-3'>
                               Accomodation Details
                             </h5>
+                            <h6 className='font-weight-bolder text-muted mb-3'>
+                              Address
+                            </h6>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group className='mb-3' controlId='house'>
+                                <Form.Label className='small mb-1'>
+                                  House No/Name
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    house === ''
+                                      ? 'House is Required'
+                                      : 'Enter House'
+                                  }
+                                  value={house}
+                                  onChange={(e) => {
+                                    setHouse(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group className='mb-3' controlId='street'>
+                                <Form.Label className='small mb-1'>
+                                  Street No/Name
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    street === ''
+                                      ? 'Street is Required'
+                                      : 'Enter Street'
+                                  }
+                                  value={street}
+                                  onChange={(e) => {
+                                    setStreet(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group className='mb-3' controlId='area'>
+                                <Form.Label className='small mb-1'>
+                                  Area Name
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    area === ''
+                                      ? 'Area is Required'
+                                      : 'Enter Area'
+                                  }
+                                  value={area}
+                                  onChange={(e) => {
+                                    setArea(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group className='mb-3' controlId='city'>
+                                <Form.Label className='small mb-1'>
+                                  City
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    city === ''
+                                      ? 'City is Required'
+                                      : 'Enter City'
+                                  }
+                                  value={city}
+                                  onChange={(e) => {
+                                    setCity(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='ownerName'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Owner Name
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    ownerName === ''
+                                      ? 'Owner Name is Required'
+                                      : 'Enter Owner Name'
+                                  }
+                                  value={ownerName}
+                                  onChange={(e) => {
+                                    setOwnerName(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='ownerContact'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Owner Contact Number
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    ownerContact === ''
+                                      ? 'Owner Contact is Required'
+                                      : 'Enter Owner Contact'
+                                  }
+                                  value={ownerContact}
+                                  onChange={(e) => {
+                                    setOwnerContact(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group className='mb-3' controlId='ownerNid'>
+                                <Form.Label className='small mb-1'>
+                                  Owner NID Number
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    ownerNid === ''
+                                      ? 'Owner NID is Required'
+                                      : 'Enter Owner NID'
+                                  }
+                                  value={ownerNid}
+                                  onChange={(e) => {
+                                    setOwnerNid(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group className='mb-3' controlId='rooms'>
+                                <Form.Label className='small mb-1'>
+                                  Number of rooms
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    rooms <= 0
+                                      ? 'Number of rooms is Required(min: 1, max: 10)'
+                                      : 'Enter Number of rooms'
+                                  }
+                                  value={rooms <= 0 || rooms > 10 ? '' : rooms}
+                                  onChange={(e) => {
+                                    setRooms(e.target.value * 1)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='checkinDate'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Checkin Date
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='date'
+                                  placeholder={
+                                    checkinDate === ''
+                                      ? 'Checkin Date is Required'
+                                      : 'Enter Checkin Date'
+                                  }
+                                  value={checkinDate}
+                                  onChange={(e) => {
+                                    setCheckinDate(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='checkoutDate'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Checkout Date
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='date'
+                                  placeholder={
+                                    checkoutDate === ''
+                                      ? 'Checkout Date is Required'
+                                      : 'Enter Checkout Date'
+                                  }
+                                  value={checkoutDate}
+                                  onChange={(e) => {
+                                    setCheckoutDate(e.target.value)
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
+                            <Col lg={6} md={6} sm={12}>
+                              <Form.Group
+                                className='mb-3'
+                                controlId='maxGuests'
+                              >
+                                <Form.Label className='small mb-1'>
+                                  Maximum Guests
+                                </Form.Label>
+                                <Form.Control
+                                  required
+                                  type='text'
+                                  placeholder={
+                                    maxGuests <= 0
+                                      ? 'Maximum Guests is Required(min: 1)'
+                                      : 'Enter Maximum Guests'
+                                  }
+                                  value={maxGuests <= 0 ? '' : maxGuests}
+                                  onChange={(e) => {
+                                    if (e.target.value <= 0) {
+                                      setMaxGuests(1)
+                                    } else {
+                                      setMaxGuests(e.target.value * 1)
+                                    }
+                                  }}
+                                ></Form.Control>
+                              </Form.Group>
+                            </Col>
                           </Row>
                         ) : (
                           <Row>
