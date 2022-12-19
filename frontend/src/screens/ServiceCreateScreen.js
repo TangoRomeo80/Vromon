@@ -41,7 +41,7 @@ const ServiceCreateScreen = () => {
     isCreateSuccess: isServiceCreateSuccess,
     isCreateLoading: isServiceCreateLoading,
     createErrorMessage: serviceCreateErrorMessage,
-  } = useSelector((state) => state.destination)
+  } = useSelector((state) => state.service)
 
   const {
     businesses,
@@ -304,6 +304,8 @@ const ServiceCreateScreen = () => {
     <>
       {isServiceCreateLoading ? (
         <Loader />
+      ) : isServiceCreateError ? (
+        <Message variant='danger'>{serviceCreateErrorMessage}</Message>
       ) : (
         <Container className='pt-5'>
           <Row className='pb-5'>
