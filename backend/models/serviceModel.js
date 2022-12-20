@@ -582,8 +582,7 @@ serviceSchema.pre('save', function (next) {
 serviceSchema.pre('findOneAndUpdate', function (next) {
   if (!this._update.reviews) {
     next()
-  }
-  if (this._update.reviews.length === 0) {
+  } else if (this._update.reviews.length === 0) {
     this._update.rating = 4.5
     this._update.numOfRatings = 0
   } else {

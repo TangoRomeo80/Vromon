@@ -133,6 +133,7 @@ const TourDetailsBusiness = () => {
       toast.error(updateErrorMessage, { position: 'top-center' })
     } else if (isUpdateSuccess) {
       toast.success('Tour Updated Successfully', { position: 'top-center' })
+      navigate(`/serviceList`)
     }
   })
 
@@ -183,6 +184,7 @@ const TourDetailsBusiness = () => {
     return () => {
       dispatch(resetServiceDetails())
       dispatch(resetServiceUpdate())
+      dispatch(resetServiceDelete())
       dispatch(resetDestinationList())
       dispatch(resetBusinessList())
     }
@@ -198,7 +200,33 @@ const TourDetailsBusiness = () => {
   })
 
   //To be Implemented
-  const updateHandler = () => {}
+  const updateHandler = () => {
+    const serviceData = {
+      serviceName,
+      price,
+      priceDiscount,
+      description,
+      destination,
+      business,
+      serviceMobileNumber,
+      coverImg,
+      images,
+      tourInfo: {
+        name: tourName,
+        duration,
+        travelDate,
+        maxGroupSize,
+        startLocation,
+        locations,
+        leadGuideName,
+        guideNames,
+        leadGuideNid,
+        leadGuideContact,
+      },
+    }
+
+    dispatch(updateService({ id: params.id, serviceData }))
+  }
 
   const deleteHandler = () => {
     dispatch(deleteService(params.id))

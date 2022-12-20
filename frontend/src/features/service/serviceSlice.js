@@ -395,7 +395,7 @@ export const serviceSlice = createSlice({
           service._id === action.payload._id ? action.payload : service
         )
         state.service =
-          state.service._id === action.payload._id
+          state.service && state.service._id === action.payload._id
             ? action.payload
             : state.service
       })
