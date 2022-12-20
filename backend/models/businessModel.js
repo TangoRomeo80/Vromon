@@ -70,11 +70,44 @@ const businessSchema = new mongoose.Schema(
       required: [true, 'License Number is Required'],
       unique: true,
     },
+
+    businessDescription: {
+      type: String,
+      trim: true,
+      required: [true, 'Business Description is Required'],
+      maxlength: [
+        500,
+        'Business Description cannot be more than 500 characters',
+      ],
+    },
+
+    recievedPaymentAmount: {
+      type: Number,
+      default: 0,
+    },
+
+    duePaymentAmount: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
   }
 )
+
+businessSchema.pre('save', async function (next) {
+  this.duePaymentAmount = this.recievedPaymentAmount * 0.15
+  next()
+})
+
+businessSchema.pre('findOneAndUpdate', async function (next) {
+  if (!this._update.recievedPaymentAmount) {
+    next()
+  }
+  this._update.duePaymentAmount = this._update.recievedPaymentAmount * 0.15
+  next()
+})
 
 businessSchema.pre(/^find/, function (next) {
   this.populate({

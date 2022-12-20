@@ -6,13 +6,6 @@ import { TbCurrencyTaka } from 'react-icons/tb'
 import { FcCancel } from 'react-icons/fc'
 import { Link, useNavigate } from 'react-router-dom'
 import StatCard from '../components/StatCard'
-import {
-  MdBusiness,
-  MdPayment,
-  MdAddBusiness,
-  MdLocationOn,
-} from 'react-icons/md'
-import { RiSecurePaymentFill } from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   getAllBookings,
@@ -319,35 +312,39 @@ const BusinessOwnerDashoard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {ownedServices.map((service) => (
-                      <LinkContainer
-                        to={
-                          service.serviceType === 'transportation'
-                            ? `/transportDetailsBusiness/${service._id}`
-                            : service.serviceType === 'accomodation'
-                            ? `/staysDetailsBusiness/${service._id}`
-                            : `/tourDetailsBusiness/${service._id}`
-                        }
-                      >
-                        <tr key={service._id} style={{ cursor: 'pointer' }}>
-                          <td>{service.serviceType}</td>
+                    {ownedServices.map((service, index) => (
+                      <>
+                        {index < 5 && (
+                          <LinkContainer
+                            to={
+                              service.serviceType === 'transportation'
+                                ? `/transportDetailsBusiness/${service._id}`
+                                : service.serviceType === 'accomodation'
+                                ? `/staysDetailsBusiness/${service._id}`
+                                : `/tourDetailsBusiness/${service._id}`
+                            }
+                          >
+                            <tr key={service._id} style={{ cursor: 'pointer' }}>
+                              <td>{service.serviceType}</td>
 
-                          <td>{service.serviceName}</td>
+                              <td>{service.serviceName}</td>
 
-                          <td>
-                            {service.destination.district},
-                            {service.destination.division}
-                          </td>
+                              <td>
+                                {service.destination.district},
+                                {service.destination.division}
+                              </td>
 
-                          <td>{service.serviceMobileNumber}</td>
+                              <td>{service.serviceMobileNumber}</td>
 
-                          <td>
-                            <Button variant='info' className='btn-sm'>
-                              <FaEdit />
-                            </Button>
-                          </td>
-                        </tr>
-                      </LinkContainer>
+                              <td>
+                                <Button variant='info' className='btn-sm'>
+                                  <FaEdit />
+                                </Button>
+                              </td>
+                            </tr>
+                          </LinkContainer>
+                        )}
+                      </>
                     ))}
                   </tbody>
                 </Table>
@@ -380,21 +377,30 @@ const BusinessOwnerDashoard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {ownedBusinesses.map((business) => (
-                      <LinkContainer to={`/businessDetails/${business._id}`}>
-                        <tr key={business._id} style={{ cursor: 'pointer' }}>
-                          <td>{business.businessName}</td>
-                          <td>{business.businessAddress}</td>
-                          <td>{business.businessPhone}</td>
-                          <td>{business.businessWebsite}</td>
-                          <td>{business.businessTIN}</td>
-                          <td>
-                            <Button variant='info' className='btn-sm'>
-                              <FaEdit />
-                            </Button>
-                          </td>
-                        </tr>
-                      </LinkContainer>
+                    {ownedBusinesses.map((business, index) => (
+                      <>
+                        {index < 5 && (
+                          <LinkContainer
+                            to={`/businessDetails/${business._id}`}
+                          >
+                            <tr
+                              key={business._id}
+                              style={{ cursor: 'pointer' }}
+                            >
+                              <td>{business.businessName}</td>
+                              <td>{business.businessAddress}</td>
+                              <td>{business.businessPhone}</td>
+                              <td>{business.businessWebsite}</td>
+                              <td>{business.businessTIN}</td>
+                              <td>
+                                <Button variant='info' className='btn-sm'>
+                                  <FaEdit />
+                                </Button>
+                              </td>
+                            </tr>
+                          </LinkContainer>
+                        )}
+                      </>
                     ))}
                   </tbody>
                 </Table>
