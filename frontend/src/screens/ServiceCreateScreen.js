@@ -542,7 +542,7 @@ const ServiceCreateScreen = () => {
                             type='text'
                             placeholder={
                               priceDiscount < 0
-                                ? 'Price discount needs to be between 1 and 100'
+                                ? 'Price discount needs to be in between 1 to 100 percent'
                                 : 'Enter Discount Percentage'
                             }
                             value={
@@ -1281,7 +1281,7 @@ const ServiceCreateScreen = () => {
                                 controlId='locations'
                               >
                                 <Form.Label className='small mb-1'>
-                                  Locations(Write locations seperated by comma)
+                                  Locations(Provide Location Names, Divided by Comma)
                                 </Form.Label>
                                 <Form.Control
                                   required

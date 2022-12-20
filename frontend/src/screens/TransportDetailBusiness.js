@@ -137,6 +137,7 @@ const TransportDetailBusiness = () => {
 
   //To be implemented
   const updateHandler = () => {};
+  
   const deleteHandler = () => {
     dispatch(deleteService(params.id));
   };
