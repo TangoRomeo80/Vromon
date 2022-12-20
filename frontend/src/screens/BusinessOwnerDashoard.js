@@ -6,13 +6,6 @@ import { TbCurrencyTaka } from 'react-icons/tb'
 import { FcCancel } from 'react-icons/fc'
 import { Link, useNavigate } from 'react-router-dom'
 import StatCard from '../components/StatCard'
-import {
-  MdBusiness,
-  MdPayment,
-  MdAddBusiness,
-  MdLocationOn,
-} from 'react-icons/md'
-import { RiSecurePaymentFill } from 'react-icons/ri'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   getAllBookings,
