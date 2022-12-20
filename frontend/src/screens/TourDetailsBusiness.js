@@ -773,7 +773,7 @@ const TourDetailsBusiness = () => {
                           type="submit"
                           onClick={updateHandler}
                         >
-                          Update Transportation Information
+                          Update Tour Information
                         </Button>
                       </Col>
                       <Col
