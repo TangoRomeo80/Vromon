@@ -811,13 +811,13 @@ const StayDetailsBusiness = () => {
                             type="text"
                             placeholder={
                               maxGuests <= 0
-                                ? "Maximum Guests is Required(min: 1)"
+                                ? "Maximum Guests is Required(min: 1; max: 10)"
                                 : "Enter Maximum Guests"
                             }
                             value={maxGuests <= 0 ? "" : maxGuests}
                             onChange={(e) => {
                               if (e.target.value <= 0) {
-                                setMaxGuests(1);
+                                setMaxGuests(0);
                               } else {
                                 setMaxGuests(e.target.value * 1);
                               }
