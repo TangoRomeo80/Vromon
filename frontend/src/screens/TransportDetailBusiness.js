@@ -534,7 +534,10 @@ const TransportDetailBusiness = () => {
                           <Form.Control
                             type="text"
                             value={pickUpFrom}
-                            onChange={(e) => setPickUpFrom(e.target.value)}
+                            onChange={(e) => {
+                              setPickUpFrom(e.target.value);
+                              setSearchSelected(false);
+                            }}
                           ></Form.Control>
                         </Form.Group>
                         {pickUpFrom && !searchSelected && (
@@ -594,7 +597,10 @@ const TransportDetailBusiness = () => {
                           <Form.Control
                             type="text"
                             value={dropTo}
-                            onChange={(e) => setDropTo(e.target.value)}
+                            onChange={(e) => {
+                              setDropTo(e.target.value);
+                              setSearchSelected(false);
+                            }}
                           ></Form.Control>
                         </Form.Group>
                         {dropTo && !searchSelected && (
