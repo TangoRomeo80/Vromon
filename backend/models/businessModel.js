@@ -63,12 +63,34 @@ const businessSchema = new mongoose.Schema(
       type: String,
       required: [true, 'TIN Number is Required'],
       unique: true,
+      validate: {
+        validator: function (phn) {
+          if (phn !== '') {
+            return phn.length === 12 && validator.isNumeric
+          } else {
+            return true
+          }
+        },
+        message:
+          'TIN Number should contain 12 digits & can contain only numerics',
+      },
     },
 
     businessLicense: {
       type: String,
       required: [true, 'License Number is Required'],
       unique: true,
+      validate: {
+        validator: function (phn) {
+          if (phn !== '') {
+            return phn.length === 13 && validator.isNumeric
+          } else {
+            return true
+          }
+        },
+        message:
+          'BIN Number should contain 13 digits & can contain only numerics',
+      },
     },
 
     businessDescription: {
