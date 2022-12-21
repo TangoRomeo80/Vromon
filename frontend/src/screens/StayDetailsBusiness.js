@@ -216,7 +216,6 @@ const StayDetailsBusiness = () => {
     }
   });
 
-  // To be Implemented
   const updateHandler = () => {
     const serviceData = {
       coverImg,

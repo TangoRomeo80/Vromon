@@ -214,8 +214,32 @@ const TransportDetailBusiness = () => {
     }
   })
 
-  //To be implemented
-  const updateHandler = () => {}
+  const updateHandler = () => {
+    const serviceData = {
+      coverImg,
+      serviceName,
+      price,
+      priceDiscount,
+      description,
+      destination,
+      business,
+      serviceMobileNumber,
+      transportInfo: {
+        pickUpFrom,
+        dropTo,
+        rentDuration,
+        carModel,
+        pickUpDate,
+        dropOffDate,
+        driverName,
+        driverContact,
+        driverLicense,
+        carRegistration,
+        carType,
+      },
+    }
+    dispatch(updateService(params.id, serviceData));
+  };
 
   const deleteHandler = () => {
     dispatch(deleteService(params.id))
