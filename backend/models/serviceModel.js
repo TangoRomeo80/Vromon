@@ -339,7 +339,7 @@ const transportSchema = new mongoose.Schema({
     default: '4 seater',
     enum: {
       values: ['4 seater', '6 seater', '8 seater'],
-      message: 'Car type must be Sedan or microBus',
+      message: 'Car type must be 4 seater, 6 seater or 8 seater',
     },
   },
 })
