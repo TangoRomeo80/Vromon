@@ -152,7 +152,7 @@ const App = () => {
                 element={<StayDetailsBusiness />}
               />
               <Route
-                path='/staysDetailsTourist/:id'
+                path='/staysDetailsTourist'
                 element={<StayDetailsTourist />}
               />
               <Route
