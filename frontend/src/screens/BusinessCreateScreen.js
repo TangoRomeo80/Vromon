@@ -15,8 +15,8 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { toast } from 'react-toastify'
 import {
-  createBusiness,
-  resetBusinessCreate,
+    createBusiness,
+    resetBusinessCreate,
 } from '../features/business/businessSlice'
 
 const BusinessCreateScreen = () => {

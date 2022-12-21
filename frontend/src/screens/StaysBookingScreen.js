@@ -83,6 +83,20 @@ const StaysBookingScreen = () => {
   const handleShow = () => setShowBookingModal(true)
 
   useEffect(() => {
+    if (!userInfo) {
+      toast.error('Please Login to Continue', {
+        position: 'top-center',
+      })
+      navigate('/login')
+    } else if (userInfo && userInfo.role !== 'tourist') {
+      toast.error('Only Tourist can book a stay service', {
+        position: 'top-center',
+      })
+      navigate('/')
+    }
+  }, [userInfo, navigate])
+
+  useEffect(() => {
     if (searchParams.get('status')) {
       if (searchParams.get('status') === 'success') {
         dispatch(
