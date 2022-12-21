@@ -108,28 +108,37 @@ const businessSchema = new mongoose.Schema(
       default: 0,
     },
 
-    duePaymentAmount: {
-      type: Number,
-      default: 0,
-    },
+    // duePaymentAmount: {
+    //   type: Number,
+    //   default: 0,
+    // },
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 )
 
-businessSchema.pre('save', async function (next) {
-  this.duePaymentAmount = this.recievedPaymentAmount * 0.15
-  next()
+businessSchema.virtual('duePaymentAmount').get(function () {
+  return this.recievedPaymentAmount * 0.15
 })
 
-businessSchema.pre('findOneAndUpdate', async function (next) {
-  if (!this._update.recievedPaymentAmount) {
-    next()
-  }
-  this._update.duePaymentAmount = this._update.recievedPaymentAmount * 0.15
-  next()
-})
+// businessSchema.pre('save', async function (next) {
+//   if (!this.isModified('recievedPaymentAmount')) {
+//     next()
+//   }
+//   this.duePaymentAmount = this.recievedPaymentAmount * 0.15
+//   next()
+// })
+
+// businessSchema.pre('findOneAndUpdate', async function (next) {
+//   if (!this._update.recievedPaymentAmount) {
+//     next()
+//   }
+//   this._update.duePaymentAmount = this._update.recievedPaymentAmount * 0.15
+//   next()
+// })
 
 businessSchema.pre(/^find/, function (next) {
   this.populate({

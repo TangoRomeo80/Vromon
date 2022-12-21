@@ -213,7 +213,7 @@ const TransportDetailBusiness = () => {
     } else if (userInfo.userType !== 'businessowner') {
       navigate('/')
     }
-  })
+  }, [userInfo, navigate])
 
   const updateHandler = () => {
     const serviceData = {
