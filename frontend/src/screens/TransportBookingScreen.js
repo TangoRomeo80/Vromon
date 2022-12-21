@@ -469,18 +469,18 @@ const TransportBookingScreen = () => {
                           <Card.Text>
                             <strong>Departure Date</strong>
                           </Card.Text>
-                          <Card.Text>
+                          {/* <Card.Text>
                             <strong>Departure Time</strong>
-                          </Card.Text>
+                          </Card.Text> */}
                           <Card.Text>
                             <strong>Destination</strong>
                           </Card.Text>
                           <Card.Text>
                             <strong>Drop Date</strong>
                           </Card.Text>
-                          <Card.Text>
+                          {/* <Card.Text>
                             <strong>Estimated Drop Time</strong>
-                          </Card.Text>
+                          </Card.Text> */}
                           <Card.Text>
                             <strong>Type</strong>
                           </Card.Text>
@@ -499,7 +499,7 @@ const TransportBookingScreen = () => {
                               'DD-MM-YYYY'
                             )}
                           </Card.Text>
-                          <Card.Text className='d-flex justify-content-end'>
+                          {/* <Card.Text className='d-flex justify-content-end'>
                             {transport.transportInfo.pickUpTime.split(':')[0] *
                               1 >=
                               12 &&
@@ -517,7 +517,7 @@ const TransportBookingScreen = () => {
                                 )[1] +
                                 ' PM'
                               : transport.transportInfo.pickUpTime + ' AM'}
-                          </Card.Text>
+                          </Card.Text> */}
                           <Card.Text className='d-flex justify-content-end'>
                             {transport.transportInfo.dropTo}
                           </Card.Text>
@@ -526,7 +526,7 @@ const TransportBookingScreen = () => {
                               'DD-MM-YYYY'
                             )}
                           </Card.Text>
-                          <Card.Text className='d-flex justify-content-end'>
+                          {/* <Card.Text className='d-flex justify-content-end'>
                             {transport.transportInfo.dropOffTime.split(':')[0] *
                               1 >=
                               12 &&
@@ -544,7 +544,7 @@ const TransportBookingScreen = () => {
                                 )[1] +
                                 ' PM'
                               : transport.transportInfo.dropOffTime + ' AM'}
-                          </Card.Text>
+                          </Card.Text> */}
                           <Card.Text className='d-flex justify-content-end'>
                             {transport.transportInfo.carType}
                           </Card.Text>
