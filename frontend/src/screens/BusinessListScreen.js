@@ -79,7 +79,7 @@ const BusinessListScreen = () => {
           </Row>
           <Row className='pb-2'>
             <Col sm={4} md={2} lg={2}>
-              <Link className='btn btn-primary my-3' to='/busniessDash'>
+              <Link className='btn btn-primary my-3' to='/businessDash'>
                 Back to Dashboard
               </Link>
             </Col>
