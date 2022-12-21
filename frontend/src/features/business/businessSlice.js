@@ -220,10 +220,7 @@ const businessSlice = createSlice({
         state.businesses = state.businesses.map((business) =>
           business._id === action.payload._id ? action.payload : business
         )
-        state.business =
-          state.business._id === action.payload._id
-            ? action.payload
-            : state.business
+        state.business = action.payload
       })
       .addCase(updateBusiness.rejected, (state, action) => {
         state.isUpdateLoading = false

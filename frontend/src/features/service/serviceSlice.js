@@ -394,10 +394,7 @@ export const serviceSlice = createSlice({
         state.services = state.services.map((service) =>
           service._id === action.payload._id ? action.payload : service
         )
-        state.service =
-          state.service && state.service._id === action.payload._id
-            ? action.payload
-            : state.service
+        state.service = action.payload
       })
       .addCase(updateService.rejected, (state, action) => {
         state.isUpdateLoading = false

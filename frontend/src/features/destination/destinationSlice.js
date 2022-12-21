@@ -17,7 +17,7 @@ const initialState = {
   isCreateSuccess: false,
   isCreateLoading: false,
   createErrorMessage: '',
-  
+
   isUpdateError: false,
   isUpdateSuccess: false,
   isUpdateLoading: false,
@@ -290,10 +290,7 @@ const destinationSlice = createSlice({
         state.destinations = state.destinations.map((destination) =>
           destination._id === action.payload._id ? action.payload : destination
         )
-        state.destination =
-          state.destination._id === action.payload._id
-            ? action.payload
-            : state.destination
+        state.destination = action.payload
       })
       .addCase(updateDestination.rejected, (state, action) => {
         state.isUpdateLoading = false

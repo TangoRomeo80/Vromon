@@ -220,10 +220,7 @@ const paymentSlice = createSlice({
         state.payments = state.payments.map((payment) =>
           payment._id === action.payload._id ? action.payload : payment
         )
-        state.payment =
-          state.payment._id === action.payload._id
-            ? action.payload
-            : state.payment
+        state.payment = action.payload
       })
       .addCase(updatePayment.rejected, (state, action) => {
         state.isUpdateLoading = false
