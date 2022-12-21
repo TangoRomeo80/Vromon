@@ -273,8 +273,8 @@ const BusinessOwnerDashoard = () => {
                           </td>
 
                           <td>
-                            <Button variant='success' className='btn-sm'>
-                              Accept/Cancel
+                            <Button variant='danger' className='btn-sm'>
+                              Cancel
                             </Button>
                           </td>
                         </tr>
