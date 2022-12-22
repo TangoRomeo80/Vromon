@@ -91,7 +91,7 @@ const BusinessDetailsScreen = () => {
         })
       }
     }
-  }, [searchParams, dispatch, params, business])
+  }, [searchParams, isDetailsSuccess, dispatch])
 
   const [businessName, setBusinessName] = useState('')
   const [businessAddress, setBusinessAddress] = useState('')
@@ -217,7 +217,7 @@ const BusinessDetailsScreen = () => {
           <>
             <Row className='pb-5'>
               <Card.Text as='h2' className='font-weight-bolder text-center'>
-                Create Business
+                Business Details
               </Card.Text>
             </Row>
             <Form>
@@ -466,7 +466,11 @@ const BusinessDetailsScreen = () => {
                 <Row>
                   <Col lg={12} md={12} sm={12}>
                     <Card.Text>
-                      <h5>Payment Amount: BDT {duePaymentAmount}</h5>
+                      {duePaymentAmount > 0 ? (
+                        <h5>Payment Amount: BDT {duePaymentAmount}</h5>
+                      ) : (
+                        <h5>Payment Amount: None</h5>
+                      )}
                     </Card.Text>
                   </Col>
                 </Row>
@@ -491,12 +495,12 @@ const BusinessDetailsScreen = () => {
                 </Row>
               </Modal.Body>
               <Modal.Footer>
-                {paymentMethod === 'cash' && (
+                {paymentMethod === 'cash' && duePaymentAmount > 0 && (
                   <Button variant='success' onClick={handleConfirm}>
                     Request for payment confirmation
                   </Button>
                 )}
-                {paymentMethod === 'card' && (
+                {paymentMethod === 'card' && duePaymentAmount > 0 && (
                   <Button variant='primary' onClick={handlePayment}>
                     Make Payment
                   </Button>
