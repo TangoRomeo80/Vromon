@@ -17,10 +17,12 @@ import {
 } from "../features/service/serviceSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import Rating from "../components/Rating";
+import AddDestinationReview from "../components/AddDestinationReview";
+import ReadDestinationReviews from "../components/ReadDestinationReviews";
 
 const StayDetailsTourist = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const params = useParams();
 
@@ -51,6 +53,10 @@ const StayDetailsTourist = () => {
     isDetailsError,
     detailsErrorMessage,
   ]);
+
+  const reFetchAccomodation = () => {
+    dispatch(getAccomodationById(params.id));
+  };
 
   useEffect(() => {
     return () => {
@@ -89,11 +95,23 @@ const StayDetailsTourist = () => {
                       {`${accomodation.accomodationInfo.address.house}, ${accomodation.accomodationInfo.address.street}, ${accomodation.accomodationInfo.address.area}, ${accomodation.accomodationInfo.address.city}, `}
                     </Card.Text>
                     <Card.Text>
-                      Yaha Rating Ayega ** Yaha Number of Ratings Ayega
+                      <Rating
+                        value={accomodation.rating}
+                        text={`${accomodation.numOfRatings} reviews`}
+                        num={accomodation.numOfRatings}
+                      />
+                      {/* Yaha Rating Ayega ** Yaha Number of Ratings Ayega */}
                     </Card.Text>
                     <Card.Text>
-                      Yaha Write Reviews Button Ayega ** Aur Yaha View Reviews
-                      Button Ayega
+                      {/* <AddDestinationReview
+                        reset={reFetchAccomodation}
+                        id={params.id}
+                      /> */}
+
+                      {/* <ReadDestinationReviews
+                        accomodation={accomodation}
+                        user
+                      /> */}
                     </Card.Text>
                   </Card.Body>
                 </Card>
