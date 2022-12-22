@@ -97,7 +97,7 @@ const TourDetailsTourist = () => {
               Detailed Information
             </h3>
 
-            <Row>
+            <Row className='my-3'>
               <Col lg={6} md={6} sm={12}>
                 <Carousel>
                   {tour.images.length === 0 ? (

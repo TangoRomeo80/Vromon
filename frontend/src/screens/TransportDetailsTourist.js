@@ -84,7 +84,7 @@ const TransportDetailsTourist = () => {
                     style={{ maxHeight: "45vh", objectFit: "cover" }}
                   />
                   <Card.Body cascade>
-                    <Card.Title as="h3">{transport.serviceName}</Card.Title>
+                    <Card.Title as="h3">{transport.transportInfo.carModel}</Card.Title>
                     <Card.Text>
                       <MdLocationOn /> {transport.transportInfo.pickUpFrom} -{" "}
                       {transport.transportInfo.dropTo}
@@ -105,7 +105,7 @@ const TransportDetailsTourist = () => {
               Detailed Information
             </h3>
 
-            <Row>
+            <Row className='my-3'>
               <Col lg={6} md={6} sm={12}>
                 <Carousel>
                   {transport.images.length === 0 ? (
@@ -133,12 +133,12 @@ const TransportDetailsTourist = () => {
               </Col>
               <Col lg={6} md={6} sm={12}>
                 <Card>
-                  <Card.Header as="h3" className="text-center">
+                  <Card.Header as="h4" className="text-center">
                     Information Of Transportation
                   </Card.Header>
                   <Card.Body>
                     <Card.Text>
-                      <strong>Transport Name : </strong>
+                      <strong>Company Name : </strong>
                       {transport.serviceName}
                     </Card.Text>
                     <Card.Text>

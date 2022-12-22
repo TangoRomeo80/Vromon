@@ -92,7 +92,7 @@ const StayDetailsTourist = () => {
                     <Card.Title as="h3">{accomodation.serviceName}</Card.Title>
                     <Card.Text>
                       <MdLocationOn /> &nbsp;
-                      {`${accomodation.accomodationInfo.address.house}, ${accomodation.accomodationInfo.address.street}, ${accomodation.accomodationInfo.address.area}, ${accomodation.accomodationInfo.address.city}, `}
+                      {`${accomodation.accomodationInfo.address.house}, ${accomodation.accomodationInfo.address.street}, ${accomodation.accomodationInfo.address.area}, ${accomodation.accomodationInfo.address.city} `}
                     </Card.Text>
                     <Card.Text>
                       <Rating
@@ -122,7 +122,7 @@ const StayDetailsTourist = () => {
               Detailed Information
             </h3>
 
-            <Row>
+            <Row className='my-3'>
               <Col lg={6} md={6} sm={12}>
                 <Carousel>
                   {accomodation.images.length === 0 ? (
@@ -152,7 +152,7 @@ const StayDetailsTourist = () => {
               </Col>
               <Col lg={6} md={6} sm={12}>
                 <Card>
-                  <Card.Header as="h3" className="text-center">
+                  <Card.Header as="h4" className="text-center">
                     Information About {accomodation.serviceName}
                   </Card.Header>
                   <Card.Body>
