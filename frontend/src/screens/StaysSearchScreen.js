@@ -363,7 +363,7 @@ const StaysSearchScreen = () => {
                                 Book Now
                               </Link>
                               <Link
-                                to="/staysDetailsTourist"
+                                to={`/staysDetailsTourist/${accomodation._id}`}
                                 className="btn btn-warning"
                               >
                                 View Details

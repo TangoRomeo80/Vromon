@@ -108,6 +108,17 @@ const businessSchema = new mongoose.Schema(
       default: 0,
     },
 
+    paymentConfirmRequest: {
+      type: String,
+      default: 'resolved',
+      enum: ['resolved', 'pending', 'rejected'],
+    },
+
+    isDue: {
+      type: Boolean,
+      default: false,
+    },
+
     // duePaymentAmount: {
     //   type: Number,
     //   default: 0,
@@ -121,7 +132,11 @@ const businessSchema = new mongoose.Schema(
 )
 
 businessSchema.virtual('duePaymentAmount').get(function () {
-  return this.recievedPaymentAmount * 0.15
+  if (!this.isDue) {
+    return 0
+  } else {
+    return this.recievedPaymentAmount * 0.15
+  }
 })
 
 // businessSchema.pre('save', async function (next) {

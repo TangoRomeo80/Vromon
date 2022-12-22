@@ -351,10 +351,16 @@ const TourSearchScreen = () => {
 
                             <Link
                               to={`/toursBooking/${tour._id}`}
-                              className="btn btn-success"
+                              className="btn btn-success me-2"
                             >
                               Book Now
                             </Link>
+                            <Link
+                                to={`/tourDetailsTourist/${tour._id}`}
+                                className="btn btn-warning"
+                              >
+                                View Details
+                              </Link>
                           </Card.Body>
                         </Col>
                       </Row>

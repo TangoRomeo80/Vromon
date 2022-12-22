@@ -111,6 +111,7 @@ const BookingDetailsBusinessScreen = () => {
       const businessData = {
         recievedPaymentAmount:
           booking.service.business.recievedPaymentAmount + bookingPrice,
+        isDue: true,
       }
       dispatch(
         updateBusiness({
@@ -138,6 +139,7 @@ const BookingDetailsBusinessScreen = () => {
       const businessData = {
         recievedPaymentAmount:
           booking.service.business.recievedPaymentAmount + bookingPrice,
+        isDue: true,
       }
       dispatch(
         updateBusiness({

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Card, Row, Col, Form, Button } from 'react-bootstrap'
+import { Container, Card, Row, Col, Form, Button, Modal } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { toast } from 'react-toastify'
@@ -13,8 +13,13 @@ import {
   resetBusinessUpdate,
   resetBusinessDelete,
 } from '../features/business/businessSlice'
+import {
+  createPayment,
+  resetPaymentCreate,
+} from '../features/payment/paymentSlice'
 
 const BusinessDetailsScreen = () => {
+  const [searchParams] = useSearchParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const params = useParams()
@@ -37,6 +42,14 @@ const BusinessDetailsScreen = () => {
     isDeleteSuccess,
   } = useSelector((state) => state.business)
 
+  const {
+    payment,
+    isCreateLoading: isPaymentCreateLoading,
+    isCreateSuccess: isPaymentCreateSuccess,
+    isCreateError: isPaymentCreateError,
+    createErrorMessage: paymentCreateErrorMessage,
+  } = useSelector((state) => state.payment)
+
   useEffect(() => {
     if (!userInfo) {
       navigate('/login')
@@ -44,6 +57,41 @@ const BusinessDetailsScreen = () => {
       navigate('/')
     }
   }, [userInfo, navigate])
+
+  useEffect(() => {
+    if (searchParams.get('status') && isDetailsSuccess) {
+      if (searchParams.get('status') === 'success') {
+        dispatch(
+          updateBusiness({
+            id: params.id,
+            businessData: {
+              isDue: false,
+            },
+          })
+        )
+        dispatch(
+          createPayment({
+            paymentParties: 'B2V',
+            paymentMethod: 'card',
+            paymentAmount: searchParams.get('amount') * 1,
+            paymentFrom: business._id,
+            paymentForBusiness: business._id,
+          })
+        )
+        toast.success('Payment Successful', {
+          position: 'top-center',
+        })
+      } else if (searchParams.get('status') === 'failed') {
+        toast.error('Payment Failed', {
+          position: 'top-center',
+        })
+      } else if (searchParams.get('status') === 'cancel') {
+        toast.error('Payment Cancelled', {
+          position: 'top-center',
+        })
+      }
+    }
+  }, [searchParams, dispatch, params, business])
 
   const [businessName, setBusinessName] = useState('')
   const [businessAddress, setBusinessAddress] = useState('')
@@ -55,6 +103,11 @@ const BusinessDetailsScreen = () => {
   const [businessDescription, setBusinessDescription] = useState('')
   const [recievedPaymentAmount, setRecievedPaymentAmount] = useState(0)
   const [duePaymentAmount, setDuePaymentAmount] = useState(0)
+  const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState('')
+
+  const handleClose = () => setShowPaymentModal(false)
+  const handleShow = () => setShowPaymentModal(true)
 
   useEffect(() => {
     if (isDetailsError) {
@@ -98,10 +151,17 @@ const BusinessDetailsScreen = () => {
   })
 
   useEffect(() => {
+    if (isPaymentCreateError) {
+      toast.error(paymentCreateErrorMessage, { position: 'top-center' })
+    }
+  }, [dispatch, isPaymentCreateError])
+
+  useEffect(() => {
     return () => {
       dispatch(resetBusinessDetails())
       dispatch(resetBusinessUpdate())
       dispatch(resetBusinessDelete())
+      dispatch(resetPaymentCreate())
     }
   }, [dispatch])
 
@@ -124,7 +184,26 @@ const BusinessDetailsScreen = () => {
   }
 
   const handlePayment = () => {
-    navigate(`/businessPayments`)
+    window.open(
+      `http://localhost:5000/api/businesses/ssl-request?businessId=${business._id}`,
+      '_self'
+    )
+    handleClose()
+  }
+
+  const handleConfirm = () => {
+    dispatch(
+      updateBusiness({
+        id: params.id,
+        businessData: {
+          paymentConfirmRequest: 'pending',
+        },
+      })
+    )
+    handleClose()
+    toast.success('Payment Confirm Request Sent Successfully', {
+      position: 'top-center',
+    })
   }
 
   return (
@@ -350,7 +429,7 @@ const BusinessDetailsScreen = () => {
                           <Button
                             variant='outline-warning'
                             size='md'
-                            onClick={handlePayment}
+                            onClick={handleShow}
                           >
                             Make Payments
                           </Button>
@@ -374,6 +453,59 @@ const BusinessDetailsScreen = () => {
                 </Col>
               </Row>
             </Form>
+            <Modal
+              show={showPaymentModal}
+              onHide={handleClose}
+              backdrop='static'
+              keyboard={false}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Complete Payment for {businessName}</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Row>
+                  <Col lg={12} md={12} sm={12}>
+                    <Card.Text>
+                      <h5>Payment Amount: BDT {duePaymentAmount}</h5>
+                    </Card.Text>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col lg={12} md={12} sm={12}>
+                    <Form>
+                      <Form.Group className='mb-3' controlId='paymentMethod'>
+                        <Form.Label className=''>Payment Method</Form.Label>
+                        <Form.Control
+                          as='select'
+                          className='shadow'
+                          value={paymentMethod}
+                          onChange={(e) => setPaymentMethod(e.target.value)}
+                        >
+                          <option value=''>Select Payment Method</option>
+                          <option value='cash'>Cash</option>
+                          <option value='card'>Card/Mobile Banking</option>
+                        </Form.Control>
+                      </Form.Group>
+                    </Form>
+                  </Col>
+                </Row>
+              </Modal.Body>
+              <Modal.Footer>
+                {paymentMethod === 'cash' && (
+                  <Button variant='success' onClick={handleConfirm}>
+                    Request for payment confirmation
+                  </Button>
+                )}
+                {paymentMethod === 'card' && (
+                  <Button variant='primary' onClick={handlePayment}>
+                    Make Payment
+                  </Button>
+                )}
+                <Button variant='danger' onClick={handleClose}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
           </>
         )}
       </Container>

@@ -1,133 +1,192 @@
-import React, { useState } from "react";
-import { Container, Card, Row, Col, Form, Button } from "react-bootstrap";
-
+import React, { useEffect, useState } from "react";
+import {
+  Container,
+  Card,
+  Row,
+  Col,
+  Form,
+  Button,
+  Carousel,
+} from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { MdLocationOn } from "react-icons/md";
+import { toast } from "react-toastify";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import Rating from "../components/Rating";
+import Moment from "moment";
+import {
+  getTransportById,
+  resetServiceDetails,
+} from "../features/service/serviceSlice";
 
 const TransportDetailsTourist = () => {
+  const dispatch = useDispatch();
 
-  const [transportType, setTransportType] = useState("");
-  const [departFrom, setDepartFrom] = useState("");
-  const [departTo, setDepartTo] = useState("");
-  const [departDate, setDepartDate] = useState("");
-  const [departTime, setDepartTime] = useState("");
-  const [arrivalTime, setArrivalTime] = useState("");
-  const [returnDate, setReturnDate] = useState("");
-  const [returnTime, setReturnTime] = useState("");
-  const [busType, setBusType] = useState("");
-  const [pickupFrom, setPickupFrom] = useState("");
-  const [dropTo, setDropTo] = useState("");
-  const [rentDuration, setRentDuration] = useState("");
-  const [pickUpDate, setPickUpDate] = useState("");
-  const [dropOffDate, setDropOffDate] = useState("");
-  const [pickUpTime, setPickUpTime] = useState("");
-  const [dropOffTime, setDropOffTime]= useState("");
-  const [driverName, setDriverName] = useState("");
-  const [driverContact, setDriverContact] = useState("");
-  const [driverLicense, setDriverLicense] = useState("");
-  const [carRegistration, setCarRegistration] = useState("");
-  const [carRegistrationImage, setCarRegistrationImage] = useState("");
-  const [carModel, setCarModel] = useState("");
-  const [carType, setCarType] = useState("");
+  const params = useParams();
 
+  const {
+    transport,
+    isDetailsLoading,
+    isDetailsError,
+    isDetailsSuccess,
+    detailsErrorMessage,
+  } = useSelector((state) => state.service);
+
+  const [transportDetails, setTransportDetails] = useState({});
+
+  useEffect(() => {
+    if (isDetailsError) {
+      toast.error(detailsErrorMessage, { position: "top-center" });
+    } else if (isDetailsSuccess) {
+      setTransportDetails(transport);
+    } else {
+      dispatch(getTransportById(params.id));
+    }
+  }, [
+    dispatch,
+    transport,
+    isDetailsSuccess,
+    isDetailsError,
+    detailsErrorMessage,
+  ]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetServiceDetails());
+    };
+  }, [dispatch]);
 
   return (
-    <Container className="pt-5">
-    <Row className="pb-5">
-      <Card.Text as="h2" className="font-weight-bolder text-center">
-        Transport Details
-      </Card.Text>
-    </Row>
+    <Container className="pt-4">
+      {isDetailsLoading ? (
+        <Loader />
+      ) : isDetailsError ? (
+        <Message variant="danger">{detailsErrorMessage}</Message>
+      ) : (
+        transport && (
+          <>
+            <Row className="pb-4">
+              <Card.Text as="h2" className="font-weight-bolder text-center">
+                Details Information of {transport.serviceName}
+              </Card.Text>
+            </Row>
 
-    <Form>
-      <Row>
-        <Col xs={12} md={4} xl={3}>
-          <Card className="mb-4">
-            <Card.Header>Transport Image</Card.Header>
-            <Card.Body className="text-center">
-                <Card.Img
-                src='/destinations/test.png'
-                />
-            </Card.Body>
-          </Card>
-        </Col>
+            <Row>
+              <Col>
+                <Card>
+                  <Card.Img
+                    cascade
+                    className="img-fluid"
+                    src={transport.coverImg}
+                    style={{ maxHeight: "45vh", objectFit: "cover" }}
+                  />
+                  <Card.Body cascade>
+                    <Card.Title as="h3">{transport.transportInfo.carModel}</Card.Title>
+                    <Card.Text>
+                      <MdLocationOn /> {transport.transportInfo.pickUpFrom} -{" "}
+                      {transport.transportInfo.dropTo}
+                    </Card.Text>
+                    <Card.Text>
+                      Yaha Rating Ayega ** Yaha Number of Ratings Ayega
+                    </Card.Text>
+                    <Card.Text>
+                      Yaha Write Reviews Button Ayega ** Aur Yaha View Reviews
+                      Button Ayega
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
 
-        <Col xs={12} md={8} xl={9}>
-          <Card className="mb-4">
-            <Card.Header>Transport Information</Card.Header>
-            <Card.Body>
-              <Row>
-                <Col lg={6} md={6} sm={12}>
-                  <Form.Group className="mb-3" controlId="transportName">
-                    <Form.Label className="small mb-1">
-                      Transport Name
-                    </Form.Label>
-                    <Form.Control required type="text"></Form.Control>
-                  </Form.Group>
-                </Col>
-                <Col lg={6} md={6} sm={12}>
-                  <Form.Group className="mb-3" controlId="transportName">
-                    <Form.Label className="small mb-1">
-                      Car Type
-                    </Form.Label>
-                    <Form.Control required type="text"></Form.Control>
-                  </Form.Group>
-                </Col>
-              </Row>
+            <h3 className="my-4 d-flex justify-content-center">
+              Detailed Information
+            </h3>
 
-              <Row>
-                <Col lg={12} md={12} sm={12}>
-                  <Form.Group className="mb-3" controlId="transportName">
-                    <Form.Label className="small mb-1">
-                      Car Model
-                    </Form.Label>
-                    <Form.Control required type="text"></Form.Control>
-                  </Form.Group>
-                </Col>
-              </Row>
+            <Row className='my-3'>
+              <Col lg={6} md={6} sm={12}>
+                <Carousel>
+                  {transport.images.length === 0 ? (
+                    <Carousel.Item>
+                      <img
+                        className="d-block w-100"
+                        src={transport.coverImg}
+                        alt="Destination Images"
+                        style={{ maxHeight: "45vh", objectFit: "cover" }}
+                      />
+                    </Carousel.Item>
+                  ) : (
+                    transport.images.map((image, index) => (
+                      <Carousel.Item>
+                        <img
+                          className="d-block w-100"
+                          src={image}
+                          alt="Destination Images"
+                          style={{ maxHeight: "45vh", objectFit: "cover" }}
+                        />
+                      </Carousel.Item>
+                    ))
+                  )}
+                </Carousel>
+              </Col>
+              <Col lg={6} md={6} sm={12}>
+                <Card>
+                  <Card.Header as="h4" className="text-center">
+                    Information Of Transportation
+                  </Card.Header>
+                  <Card.Body>
+                    <Card.Text>
+                      <strong>Company Name : </strong>
+                      {transport.serviceName}
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Car Model : </strong>
+                      {transport.transportInfo.carModel}
+                    </Card.Text>
 
-              <Row>
-                <Col lg={6} md={6} sm={12}>
-                  <Form.Group className="mb-3" controlId="transportName">
-                    <Form.Label className="small mb-1">
-                      Pick From
-                    </Form.Label>
-                    <Form.Control required type="text"></Form.Control>
-                  </Form.Group>
-                </Col>
-                <Col lg={6} md={6} sm={12}>
-                  <Form.Group className="mb-3" controlId="transportName">
-                    <Form.Label className="small mb-1">
-                      Drop To
-                    </Form.Label>
-                    <Form.Control required type="text"></Form.Control>
-                  </Form.Group>
-                </Col>
-              </Row>
+                    <Card.Text>
+                      <strong>Car Type : </strong>
+                      {transport.transportInfo.carType}
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Pick From : </strong>
+                      {transport.transportInfo.pickUpFrom}
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Drop To : </strong>
+                      {transport.transportInfo.dropTo}
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Pick Date : </strong>
+                      {Moment(transport.transportInfo.pickUpDate).format(
+                              'DD-MM-YYYY'
+                            )}
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Drop Date : </strong>
+                      {Moment(transport.transportInfo.dropOffDate).format(
+                              'DD-MM-YYYY'
+                            )}
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Cost : </strong>
+                      {transport.price}
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>Discount : </strong>
+                      {transport.priceDiscount}%
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          </>
+        )
+      )}
+    </Container>
+  );
+};
 
-              <Row>
-                <Col lg={6} md={6} sm={12}>
-                  <Form.Group className="mb-3" controlId="transportName">
-                    <Form.Label className="small mb-1">
-                      Pick Time
-                    </Form.Label>
-                    <Form.Control required type="text"></Form.Control>
-                  </Form.Group>
-                </Col>
-                <Col lg={6} md={6} sm={12}>
-                  <Form.Group className="mb-3" controlId="transportName">
-                    <Form.Label className="small mb-1">
-                      Drop Ttime
-                    </Form.Label>
-                    <Form.Control required type="text"></Form.Control>
-                  </Form.Group>
-                </Col>
-              </Row>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Form>
-  </Container>
-  )
-}
-
-export default TransportDetailsTourist
+export default TransportDetailsTourist;
