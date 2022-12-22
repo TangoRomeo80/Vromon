@@ -197,7 +197,7 @@ const BusinessOwnerDashoard = () => {
                         to={`/bookingDetailsBusiness/${booking._id}`}
                       >
                         <tr key={booking._id} style={{ cursor: 'pointer' }}>
-                          <td>{booking.user.userName}</td>
+                          <td>{booking.customerInfo.customerName}</td>
 
                           <td>{booking.service.serviceType}</td>
 
@@ -248,7 +248,7 @@ const BusinessOwnerDashoard = () => {
                       <th>Service Name</th>
                       <th>Booking Date</th>
                       <th>Booking Fare</th>
-                      <th>Cancel</th>
+                      <th>Complete/Cancel</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -257,7 +257,7 @@ const BusinessOwnerDashoard = () => {
                         to={`/bookingDetailsBusiness/${booking._id}`}
                       >
                         <tr key={booking._id} style={{ cursor: 'pointer' }}>
-                          <td>{booking.user.userName}</td>
+                          <td>{booking.customerInfo.customerName}</td>
 
                           <td>{booking.service.serviceType}</td>
 
@@ -274,7 +274,7 @@ const BusinessOwnerDashoard = () => {
 
                           <td>
                             <Button variant='danger' className='btn-sm'>
-                              Cancel
+                              Complete/Cancel
                             </Button>
                           </td>
                         </tr>

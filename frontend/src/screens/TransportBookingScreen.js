@@ -86,7 +86,7 @@ const TransportBookingScreen = () => {
         position: 'top-center',
       })
       navigate('/login')
-    } else if (userInfo && userInfo.role !== 'tourist') {
+    } else if (userInfo && userInfo.userType !== 'tourist') {
       toast.error('Only Tourist can book a stay service', {
         position: 'top-center',
       })

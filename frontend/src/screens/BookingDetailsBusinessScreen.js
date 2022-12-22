@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import {
@@ -10,10 +10,15 @@ import {
   resetBookingDetails,
   resetBookingUpdate,
 } from '../features/booking/bookingSlice'
+import {
+  updateBusiness,
+  resetBusinessUpdate,
+} from '../features/business/businessSlice'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
 const BookingDetailsBusinessScreen = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const params = useParams()
 
@@ -25,11 +30,19 @@ const BookingDetailsBusinessScreen = () => {
     isDetailsError,
     isDetailsSuccess,
     detailsErrorMessage,
-    isUpdateLoading,
-    isUpdateError,
-    isUpdateSuccess,
-    updateErrorMessage,
+    isUpdateLoading: isBookingUpdateLoading,
+    isUpdateError: isBookingUpdateError,
+    isUpdateSuccess: isBookingUpdateSuccess,
+    updateErrorMessage: bookingUpdateErrorMessage,
   } = useSelector((state) => state.booking)
+
+  const {
+    business,
+    isUpdateLoading: isBusinessUpdateLoading,
+    isUpdateError: isBusinessUpdateError,
+    isUpdateSuccess: isBusinessUpdateSuccess,
+    updateErrorMessage: businessUpdateErrorMessage,
+  } = useSelector((state) => state.business)
 
   const [customerName, setCustomerName] = useState('')
   const [customerPhone, setCustomerPhone] = useState('')
@@ -64,9 +77,9 @@ const BookingDetailsBusinessScreen = () => {
   }, [dispatch, booking, isDetailsSuccess, isDetailsError, detailsErrorMessage])
 
   useEffect(() => {
-    if (isUpdateError) {
-      toast.error(updateErrorMessage, { position: 'top-center' })
-    } else if (isUpdateSuccess) {
+    if (isBookingUpdateError) {
+      toast.error(bookingUpdateErrorMessage, { position: 'top-center' })
+    } else if (isBookingUpdateSuccess) {
       if (booking.bookingStatus === 'availed') {
         toast.success('Booking confirmed for customer', {
           position: 'top-center',
@@ -76,6 +89,7 @@ const BookingDetailsBusinessScreen = () => {
           position: 'top-center',
         })
       }
+      navigate('/businessDash')
     }
   })
 
@@ -83,6 +97,7 @@ const BookingDetailsBusinessScreen = () => {
     return () => {
       dispatch(resetBookingDetails())
       dispatch(resetBookingUpdate())
+      dispatch(resetBusinessUpdate())
     }
   }, [dispatch])
 
@@ -90,6 +105,46 @@ const BookingDetailsBusinessScreen = () => {
     const bookingData = {
       bookingStatus: 'availed',
       availedDate: Date.now(),
+    }
+
+    if (paymentMethod === 'card' && paymentStatus === 'paid') {
+      const businessData = {
+        recievedPaymentAmount:
+          booking.service.business.recievedPaymentAmount + bookingPrice,
+      }
+      dispatch(
+        updateBusiness({
+          id: booking.service.business._id,
+          businessData,
+        })
+      )
+    }
+
+    dispatch(
+      updateBooking({
+        id: params.id,
+        bookingData,
+      })
+    )
+  }
+
+  const completedBookingHandler = () => {
+    const bookingData = {
+      bookingStatus: 'completed',
+      paymentStatus: 'paid',
+    }
+
+    if (paymentMethod === 'cash') {
+      const businessData = {
+        recievedPaymentAmount:
+          booking.service.business.recievedPaymentAmount + bookingPrice,
+      }
+      dispatch(
+        updateBusiness({
+          id: booking.service.business._id,
+          businessData,
+        })
+      )
     }
 
     dispatch(
@@ -115,7 +170,7 @@ const BookingDetailsBusinessScreen = () => {
 
   return (
     <Container className='pt-5'>
-      {isDetailsLoading || isUpdateLoading ? (
+      {isDetailsLoading || isBookingUpdateLoading ? (
         <Loader />
       ) : isDetailsError ? (
         <Message variant='danger'>{detailsErrorMessage}</Message>
@@ -369,13 +424,23 @@ const BookingDetailsBusinessScreen = () => {
 
                     <Row className='py-4'>
                       <Col lg={6} md={6} sm={12}>
-                        <Button
-                          className='d-flex justify-content-start'
-                          variant='outline-success'
-                          onClick={confirmBookingHandler}
-                        >
-                          Confirm Booking
-                        </Button>
+                        {bookingStatus === 'booked' ? (
+                          <Button
+                            className='d-flex justify-content-start'
+                            variant='outline-success'
+                            onClick={confirmBookingHandler}
+                          >
+                            Confirm Booking
+                          </Button>
+                        ) : (
+                          <Button
+                            className='d-flex justify-content-start'
+                            variant='outline-warning'
+                            onClick={completedBookingHandler}
+                          >
+                            Mark as completed
+                          </Button>
+                        )}
                       </Col>
                       <Col
                         lg={6}
