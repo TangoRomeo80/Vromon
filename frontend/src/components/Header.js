@@ -154,10 +154,10 @@ const Header = () => {
                         </Nav.Link>
                       </LinkContainer>
 
-                      <LinkContainer to='/adminServiceList'>
+                      <LinkContainer to='/adminBusinessList'>
                         <Nav.Link>
                           <FaRoute className='me-1' />
-                          Services
+                          Businesses
                         </Nav.Link>
                       </LinkContainer>
 

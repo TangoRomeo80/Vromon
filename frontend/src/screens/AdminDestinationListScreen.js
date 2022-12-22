@@ -90,6 +90,12 @@ const AdminDestinationListScreen = () => {
     dispatch,
   ])
 
+  useEffect(() => {
+    return () => {
+      dispatch(resetDestinationList())
+    }
+  }, [dispatch])
+
   return (
     <Container classname='pt-3'>
       {isListLoading ? (

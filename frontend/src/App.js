@@ -25,7 +25,7 @@ import BusinessOwnerDashoard from './screens/BusinessOwnerDashoard'
 import BookingRequestsScreen from './screens/BookingRequestsScreen'
 import AdminDashboard from './screens/AdminDashboard'
 import AdminUserListScreen from './screens/AdminUserListScreen'
-import AdminServiceListScreen from './screens/AdminServiceListScreen'
+import AdminBusinessListScreen from './screens/AdminBusinessListScreen'
 import AdminDestinationListScreen from './screens/AdminDestinationListScreen'
 import DestinationCreateScreen from './screens/DestinationCreateScreen'
 import StaysSearchByDestinationScreen from './screens/StaysSearchByDestinationScreen'
@@ -49,6 +49,9 @@ import ServiceCreateScreen from './screens/ServiceCreateScreen'
 import BusinessCreateScreen from './screens/BusinessCreateScreen'
 import AdminBookingListScreen from './screens/AdminBookingListScreen'
 import AdminDestinationDetailsScreen from './screens/AdminDestinationDetailsScreen'
+import AdminBusinessDetailsScreen from './screens/AdminBusinessDetailsScreen'
+import AdminUserDetailsScreen from './screens/AdminUserDetailsScreen'
+import AdminBookingDetailsScreen from './screens/AdminBookingDetailsScreen'
 
 const App = () => {
   return (
@@ -99,8 +102,17 @@ const App = () => {
               <Route path='/adminDash' element={<AdminDashboard />} />
               <Route path='/adminUserList' element={<AdminUserListScreen />} />
               <Route
-                path='/adminServiceList'
-                element={<AdminServiceListScreen />}
+                path='/adminUserDetail/:id'
+                element={<AdminUserDetailsScreen />}
+              />
+
+              <Route
+                path='/adminBusinessList'
+                element={<AdminBusinessListScreen />}
+              />
+              <Route
+                path='/adminBusinessDetail/:id'
+                element={<AdminBusinessDetailsScreen />}
               />
               <Route
                 path='/adminDestinationList'
@@ -113,6 +125,10 @@ const App = () => {
               <Route
                 path='/adminBookingList'
                 element={<AdminBookingListScreen />}
+              />
+              <Route
+                path='/adminBookingDetail/:id'
+                element={<AdminBookingDetailsScreen />}
               />
               <Route path='/serviceList' element={<ServiceListScreen />} />
               <Route path='/businessList' element={<BusinessListScreen />} />
