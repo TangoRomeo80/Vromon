@@ -52,6 +52,7 @@ import AdminDestinationDetailsScreen from './screens/AdminDestinationDetailsScre
 import AdminBusinessDetailsScreen from './screens/AdminBusinessDetailsScreen'
 import AdminUserDetailsScreen from './screens/AdminUserDetailsScreen'
 import AdminBookingDetailsScreen from './screens/AdminBookingDetailsScreen'
+import AdminUserCreateScreen from './screens/AdminUserCreateScreen'
 
 const App = () => {
   return (
@@ -105,7 +106,10 @@ const App = () => {
                 path='/adminUserDetail/:id'
                 element={<AdminUserDetailsScreen />}
               />
-
+              <Route
+                path='/adminUserCreate'
+                element={<AdminUserCreateScreen />}
+              />
               <Route
                 path='/adminBusinessList'
                 element={<AdminBusinessListScreen />}
