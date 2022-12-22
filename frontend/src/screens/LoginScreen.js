@@ -73,7 +73,7 @@ const LoginScreen = () => {
 
   return (
     <FormContainer>
-      <h1 className='d-flex justify-content-center pt-1'>Sign In</h1>
+      <h1 className='d-flex justify-content-center pt-5 pb-2'>Sign In</h1>
       <Form onSubmit={submitHandler}>
         {!forgotPassword && (
           <>
