@@ -156,6 +156,11 @@ const BusinessOwnerDashoard = () => {
 
   return (
     <Container className='py-3'>
+      <Row>
+        <Col className='d-flex justify-content-center'>
+          <h1>Dashboard</h1>
+        </Col>
+      </Row>
       <Row className='my-4'>
         <Col lg={6} sm={12} md={12}>
           <StatCard
