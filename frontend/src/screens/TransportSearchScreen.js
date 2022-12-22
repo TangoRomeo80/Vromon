@@ -481,7 +481,7 @@ const TransportScreen = () => {
                                       Book Now
                                     </Link>
                                     <Link
-                                      to="/transportDetailsTourist"
+                                      to={`/transportDetailsTourist/${transport._id}`}
                                       className="btn btn-warning"
                                     >
                                       View Details

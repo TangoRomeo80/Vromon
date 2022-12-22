@@ -139,7 +139,7 @@ const App = () => {
                 element={<TransportDetailBusiness />}
               />
               <Route
-                path='/transportDetailsTourist'
+                path='/transportDetailsTourist/:id'
                 element={<TransportDetailsTourist />}
               />
               <Route
