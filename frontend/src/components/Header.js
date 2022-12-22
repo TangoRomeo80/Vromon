@@ -147,28 +147,28 @@ const Header = () => {
                         </Nav.Link>
                       </LinkContainer>
 
-                      <LinkContainer to='/serviceList'>
+                      <LinkContainer to='/adminDestinationList'>
                         <Nav.Link>
                           <FaMapMarkerAlt className='me-1' />
                           Destinations
                         </Nav.Link>
                       </LinkContainer>
 
-                      <LinkContainer to='/serviceList'>
+                      <LinkContainer to='/adminServiceList'>
                         <Nav.Link>
                           <FaRoute className='me-1' />
                           Services
                         </Nav.Link>
                       </LinkContainer>
 
-                      <LinkContainer to='/bookingRequestList'>
+                      <LinkContainer to='/adminUserList'>
                         <Nav.Link>
                           <FaUserCircle className='me-1' />
                           Users
                         </Nav.Link>
                       </LinkContainer>
 
-                      <LinkContainer to='/businessOwnerAnalytics'>
+                      <LinkContainer to='/adminBookingList'>
                         <Nav.Link>
                           <FaTag className='me-1' />
                           Bookings

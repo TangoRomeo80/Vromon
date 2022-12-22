@@ -47,6 +47,7 @@ import BookingDetailsBusinessScreen from './screens/BookingDetailsBusinessScreen
 import BusinessDetailsScreen from './screens/BusinessDetailsScreen'
 import ServiceCreateScreen from './screens/ServiceCreateScreen'
 import BusinessCreateScreen from './screens/BusinessCreateScreen'
+import AdminBookingListScreen from './screens/AdminBookingListScreen'
 
 const App = () => {
   return (
@@ -103,6 +104,10 @@ const App = () => {
               <Route
                 path='/adminDestinationList'
                 element={<AdminDestinationListScreen />}
+              />
+              <Route
+                path='/adminBookingList'
+                element={<AdminBookingListScreen />}
               />
               <Route path='/serviceList' element={<ServiceListScreen />} />
               <Route path='/businessList' element={<BusinessListScreen />} />
