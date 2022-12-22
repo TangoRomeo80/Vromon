@@ -18,7 +18,7 @@ const paymentSchema = new mongoose.Schema(
         if (this.paymentParties === 'C2B') {
           return 'User'
         } else {
-          return 'Service'
+          return 'Business'
         }
       },
       required: [true, 'Payment From User is Required'],
