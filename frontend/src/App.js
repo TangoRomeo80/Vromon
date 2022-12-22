@@ -23,7 +23,6 @@ import ServiceListScreen from './screens/ServiceListScreen'
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen'
 import BusinessOwnerDashoard from './screens/BusinessOwnerDashoard'
 import BookingRequestsScreen from './screens/BookingRequestsScreen'
-import BusinessOwnerAnalyticsScreen from './screens/BusinessOwnerAnalyticsScreen'
 import AdminDashboard from './screens/AdminDashboard'
 import AdminUserListScreen from './screens/AdminUserListScreen'
 import AdminServiceListScreen from './screens/AdminServiceListScreen'
@@ -94,10 +93,6 @@ const App = () => {
               <Route
                 path='/businessOwnerInfo'
                 element={<BusinessOwnerInfoScreen />}
-              />
-              <Route
-                path='/businessOwnerAnalytics'
-                element={<BusinessOwnerAnalyticsScreen />}
               />
               <Route path='/adminDash' element={<AdminDashboard />} />
               <Route path='/adminUserList' element={<AdminUserListScreen />} />
