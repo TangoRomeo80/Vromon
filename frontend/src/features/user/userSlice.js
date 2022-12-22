@@ -304,8 +304,7 @@ const userSlice = createSlice({
         state.users = state.users.map((user) =>
           user._id === action.payload._id ? action.payload : user
         )
-        state.user =
-          state.user._id === action.payload._id ? action.payload : state.user
+        state.user = action.payload
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.isUpdateLoading = false
