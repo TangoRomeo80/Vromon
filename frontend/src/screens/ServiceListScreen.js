@@ -140,10 +140,11 @@ const ServiceListScreen = () => {
                           <Card.Body>
                             <Row>
                               <Col lg={3} md={3} sm={12}>
-                                <Image
+                                <Card.Img
+                                className='img-fluid rounded-start'
                                   src={transport.coverImg}
                                   alt={transport.serviceName}
-                                  fluid
+                                  style={{ height: '100%', objectFit: 'cover' }}
                                 />
                               </Col>
                               <Col lg={5} md={5} sm={12}>
