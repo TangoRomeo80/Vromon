@@ -88,9 +88,6 @@ const StayDetailsTourist = () => {
               <Card.Text>
                 <strong>Discount : %</strong>
               </Card.Text>
-              <Card.Text>
-                <strong>Rating : </strong>
-              </Card.Text>
             </Card.Body>
           </Card>
         </Col>
