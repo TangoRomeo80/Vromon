@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
+import { MdLocationOn } from "react-icons/md";
 
 const StayDetailsTourist = () => {
   return (
@@ -29,6 +30,19 @@ const StayDetailsTourist = () => {
               src="/uploads/stays-2.jpg"
               style={{ maxHeight: "45vh" }}
             />
+            <Card.Body cascade>
+              <Card.Title as="h3">Yaha Nam Ayega</Card.Title>
+              <Card.Text>
+                <MdLocationOn /> Yaha District and Division Ayega
+              </Card.Text>
+              <Card.Text>
+                Yaha Rating Ayega ** Yaha Number of Ratings Ayega
+              </Card.Text>
+              <Card.Text>
+                Yaha Write Reviews Button Ayega ** Aur Yaha View Reviews Button
+                Ayega
+              </Card.Text>
+            </Card.Body>
           </Card>
         </Col>
       </Row>
@@ -77,12 +91,6 @@ const StayDetailsTourist = () => {
               <Card.Text>
                 <strong>Rating : </strong>
               </Card.Text>
-              <Link to="" className="btn btn-primary">
-                  Write a Review
-                </Link>
-                <Link to="" className="btn btn-primary">
-                  Check All Reviews
-                </Link>
             </Card.Body>
           </Card>
         </Col>
