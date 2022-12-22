@@ -71,20 +71,26 @@ const TransportDetailsTourist = () => {
             </Card.Header>
             <Card.Body>
               <Card.Text>
-                <strong>Tour Package Name</strong>
+                <strong>Transport Name</strong>
               </Card.Text>
               <Card.Text>
-                <strong>Location</strong>
+                <strong>Car Model</strong>
               </Card.Text>
               
               <Card.Text>
-                <strong>Max Travelers : </strong>
+                <strong>Car Type : </strong>
               </Card.Text>
               <Card.Text>
-                <strong>Travel Date : </strong>
+                <strong>Pick From : </strong>
               </Card.Text>
               <Card.Text>
-                <strong>Lead Tour Guide : </strong>
+                <strong>Drop To : </strong>
+              </Card.Text>
+              <Card.Text>
+                <strong>Pick Date : </strong>
+              </Card.Text>
+              <Card.Text>
+                <strong>Drop Date : </strong>
               </Card.Text>
               <Card.Text>
                 <strong>Cost : </strong>
