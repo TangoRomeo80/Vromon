@@ -356,7 +356,7 @@ const TourSearchScreen = () => {
                               Book Now
                             </Link>
                             <Link
-                                to="/tourDetailsTourist"
+                                to={`/tourDetailsTourist/${tour._id}`}
                                 className="btn btn-warning"
                               >
                                 View Details

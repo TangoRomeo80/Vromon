@@ -155,7 +155,7 @@ const App = () => {
                 element={<DestinationDetailsScreen />}
               />
               <Route
-                path='/tourDetailsTourist'
+                path='/tourDetailsTourist/:id'
                 element={<TourDetailsTourist />}
               />
               <Route

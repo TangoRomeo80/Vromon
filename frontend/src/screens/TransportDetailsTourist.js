@@ -81,7 +81,7 @@ const TransportDetailsTourist = () => {
                     cascade
                     className="img-fluid"
                     src={transport.coverImg}
-                    style={{ maxHeight: "45vh" }}
+                    style={{ maxHeight: "45vh", objectFit: "cover" }}
                   />
                   <Card.Body cascade>
                     <Card.Title as="h3">{transport.serviceName}</Card.Title>
@@ -134,7 +134,7 @@ const TransportDetailsTourist = () => {
               <Col lg={6} md={6} sm={12}>
                 <Card>
                   <Card.Header as="h3" className="text-center">
-                    Information About {transport.carModel}
+                    Information Of Transportation
                   </Card.Header>
                   <Card.Body>
                     <Card.Text>
