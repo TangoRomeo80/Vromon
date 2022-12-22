@@ -13,6 +13,10 @@ import {
   resetBusinessUpdate,
   resetBusinessDelete,
 } from '../features/business/businessSlice'
+import {
+  createPayment,
+  resetPaymentCreate,
+} from '../features/payment/paymentSlice'
 
 const BusinessDetailsScreen = () => {
   const dispatch = useDispatch()
@@ -37,6 +41,14 @@ const BusinessDetailsScreen = () => {
     isDeleteSuccess,
   } = useSelector((state) => state.business)
 
+  const {
+    payment,
+    isCreateLoading: isPaymentCreateLoading,
+    isCreateSuccess: isPaymentCreateSuccess,
+    isCreateError: isPaymentCreateError,
+    createErrorMessage: paymentCreateErrorMessage,
+  } = useSelector((state) => state.payment)
+
   useEffect(() => {
     if (!userInfo) {
       navigate('/login')
@@ -55,6 +67,11 @@ const BusinessDetailsScreen = () => {
   const [businessDescription, setBusinessDescription] = useState('')
   const [recievedPaymentAmount, setRecievedPaymentAmount] = useState(0)
   const [duePaymentAmount, setDuePaymentAmount] = useState(0)
+  const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState('')
+
+  const handleClose = () => setShowPaymentModal(false)
+  const handleShow = () => setShowPaymentModal(true)
 
   useEffect(() => {
     if (isDetailsError) {
