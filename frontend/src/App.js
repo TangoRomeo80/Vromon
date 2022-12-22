@@ -147,7 +147,7 @@ const App = () => {
                 element={<StayDetailsBusiness />}
               />
               <Route
-                path='/staysDetailsTourist'
+                path='/staysDetailsTourist/:id'
                 element={<StayDetailsTourist />}
               />
               <Route
