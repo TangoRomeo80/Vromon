@@ -123,12 +123,12 @@ const Header = () => {
                         </Nav.Link>
                       </LinkContainer>
 
-                      <LinkContainer to='/businessOwnerAnalytics'>
+                      {/* <LinkContainer to='/businessOwnerAnalytics'>
                         <Nav.Link>
                           <GoDashboard className='me-1' />
                           Analytics
                         </Nav.Link>
-                      </LinkContainer>
+                      </LinkContainer> */}
 
                       <LinkContainer to='/destinationCreate'>
                         <Nav.Link>
