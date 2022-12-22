@@ -139,7 +139,7 @@ const App = () => {
                 element={<TransportDetailBusiness />}
               />
               <Route
-                path='/transportDetailsTourist/:id'
+                path='/transportDetailsTourist'
                 element={<TransportDetailsTourist />}
               />
               <Route
@@ -155,7 +155,7 @@ const App = () => {
                 element={<DestinationDetailsScreen />}
               />
               <Route
-                path='/tourDetailsTourist/:id'
+                path='/tourDetailsTourist'
                 element={<TourDetailsTourist />}
               />
               <Route
