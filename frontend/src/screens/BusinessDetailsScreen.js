@@ -66,6 +66,7 @@ const BusinessDetailsScreen = () => {
             id: params.id,
             businessData: {
               isDue: false,
+              duePaymentAmount: 0,
             },
           })
         )

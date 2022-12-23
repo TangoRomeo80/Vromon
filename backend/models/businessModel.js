@@ -119,10 +119,10 @@ const businessSchema = new mongoose.Schema(
       default: false,
     },
 
-    // duePaymentAmount: {
-    //   type: Number,
-    //   default: 0,
-    // },
+    duePaymentAmount: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
@@ -131,13 +131,13 @@ const businessSchema = new mongoose.Schema(
   }
 )
 
-businessSchema.virtual('duePaymentAmount').get(function () {
-  if (!this.isDue) {
-    return 0
-  } else {
-    return this.recievedPaymentAmount * 0.15
-  }
-})
+// businessSchema.virtual('duePaymentAmount').get(function () {
+//   if (!this.isDue) {
+//     return 0
+//   } else {
+//     return this.recievedPaymentAmount * 0.15
+//   }
+// })
 
 // businessSchema.pre('save', async function (next) {
 //   if (!this.isModified('recievedPaymentAmount')) {
