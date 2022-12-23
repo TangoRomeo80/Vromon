@@ -27,6 +27,9 @@ const AdminBookingListScreen = () => {
     listErrorMessage: bookingListErrorMessage,
   } = useSelector((state) => state.booking)
 
+  const [customerNameSearch, setCustomerNameSearch] = useState('')
+  const [serviceNameSearch, setServiceNameSearch] = useState('')
+
   useEffect(() => {
     if (!userInfo) {
       navigate('/login')
@@ -90,7 +93,8 @@ const AdminBookingListScreen = () => {
                   <tbody>
                     {bookings.map((booking) => (
                       <LinkContainer
-                        to={`/adminBookingDetail/${booking._id}`}
+                        // to={`/adminBookingDetail/${booking._id}`}
+                        to='#'
                       >
                         <tr key={booking._id} style={{ cursor: 'pointer' }}>
                           <td>{booking.customerInfo.customerName}</td>
