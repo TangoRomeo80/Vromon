@@ -39,6 +39,10 @@ const TransportDetailsTourist = () => {
 
   const [transportDetails, setTransportDetails] = useState({})
 
+  const reFetchTransport = () => {
+    dispatch(getTransportById(params.id))
+  }
+
   useEffect(() => {
     if (isDetailsError) {
       toast.error(detailsErrorMessage, { position: 'top-center' })
@@ -94,11 +98,18 @@ const TransportDetailsTourist = () => {
                       {transport.transportInfo.dropTo}
                     </Card.Text>
                     <Card.Text>
-                      Yaha Rating Ayega ** Yaha Number of Ratings Ayega
+                      <Rating
+                        value={transport.rating}
+                        text={`${transport.numOfRatings} reviews`}
+                        num={transport.numOfRatings}
+                      />
                     </Card.Text>
                     <Card.Text>
-                      Yaha Write Reviews Button Ayega ** Aur Yaha View Reviews
-                      Button Ayega
+                      <AddServiceReview
+                        reset={reFetchTransport}
+                        id={params.id}
+                      />
+                      <ReadServiceReviews service={transport} user />
                     </Card.Text>
                   </Card.Body>
                 </Card>

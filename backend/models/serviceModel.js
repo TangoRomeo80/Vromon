@@ -532,7 +532,7 @@ const serviceSchema = new mongoose.Schema(
     },
     priceDiscount: {
       type: Number,
-      default: 0 + '%',
+      default: 0,
       max: [100, 'Service price discount cannot be more than 100%'],
     },
     reviews: [reviewSchema],

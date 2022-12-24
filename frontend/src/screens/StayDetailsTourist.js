@@ -1,30 +1,27 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Container, Card, Row, Col, Carousel } from "react-bootstrap";
-import {
-  Link,
-  useParams,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { MdLocationOn } from "react-icons/md";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { Container, Card, Row, Col, Carousel } from 'react-bootstrap'
+import { Link, useParams, useNavigate, useSearchParams } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { MdLocationOn } from 'react-icons/md'
+import { toast } from 'react-toastify'
 import {
   getAccomodationById,
   resetServiceDetails,
-} from "../features/service/serviceSlice";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
-import Rating from "../components/Rating";
+} from '../features/service/serviceSlice'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
+import Rating from '../components/Rating'
+import AddServiceReview from '../components/AddServiceReview'
+import ReadServiceReviews from '../components/ReadServiceReviews'
 
 const StayDetailsTourist = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const params = useParams();
+  const params = useParams()
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.auth)
 
   const {
     accomodation,
@@ -32,17 +29,17 @@ const StayDetailsTourist = () => {
     isDetailsError,
     isDetailsSuccess,
     detailsErrorMessage,
-  } = useSelector((state) => state.service);
+  } = useSelector((state) => state.service)
 
-  const [accomodationDetails, setAccomodationDetails] = useState({});
+  const [accomodationDetails, setAccomodationDetails] = useState({})
 
   useEffect(() => {
     if (isDetailsError) {
-      toast.error(detailsErrorMessage, { position: "top-center" });
+      toast.error(detailsErrorMessage, { position: 'top-center' })
     } else if (isDetailsSuccess) {
-      setAccomodationDetails(accomodation);
+      setAccomodationDetails(accomodation)
     } else {
-      dispatch(getAccomodationById(params.id));
+      dispatch(getAccomodationById(params.id))
     }
   }, [
     dispatch,
@@ -50,29 +47,29 @@ const StayDetailsTourist = () => {
     isDetailsSuccess,
     isDetailsError,
     detailsErrorMessage,
-  ]);
+  ])
 
   const reFetchAccomodation = () => {
-    dispatch(getAccomodationById(params.id));
-  };
+    dispatch(getAccomodationById(params.id))
+  }
 
   useEffect(() => {
     return () => {
-      dispatch(resetServiceDetails());
-    };
-  }, [dispatch]);
+      dispatch(resetServiceDetails())
+    }
+  }, [dispatch])
 
   return (
-    <Container className="pt-4">
+    <Container className='pt-4'>
       {isDetailsLoading ? (
         <Loader />
       ) : isDetailsError ? (
-        <Message variant="danger">{detailsErrorMessage}</Message>
+        <Message variant='danger'>{detailsErrorMessage}</Message>
       ) : (
         accomodation && (
           <>
-            <Row className="pb-4">
-              <Card.Text as="h2" className="font-weight-bolder text-center">
+            <Row className='pb-4'>
+              <Card.Text as='h2' className='font-weight-bolder text-center'>
                 Details Information of {accomodation.serviceName}
               </Card.Text>
             </Row>
@@ -82,12 +79,12 @@ const StayDetailsTourist = () => {
                 <Card>
                   <Card.Img
                     cascade
-                    className="img-fluid"
+                    className='img-fluid'
                     src={accomodation.coverImg}
-                    style={{ maxHeight: "50vh" }}
+                    style={{ maxHeight: '50vh', objectFit: 'cover' }}
                   />
                   <Card.Body cascade>
-                    <Card.Title as="h3">{accomodation.serviceName}</Card.Title>
+                    <Card.Title as='h3'>{accomodation.serviceName}</Card.Title>
                     <Card.Text>
                       <MdLocationOn /> &nbsp;
                       {`${accomodation.accomodationInfo.address.house}, ${accomodation.accomodationInfo.address.street}, ${accomodation.accomodationInfo.address.area}, ${accomodation.accomodationInfo.address.city} `}
@@ -101,22 +98,19 @@ const StayDetailsTourist = () => {
                       {/* Yaha Rating Ayega ** Yaha Number of Ratings Ayega */}
                     </Card.Text>
                     <Card.Text>
-                      {/* <AddDestinationReview
+                      <AddServiceReview
                         reset={reFetchAccomodation}
                         id={params.id}
-                      /> */}
+                      />
 
-                      {/* <ReadDestinationReviews
-                        accomodation={accomodation}
-                        user
-                      /> */}
+                      <ReadServiceReviews service={accomodation} user />
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
             </Row>
 
-            <h3 className="my-4 d-flex justify-content-center">
+            <h3 className='my-4 d-flex justify-content-center'>
               Detailed Information
             </h3>
 
@@ -126,31 +120,29 @@ const StayDetailsTourist = () => {
                   {accomodation.images.length === 0 ? (
                     <Carousel.Item>
                       <img
-                        className="d-block w-100"
+                        className='d-block w-100'
                         src={accomodation.coverImg}
-                        alt="Destination Images"
-                        style={{ maxHeight: "45vh", objectFit: "cover" }}
+                        alt='Destination Images'
+                        style={{ maxHeight: '50vh', objectFit: 'cover' }}
                       />
                     </Carousel.Item>
                   ) : (
-                    <>
-                      {accomodation.images.map((image, index) => (
-                        <Carousel.Item>
-                          <img
-                            className="d-block w-100"
-                            src={image}
-                            alt="Destination Images"
-                            style={{ maxHeight: "45vh", objectFit: "cover" }}
-                          />
-                        </Carousel.Item>
-                      ))}
-                    </>
+                    accomodation.images.map((image, index) => (
+                      <Carousel.Item>
+                        <img
+                          className='d-block w-100'
+                          src={image}
+                          alt='Destination Images'
+                          style={{ maxHeight: '45vh', objectFit: 'cover' }}
+                        />
+                      </Carousel.Item>
+                    ))
                   )}
                 </Carousel>
               </Col>
               <Col lg={6} md={6} sm={12}>
                 <Card>
-                  <Card.Header as="h4" className="text-center">
+                  <Card.Header as='h4' className='text-center'>
                     Information About {accomodation.serviceName}
                   </Card.Header>
                   <Card.Body>
@@ -186,7 +178,7 @@ const StayDetailsTourist = () => {
         )
       )}
     </Container>
-  );
-};
+  )
+}
 
-export default StayDetailsTourist;
+export default StayDetailsTourist
