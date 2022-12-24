@@ -8,6 +8,7 @@ import {
   createOne,
   updateOne,
   deleteOne,
+  addReview,
 } from './handlerFactory.js' //import generic handler
 
 /*
@@ -69,3 +70,11 @@ export const updateService = updateOne(Service)
 */
 
 export const deleteService = deleteOne(Service)
+
+/*
+Request type: POST
+Endpoint: /api/services/:id/reviews
+Description: Add review to the service
+*/
+
+export const addServiceReview = addReview(Service)

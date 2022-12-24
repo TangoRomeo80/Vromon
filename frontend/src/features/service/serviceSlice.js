@@ -30,6 +30,10 @@ const initialState = {
   isDeleteSuccess: false,
   isDeleteLoading: false,
   deleteErrorMessage: '',
+  isReviewError: false,
+  isReviewSuccess: false,
+  isReviewLoading: false,
+  reviewErrorMessage: '',
 }
 
 //get all services
@@ -244,6 +248,24 @@ export const getTourById = createAsyncThunk(
   }
 )
 
+//Add Service review
+export const addServiceReview = createAsyncThunk(
+  'service/addServiceReview',
+  async (data, thunkAPI) => {
+    const { id, reviewData } = data
+    try {
+      const token = thunkAPI.getState().auth.userInfo.token
+      return await serviceService.addServiceReview(id, reviewData, token)
+    } catch (err) {
+      const message =
+        (err.response && err.response.data && err.response.data.message) ||
+        err.message ||
+        err.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const serviceSlice = createSlice({
   name: 'service',
   initialState,
@@ -285,6 +307,12 @@ export const serviceSlice = createSlice({
       state.isDeleteSuccess = false
       state.isDeleteLoading = false
       state.deleteErrorMessage = ''
+    },
+    resetServiceReview: (state) => {
+      state.isReviewError = false
+      state.isReviewSuccess = false
+      state.isReviewLoading = false
+      state.reviewErrorMessage = ''
     },
   },
   extraReducers: (builder) => {
@@ -532,6 +560,24 @@ export const serviceSlice = createSlice({
         state.isDetailsError = true
         state.detailsErrorMessage = action.payload
       })
+      .addCase(addServiceReview.pending, (state) => {
+        state.isReviewLoading = true
+        state.isReviewError = false
+        state.isReviewSuccess = false
+        state.reviewErrorMessage = ''
+      })
+      .addCase(addServiceReview.fulfilled, (state, action) => {
+        state.isReviewLoading = false
+        state.isReviewSuccess = true
+        state.isReviewError = false
+        state.reviewErrorMessage = ''
+        state.service = action.payload
+      })
+      .addCase(addServiceReview.rejected, (state, action) => {
+        state.isReviewLoading = false
+        state.isReviewError = true
+        state.reviewErrorMessage = action.payload
+      })
   },
 })
 
@@ -541,5 +587,6 @@ export const {
   resetServiceCreate,
   resetServiceDelete,
   resetServiceUpdate,
+  resetServiceReview,
 } = serviceSlice.actions
 export default serviceSlice.reducer

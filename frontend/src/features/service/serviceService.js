@@ -96,6 +96,16 @@ const getTourById = async (id) => {
   return response.data.data
 }
 
+//Add service review
+const addServiceReview = async (id, reviewData, token) => {
+  const response = await axios.post(`/api/services/${id}/reviews`, reviewData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  return response.data.data
+}
+
 const serviceService = {
   getAllServices,
   getServiceById,
@@ -110,6 +120,7 @@ const serviceService = {
   getAllTours,
   getTourById,
   getCheapestTours,
+  addServiceReview,
 }
 
 export default serviceService

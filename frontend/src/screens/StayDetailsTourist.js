@@ -18,8 +18,6 @@ import {
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Rating from "../components/Rating";
-import AddAccomodationReview from "../components/AddAccomodationReview";
-import ReadAccomodationReviews from "../components/ReadAccomodationReviews";
 
 const StayDetailsTourist = () => {
   const dispatch = useDispatch();
