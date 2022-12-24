@@ -12,6 +12,7 @@ import {
 } from '../features/booking/bookingSlice'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import Moment from 'moment'
 
 const BookingDetailsTouristScreen = () => {
   const navigate = useNavigate()
@@ -29,7 +30,7 @@ const BookingDetailsTouristScreen = () => {
     isUpdateLoading,
     isUpdateError,
     isUpdateSuccess,
-    updateErrorMessag,
+    updateErrorMessage,
   } = useSelector((state) => state.booking)
 
   useEffect(() => {
@@ -72,7 +73,309 @@ const BookingDetailsTouristScreen = () => {
     }
   }, [dispatch, booking, isDetailsSuccess, isDetailsError, detailsErrorMessage])
 
-  return <div>BookingDetailsTouristScreen</div>
+  useEffect(() => {
+    if (isUpdateError) {
+      toast.error(updateErrorMessage, { position: 'top-center' })
+    } else if (isUpdateSuccess) {
+      if (booking.bookingStatus === 'cancelled') {
+        toast.error('Booking cancelled', {
+          position: 'top-center',
+        })
+      }
+      navigate('/myBookings')
+    }
+  })
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetBookingDetails())
+      dispatch(resetBookingUpdate())
+    }
+  }, [dispatch])
+
+  const updateBookingHandler = () => {
+    const bookingData = {
+      customerInfo: {
+        customerName,
+        customerPhone,
+        remarks,
+      },
+    }
+
+    dispatch(
+      updateBooking({
+        id: params.id,
+        bookingData,
+      })
+    )
+  }
+
+  const cancelBookingHandler = () => {
+    const bookingData = {
+      bookingStatus: 'cancelled',
+    }
+
+    dispatch(
+      updateBooking({
+        id: params.id,
+        bookingData,
+      })
+    )
+  }
+
+  return (
+    <Container className='pt-5'>
+      {isDetailsLoading || isUpdateLoading ? (
+        <Loader />
+      ) : isDetailsError ? (
+        <Message variant='danger'>{detailsErrorMessage}</Message>
+      ) : (
+        <>
+          <Row className='pb-5'>
+            <Card.Text as='h2' className='font-weight-bolder text-center'>
+              Booking Information
+            </Card.Text>
+          </Row>
+
+          <Form>
+            <Row>
+              <Col xs={12} md={12} xl={12}>
+                <Card className='mb-4'>
+                  <Card.Header>Booking Information</Card.Header>
+                  <Card.Body>
+                    <Row>
+                      <h5 className='font-weight-bolder text-muted mb-3'>
+                        Customer Information
+                      </h5>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='customerName'>
+                          <Form.Label className='small mb-1'>
+                            Full Name
+                          </Form.Label>
+                          <Form.Control
+                            type='text'
+                            value={customerName}
+                            onChange={(e) => setCustomerName(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='customerPhone'>
+                          <Form.Label className='small mb-1'>
+                            Phone No.
+                          </Form.Label>
+                          <Form.Control
+                            type='text'
+                            value={customerPhone}
+                            onChange={(e) => setCustomerPhone(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    <h5 className='font-weight-bolder text-muted mb-3'>
+                      Service Information
+                    </h5>
+                    <Row>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='serviceType'>
+                          <Form.Label className='small mb-1'>
+                            Service Type
+                          </Form.Label>
+                          <Form.Control
+                            disabled
+                            type='select'
+                            as='select'
+                            value={serviceType}
+                            onChange={(e) => setServiceType(e.target.value)}
+                          >
+                            <option disabled selected value=''>
+                              Select Service Type
+                            </option>
+                            <option value='Transportation'>Transport</option>
+                            <option value='Stays'>Stays</option>
+                            <option value='Tours'>Tours</option>
+                          </Form.Control>
+                        </Form.Group>
+                      </Col>
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='serviceName'>
+                          <Form.Label className='small mb-1'>
+                            Service Name
+                          </Form.Label>
+                          <Form.Control
+                            disabled
+                            type='text'
+                            value={serviceName}
+                            onChange={(e) => setServiceName(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    <h5 className='font-weight-bolder text-muted mb-3'>
+                      Booking Information
+                    </h5>
+                    <Row>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='bookingDate'>
+                          <Form.Label className='small mb-1'>
+                            Booking Date
+                          </Form.Label>
+                          <Form.Control
+                            type='text'
+                            disabled
+                            value={Moment(bookingDate).format('DD/MM/YYYY')}
+                            onChange={(e) => setBookingDate(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='availedDate'>
+                          <Form.Label className='small mb-1'>
+                            Availed Date
+                          </Form.Label>
+                          <Form.Control
+                            type='texte'
+                            disabled
+                            value={Moment(availedDate).format('DD/MM/YYYY')}
+                            onChange={(e) => setAvailedDate(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='bookingPrice'>
+                          <Form.Label className='small mb-1'>
+                            Booking Price
+                          </Form.Label>
+                          <Form.Control
+                            type='text'
+                            disabled
+                            value={bookingPrice}
+                            onChange={(e) => setBookingPrice(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='bookingStatus'>
+                          <Form.Label className='small mb-1'>
+                            Booking Status
+                          </Form.Label>
+                          <Form.Control
+                            as='select'
+                            type='select'
+                            disabled
+                            value={bookingStatus}
+                            onChange={(e) => setBookingStatus(e.target.value)}
+                          >
+                            <option disabled selected value=''>
+                              Select Booking Status
+                            </option>
+                            <option value='pending'>Pending</option>
+                            <option value='booked'>Booked</option>
+                            <option value='availed'>Availed</option>
+                            <option value='completed'>Completed</option>
+                            <option value='cancelled'>Cancelled</option>
+                          </Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    <h5 className='font-weight-bolder text-muted mb-3'>
+                      Payment Information
+                    </h5>
+                    <Row>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='paymentMethod'>
+                          <Form.Label className='small mb-1'>
+                            Payment Method
+                          </Form.Label>
+                          <Form.Control
+                            as='select'
+                            type='select'
+                            disabled
+                            value={paymentMethod}
+                            onChange={(e) => setPaymentMethod(e.target.value)}
+                          >
+                            <option disabled selected value=''>
+                              Select Payment Method
+                            </option>
+                            <option value='cash'>Cash</option>
+                            <option value='card'>Card</option>
+                          </Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={6} md={6} sm={12}>
+                        <Form.Group className='mb-3' controlId='paymentStatus'>
+                          <Form.Label className='small mb-1'>
+                            Payment Status
+                          </Form.Label>
+                          <Form.Control
+                            as='select'
+                            type='select'
+                            disabled
+                            value={paymentStatus}
+                            onChange={(e) => setPaymentStatus(e.target.value)}
+                          >
+                            <option disabled selected value=''>
+                              Select Payment Status
+                            </option>
+                            <option value='pending'>Pending</option>
+                            <option value='paid'>Paid</option>
+                          </Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col lg={12} md={12} sm={12}>
+                        <Form.Group className='mb-3' controlId='remarks'>
+                          <Form.Label className='small mb-1'>
+                            Remarks
+                          </Form.Label>
+                          <Form.Control
+                            as='textarea'
+                            rows={4}
+                            value={remarks}
+                            onChange={(e) => setRemarks(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    <Row className='py-4'>
+                      <Col lg={6} md={6} sm={12}>
+                        <Button
+                          className='d-flex justify-content-start'
+                          variant='outline-success'
+                          onClick={updateBookingHandler}
+                        >
+                          Update Booking Information
+                        </Button>
+                      </Col>
+                      <Col
+                        lg={6}
+                        md={6}
+                        sm={12}
+                        className='d-flex justify-content-end'
+                      >
+                        <Button
+                          variant='outline-danger'
+                          onClick={cancelBookingHandler}
+                        >
+                          Cancel Booking
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          </Form>
+        </>
+      )}
+    </Container>
+  )
 }
 
 export default BookingDetailsTouristScreen

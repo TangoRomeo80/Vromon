@@ -16,6 +16,7 @@ import {
 } from '../features/business/businessSlice'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import Moment from 'moment'
 
 const BookingDetailsBusinessScreen = () => {
   const navigate = useNavigate()
@@ -316,9 +317,9 @@ const BookingDetailsBusinessScreen = () => {
                             Booking Date
                           </Form.Label>
                           <Form.Control
-                            type='date'
+                            type='text'
                             disabled
-                            value={bookingDate}
+                            value={Moment(bookingDate).format('DD/MM/YYYY')}
                             onChange={(e) => setBookingDate(e.target.value)}
                           ></Form.Control>
                         </Form.Group>
@@ -329,9 +330,9 @@ const BookingDetailsBusinessScreen = () => {
                             Availed Date
                           </Form.Label>
                           <Form.Control
-                            type='date'
+                            type='texte'
                             disabled
-                            value={availedDate}
+                            value={Moment(availedDate).format('DD/MM/YYYY')}
                             onChange={(e) => setAvailedDate(e.target.value)}
                           ></Form.Control>
                         </Form.Group>
