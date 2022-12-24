@@ -126,7 +126,7 @@ const TouristBookingScreen = () => {
                       )
                       .map((booking) => (
                         <LinkContainer
-                          to={`/touristBookingDetails/${booking._id}`}
+                          to={`/bookingDetailsTourist/${booking._id}`}
                         >
                           <tr key={booking._id} style={{ cursor: 'pointer' }}>
                             <td>{booking.customerInfo.customerName}</td>

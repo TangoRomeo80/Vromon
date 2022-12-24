@@ -74,7 +74,6 @@ const App = () => {
               <Route path='/profile' element={<ProfileScreen />} />
               <Route path='/tourSearch' element={<TourSearchScreen />} />
               <Route path='/myBookings' element={<TouristBookingScreen />} />
-              <Route path='/touristBookingDetails/:id' element={<TouristBookingDetailsScreen />} />
               
 
               <Route path='/businessDash' element={<BusinessOwnerDashoard />} />

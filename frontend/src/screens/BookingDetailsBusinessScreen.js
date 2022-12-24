@@ -44,6 +44,14 @@ const BookingDetailsBusinessScreen = () => {
     updateErrorMessage: businessUpdateErrorMessage,
   } = useSelector((state) => state.business)
 
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/login')
+    } else if (userInfo.userType !== 'businessowner') {
+      navigate('/')
+    }
+  }, [userInfo, navigate])
+
   const [customerName, setCustomerName] = useState('')
   const [customerPhone, setCustomerPhone] = useState('')
   const [serviceType, setServiceType] = useState('')
@@ -142,7 +150,8 @@ const BookingDetailsBusinessScreen = () => {
         recievedPaymentAmount:
           booking.service.business.recievedPaymentAmount + bookingPrice,
         isDue: true,
-        duePaymentAmount: booking.service.business.duePaymentAmount + (bookingPrice * 0.15),
+        duePaymentAmount:
+          booking.service.business.duePaymentAmount + bookingPrice * 0.15,
       }
       dispatch(
         updateBusiness({
