@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, Modal, Card, Row, Col } from 'react-bootstrap'
 import Rating from './Rating'
 
-const ReadServiceReview = ({ service }) => {
+const ReadServiceReviiews = ({ service }) => {
   const [show, setShow] = useState(false)
 
   const handleClose = () => setShow(false)
@@ -73,4 +73,4 @@ const ReadServiceReview = ({ service }) => {
   )
 }
 
-export default ReadServiceReview
+export default ReadServiceReviiews

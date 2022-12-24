@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 import {
   Container,
   Card,
@@ -7,25 +7,27 @@ import {
   Form,
   Button,
   Carousel,
-} from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { MdLocationOn } from "react-icons/md";
-import { toast } from "react-toastify";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
-import Rating from "../components/Rating";
-import Moment from "moment";
+} from 'react-bootstrap'
+import { Link, useParams } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { MdLocationOn } from 'react-icons/md'
+import { toast } from 'react-toastify'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
+import Rating from '../components/Rating'
+import Moment from 'moment'
 import {
   getTransportById,
   resetServiceDetails,
-} from "../features/service/serviceSlice";
+} from '../features/service/serviceSlice'
+import AddServiceReview from '../components/AddServiceReview'
+import ReadServiceReviews from '../components/ReadServiceReviews'
 
 const TransportDetailsTourist = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const params = useParams();
+  const params = useParams()
 
   const {
     transport,
@@ -33,17 +35,17 @@ const TransportDetailsTourist = () => {
     isDetailsError,
     isDetailsSuccess,
     detailsErrorMessage,
-  } = useSelector((state) => state.service);
+  } = useSelector((state) => state.service)
 
-  const [transportDetails, setTransportDetails] = useState({});
+  const [transportDetails, setTransportDetails] = useState({})
 
   useEffect(() => {
     if (isDetailsError) {
-      toast.error(detailsErrorMessage, { position: "top-center" });
+      toast.error(detailsErrorMessage, { position: 'top-center' })
     } else if (isDetailsSuccess) {
-      setTransportDetails(transport);
+      setTransportDetails(transport)
     } else {
-      dispatch(getTransportById(params.id));
+      dispatch(getTransportById(params.id))
     }
   }, [
     dispatch,
@@ -51,25 +53,25 @@ const TransportDetailsTourist = () => {
     isDetailsSuccess,
     isDetailsError,
     detailsErrorMessage,
-  ]);
+  ])
 
   useEffect(() => {
     return () => {
-      dispatch(resetServiceDetails());
-    };
-  }, [dispatch]);
+      dispatch(resetServiceDetails())
+    }
+  }, [dispatch])
 
   return (
-    <Container className="pt-4">
+    <Container className='pt-4'>
       {isDetailsLoading ? (
         <Loader />
       ) : isDetailsError ? (
-        <Message variant="danger">{detailsErrorMessage}</Message>
+        <Message variant='danger'>{detailsErrorMessage}</Message>
       ) : (
         transport && (
           <>
-            <Row className="pb-4">
-              <Card.Text as="h2" className="font-weight-bolder text-center">
+            <Row className='pb-4'>
+              <Card.Text as='h2' className='font-weight-bolder text-center'>
                 Details Information of {transport.serviceName}
               </Card.Text>
             </Row>
@@ -79,14 +81,16 @@ const TransportDetailsTourist = () => {
                 <Card>
                   <Card.Img
                     cascade
-                    className="img-fluid"
+                    className='img-fluid'
                     src={transport.coverImg}
-                    style={{ maxHeight: "45vh", objectFit: "cover" }}
+                    style={{ maxHeight: '45vh', objectFit: 'cover' }}
                   />
                   <Card.Body cascade>
-                    <Card.Title as="h3">{transport.transportInfo.carModel}</Card.Title>
+                    <Card.Title as='h3'>
+                      {transport.transportInfo.carModel}
+                    </Card.Title>
                     <Card.Text>
-                      <MdLocationOn /> {transport.transportInfo.pickUpFrom} -{" "}
+                      <MdLocationOn /> {transport.transportInfo.pickUpFrom} -{' '}
                       {transport.transportInfo.dropTo}
                     </Card.Text>
                     <Card.Text>
@@ -101,7 +105,7 @@ const TransportDetailsTourist = () => {
               </Col>
             </Row>
 
-            <h3 className="my-4 d-flex justify-content-center">
+            <h3 className='my-4 d-flex justify-content-center'>
               Detailed Information
             </h3>
 
@@ -111,20 +115,20 @@ const TransportDetailsTourist = () => {
                   {transport.images.length === 0 ? (
                     <Carousel.Item>
                       <img
-                        className="d-block w-100"
+                        className='d-block w-100'
                         src={transport.coverImg}
-                        alt="Destination Images"
-                        style={{ maxHeight: "45vh", objectFit: "cover" }}
+                        alt='Destination Images'
+                        style={{ maxHeight: '45vh', objectFit: 'cover' }}
                       />
                     </Carousel.Item>
                   ) : (
                     transport.images.map((image, index) => (
                       <Carousel.Item>
                         <img
-                          className="d-block w-100"
+                          className='d-block w-100'
                           src={image}
-                          alt="Destination Images"
-                          style={{ maxHeight: "45vh", objectFit: "cover" }}
+                          alt='Destination Images'
+                          style={{ maxHeight: '45vh', objectFit: 'cover' }}
                         />
                       </Carousel.Item>
                     ))
@@ -133,7 +137,7 @@ const TransportDetailsTourist = () => {
               </Col>
               <Col lg={6} md={6} sm={12}>
                 <Card>
-                  <Card.Header as="h4" className="text-center">
+                  <Card.Header as='h4' className='text-center'>
                     Information Of Transportation
                   </Card.Header>
                   <Card.Body>
@@ -161,14 +165,14 @@ const TransportDetailsTourist = () => {
                     <Card.Text>
                       <strong>Pick Date : </strong>
                       {Moment(transport.transportInfo.pickUpDate).format(
-                              'DD-MM-YYYY'
-                            )}
+                        'DD-MM-YYYY'
+                      )}
                     </Card.Text>
                     <Card.Text>
                       <strong>Drop Date : </strong>
                       {Moment(transport.transportInfo.dropOffDate).format(
-                              'DD-MM-YYYY'
-                            )}
+                        'DD-MM-YYYY'
+                      )}
                     </Card.Text>
                     <Card.Text>
                       <strong>Cost : </strong>
@@ -186,7 +190,7 @@ const TransportDetailsTourist = () => {
         )
       )}
     </Container>
-  );
-};
+  )
+}
 
-export default TransportDetailsTourist;
+export default TransportDetailsTourist
