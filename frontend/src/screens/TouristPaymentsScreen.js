@@ -150,29 +150,39 @@ const TouristPaymentsScreen = () => {
                       <th>Payment For Service(If applicable)</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {ownedPayments.map((payment) => (
-                      <tr key={payment._id}>
-                        <td>{payment._id}</td>
-                        <td>
-                          {Moment(payment.createdAt).format(
-                            'DD/MM/YYYY hh:mm A'
-                          )}
-                        </td>
-                        <td>
-                          {payment.paymentParties === 'C2B'
-                            ? 'Payment'
-                            : 'Refund'}
-                        </td>
-                        <td>{payment.paymentAmount}</td>
-                        <td>
-                          {payment.paymentParties === 'C2B'
-                            ? payment.paymentForBooking.service.serviceName
-                            : 'N/A'}
+                  {ownedPayments.length === 0 ? (
+                    <tbody>
+                      <tr>
+                        <td colSpan='5' className='text-center'>
+                          No Transactions Found
                         </td>
                       </tr>
-                    ))}
-                  </tbody>
+                    </tbody>
+                  ) : (
+                    <tbody>
+                      {ownedPayments.map((payment) => (
+                        <tr key={payment._id}>
+                          <td>{payment._id}</td>
+                          <td>
+                            {Moment(payment.createdAt).format(
+                              'DD/MM/YYYY hh:mm A'
+                            )}
+                          </td>
+                          <td>
+                            {payment.paymentParties === 'C2B'
+                              ? 'Payment'
+                              : 'Refund'}
+                          </td>
+                          <td>{payment.paymentAmount}</td>
+                          <td>
+                            {payment.paymentParties === 'C2B'
+                              ? payment.paymentForBooking.service.serviceName
+                              : 'N/A'}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  )}
                 </Table>
               )
             )}

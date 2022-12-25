@@ -14,6 +14,10 @@ import {
   updateBusiness,
   resetBusinessUpdate,
 } from '../features/business/businessSlice'
+import {
+  createPayment,
+  resetPaymentCreate,
+} from '../features/payment/paymentSlice'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Moment from 'moment'
@@ -37,6 +41,14 @@ const BookingDetailsBusinessScreen = () => {
     updateErrorMessage: bookingUpdateErrorMessage,
   } = useSelector((state) => state.booking)
 
+  const {
+    payment,
+    isCreateLoading: isPaymentCreateLoading,
+    isCreateSuccess: isPaymentCreateSuccess,
+    isCreateError: isPaymentCreateError,
+    createErrorMessage: paymentCreateErrorMessage,
+  } = useSelector((state) => state.payment)
+
   useEffect(() => {
     if (!userInfo) {
       navigate('/login')
@@ -57,6 +69,7 @@ const BookingDetailsBusinessScreen = () => {
   const [bookingStatus, setBookingStatus] = useState('')
   const [paymentStatus, setPaymentStatus] = useState('')
   const [paymentRefundRequest, setPaymentRefundRequest] = useState('')
+  const [customerId, setCustomerId] = useState('')
 
   useEffect(() => {
     if (isDetailsError) {
@@ -74,6 +87,7 @@ const BookingDetailsBusinessScreen = () => {
       setBookingStatus(booking.bookingStatus)
       setPaymentStatus(booking.paymentStatus)
       setPaymentRefundRequest(booking.paymentRefundRequest)
+      setCustomerId(booking.user._id)
     } else {
       dispatch(getBookingById(params.id))
     }
@@ -101,6 +115,7 @@ const BookingDetailsBusinessScreen = () => {
       dispatch(resetBookingDetails())
       dispatch(resetBookingUpdate())
       dispatch(resetBusinessUpdate())
+      dispatch(resetPaymentCreate())
     }
   }, [dispatch])
 
@@ -112,6 +127,14 @@ const BookingDetailsBusinessScreen = () => {
       updateBooking({
         id: booking._id,
         bookingData,
+      })
+    )
+    dispatch(
+      createPayment({
+        paymentParties: 'V2C',
+        paymentMethod: 'card',
+        paymentAmount: bookingPrice,
+        paymentForCustomer: customerId,
       })
     )
   }

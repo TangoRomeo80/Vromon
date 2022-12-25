@@ -21,7 +21,16 @@ const paymentSchema = new mongoose.Schema(
           return 'Business'
         }
       },
-      required: [true, 'Payment From User is Required'],
+      required: [
+        function () {
+          if (this.paymentParties === 'V2C') {
+            return false
+          } else {
+            return true
+          }
+        },
+        'Payment From User is Required',
+      ],
     },
     paymentForBooking: {
       type: mongoose.Schema.Types.ObjectId,
@@ -102,6 +111,9 @@ paymentSchema.pre(/^find/, function (next) {
     },
     {
       path: 'paymentForBooking',
+    },
+    {
+      path: 'paymentForCustomer',
     },
   ])
   next()
