@@ -77,8 +77,18 @@ const BookingDetailsTouristScreen = () => {
     if (isUpdateError) {
       toast.error(updateErrorMessage, { position: 'top-center' })
     } else if (isUpdateSuccess) {
-      if (booking.bookingStatus === 'cancelled') {
+      if (
+        booking.bookingStatus === 'cancelled' &&
+        booking.paymentRefundRequest === 'resolved'
+      ) {
         toast.error('Booking cancelled', {
+          position: 'top-center',
+        })
+      } else if (
+        booking.bookingStatus === 'cancelled' &&
+        booking.paymentRefundRequest === 'pending'
+      ) {
+        toast.warning('Please wait for the refund to be processed.', {
           position: 'top-center',
         })
       }
@@ -166,6 +176,7 @@ const BookingDetailsTouristScreen = () => {
                             Full Name
                           </Form.Label>
                           <Form.Control
+                            disabled={bookingStatus === 'cancelled'}
                             type='text'
                             value={customerName}
                             onChange={(e) => setCustomerName(e.target.value)}
@@ -178,6 +189,7 @@ const BookingDetailsTouristScreen = () => {
                             Phone No.
                           </Form.Label>
                           <Form.Control
+                            disabled={bookingStatus === 'cancelled'}
                             type='text'
                             value={customerPhone}
                             onChange={(e) => setCustomerPhone(e.target.value)}
@@ -347,6 +359,7 @@ const BookingDetailsTouristScreen = () => {
                             Remarks
                           </Form.Label>
                           <Form.Control
+                            disabled={bookingStatus === 'cancelled'}
                             as='textarea'
                             rows={4}
                             value={remarks}
@@ -375,7 +388,7 @@ const BookingDetailsTouristScreen = () => {
                           lg={6}
                           md={6}
                           sm={12}
-                          className='d-flex justify-content-end'
+                          className='d-flex justify-content-start'
                         >
                           <Button
                             variant='outline-warning'

@@ -199,37 +199,6 @@ const BookingDetailsBusinessScreen = () => {
 
           <Form>
             <Row>
-              {/* <Col xs={12} md={4} xl={3}>
-                <Card className='mb-4'>
-                  <Card.Header>Requested Service Image</Card.Header>
-                  <Card.Body className='text-center'>
-                    <Form.Group controlId='image 1'>
-                      <Form.Label>Upload New Image</Form.Label>
-                      <Form.Control
-                        className='mb-3'
-                        type='file'
-                        id='image-file'
-                        label='Cover Image'
-                      ></Form.Control>
-                    </Form.Group>
-                  </Card.Body>
-                </Card>
-                <Card className='mb-4'>
-                  <Card.Header>NID Scan Copy</Card.Header>
-                  <Card.Body className='text-center'>
-                    <Form.Group controlId='image 2'>
-                      <Form.Label>Upload New Image</Form.Label>
-                      <Form.Control
-                        className='mb-3'
-                        type='file'
-                        id='image-file'
-                        label='Cover Image'
-                      ></Form.Control>
-                    </Form.Group>
-                  </Card.Body>
-                </Card>
-              </Col> */}
-
               <Col xs={12} md={12} xl={12}>
                 <Card className='mb-4'>
                   <Card.Header>Booking Information</Card.Header>

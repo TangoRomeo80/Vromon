@@ -93,8 +93,8 @@ const AdminBookingListScreen = () => {
                   <tbody>
                     {bookings.map((booking) => (
                       <LinkContainer
-                        // to={`/adminBookingDetail/${booking._id}`}
-                        to='#'
+                        to={`/adminBookingDetail/${booking._id}`}
+                        
                       >
                         <tr key={booking._id} style={{ cursor: 'pointer' }}>
                           <td>{booking.customerInfo.customerName}</td>
