@@ -16,8 +16,9 @@ import {
 */
 
 export const getMostPopularDestinations = async (req, res, next) => {
+  req.query.page = '1'
   req.query.limit = '9'
-  req.query.sort = '-rating'
+  req.query.sort = 'rating'
   next()
 }
 
