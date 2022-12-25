@@ -18,7 +18,6 @@ import SearchTransports from '../components/SearchTransports'
 import SearchDestinations from '../components/SearchDestinations'
 import SearchTours from '../components/SearchTours'
 
-
 const Navbar = () => {
   const [searchParams] = useSearchParams()
   const [searchSelection, setSearchSelection] = useState('destinations')
@@ -63,8 +62,9 @@ const Navbar = () => {
                 className='d-flex justify-content-center pe-0'
                 onClick={() => setSearchSelection('destinations')}
               >
-                <Link
+                {/* <Link
                   to=''
+
                   className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow py-1'
                   style={{ width: '100%', borderRadius: '0' }}
                   variant={
@@ -74,7 +74,18 @@ const Navbar = () => {
                   }
                 >
                   <b>Destination</b>
-                </Link>
+                </Link> */}
+                <Button
+                  className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow py-1'
+                  style={{ width: '100%', borderRadius: '20' }}
+                  variant={
+                    searchSelection === 'destinations'
+                      ? 'success'
+                      : 'outline-success'
+                  }
+                >
+                  <b>Destination</b>
+                </Button>
               </Col>
               <Col
                 sm={6}
@@ -82,7 +93,7 @@ const Navbar = () => {
                 className='d-flex justify-content-center px-0'
                 onClick={() => setSearchSelection('transports')}
               >
-                <Link
+                {/* <Link
                   to=''
                   className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow'
                   style={{ width: '100%', borderRadius: '0' }}
@@ -93,7 +104,18 @@ const Navbar = () => {
                   }
                 >
                   <b>Transports</b>
-                </Link>
+                </Link> */}
+                <Button
+                  className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow py-1'
+                  style={{ width: '100%', borderRadius: '20' }}
+                  variant={
+                    searchSelection === 'transports'
+                      ? 'success'
+                      : 'outline-success'
+                  }
+                >
+                  <b>Transports</b>
+                </Button>
               </Col>
               <Col
                 sm={6}
@@ -101,7 +123,7 @@ const Navbar = () => {
                 className='d-flex justify-content-center px-0'
                 onClick={() => setSearchSelection('stays')}
               >
-                <Link
+                {/* <Link
                   to=''
                   className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow'
                   style={{ width: '100%', borderRadius: '0' }}
@@ -110,7 +132,16 @@ const Navbar = () => {
                   }
                 >
                   <b>Stays</b>
-                </Link>
+                </Link> */}
+                <Button
+                  className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow py-1'
+                  style={{ width: '100%', borderRadius: '20' }}
+                  variant={
+                    searchSelection === 'stays' ? 'success' : 'outline-success'
+                  }
+                >
+                  <b>Stays</b>
+                </Button>
               </Col>
               <Col
                 sm={6}
@@ -118,7 +149,7 @@ const Navbar = () => {
                 className='d-flex justify-content-center ps-0'
                 onClick={() => setSearchSelection('tours')}
               >
-                <Link
+                {/* <Link
                   to=''
                   className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow'
                   style={{ width: '100%', borderRadius: '0' }}
@@ -127,7 +158,16 @@ const Navbar = () => {
                   }
                 >
                   <b>Tours</b>
-                </Link>
+                </Link> */}
+                <Button
+                  className='text-decoration-none d-flex justify-content-center align-items-center text-dark shadow py-1'
+                  style={{ width: '100%', borderRadius: '20' }}
+                  variant={
+                    searchSelection === 'tours' ? 'success' : 'outline-success'
+                  }
+                >
+                  <b>Tours</b>
+                </Button>
               </Col>
             </Row>
           </Container>
