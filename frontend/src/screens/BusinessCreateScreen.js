@@ -82,8 +82,6 @@ const BusinessCreateScreen = () => {
       <Container className='pt-5'>
         {isBusinessCreateLoading ? (
           <Loader />
-        ) : isBusinessCreateError ? (
-          <Message variant='danger'>{businessCreateErrorMessage}</Message>
         ) : (
           <>
             <Row className='pb-5'>
