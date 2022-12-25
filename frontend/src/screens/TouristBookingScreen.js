@@ -75,15 +75,21 @@ const TouristBookingScreen = () => {
           <Card className='shadow'>
             <Card.Body>
               <Row className='mb-3'>
-                <Button onClick={() => setBookingServiceType('transportation')}>Transport Bookings</Button>
+                <Button onClick={() => setBookingServiceType('transportation')}>
+                  Transport Bookings
+                </Button>
               </Row>
 
               <Row className='mb-3'>
-                <Button onClick={() => setBookingServiceType('accomodation')} >Stay Bookings</Button>
+                <Button onClick={() => setBookingServiceType('accomodation')}>
+                  Stay Bookings
+                </Button>
               </Row>
 
               <Row className='mb-3'>
-                <Button onClick={() => setBookingServiceType('tours')}>Tour Bookings</Button>
+                <Button onClick={() => setBookingServiceType('tours')}>
+                  Tour Bookings
+                </Button>
               </Row>
             </Card.Body>
           </Card>
@@ -118,38 +124,50 @@ const TouristBookingScreen = () => {
                       <th>Payment Status</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {ownedBookings
-                      .filter(
-                        (booking) =>
-                          booking.service.serviceType === bookingServiceType
-                      )
-                      .map((booking) => (
-                        <LinkContainer
-                          to={`/bookingDetailsTourist/${booking._id}`}
-                        >
-                          <tr key={booking._id} style={{ cursor: 'pointer' }}>
-                            <td>{booking.customerInfo.customerName}</td>
+                  {ownedBookings.length === 0 ? (
+                    <tbody>
+                      <tr>
+                        <td colSpan='7' className='text-center'>
+                          No Bookings Found
+                        </td>
+                      </tr>
+                    </tbody>
+                  ) : (
+                    <tbody>
+                      {ownedBookings
+                        .filter(
+                          (booking) =>
+                            booking.service.serviceType === bookingServiceType
+                        )
+                        .map((booking) => (
+                          <LinkContainer
+                            to={`/bookingDetailsTourist/${booking._id}`}
+                          >
+                            <tr key={booking._id} style={{ cursor: 'pointer' }}>
+                              <td>{booking.customerInfo.customerName}</td>
 
-                            <td>{booking.service.serviceType}</td>
+                              <td>{booking.service.serviceType}</td>
 
-                            <td>{booking.service.serviceName}</td>
+                              <td>{booking.service.serviceName}</td>
 
-                            <td>
-                              {Moment(booking.bookingDate).format('DD-MM-YYYY')}
-                            </td>
+                              <td>
+                                {Moment(booking.bookingDate).format(
+                                  'DD-MM-YYYY'
+                                )}
+                              </td>
 
-                            <td>
-                              BDT {booking.service.price}
-                              <TbCurrencyTaka className='mb-1' />
-                            </td>
+                              <td>
+                                BDT {booking.service.price}
+                                <TbCurrencyTaka className='mb-1' />
+                              </td>
 
-                            <td>{booking.bookingStatus}</td>
-                            <td>{booking.paymentStatus}</td>
-                          </tr>
-                        </LinkContainer>
-                      ))}
-                  </tbody>
+                              <td>{booking.bookingStatus}</td>
+                              <td>{booking.paymentStatus}</td>
+                            </tr>
+                          </LinkContainer>
+                        ))}
+                    </tbody>
+                  )}
                 </Table>
               )
             )}

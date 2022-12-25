@@ -110,6 +110,19 @@ const BookingDetailsTouristScreen = () => {
     )
   }
 
+  const refundBookingHandler = () => {
+    const bookingData = {
+      paymentRefundRequest: 'pending',
+    }
+
+    dispatch(
+      updateBooking({
+        id: params.id,
+        bookingData,
+      })
+    )
+  }
+
   const cancelBookingHandler = () => {
     const bookingData = {
       bookingStatus: 'cancelled',
@@ -344,28 +357,48 @@ const BookingDetailsTouristScreen = () => {
                     </Row>
 
                     <Row className='py-4'>
-                      <Col lg={6} md={6} sm={12}>
-                        <Button
-                          className='d-flex justify-content-start'
-                          variant='outline-success'
-                          onClick={updateBookingHandler}
+                      {bookingStatus !== 'cancelled' && (
+                        <Col lg={6} md={6} sm={12}>
+                          <Button
+                            className='d-flex justify-content-start'
+                            variant='outline-success'
+                            onClick={updateBookingHandler}
+                          >
+                            Update Booking Information
+                          </Button>
+                        </Col>
+                      )}
+
+                      {bookingStatus === 'cancelled' &&
+                      paymentStatus === 'paid' ? (
+                        <Col
+                          lg={6}
+                          md={6}
+                          sm={12}
+                          className='d-flex justify-content-end'
                         >
-                          Update Booking Information
-                        </Button>
-                      </Col>
-                      <Col
-                        lg={6}
-                        md={6}
-                        sm={12}
-                        className='d-flex justify-content-end'
-                      >
-                        <Button
-                          variant='outline-danger'
-                          onClick={cancelBookingHandler}
+                          <Button
+                            variant='outline-warning'
+                            onClick={refundBookingHandler}
+                          >
+                            Request Refund
+                          </Button>
+                        </Col>
+                      ) : bookingStatus === 'cancelled' ? null : (
+                        <Col
+                          lg={6}
+                          md={6}
+                          sm={12}
+                          className='d-flex justify-content-end'
                         >
-                          Cancel Booking
-                        </Button>
-                      </Col>
+                          <Button
+                            variant='outline-danger'
+                            onClick={cancelBookingHandler}
+                          >
+                            Cancel Booking
+                          </Button>
+                        </Col>
+                      )}
                     </Row>
                   </Card.Body>
                 </Card>

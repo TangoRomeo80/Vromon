@@ -9,7 +9,7 @@ const paymentSchema = new mongoose.Schema(
     paymentParties: {
       type: String,
       required: [true, 'Payment Party is Required'],
-      enum: ['C2B', 'B2V'],
+      enum: ['C2B', 'B2V', 'V2C'],
       default: 'C2B',
     },
     paymentFrom: {
@@ -51,6 +51,22 @@ const paymentSchema = new mongoose.Schema(
         'Payment For Business is Required',
       ],
     },
+
+    paymentForCustomer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: [
+        function () {
+          if (this.paymentParties === 'V2C') {
+            return true
+          } else {
+            return false
+          }
+        },
+        'Payment For Customer is Required',
+      ],
+    },
+
     paymentAmount: {
       type: Number,
       required: [true, 'Payment Amount is Required'],

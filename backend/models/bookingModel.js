@@ -104,6 +104,11 @@ const bookingSchema = new mongoose.Schema(
           'Service type needs to be pending, booked, availed, completed or cancelled',
       },
     },
+    paymentRefundRequest: {
+      type: String,
+      default: 'resolved',
+      enum: ['resolved', 'pending', 'rejected'],
+    },
   },
   {
     timestamps: true,

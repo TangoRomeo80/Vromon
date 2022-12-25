@@ -53,7 +53,6 @@ import AdminBusinessDetailsScreen from './screens/AdminBusinessDetailsScreen'
 import AdminUserDetailsScreen from './screens/AdminUserDetailsScreen'
 import AdminBookingDetailsScreen from './screens/AdminBookingDetailsScreen'
 import AdminUserCreateScreen from './screens/AdminUserCreateScreen'
-import TouristBookingDetailsScreen from './screens/TouristBookingDetailsScreen'
 
 const App = () => {
   return (

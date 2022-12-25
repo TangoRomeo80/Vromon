@@ -220,7 +220,7 @@ const Header = () => {
                       </Nav.Link>
                     </LinkContainer>
                   </NavDropdown.Item>
-                  {userInfo.userType === 'tourist' && (
+                  {/* {userInfo.userType === 'tourist' && (
                     <NavDropdown.Item>
                       <LinkContainer to='/myBookings' className='px-0'>
                         <Nav.Link className='text-dark'>
@@ -229,7 +229,7 @@ const Header = () => {
                         </Nav.Link>
                       </LinkContainer>
                     </NavDropdown.Item>
-                  )}
+                  )} */}
                   <NavDropdown.Item onClick={logoutHandler}>
                     <LinkContainer to='#' className='px-0'>
                       <Nav.Link className='text-dark'>
