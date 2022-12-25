@@ -254,7 +254,7 @@ const ToursBookingScreen = () => {
                   <Card.Img
                     className='img-fluid'
                     cascade
-                    src='/uploads/stays-2.jpg'
+                    src={tour.coverImg}
                     style={{ height: '53vh' }}
                   />
                 </Card>
@@ -267,7 +267,7 @@ const ToursBookingScreen = () => {
                       <Card.Img
                         className='img-fluid'
                         cascade
-                        src='/uploads/stays-2.jpg'
+                        src={tour.images[0]}
                         style={{ height: '25vh' }}
                       />
                     </Card>
@@ -277,7 +277,7 @@ const ToursBookingScreen = () => {
                       <Card.Img
                         className='img-fluid'
                         cascade
-                        src='/uploads/stays-2.jpg'
+                        src={tour.images[1]}
                         style={{ height: '25vh' }}
                       />
                     </Card>
@@ -287,7 +287,7 @@ const ToursBookingScreen = () => {
                       <Card.Img
                         className='img-fluid'
                         cascade
-                        src='/uploads/stays-2.jpg'
+                        src={tour.images[2]}
                         style={{ height: '25vh' }}
                       />
                     </Card>
@@ -297,7 +297,7 @@ const ToursBookingScreen = () => {
                       <Card.Img
                         className='img-fluid'
                         cascade
-                        src='/uploads/stays-2.jpg'
+                        src={tour.images[0]}
                         style={{ height: '25vh' }}
                       />
                     </Card>
@@ -510,7 +510,7 @@ const ToursBookingScreen = () => {
                     <Row className='mb-5'>
                       <Col lg={4} md={12} sm={12}>
                         <Card.Img
-                          src='/uploads/stays-1.jpg'
+                          src={tour.coverImg}
                           className='img-fluid'
                         />
                       </Col>

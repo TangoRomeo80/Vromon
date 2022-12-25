@@ -255,7 +255,7 @@ const StaysBookingScreen = () => {
                   <Card.Img
                     className='img-fluid'
                     cascade
-                    src='/uploads/stays-2.jpg'
+                    src={accomodation.coverImg}
                     style={{ height: '53vh' }}
                   />
                 </Card>
@@ -268,7 +268,7 @@ const StaysBookingScreen = () => {
                       <Card.Img
                         className='img-fluid'
                         cascade
-                        src='/uploads/stays-2.jpg'
+                        src={accomodation.images[0]}
                         style={{ height: '25vh' }}
                       />
                     </Card>
@@ -278,7 +278,7 @@ const StaysBookingScreen = () => {
                       <Card.Img
                         className='img-fluid'
                         cascade
-                        src='/uploads/stays-2.jpg'
+                        src={accomodation.images[1]}
                         style={{ height: '25vh' }}
                       />
                     </Card>
@@ -288,7 +288,7 @@ const StaysBookingScreen = () => {
                       <Card.Img
                         className='img-fluid'
                         cascade
-                        src='/uploads/stays-2.jpg'
+                        src={accomodation.images[2]}
                         style={{ height: '25vh' }}
                       />
                     </Card>
@@ -298,7 +298,7 @@ const StaysBookingScreen = () => {
                       <Card.Img
                         className='img-fluid'
                         cascade
-                        src='/uploads/stays-2.jpg'
+                        src={accomodation.images[0]}
                         style={{ height: '25vh' }}
                       />
                     </Card>
