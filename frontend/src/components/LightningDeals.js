@@ -5,8 +5,13 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { MdDateRange, MdLocationOn } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCheapestTours, resetServiceList } from '../features/service/serviceSlice'
+import {
+  getCheapestTours,
+  resetServiceList,
+} from '../features/service/serviceSlice'
 import Rating from './Rating'
+import Loader from './Loader'
+import Message from './Message'
 
 const LightningDeals = () => {
   const dispatch = useDispatch()
@@ -19,8 +24,7 @@ const LightningDeals = () => {
   useEffect(() => {
     if (isListError) {
       toast.error(listErrorMessage, { position: 'top-center' })
-    }
-    if (isListSuccess) {
+    } else if (isListSuccess) {
       setTopServices(tours)
     } else {
       dispatch(getCheapestTours())
@@ -39,51 +43,59 @@ const LightningDeals = () => {
         <h2 className='font-weight-bold text-center mb-4 my-4'>
           Lightning Deals
         </h2>
-
-        <Row className='my-4'>
-          {tours.map(
-            (service, idx) =>
-              idx < 10 && (
-                <Col sm={12} md={3} lg={3}>
-                  <Card>
-                    <Card.Img
-                      cascade
-                      className='img-fluid'
-                      src={service.coverImg}
-                      style={{ height: '40vh', objectFit: 'cover' }}
-                    />
-                    <Card.Body cascade>
-                      <Card.Title>{service.tourInfo.name}</Card.Title>
-                      <Card.Text>
-                        <MdDateRange /> &nbsp;{service.tourInfo.duration} days{' '}
-                        <br />
-                        <MdLocationOn /> &nbsp;{service.destination.name},{' '}
-                        {service.destination.district}
-                      </Card.Text>
-                      <Card.Text style={{ fontWeight: 'bold' }}>
-                        BDT {service.price}
-                      </Card.Text>
-                      <Card.Text>
-                        <Rating
-                          value={service.rating}
-                          text={`${service.numOfRatings} reviews`}
-                          num={service.numOfRatings}
+        {isListLoading ? (
+          <Loader />
+        ) : isListError ? (
+          <Message variant='danger'>{listErrorMessage}</Message>
+        ) : (
+          <>
+            <Row className='my-4'>
+              {tours.map(
+                (service, idx) =>
+                  idx < 10 && (
+                    <Col sm={12} md={3} lg={3}>
+                      <Card>
+                        <Card.Img
+                          cascade
+                          className='img-fluid'
+                          src={service.coverImg}
+                          style={{ height: '40vh', objectFit: 'cover' }}
                         />
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              )
-          )}
-        </Row>
+                        <Card.Body cascade>
+                          <Card.Title>{service.tourInfo.name}</Card.Title>
+                          <Card.Text>
+                            <MdDateRange /> &nbsp;{service.tourInfo.duration}{' '}
+                            days <br />
+                            <MdLocationOn /> &nbsp;{
+                              service.destination.name
+                            }, {service.destination.district}
+                          </Card.Text>
+                          <Card.Text style={{ fontWeight: 'bold' }}>
+                            BDT {service.price}
+                          </Card.Text>
+                          <Card.Text>
+                            <Rating
+                              value={service.rating}
+                              text={`${service.numOfRatings} reviews`}
+                              num={service.numOfRatings}
+                            />
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  )
+              )}
+            </Row>
 
-        <Row className='py-4'>
-          <LinkContainer to='/tourSearch'>
-            <Button variant='outline-dark' size='md'>
-              <b>Show More</b>
-            </Button>
-          </LinkContainer>
-        </Row>
+            <Row className='py-4'>
+              <LinkContainer to='/tourSearch'>
+                <Button variant='outline-dark' size='md'>
+                  <b>Show More</b>
+                </Button>
+              </LinkContainer>
+            </Row>
+          </>
+        )}
       </Container>
     </div>
   )

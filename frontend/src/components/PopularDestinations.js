@@ -10,6 +10,8 @@ import {
   resetDestinationList,
 } from '../features/destination/destinationSlice'
 import Rating from './Rating'
+import Loader from './Loader'
+import Message from './Message'
 
 const PopularDestinations = () => {
   const dispatch = useDispatch()
@@ -27,8 +29,7 @@ const PopularDestinations = () => {
   useEffect(() => {
     if (isListError) {
       toast.error(listErrorMessage, { position: 'top-center' })
-    }
-    if (isListSuccess) {
+    } else if (isListSuccess) {
       setTopDestinations(destinations)
     } else {
       dispatch(getTopDestinations())
@@ -47,45 +48,53 @@ const PopularDestinations = () => {
         <h2 className='font-weight-bold text-center mb-4'>
           Popular Destinations Right Now
         </h2>
-        <Row className='my-4'>
-          {destinations.map((destination, idx) => (
-            <Col xs={12} md={idx === 0 ? 12 : 3} lg={idx === 0 ? 12 : 3}>
-              <LinkContainer to={`/destinationDetails/${destination._id}`}>
-                <Card key={destination._id} className='mb-2'>
-                  <Card.Img
-                    cascade
-                    className='img-fluid'
-                    src={destination.coverImg}
-                    style={{ height: '40vh', objectFit: 'cover'}}
-                  />
-
-                  <Card.Body cascade>
-                    <Card.Title>{destination.name}</Card.Title>
-                    <Card.Text>
-                      <MdLocationOn /> {destination.district},
-                      {destination.division}
-                    </Card.Text>
-                    <Card.Text>
-                      <Rating
-                        value={destination.rating}
-                        text={`${destination.numOfRatings} reviews`}
-                        num={destination.numOfRatings}
+        {isListLoading ? (
+          <Loader />
+        ) : isListError ? (
+          <Message variant='danger'>{listErrorMessage}</Message>
+        ) : (
+          <>
+            <Row className='my-4'>
+              {destinations.map((destination, idx) => (
+                <Col xs={12} md={idx === 0 ? 12 : 3} lg={idx === 0 ? 12 : 3}>
+                  <LinkContainer to={`/destinationDetails/${destination._id}`}>
+                    <Card key={destination._id} className='mb-2'>
+                      <Card.Img
+                        cascade
+                        className='img-fluid'
+                        src={destination.coverImg}
+                        style={{ height: '40vh', objectFit: 'cover' }}
                       />
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </LinkContainer>
-            </Col>
-          ))}
-        </Row>
 
-        <Row className='py-4'>
-          <LinkContainer to='/destinationSearch'>
-            <Button variant='outline-dark' size='md'>
-              <b>Show More</b>
-            </Button>
-          </LinkContainer>
-        </Row>
+                      <Card.Body cascade>
+                        <Card.Title>{destination.name}</Card.Title>
+                        <Card.Text>
+                          <MdLocationOn /> {destination.district},
+                          {destination.division}
+                        </Card.Text>
+                        <Card.Text>
+                          <Rating
+                            value={destination.rating}
+                            text={`${destination.numOfRatings} reviews`}
+                            num={destination.numOfRatings}
+                          />
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </LinkContainer>
+                </Col>
+              ))}
+            </Row>
+
+            <Row className='py-4'>
+              <LinkContainer to='/destinationSearch'>
+                <Button variant='outline-dark' size='md'>
+                  <b>Show More</b>
+                </Button>
+              </LinkContainer>
+            </Row>
+          </>
+        )}
       </Container>
     </div>
   )

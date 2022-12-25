@@ -42,7 +42,7 @@ const AdminDestinationListScreen = () => {
   useEffect(() => {
     if (isListError) {
       toast.error(listErrorMessage, { position: 'top-center' })
-    } else if (isListSuccess) {
+    } else if (isListSuccess && destinations.length > 0) {
       setFilteredDestinations(
         destinations
           .filter((destination) => {

@@ -81,7 +81,7 @@ const AdminDestinationDetailsScreen = () => {
     } else {
       dispatch(getDestinationById(params.id))
     }
-  }, [isDetailsError, detailsErrorMessage, isDetailsSuccess, destination])
+  }, [isDetailsError, detailsErrorMessage, isDetailsSuccess])
 
   useEffect(() => {
     if (isUpdateError) {
