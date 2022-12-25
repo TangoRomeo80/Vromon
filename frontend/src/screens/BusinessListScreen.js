@@ -66,41 +66,41 @@ const BusinessListScreen = () => {
 
   return (
     <Container className='pt-5'>
+      <Row className='pb-2'>
+        <Card.Text as='h2' className='font-weight-bolder text-center'>
+          List of Businesses
+        </Card.Text>
+      </Row>
+      <Row className='pb-2'>
+        <Col sm={4} md={2} lg={2}>
+          <Link className='btn btn-primary my-3' to='/businessDash'>
+            Back to Dashboard
+          </Link>
+        </Col>
+        <Col sm={4} md={2} lg={2}>
+          <Link className='btn btn-success my-3' to='/businessCreate'>
+            <FaPlus />
+            Create New Business
+          </Link>
+        </Col>
+      </Row>
+      <Row className='mb-3'>
+        <Col sm={12} md={6} lg={6}>
+          <Form.Control
+            shadow
+            type='text'
+            name='businessNameSearch'
+            onChange={(e) => setBusinessNameSearch(e.target.value)}
+            placeholder='Search Business by name...'
+          ></Form.Control>
+        </Col>
+      </Row>
       {isBusinessListLoading ? (
         <Loader />
       ) : isBusinessListError ? (
         <Message variant='danger'>{businessListErrorMessage}</Message>
       ) : (
         <>
-          <Row className='pb-2'>
-            <Card.Text as='h2' className='font-weight-bolder text-center'>
-              List of Businesses
-            </Card.Text>
-          </Row>
-          <Row className='pb-2'>
-            <Col sm={4} md={2} lg={2}>
-              <Link className='btn btn-primary my-3' to='/businessDash'>
-                Back to Dashboard
-              </Link>
-            </Col>
-            <Col sm={4} md={2} lg={2}>
-              <Link className='btn btn-success my-3' to='/businessCreate'>
-                <FaPlus />
-                Create New Business
-              </Link>
-            </Col>
-          </Row>
-          <Row className='mb-3'>
-            <Col sm={12} md={6} lg={6}>
-              <Form.Control
-                shadow
-                type='text'
-                name='businessNameSearch'
-                onChange={(e) => setBusinessNameSearch(e.target.value)}
-                placeholder='Search Business by name...'
-              ></Form.Control>
-            </Col>
-          </Row>
           <Row className='my-4'>
             <Col sm={12} md={12} lg={12}>
               <Card>
