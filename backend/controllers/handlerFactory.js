@@ -10,8 +10,8 @@ export const getAll = (Model) =>
     const features = new APIFeatures(Model.find(), req.query)
       .filter()
       .sort()
-      .limitFields()
-      .paginate()
+      // .limitFields()
+      // .paginate()
 
     const doc = await features.query
 
