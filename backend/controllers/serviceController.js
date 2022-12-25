@@ -16,7 +16,6 @@ import {
 */
 
 export const getMostPopularServices = async (req, res, next) => {
-  page = '1'
   req.query.limit = '4'
   req.query.sort = '-rating'
   next()
@@ -26,7 +25,6 @@ export const getMostPopularServices = async (req, res, next) => {
   Alias middleware for getting cheapest tours
 */
 export const getCheapestTours = async (req, res, next) => {
-  req.query.page = '1'
   req.query.limit = '8'
   req.query.sort = 'price'
   req.query.serviceType = 'tours'
