@@ -78,6 +78,13 @@ const Header = () => {
                         </Nav.Link>
                       </LinkContainer>
 
+                      <LinkContainer to='/touristPayments'>
+                        <Nav.Link>
+                          <FaMoneyBill className='me-1' />
+                          Payments
+                        </Nav.Link>
+                      </LinkContainer>
+
                       <LinkContainer to='/destinationCreate'>
                         <Nav.Link>
                           <BiLocationPlus className='me-1' />

@@ -12,7 +12,7 @@ import {
 import Moment from 'moment'
 import StatCard from '../components/StatCard'
 
-const BusinessPaymentScreen = () => {
+const TouristPaymentsScreen = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -33,7 +33,7 @@ const BusinessPaymentScreen = () => {
   useEffect(() => {
     if (!userInfo) {
       navigate('/login')
-    } else if (userInfo.userType !== 'businessowner') {
+    } else if (userInfo.userType !== 'tourist') {
       navigate('/')
     }
   }, [userInfo, navigate])
@@ -41,27 +41,21 @@ const BusinessPaymentScreen = () => {
   useEffect(() => {
     if (isListError) {
       toast.error(listErrorMessage, { position: 'top-center' })
-    } else if (isListSuccess) {
+    } else if (isListSuccess && payments) {
       setOwnedPayments(
         payments.filter((payment) => {
           if (payment.paymentParties === 'C2B') {
-            return (
-              payment.paymentForBooking.service.business.businessOwner._id ===
-              userInfo._id
-            )
-          } else {
-            return payment.paymentFrom.businessOwner._id === userInfo._id
+            return payment.paymentFrom._id === userInfo._id
+          } else if (payment.paymentParties === 'V2C') {
+            return payment.paymentForCustomer._id === userInfo._id
           }
         })
       )
 
       setInPayments(
         payments.filter((payment) => {
-          if (payment.paymentParties === 'C2B') {
-            return (
-              payment.paymentForBooking.service.business.businessOwner._id ===
-              userInfo._id
-            )
+          if (payment.paymentParties === 'V2C') {
+            return payment.paymentForCustomer._id === userInfo._id
           } else {
             return false
           }
@@ -70,8 +64,8 @@ const BusinessPaymentScreen = () => {
 
       setOutPayments(
         payments.filter((payment) => {
-          if (payment.paymentParties === 'B2V') {
-            return payment.paymentFrom.businessOwner._id === userInfo._id
+          if (payment.paymentParties === 'C2B') {
+            return payment.paymentFrom._id === userInfo._id
           } else {
             return false
           }
@@ -106,18 +100,6 @@ const BusinessPaymentScreen = () => {
         <Col lg={6} sm={12} md={6} className='d-flex justify-content-center'>
           <StatCard
             linkTo='#'
-            data={payments ? inPayments.length : 0}
-            description='Recieved Payments'
-            bgColor='success'
-            width='30'
-            loading={isListLoading ? true : false}
-            error={isListError ? listErrorMessage : null}
-            imgSrc='./moneyIn.png'
-          />
-        </Col>
-        <Col lg={6} sm={12} md={6} className='d-flex justify-content-center'>
-          <StatCard
-            linkTo='#'
             data={payments ? outPayments.length : 0}
             description='Completed Payments'
             bgColor='danger'
@@ -125,6 +107,18 @@ const BusinessPaymentScreen = () => {
             loading={isListLoading ? true : false}
             error={isListError ? listErrorMessage : null}
             imgSrc='./moneyOut.png'
+          />
+        </Col>
+        <Col lg={6} sm={12} md={6} className='d-flex justify-content-center'>
+          <StatCard
+            linkTo='#'
+            data={payments ? inPayments.length : 0}
+            description='Recieved Refunds'
+            bgColor='success'
+            width='30'
+            loading={isListLoading ? true : false}
+            error={isListError ? listErrorMessage : null}
+            imgSrc='./moneyIn.png'
           />
         </Col>
       </Row>
@@ -153,8 +147,7 @@ const BusinessPaymentScreen = () => {
                       <th>Transaction Date</th>
                       <th>Transaction Type</th>
                       <th>Transaction Amount</th>
-                      <th>Transaction From(If from customer)</th>
-                      <th>Transaction for Business</th>
+                      <th>Payment For Service(If applicable)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -168,20 +161,14 @@ const BusinessPaymentScreen = () => {
                         </td>
                         <td>
                           {payment.paymentParties === 'C2B'
-                            ? 'Customer to Business'
-                            : 'Business to Vendor'}
+                            ? 'Payment'
+                            : 'Refund'}
                         </td>
                         <td>{payment.paymentAmount}</td>
                         <td>
                           {payment.paymentParties === 'C2B'
-                            ? payment.paymentFrom.userName
+                            ? payment.paymentForBooking.service.serviceName
                             : 'N/A'}
-                        </td>
-                        <td>
-                          {payment.paymentParties === 'C2B'
-                            ? payment.paymentForBooking.service.business
-                                .businessName
-                            : payment.paymentForBusiness.businessName}
                         </td>
                       </tr>
                     ))}
@@ -196,4 +183,4 @@ const BusinessPaymentScreen = () => {
   )
 }
 
-export default BusinessPaymentScreen
+export default TouristPaymentsScreen

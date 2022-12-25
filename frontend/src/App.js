@@ -53,6 +53,7 @@ import AdminBusinessDetailsScreen from './screens/AdminBusinessDetailsScreen'
 import AdminUserDetailsScreen from './screens/AdminUserDetailsScreen'
 import AdminBookingDetailsScreen from './screens/AdminBookingDetailsScreen'
 import AdminUserCreateScreen from './screens/AdminUserCreateScreen'
+import TouristPaymentsScreen from './screens/TouristPaymentsScreen'
 
 const App = () => {
   return (
@@ -73,7 +74,6 @@ const App = () => {
               <Route path='/profile' element={<ProfileScreen />} />
               <Route path='/tourSearch' element={<TourSearchScreen />} />
               <Route path='/myBookings' element={<TouristBookingScreen />} />
-              
 
               <Route path='/businessDash' element={<BusinessOwnerDashoard />} />
               <Route
@@ -140,6 +140,10 @@ const App = () => {
               <Route
                 path='/businessPayments'
                 element={<BusinessPaymentScreen />}
+              />
+              <Route
+                path='/touristPayments'
+                element={<TouristPaymentsScreen />}
               />
               <Route
                 path='/bookingRequestList'
