@@ -141,7 +141,7 @@ const ServiceListScreen = () => {
                             <Row>
                               <Col lg={3} md={3} sm={12}>
                                 <Card.Img
-                                className='img-fluid rounded-start'
+                                  className='img-fluid rounded-start'
                                   src={transport.coverImg}
                                   alt={transport.serviceName}
                                   style={{ height: '100%', objectFit: 'cover' }}
@@ -240,7 +240,19 @@ const ServiceListScreen = () => {
                                 </Card.Text> */}
                                 <Card.Text style={{ color: 'red' }}>
                                   <strong>Price: </strong>
-                                  BDT {transport.price} <TbCurrencyTaka />
+                                  BDT{' '}
+                                  {transport.price -
+                                    (transport.price *
+                                      transport.priceDiscount) /
+                                      100}{' '}
+                                  <TbCurrencyTaka />
+                                </Card.Text>
+                                <Card.Text>
+                                  <strong>
+                                    {transport.priceDiscount > 0
+                                      ? transport.priceDiscount + '% off'
+                                      : 'No discount available'}
+                                  </strong>
                                 </Card.Text>
                                 <Link
                                   to={`/transportDetailsBusiness/${transport._id}`}
@@ -305,12 +317,17 @@ const ServiceListScreen = () => {
                               <Card.Body>
                                 <Card.Text className='my-3'>
                                   <strong>Cost : </strong> BDT{' '}
-                                  {accomodation.price}
+                                  {accomodation.price -
+                                    (accomodation.price *
+                                      accomodation.priceDiscount) /
+                                      100}
                                   <TbCurrencyTaka className='mb-1' />
                                 </Card.Text>
                                 <Card.Text>
                                   <strong>
-                                    **Discount Price Here (If Available)
+                                    {accomodation.priceDiscount > 0
+                                      ? accomodation.priceDiscount + '% off'
+                                      : 'No discount available'}
                                   </strong>
                                 </Card.Text>
 
@@ -377,8 +394,17 @@ const ServiceListScreen = () => {
                                 </Card.Text>
                                 <Card.Text style={{ color: 'red' }}>
                                   <strong>Price : </strong>
-                                  BDT {tour.price}
+                                  BDT{' '}
+                                  {tour.price -
+                                    (tour.price * tour.priceDiscount) / 100}
                                   <TbCurrencyTaka className='mb-1' />
+                                </Card.Text>
+                                <Card.Text>
+                                  <strong>
+                                    {tour.priceDiscount > 0
+                                      ? tour.priceDiscount + '% off'
+                                      : 'No discount available'}
+                                  </strong>
                                 </Card.Text>
 
                                 <Link
