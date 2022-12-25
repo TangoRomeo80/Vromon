@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Moment from "moment";
-import { toast } from "react-toastify";
-import { Link, useSearchParams } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import Moment from 'moment'
+import { toast } from 'react-toastify'
+import { Link, useSearchParams } from 'react-router-dom'
 import {
   Row,
   Col,
@@ -11,58 +11,58 @@ import {
   Button,
   Modal,
   Image,
-} from "react-bootstrap";
+} from 'react-bootstrap'
 
-import { FaFilter } from "react-icons/fa";
-import { TbCurrencyTaka } from "react-icons/tb";
+import { FaFilter } from 'react-icons/fa'
+import { TbCurrencyTaka } from 'react-icons/tb'
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux'
 import {
   getAllTransports,
   resetServiceList,
-} from "../features/service/serviceSlice";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import SearchTransports from "../components/SearchTransports";
-import Rating from "../components/Rating";
+} from '../features/service/serviceSlice'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import SearchTransports from '../components/SearchTransports'
+import Rating from '../components/Rating'
 
 const TransportScreen = () => {
-  const dispatch = useDispatch();
-  const [searchParams] = useSearchParams();
+  const dispatch = useDispatch()
+  const [searchParams] = useSearchParams()
 
-  const [allTransports, setAllTransports] = useState([]);
-  const [departFrom, setDepartFrom] = useState(searchParams.get("from") || "");
-  const [departTo, setDepartTo] = useState(searchParams.get("to") || "");
-  const [departDate, setDepartDate] = useState(searchParams.get("dep") || null);
-  const [returnDate, setReturnDate] = useState(searchParams.get("ret") || null);
-  const [pickUpFrom, setPickUpFrom] = useState(searchParams.get("pick") || "");
-  const [dropOffTo, setDropOffTo] = useState(searchParams.get("drop") || "");
+  const [allTransports, setAllTransports] = useState([])
+  const [departFrom, setDepartFrom] = useState(searchParams.get('from') || '')
+  const [departTo, setDepartTo] = useState(searchParams.get('to') || '')
+  const [departDate, setDepartDate] = useState(searchParams.get('dep') || null)
+  const [returnDate, setReturnDate] = useState(searchParams.get('ret') || null)
+  const [pickUpFrom, setPickUpFrom] = useState(searchParams.get('pick') || '')
+  const [dropOffTo, setDropOffTo] = useState(searchParams.get('drop') || '')
   const [pickUpDate, setPickUpDate] = useState(
-    searchParams.get("pickDate") || null
-  );
+    searchParams.get('pickDate') || null
+  )
   const [dropOffDate, setDropOffDate] = useState(
-    searchParams.get("dropDate") || null
-  );
+    searchParams.get('dropDate') || null
+  )
   const [pickUpTime, setPickUpTime] = useState(
-    searchParams.get("pickTime") || ""
-  );
+    searchParams.get('pickTime') || ''
+  )
   const [dropOffTime, setDropOffTime] = useState(
-    searchParams.get("dropTime") || ""
-  );
+    searchParams.get('dropTime') || ''
+  )
   const [isRental, setIsRental] = useState(
-    searchParams.get("rental") === "false" ? false : true
-  );
-  const [modifySearch, setModifySearch] = useState(false);
-  const [maxPrice, setMaxPrice] = useState(5000);
-  const [busType, setBusType] = useState("");
-  const [busProvider, setBusProvider] = useState("");
-  const [carType, setCarType] = useState("");
+    searchParams.get('rental') === 'false' ? false : true
+  )
+  const [modifySearch, setModifySearch] = useState(false)
+  const [maxPrice, setMaxPrice] = useState(5000)
+  const [busType, setBusType] = useState('')
+  const [busProvider, setBusProvider] = useState('')
+  const [carType, setCarType] = useState('')
   const [isMobile, setIsMobile] = useState(
     window.innerWidth < 768 ? true : false
-  );
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  )
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   const {
     transports,
@@ -70,74 +70,74 @@ const TransportScreen = () => {
     isListSuccess,
     isListError,
     listErrorMessage,
-  } = useSelector((state) => state.service);
+  } = useSelector((state) => state.service)
 
   useEffect(() => {
     if (isListError) {
-      toast.error(listErrorMessage, { position: "top-center" });
+      toast.error(listErrorMessage, { position: 'top-center' })
     } else if (isListSuccess) {
       const filteredServices = transports
         .filter((service) => {
-          return service.transportInfo.transportType === "car";
+          return service.transportInfo.transportType === 'car'
         })
         .filter((service) => {
-          if (pickUpFrom === "") {
-            return service;
+          if (pickUpFrom === '') {
+            return service
           } else if (
             service.transportInfo.pickUpFrom
               .toLowerCase()
               .includes(pickUpFrom.toLowerCase())
           ) {
-            return service;
+            return service
           }
         })
         .filter((service) => {
-          if (dropOffTo === "") {
-            return service;
+          if (dropOffTo === '') {
+            return service
           } else if (
             service.transportInfo.dropTo
               .toLowerCase()
               .includes(dropOffTo.toLowerCase())
           ) {
-            return service;
+            return service
           }
         })
         .filter((service) => {
           if (pickUpDate === null) {
-            return service;
+            return service
           } else if (
             new Date(service.transportInfo.pickUpDate)
               .toISOString()
-              .split("T")[0] === pickUpDate
+              .split('T')[0] === pickUpDate
           ) {
-            return service;
+            return service
           }
         })
         .filter((service) => {
           if (dropOffDate === null) {
-            return service;
+            return service
           } else if (
             new Date(service.transportInfo.dropOffDate)
               .toISOString()
-              .split("T")[0] === dropOffDate
+              .split('T')[0] === dropOffDate
           ) {
-            return service;
+            return service
           }
         })
         .filter((service) => {
-          if (carType === "") {
-            return service;
+          if (carType === '') {
+            return service
           } else if (service.transportInfo.carType === carType) {
-            return service;
+            return service
           }
         })
         .filter((service) => {
           if (maxPrice === 5000) {
-            return service;
+            return service
           } else if (service.price <= maxPrice) {
-            return service;
+            return service
           }
-        });
+        })
       // .filter((service) => {
       //   if (pickUpTime === '') {
       //     return service
@@ -153,9 +153,9 @@ const TransportScreen = () => {
       //   }
       // })
 
-      setAllTransports(filteredServices);
+      setAllTransports(filteredServices)
     } else {
-      dispatch(getAllTransports());
+      dispatch(getAllTransports())
     }
   }, [
     dispatch,
@@ -178,68 +178,68 @@ const TransportScreen = () => {
     dropOffTime,
     carType,
     isRental,
-  ]);
+  ])
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       if (window.innerWidth <= 768) {
-        setIsMobile(true);
+        setIsMobile(true)
       } else {
-        setIsMobile(false);
+        setIsMobile(false)
       }
-    });
-  }, []);
+    })
+  }, [])
 
   useEffect(() => {
     return () => {
-      dispatch(resetServiceList());
-    };
-  }, [dispatch]);
+      dispatch(resetServiceList())
+    }
+  }, [dispatch])
 
   return (
     <>
       <div>
-        <Container className="mb-3">
-          <Row className="mb-4 pt-3">
+        <Container className='mb-3'>
+          <Row className='mb-4 pt-3'>
             <Col
               lg={8}
               md={8}
               sm={12}
               // className='d-flex justify-content-center'
             >
-              <Card.Text as="h3">Transport List</Card.Text>
+              <Card.Text as='h3'>Transport List</Card.Text>
               <Card.Text>
                 {isRental ? (
                   <>
                     {pickUpFrom && pickUpDate && dropOffTo && dropOffDate
                       ? `Rental Pick up from ${pickUpFrom} to ${dropOffTo} on ${pickUpDate} at ${pickUpTime}`
-                      : "Car rental list"}
+                      : 'Car rental list'}
                   </>
                 ) : (
                   <>
                     {departFrom && departDate && departTo
                       ? `Transport from ${departFrom} to ${departTo} on ${departDate}`
-                      : "Transport list"}
+                      : 'Transport list'}
                   </>
                 )}
               </Card.Text>
             </Col>
-            <Col lg={4} md={4} sm={12} className="d-flex justify-content-end">
+            <Col lg={4} md={4} sm={12} className='d-flex justify-content-end'>
               <Button onClick={() => setModifySearch(!modifySearch)}>
-                {modifySearch ? "Cancel Search" : "Modify Search"}
+                {modifySearch ? 'Cancel Search' : 'Modify Search'}
               </Button>
             </Col>
           </Row>
 
           {modifySearch && (
-            <Row className="my-2 pt-3">
+            <Row className='my-2 pt-3'>
               <Col
                 lg={12}
                 md={12}
                 sm={12}
-                className="d-flex justify-content-center align-items-center"
+                className='d-flex justify-content-center align-items-center'
               >
-                <Card className="text-center w-100 shadow bg-light">
+                <Card className='text-center w-100 shadow bg-light'>
                   <Card.Body>
                     <SearchTransports
                       rental={isRental}
@@ -260,24 +260,24 @@ const TransportScreen = () => {
             </Row>
           )}
 
-          <Row className="pt-3">
+          <Row className='pt-3'>
             {isRental ? (
               <>
                 <Col lg={3} md={3} sm={12}>
                   {isMobile ? (
                     <>
                       <Button
-                        className="ms-1 mb-2"
-                        style={{ backgroundColor: "green" }}
+                        className='ms-1 mb-2'
+                        style={{ backgroundColor: 'green' }}
                         onClick={handleShow}
                       >
-                        <FaFilter className="me-1" />
+                        <FaFilter className='me-1' />
                         Filters
                       </Button>
                       <Modal
                         show={show}
                         onHide={handleClose}
-                        backdrop="static"
+                        backdrop='static'
                         keyboard={false}
                       >
                         <Modal.Header closeButton>
@@ -285,20 +285,20 @@ const TransportScreen = () => {
                         </Modal.Header>
                         <Modal.Body>
                           <Form>
-                            <Form.Group className="mb-3" controlId="busType">
+                            <Form.Group className='mb-3' controlId='busType'>
                               <Form.Label>Car Type</Form.Label>
                               <Form.Select
-                                aria-label="Default select example"
+                                aria-label='Default select example'
                                 onChange={(e) => setCarType(e.target.value)}
                               >
-                                <option value="">All</option>
-                                <option value="4 seater">4 Seater</option>
-                                <option value="6 seater">6 Seater</option>
-                                <option value="8 seater">8 Seater</option>
+                                <option value=''>All</option>
+                                <option value='4 seater'>4 Seater</option>
+                                <option value='6 seater'>6 Seater</option>
+                                <option value='8 seater'>8 Seater</option>
                               </Form.Select>
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="priceRange">
+                            <Form.Group className='mb-3' controlId='priceRange'>
                               <Form.Label>
                                 Maximum Price Range: BDT{maxPrice}
                               </Form.Label>
@@ -314,7 +314,7 @@ const TransportScreen = () => {
                         </Modal.Body>
 
                         <Modal.Footer>
-                          <Button variant="secondary" onClick={handleClose}>
+                          <Button variant='secondary' onClick={handleClose}>
                             Update
                           </Button>
                         </Modal.Footer>
@@ -322,25 +322,25 @@ const TransportScreen = () => {
                     </>
                   ) : (
                     <>
-                      <Card className="shadow">
+                      <Card className='shadow'>
                         <Card.Body>
-                          <Card.Title as="h5">
+                          <Card.Title as='h5'>
                             Filters for Car Rentals
                           </Card.Title>
                           <Form>
-                            <Form.Group className="mb-3" controlId="busType">
+                            <Form.Group className='mb-3' controlId='busType'>
                               <Form.Label>Car Type</Form.Label>
                               <Form.Select
-                                aria-label="Default select example"
+                                aria-label='Default select example'
                                 onChange={(e) => setCarType(e.target.value)}
                               >
-                                <option value="">All</option>
-                                <option value="4 seater">4 Seater</option>
-                                <option value="6 seater">6 Seater</option>
-                                <option value="8 seater">8 Seater</option>
+                                <option value=''>All</option>
+                                <option value='4 seater'>4 Seater</option>
+                                <option value='6 seater'>6 Seater</option>
+                                <option value='8 seater'>8 Seater</option>
                               </Form.Select>
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="priceRange">
+                            <Form.Group className='mb-3' controlId='priceRange'>
                               <Form.Label>
                                 Maximum Price Range: BDT{maxPrice}
                               </Form.Label>
@@ -359,17 +359,17 @@ const TransportScreen = () => {
                   )}
                 </Col>
                 <Col lg={9} md={9} sm={12}>
-                  <Card className="shadow">
+                  <Card className='shadow'>
                     <Card.Body>
-                      <Card.Title as="h5">Car Rentals</Card.Title>
+                      <Card.Title as='h5'>Car Rentals</Card.Title>
                       {isListLoading ? (
                         <Loader />
                       ) : allTransports.length === 0 ? (
-                        <Message variant="info">No Car rentals Found</Message>
+                        <Message variant='info'>No Car rentals Found</Message>
                       ) : (
                         <>
                           {allTransports.map((transport) => (
-                            <Card className="shadow my-2">
+                            <Card className='shadow my-2'>
                               <Card.Body>
                                 <Row>
                                   <Col lg={3} md={3} sm={12}>
@@ -380,7 +380,7 @@ const TransportScreen = () => {
                                     />
                                   </Col>
                                   <Col lg={5} md={5} sm={12}>
-                                    <Card.Title as="h5">
+                                    <Card.Title as='h5'>
                                       {transport.serviceName}
                                     </Card.Title>
                                     <Card.Text>
@@ -412,13 +412,13 @@ const TransportScreen = () => {
                                       <strong>Pick Date: </strong>
                                       {Moment(
                                         transport.transportInfo.pickUpDate
-                                      ).format("DD-MM-YYYY")}
+                                      ).format('DD-MM-YYYY')}
                                     </Card.Text>
                                     <Card.Text>
                                       <strong>Drop Date: </strong>
                                       {Moment(
                                         transport.transportInfo.dropOffDate
-                                      ).format("DD-MM-YYYY")}
+                                      ).format('DD-MM-YYYY')}
                                     </Card.Text>
                                     {/* <Card.Text>
                                       <strong>Pick time: </strong>
@@ -470,19 +470,31 @@ const TransportScreen = () => {
                                         : transport.transportInfo.dropOffTime +
                                           ' AM'}
                                     </Card.Text> */}
-                                    <Card.Text style={{ color: "red" }}>
+                                    <Card.Text style={{ color: 'red' }}>
                                       <strong>Price: </strong>
-                                      BDT {transport.price} <TbCurrencyTaka />
+                                      BDT{' '}
+                                      {transport.price -
+                                        (transport.price *
+                                          transport.priceDiscount) /
+                                          100}{' '}
+                                      <TbCurrencyTaka />
+                                    </Card.Text>
+                                    <Card.Text>
+                                      <strong>
+                                        {transport.priceDiscount > 0
+                                          ? transport.priceDiscount + '% off'
+                                          : 'No discount available'}
+                                      </strong>
                                     </Card.Text>
                                     <Link
                                       to={`/transportBooking/${transport._id}`}
-                                      className="btn btn-success me-2"
+                                      className='btn btn-success me-2'
                                     >
                                       Book Now
                                     </Link>
                                     <Link
                                       to={`/transportDetailsTourist/${transport._id}`}
-                                      className="btn btn-warning"
+                                      className='btn btn-warning'
                                     >
                                       View Details
                                     </Link>
@@ -502,7 +514,7 @@ const TransportScreen = () => {
         </Container>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default TransportScreen;
+export default TransportScreen

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
 import {
   Row,
   Col,
@@ -8,52 +8,49 @@ import {
   Button,
   Image,
   Modal,
-} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
-import { MdDateRange, MdLocationOn } from "react-icons/md";
-import { FaFilter } from "react-icons/fa";
-import { TbCurrencyTaka } from "react-icons/tb";
-import { useDispatch, useSelector } from "react-redux";
-import Moment from "moment";
-import {
-  getAllTours,
-  resetServiceList,
-} from "../features/service/serviceSlice";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import SearchTours from "../components/SearchTours";
-import { toast } from "react-toastify";
-import Rating from "../components/Rating";
+} from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
+import { MdDateRange, MdLocationOn } from 'react-icons/md'
+import { FaFilter } from 'react-icons/fa'
+import { TbCurrencyTaka } from 'react-icons/tb'
+import { useDispatch, useSelector } from 'react-redux'
+import Moment from 'moment'
+import { getAllTours, resetServiceList } from '../features/service/serviceSlice'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import SearchTours from '../components/SearchTours'
+import { toast } from 'react-toastify'
+import Rating from '../components/Rating'
 
 const TourSearchScreen = () => {
-  const dispatch = useDispatch();
-  const location = useLocation();
+  const dispatch = useDispatch()
+  const location = useLocation()
   // const [searchParams] = useState(new URLSearchParams(location.search));
-  const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams()
 
-  const [maxPrice, setMaxPrice] = useState(5000);
-  const [duration, setDuration] = useState(3);
-  const [district, setDistrict] = useState(searchParams.get("district") || "");
+  const [maxPrice, setMaxPrice] = useState(5000)
+  const [duration, setDuration] = useState(3)
+  const [district, setDistrict] = useState(searchParams.get('district') || '')
   const [travelDate, setTravelDate] = useState(
-    searchParams.get("travelDate") || null
-  );
+    searchParams.get('travelDate') || null
+  )
   const [travelerCount, setTravelerCount] = useState(
-    searchParams.get("traveler") * 1 || 1
-  );
+    searchParams.get('traveler') * 1 || 1
+  )
 
-  const [allTours, setAllTours] = useState([]);
-  const [searchedServices, setSearchedServices] = useState([]);
-  const [modifySearch, setModifySearch] = useState(false);
+  const [allTours, setAllTours] = useState([])
+  const [searchedServices, setSearchedServices] = useState([])
+  const [modifySearch, setModifySearch] = useState(false)
   const [isMobile, setIsMobile] = useState(
     window.innerWidth < 768 ? true : false
-  );
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  )
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   const { tours, isListSuccess, isListError, isListLoading, listErrorMessage } =
-    useSelector((state) => state.service);
+    useSelector((state) => state.service)
 
   // console.log(district, travelDate, travelerCount);
 
@@ -62,56 +59,56 @@ const TourSearchScreen = () => {
     //   dispatch(getAllServices());
     // }
     if (isListError) {
-      toast.error(listErrorMessage, { position: "top-center" });
+      toast.error(listErrorMessage, { position: 'top-center' })
     } else if (isListSuccess) {
       const filteredServices = tours
         .filter((service) => {
-          if (district === "") {
-            return service;
+          if (district === '') {
+            return service
           } else if (
             service.destination.district
               .toLowerCase()
               .includes(district.toLowerCase())
           ) {
-            return service;
+            return service
           }
         })
         .filter((service) => {
           if (travelDate === null) {
-            return service;
+            return service
           } else if (
             new Date(service.tourInfo.travelDate)
               .toISOString()
-              .split("T")[0] === travelDate
+              .split('T')[0] === travelDate
           ) {
-            return service;
+            return service
           }
         })
         .filter((service) => {
           if (travelerCount === 0) {
-            return service;
+            return service
           } else if (service.tourInfo.maxGroupSize >= travelerCount) {
-            return service;
+            return service
           }
         })
         .filter((service) => {
           if (maxPrice === 5000) {
-            return service;
+            return service
           } else if (service.price <= maxPrice) {
-            return service;
+            return service
           }
         })
         .filter((service) => {
           if (duration === 0) {
-            return service;
+            return service
           } else if (service.tourInfo.duration <= duration) {
-            return service;
+            return service
           }
-        });
+        })
 
-      setAllTours(filteredServices);
+      setAllTours(filteredServices)
     } else {
-      dispatch(getAllTours());
+      dispatch(getAllTours())
       // const searched = tours.filter((service) => {
       //   return (
       //     service.serviceType === "tours" &&
@@ -131,43 +128,43 @@ const TourSearchScreen = () => {
     maxPrice,
     duration,
     dispatch,
-  ]);
+  ])
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       if (window.innerWidth <= 768) {
-        setIsMobile(true);
+        setIsMobile(true)
       } else {
-        setIsMobile(false);
+        setIsMobile(false)
       }
-    });
-  }, []);
+    })
+  }, [])
 
   useEffect(() => {
     return () => {
-      dispatch(resetServiceList());
-    };
-  }, [dispatch]);
+      dispatch(resetServiceList())
+    }
+  }, [dispatch])
 
   return (
     <Container>
-      <Row className="mb-2 pt-3">
+      <Row className='mb-2 pt-3'>
         <Col lg={8} md={8} sm={6}>
-          <Card.Text as="h3">Location Name</Card.Text>
+          <Card.Text as='h3'>Location Name</Card.Text>
           <Card.Text>
             {!district && travelDate === null && travelerCount === 1
-              ? "Find Your Desired Tour Package"
+              ? 'Find Your Desired Tour Package'
               : `Tour Package Queries (District : ${district}, Travel Date : ${travelDate}, Traveler Count : ${travelerCount})`}
           </Card.Text>
         </Col>
-        <Col lg={3} md={3} sm={6} className="d-flex justify-content-end">
+        <Col lg={3} md={3} sm={6} className='d-flex justify-content-end'>
           <Button onClick={() => setModifySearch(!modifySearch)}>
-            {modifySearch ? "Cancel Search" : "Modify Search"}
+            {modifySearch ? 'Cancel Search' : 'Modify Search'}
           </Button>
         </Col>
       </Row>
 
-      <Row className="my-4">{modifySearch && <SearchTours />}</Row>
+      <Row className='my-4'>{modifySearch && <SearchTours />}</Row>
 
       {/* Search Results List */}
       <Row>
@@ -176,17 +173,17 @@ const TourSearchScreen = () => {
           {isMobile ? (
             <>
               <Button
-                className="ms-1 mb-2"
-                style={{ backgroundColor: "green" }}
+                className='ms-1 mb-2'
+                style={{ backgroundColor: 'green' }}
                 onClick={handleShow}
               >
-                <FaFilter className="me-1" />
+                <FaFilter className='me-1' />
                 Filters
               </Button>
               <Modal
                 show={show}
                 onHide={handleClose}
-                backdrop="static"
+                backdrop='static'
                 keyboard={false}
               >
                 <Modal.Header closeButton>
@@ -194,27 +191,27 @@ const TourSearchScreen = () => {
                 </Modal.Header>
                 <Modal.Body>
                   <Form>
-                    <Form.Group className="mb-3" controlId="busType">
+                    <Form.Group className='mb-3' controlId='busType'>
                       <Form.Label>Number of Travellers</Form.Label>
                       <Form.Control
-                        type="text"
-                        className="shadow"
-                        placeholder="Enter Number of Travellers"
+                        type='text'
+                        className='shadow'
+                        placeholder='Enter Number of Travellers'
                         value={travelerCount}
                         onChange={(e) => setTravelerCount(e.target.value)}
                       />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="busType">
+                    <Form.Group className='mb-3' controlId='busType'>
                       <Form.Label>Tour Duration (in days)</Form.Label>
                       <Form.Control
-                        type="text"
-                        className="shadow"
-                        placeholder="Enter Tour Duration"
+                        type='text'
+                        className='shadow'
+                        placeholder='Enter Tour Duration'
                         value={duration}
                         onChange={(e) => setDuration(e.target.value)}
                       />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="priceRange">
+                    <Form.Group className='mb-3' controlId='priceRange'>
                       <Form.Label>
                         Maximum Price Range: BDT{maxPrice}
                       </Form.Label>
@@ -230,7 +227,7 @@ const TourSearchScreen = () => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
+                  <Button variant='secondary' onClick={handleClose}>
                     Update
                   </Button>
                 </Modal.Footer>
@@ -238,31 +235,31 @@ const TourSearchScreen = () => {
             </>
           ) : (
             <>
-              <Card className="shadow">
+              <Card className='shadow'>
                 <Card.Body>
-                  <Card.Title as="h5">Filters for Tours</Card.Title>
+                  <Card.Title as='h5'>Filters for Tours</Card.Title>
                   <Form>
-                    <Form.Group className="mb-3" controlId="busType">
+                    <Form.Group className='mb-3' controlId='busType'>
                       <Form.Label>Number of Travellers</Form.Label>
                       <Form.Control
-                        type="text"
-                        className="shadow"
-                        placeholder="Enter Number of Travellers"
+                        type='text'
+                        className='shadow'
+                        placeholder='Enter Number of Travellers'
                         value={travelerCount}
                         onChange={(e) => setTravelerCount(e.target.value)}
                       />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="busType">
+                    <Form.Group className='mb-3' controlId='busType'>
                       <Form.Label>Tour Duration (in days)</Form.Label>
                       <Form.Control
-                        type="text"
-                        className="shadow"
-                        placeholder="Enter Tour Duration"
+                        type='text'
+                        className='shadow'
+                        placeholder='Enter Tour Duration'
                         value={duration}
                         onChange={(e) => setDuration(e.target.value)}
                       />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="priceRange">
+                    <Form.Group className='mb-3' controlId='priceRange'>
                       <Form.Label>
                         Maximum Price Range: BDT{maxPrice}
                       </Form.Label>
@@ -283,34 +280,34 @@ const TourSearchScreen = () => {
 
         {/* Right Colomn/Package Images Card */}
         <Col sm={12} md={9} lg={9}>
-          <Card className="shadow">
+          <Card className='shadow'>
             <Card.Body>
-              <Card.Title as="h5">Explore Best Tour Packages</Card.Title>
+              <Card.Title as='h5'>Explore Best Tour Packages</Card.Title>
               <Card.Text>*Get The Best Package Deals With Vromon</Card.Text>
 
               {isListLoading ? (
                 <Loader />
               ) : allTours.length <= 0 ? (
-                <Message variant="danger">
+                <Message variant='danger'>
                   No Tour Packages Found. Try To Modify Search Queries With
                   Different Package.
                 </Message>
               ) : (
                 <>
                   {allTours.map((tour) => (
-                    <Card className="shadow my-2">
+                    <Card className='shadow my-2'>
                       <Row>
                         <Col lg={3} md={3} sm={12}>
                           <Card.Img
-                            className="img-fluid rounded-start"
+                            className='img-fluid rounded-start'
                             src={tour.coverImg}
                             alt={tour.serviceName}
-                            style={{ objectFit: "cover", height: "100%" }}
+                            style={{ objectFit: 'cover', height: '100%' }}
                           />
                         </Col>
                         <Col lg={5} md={5} sm={12}>
                           <Card.Body>
-                            <Card.Title as="h5">
+                            <Card.Title as='h5'>
                               {tour.tourInfo.name}
                             </Card.Title>
                             <Card.Text>
@@ -336,31 +333,39 @@ const TourSearchScreen = () => {
                             <Card.Text>
                               <strong>Travel Date : </strong>
                               {Moment(tour.tourInfo.travelDate).format(
-                                "DD-MM-YYYY"
+                                'DD-MM-YYYY'
                               )}
                             </Card.Text>
                             <Card.Text>
                               <strong>Lead Tour Guide : </strong>
                               {tour.tourInfo.leadGuideName}
                             </Card.Text>
-                            <Card.Text style={{ color: "red" }}>
+                            <Card.Text style={{ color: 'red' }}>
                               <strong>Price : </strong>
-                              BDT {tour.price}
-                              <TbCurrencyTaka className="mb-1" />
+                              BDT{' '}
+                              {tour.price -
+                                (tour.price * tour.priceDiscount) / 100}
+                              <TbCurrencyTaka className='mb-1' />
                             </Card.Text>
-
+                            <Card.Text>
+                              <strong>
+                                {tour.priceDiscount > 0
+                                  ? tour.priceDiscount + '% off'
+                                  : 'No discount available'}
+                              </strong>
+                            </Card.Text>
                             <Link
                               to={`/toursBooking/${tour._id}`}
-                              className="btn btn-success me-2"
+                              className='btn btn-success me-2'
                             >
                               Book Now
                             </Link>
                             <Link
-                                to={`/tourDetailsTourist/${tour._id}`}
-                                className="btn btn-warning"
-                              >
-                                View Details
-                              </Link>
+                              to={`/tourDetailsTourist/${tour._id}`}
+                              className='btn btn-warning'
+                            >
+                              View Details
+                            </Link>
                           </Card.Body>
                         </Col>
                       </Row>
@@ -373,7 +378,7 @@ const TourSearchScreen = () => {
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default TourSearchScreen;
+export default TourSearchScreen
