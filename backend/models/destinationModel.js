@@ -83,7 +83,7 @@ const destinationSchema = new mongoose.Schema(
     },
     rating: {
       type: Number,
-      default: 4.5,
+      default: 1,
       min: 1,
       max: 5,
     },
@@ -115,7 +115,7 @@ const destinationSchema = new mongoose.Schema(
 //populating rating before save
 destinationSchema.pre('save', function (next) {
   if (this.reviews.length === 0) {
-    this.rating = 4.5
+    this.rating = 1
     this.numOfRatings = 0
   } else {
     const sum = this.reviews.reduce((acc, curr) => acc + curr.rating, 0)
@@ -131,7 +131,7 @@ destinationSchema.pre('findOneAndUpdate', function (next) {
     next()
   }
   if (this._update.reviews.length === 0) {
-    this._update.rating = 4.5
+    this._update.rating = 1
     this._update.numOfRatings = 0
   } else {
     const sum = this._update.reviews.reduce((acc, curr) => acc + curr.rating, 0)
