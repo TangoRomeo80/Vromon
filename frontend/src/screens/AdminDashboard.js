@@ -213,7 +213,7 @@ const AdminDashboard = () => {
                     <>
                       {index < 5 && (
                         <LinkContainer
-                          to={`/bookingDetailsAdmin/${booking._id}`}
+                          to={`/adminBookingDetails/${booking._id}`}
                         >
                           <tr key={booking._id} style={{ cursor: 'pointer' }}>
                             <td>{booking.customerInfo.customerName}</td>
@@ -272,13 +272,14 @@ const AdminDashboard = () => {
                     <>
                       {index < 5 && (
                         <LinkContainer
-                          to={`/serviceDetailsAdmin/${service._id}`}
+                          // to={`/adminServiceDetails/${service._id}`}
+                          to='#'
                         >
                           <tr key={service._id} style={{ cursor: 'pointer' }}>
                             <td>{service.serviceType}</td>
                             <td>{service.serviceName}</td>
-                            <td>{service.location}</td>
-                            <td>{service.contact}</td>
+                            <td>{service.destination.district}</td>
+                            <td>{service.serviceMobileNumber}</td>
                           </tr>
                         </LinkContainer>
                       )}
