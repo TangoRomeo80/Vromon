@@ -119,7 +119,7 @@ const DestinationDetails = () => {
                       <Row>
                         <Col md={4} sm={4} lg={4}>
                           <Link
-                            to={`/transportByDestination?destination=${params.id}`}
+                            to={`/transportByDestination/${params.id}`}
                           >
                             <Button variant='primary' className='w-100'>
                               <FaCar className='me-1' />
@@ -129,7 +129,7 @@ const DestinationDetails = () => {
                         </Col>
                         <Col md={4} sm={4} lg={4}>
                           <Link
-                            to={`/staysByDestination?destination=${params.id}`}
+                            to={`/staysByDestination/${params.id}`}
                           >
                             <Button variant='success' className='w-100'>
                               <BiHotel className='me-1' />
@@ -139,7 +139,7 @@ const DestinationDetails = () => {
                         </Col>
                         <Col md={4} sm={4} lg={4}>
                           <Link
-                            to={`/tourByDestination?destination=${params.id}`}
+                            to={`/toursByDestination/${params.id}`}
                           >
                             <Button variant='warning' className='w-100'>
                               <FaUmbrellaBeach className='me-1' />

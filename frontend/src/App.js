@@ -54,6 +54,9 @@ import AdminUserDetailsScreen from './screens/AdminUserDetailsScreen'
 import AdminBookingDetailsScreen from './screens/AdminBookingDetailsScreen'
 import AdminUserCreateScreen from './screens/AdminUserCreateScreen'
 import TouristPaymentsScreen from './screens/TouristPaymentsScreen'
+import TransportByDestinationScreen from './screens/TransportByDestinationScreen'
+import StaysByDestinationScreen from './screens/StaysByDestinationScreen'
+import ToursByDestinationScreen from './screens/ToursByDestinationScreen'
 
 const App = () => {
   return (
@@ -222,6 +225,18 @@ const App = () => {
               <Route
                 path='/businessCreate'
                 element={<BusinessCreateScreen />}
+              />
+              <Route
+                path='/transportByDestination/:id'
+                element={<TransportByDestinationScreen />}
+              />
+              <Route
+                path='/staysByDestination/:id'
+                element={<StaysByDestinationScreen />}
+              />
+              <Route
+                path='/toursByDestination/:id'
+                element={<ToursByDestinationScreen />}
               />
             </Routes>
           </Container>

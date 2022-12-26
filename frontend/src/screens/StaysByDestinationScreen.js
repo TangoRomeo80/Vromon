@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Row, Col, Container, Card, Form, Button, Modal } from 'react-bootstrap'
 import { MdLocationOn } from 'react-icons/md'
 import { FaFilter } from 'react-icons/fa'
@@ -13,29 +13,16 @@ import {
   getAllAccomodations,
   resetServiceList,
 } from '../features/service/serviceSlice'
-import SearchStays from '../components/SearchStays'
 import Rating from '../components/Rating'
 
-const StaysSearchScreen = () => {
-  const [maxPrice, setMaxPrice] = useState(5000)
-  const [searchHotel, setSearchHotel] = useState('')
-
+const StaysByDestinationScreen = () => {
   const dispatch = useDispatch()
-  const [searchParams] = useSearchParams()
+  const params = useParams()
 
   const [allAccomodations, setAllAccomodations] = useState([])
-  const [checkinDateSearch, setCheckinDateSearch] = useState(
-    searchParams.get('checkinDate') || null
-  )
-  const [checkoutDateSearch, setCheckoutDateSearch] = useState(
-    searchParams.get('checkoutDate') || null
-  )
-  const [guestCountSearch, setGuestCountSearch] = useState(
-    searchParams.get('guestCount') * 1 || 1
-  )
-  const [roomCountSearch, setRoomCountSearch] = useState(
-    searchParams.get('roomCount') * 1 || 1
-  )
+  const [maxPrice, setMaxPrice] = useState(5000)
+  const [guestCountSearch, setGuestCountSearch] = useState(1)
+  const [roomCountSearch, setRoomCountSearch] = useState(1)
   const [modifySearch, setModifySearch] = useState(false)
   const [isMobile, setIsMobile] = useState(
     window.innerWidth < 768 ? true : false
@@ -58,26 +45,7 @@ const StaysSearchScreen = () => {
     } else if (isListSuccess) {
       const filteredServices = accomodations
         .filter((service) => {
-          if (checkinDateSearch === null) {
-            return service
-          } else if (
-            new Date(service.accomodationInfo.checkinDate)
-              .toISOString()
-              .split('T')[0] === checkinDateSearch
-          ) {
-            return service
-          }
-        })
-        .filter((service) => {
-          if (checkoutDateSearch === null) {
-            return service
-          } else if (
-            new Date(service.accomodationInfo.checkoutDate)
-              .toISOString()
-              .split('T')[0] === checkoutDateSearch
-          ) {
-            return service
-          }
+          return service.destination._id === params.id
         })
         .filter((service) => {
           if (guestCountSearch === 1) {
@@ -106,8 +74,6 @@ const StaysSearchScreen = () => {
     }
   }, [
     dispatch,
-    checkinDateSearch,
-    checkoutDateSearch,
     guestCountSearch,
     roomCountSearch,
     isListError,
@@ -137,24 +103,12 @@ const StaysSearchScreen = () => {
     <Container>
       <Row className='mb-2 pt-3'>
         <Col lg={8} md={8} sm={12}>
-          <Card.Text as='h3'>Find Your Desired Accomodations</Card.Text>
-          <Card.Text>
-            {checkinDateSearch === null &&
-            checkoutDateSearch === null &&
-            guestCountSearch === 1 &&
-            roomCountSearch === 1
-              ? 'Find Your Desired Accomodations or Hotels'
-              : `Search Queries (Check In Date : ${checkinDateSearch}, Check Out Date : ${checkoutDateSearch}, Guest(s) : ${guestCountSearch}, Room(s) : ${roomCountSearch})`}
+          <Card.Text as='h3'>
+            Find Your Desired Accomodations in{' '}
+            {allAccomodations.length > 0 && allAccomodations[0].destination.name}
           </Card.Text>
         </Col>
-        <Col lg={4} md={4} sm={12} className='d-flex justify-content-end'>
-          <Button onClick={() => setModifySearch(!modifySearch)}>
-            {modifySearch ? 'Cancel Search' : 'Modify Search'}
-          </Button>
-        </Col>
       </Row>
-
-      <Row className='my-3'>{modifySearch && <SearchStays />}</Row>
 
       <Row>
         {/* Left Column */}
@@ -273,7 +227,7 @@ const StaysSearchScreen = () => {
             <Card.Body>
               <Row className='my-2'>
                 <Card.Title as='h5' className='mx-3'>
-                  Available PLaces to Stay
+                  Available Places to Stay
                 </Card.Title>
                 <Card.Text className='mx-3'>
                   *Price is per night per room & includes VAT & Taxes
@@ -381,4 +335,4 @@ const StaysSearchScreen = () => {
   )
 }
 
-export default StaysSearchScreen
+export default StaysByDestinationScreen
