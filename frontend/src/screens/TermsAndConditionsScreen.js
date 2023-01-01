@@ -77,6 +77,55 @@ const TermsAndConditionsScreen = () => {
       </Row>
       <Row>
         <Col className='d-flex jusify-content-center align-items-center'>
+          <p>Followings are the refund policies for the customers</p>
+        </Col>
+      </Row>
+      <Row>
+        <Col className='d-flex jusify-content-center align-items-center'>
+          <ol>
+            <li>
+              <p>
+                Cancellations made more than 30 days prior to the service
+                availing date will receive a full refund.
+              </p>
+            </li>
+            <li>
+              <p>
+                Cancellations made between 8 and 30 days prior to the service
+                availing date will receive a 50% refund.
+              </p>
+            </li>
+            <li>
+              <p>
+                Cancellations made 7 days or less prior to the service availing
+                date are not eligible for a refund.
+              </p>
+            </li>
+            <li>
+              <p>
+                No-shows on the day of the service will not be eligible for a
+                refund.
+              </p>
+            </li>
+            <li>
+              <p>
+                If the service provicder needs to cancel the service for any
+                reason, customers will receive a full refund.
+              </p>
+            </li>
+            <li>
+              <p>
+                In the event of unforeseen circumstances, such as inclement
+                weather or natural disasters, the service provider reserves the
+                right to alter the itinerary or provide a partial refund at
+                their discretion.
+              </p>
+            </li>
+          </ol>
+        </Col>
+      </Row>
+      <Row>
+        <Col className='d-flex jusify-content-center align-items-center'>
           <p>
             By using our website, you agree to these terms and conditions. If
             you do not agree, please do not use our website. We reserve the

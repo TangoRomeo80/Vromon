@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap'
+import { Container, Form, Button, Row, Col, Card, Modal } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -52,6 +52,10 @@ const BookingDetailsTouristScreen = () => {
   const [paymentMethod, setPaymentMethod] = useState('')
   const [bookingStatus, setBookingStatus] = useState('')
   const [paymentStatus, setPaymentStatus] = useState('')
+  const [showRefundPolicyModal, setShowRefundPolicyModal] = useState(false)
+
+  const handleClose = () => setShowRefundPolicyModal(false)
+  const handleShow = () => setShowRefundPolicyModal(true)
 
   useEffect(() => {
     if (isDetailsError) {
@@ -120,7 +124,7 @@ const BookingDetailsTouristScreen = () => {
     )
   }
 
-  const refundBookingHandler = () => {
+  const agreeToPolicyHandler = () => {
     const bookingData = {
       paymentRefundRequest: 'pending',
     }
@@ -131,6 +135,12 @@ const BookingDetailsTouristScreen = () => {
         bookingData,
       })
     )
+
+    handleClose()
+  }
+
+  const refundBookingHandler = () => {
+    handleShow()
   }
 
   const cancelBookingHandler = () => {
@@ -416,6 +426,70 @@ const BookingDetailsTouristScreen = () => {
                   </Card.Body>
                 </Card>
               </Col>
+              <Modal
+                show={showRefundPolicyModal}
+                onHide={handleClose}
+                backdrop='static'
+                keyboard={false}
+              >
+                <Modal.Header closeButton>
+                  <Modal.Title>Refund policies</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <p>
+                    You need to agree to the refund policies before you can
+                    request a refund:
+                  </p>
+                  <ol>
+                    <li>
+                      <p>
+                        Cancellations made more than 30 days prior to the
+                        service availing date will receive a full refund.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Cancellations made between 8 and 30 days prior to the
+                        service availing date will receive a 50% refund.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        Cancellations made 7 days or less prior to the service
+                        availing date are not eligible for a refund.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        No-shows on the day of the service will not be eligible
+                        for a refund.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the service provicder needs to cancel the service for
+                        any reason, customers will receive a full refund.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        In the event of unforeseen circumstances, such as
+                        inclement weather or natural disasters, the service
+                        provider reserves the right to alter the itinerary or
+                        provide a partial refund at their discretion.
+                      </p>
+                    </li>
+                  </ol>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant='primary' onClick={agreeToPolicyHandler}>
+                    I agree
+                  </Button>
+                  <Button variant='danger' onClick={handleClose}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </Row>
           </Form>
         </>
