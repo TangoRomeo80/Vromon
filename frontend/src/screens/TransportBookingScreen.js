@@ -114,7 +114,7 @@ const TransportBookingScreen = () => {
             updateBooking({
               id: searchParams.get('bookingId'),
               bookingData: {
-                paymentStatus: 'parital',
+                paymentStatus: 'partial',
                 paymentAmount: searchParams.get('amount') * 1,
                 paymentMethod: 'cash',
                 bookingStatus: 'booked',
@@ -210,9 +210,7 @@ const TransportBookingScreen = () => {
     }
     updateBooking({ id: booking._id, bookingData })
     window.open(
-      `http://localhost:5000/api/bookings/ssl-request?bookingId=${
-        booking._id
-      }&paymentMethod=cash}`,
+      `http://localhost:5000/api/bookings/ssl-request?bookingId=${booking._id}&paymentMethod=cash`,
       '_self'
     )
     handleClose()

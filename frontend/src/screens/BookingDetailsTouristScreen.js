@@ -358,8 +358,9 @@ const BookingDetailsTouristScreen = () => {
                             <option disabled selected value=''>
                               Select Payment Status
                             </option>
-                            <option value='pending'>Pending</option>
+                            <option value='due'>Due</option>
                             <option value='paid'>Paid</option>
+                            <option value='partial'>Partial</option>
                           </Form.Control>
                         </Form.Group>
                       </Col>

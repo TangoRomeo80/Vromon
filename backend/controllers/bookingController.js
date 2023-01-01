@@ -128,7 +128,7 @@ export const sslPaymentSuccess = catchAsync(async (req, res) => {
   res
     .status(200)
     .redirect(
-      `${process.env.CLIENT}/${serviceType}Booking/${serviceId}?bookingId=${bookingId}&status=${status}&amount=${amount}&paymentMethod=${paymentMethod}`
+      `${process.env.CLIENT}/${serviceType}Booking/${serviceId}?bookingId=${bookingId}&status=${status}&amount=${amount}&paymentMethod=${paymentMethod}&sp=sslcommerz`
     )
 })
 

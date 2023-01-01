@@ -61,7 +61,7 @@ const bookingSchema = new mongoose.Schema(
       default: 'due',
       enum: {
         values: ['due', 'paid', 'partial'],
-        message: 'Service type needs to be due or paid',
+        message: 'Payment status needs to be due, paid or partial',
       },
       required: [true, 'Payment Status is Required'],
       trim: true,
