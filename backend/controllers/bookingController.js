@@ -51,7 +51,7 @@ export const getBooking = getOne(Booking, [
 
 export const sslRequest = catchAsync(async (req, res) => {
   const queryString = req.query
-  const { bookingId } = queryString
+  const { bookingId, paymentMethod } = queryString
 
   const booking = await Booking.findById(bookingId)
   const serviceType =
@@ -66,10 +66,13 @@ export const sslRequest = catchAsync(async (req, res) => {
    */
 
   const data = {
-    total_amount: booking.service.price,
+    total_amount:
+      paymentMethod == 'card'
+        ? booking.service.price
+        : (booking.service.price * 0.3).toFixed(2),
     currency: 'BDT',
     tran_id: 'REF123',
-    success_url: `${process.env.ROOT}/api/bookings/ssl-payment-success?bookingId=${bookingId}&serviceType=${serviceType}&status=success&amount=${booking.service.price}&serviceId=${booking.service._id}`,
+    success_url: `${process.env.ROOT}/api/bookings/ssl-payment-success?bookingId=${bookingId}&serviceType=${serviceType}&status=success&amount=${booking.service.price}&serviceId=${booking.service._id}&paymentMethod=${paymentMethod}`,
     fail_url: `${process.env.ROOT}/api/bookings/ssl-payment-fail?bookingId=${bookingId}&&serviceType=${serviceType}&status=fail&serviceId=${booking.service._id}`,
     cancel_url: `${process.env.ROOT}/api/bookings/ssl-payment-cancel?bookingId=${bookingId}&&serviceType=${serviceType}&status=cancel&serviceId=${booking.service._id}`,
     shipping_method: 'No',
@@ -119,12 +122,13 @@ export const sslRequest = catchAsync(async (req, res) => {
 
 export const sslPaymentSuccess = catchAsync(async (req, res) => {
   //Handle payment success
-  const { bookingId, status, serviceType, amount, serviceId } = req.query
+  const { bookingId, status, serviceType, amount, serviceId, paymentMethod } =
+    req.query
 
   res
     .status(200)
     .redirect(
-      `${process.env.CLIENT}/${serviceType}Booking/${serviceId}?bookingId=${bookingId}&status=${status}&amount=${amount}`
+      `${process.env.CLIENT}/${serviceType}Booking/${serviceId}?bookingId=${bookingId}&status=${status}&amount=${amount}&paymentMethod=${paymentMethod}`
     )
 })
 
