@@ -39,9 +39,9 @@ const Quicklinks = () => {
               Help
             </h6>
             <Nav className='flex-column text-center'>
-              <Nav.Link href='#'>FAQ</Nav.Link>
-              <Nav.Link href='#'>Support Center</Nav.Link>
-              <Nav.Link href='#'>Privacy Policy</Nav.Link>
+              <Nav.Link href='/termsAndConditions'>Terms & Conditions</Nav.Link>
+              {/* <Nav.Link href='#'>Support Center</Nav.Link>
+              <Nav.Link href='#'>Privacy Policy</Nav.Link> */}
             </Nav>
           </Col>
           {/* <Col xs={12} md={3}>

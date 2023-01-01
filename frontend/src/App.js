@@ -57,6 +57,7 @@ import TouristPaymentsScreen from './screens/TouristPaymentsScreen'
 import TransportByDestinationScreen from './screens/TransportByDestinationScreen'
 import StaysByDestinationScreen from './screens/StaysByDestinationScreen'
 import ToursByDestinationScreen from './screens/ToursByDestinationScreen'
+import TermsAndConditionsScreen from './screens/TermsAndConditionsScreen'
 
 const App = () => {
   return (
@@ -237,6 +238,10 @@ const App = () => {
               <Route
                 path='/toursByDestination/:id'
                 element={<ToursByDestinationScreen />}
+              />
+              <Route
+                path='/termsAndConditions'
+                element={<TermsAndConditionsScreen />}
               />
             </Routes>
           </Container>
