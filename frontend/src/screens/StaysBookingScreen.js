@@ -99,17 +99,31 @@ const StaysBookingScreen = () => {
   useEffect(() => {
     if (searchParams.get('status')) {
       if (searchParams.get('status') === 'success') {
-        dispatch(
-          updateBooking({
-            id: searchParams.get('bookingId'),
-            bookingData: {
-              paymentStatus: 'paid',
-              paymentAmount: searchParams.get('amount') * 1,
-              paymentMethod: 'card',
-              bookingStatus: 'booked',
-            },
-          })
-        )
+        if (searchParams.get('paymentMethod') === 'card') {
+          dispatch(
+            updateBooking({
+              id: searchParams.get('bookingId'),
+              bookingData: {
+                paymentStatus: 'paid',
+                paymentAmount: searchParams.get('amount') * 1,
+                paymentMethod: 'card',
+                bookingStatus: 'booked',
+              },
+            })
+          )
+        } else if (searchParams.get('paymentMethod') === 'cash') {
+          dispatch(
+            updateBooking({
+              id: searchParams.get('bookingId'),
+              bookingData: {
+                paymentStatus: 'partial',
+                paymentAmount: searchParams.get('amount') * 1,
+                paymentMethod: 'cash',
+                bookingStatus: 'booked',
+              },
+            })
+          )
+        }
         dispatch(
           createPayment({
             paymentParties: 'C2B',
@@ -202,11 +216,13 @@ const StaysBookingScreen = () => {
   const handleConfirm = () => {
     const bookingData = {
       paymentMethod,
-      bookingStatus: 'booked',
     }
-    dispatch(updateBooking({ id: booking._id, bookingData }))
+    updateBooking({ id: booking._id, bookingData })
+    window.open(
+      `http://localhost:5000/api/bookings/ssl-request?bookingId=${booking._id}&paymentMethod=cash`,
+      '_self'
+    )
     handleClose()
-    toast.success('Booking Confirmed', { position: 'top-center' })
   }
 
   const handleCancel = () => {
@@ -221,7 +237,7 @@ const StaysBookingScreen = () => {
     }
     updateBooking({ id: booking._id, bookingData })
     window.open(
-      `http://localhost:5000/api/bookings/ssl-request?bookingId=${booking._id}`,
+      `http://localhost:5000/api/bookings/ssl-request?bookingId=${booking._id}&paymentMethod=card`,
       '_self'
     )
     handleClose()
@@ -474,7 +490,9 @@ const StaysBookingScreen = () => {
                                 }
                               >
                                 <option value=''>Select Payment Method</option>
-                                <option value='cash'>Cash</option>
+                                <option value='cash'>
+                                  Cash(30% needs to be paid)
+                                </option>
                                 <option value='card'>
                                   Card / Mobile Banking
                                 </option>
@@ -488,12 +506,12 @@ const StaysBookingScreen = () => {
                   <Modal.Footer>
                     {paymentMethod === 'cash' && (
                       <Button variant='success' onClick={handleConfirm}>
-                        Confirm Booking
+                        Make Partial Payment and Confirm
                       </Button>
                     )}
                     {paymentMethod === 'card' && (
                       <Button variant='primary' onClick={handlePayment}>
-                        Make Payment and Confirm
+                        Make Full Payment and Confirm
                       </Button>
                     )}
                     <Button variant='danger' onClick={handleCancel}>

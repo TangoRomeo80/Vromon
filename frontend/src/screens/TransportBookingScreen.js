@@ -422,7 +422,7 @@ const TransportBookingScreen = () => {
                                 }
                               >
                                 <option value=''>Select Payment Method</option>
-                                <option value='cash'>Cash</option>
+                                <option value='cash'>Cash(30% needs to be paid)</option>
                                 <option value='card'>
                                   Card/Mobile Banking
                                 </option>

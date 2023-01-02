@@ -82,7 +82,7 @@ const TouristBookingScreen = () => {
 
               <Row className='mb-3'>
                 <Button onClick={() => setBookingServiceType('accomodation')}>
-                  Stay Bookings
+                  Stays Bookings
                 </Button>
               </Row>
 
@@ -98,7 +98,12 @@ const TouristBookingScreen = () => {
         <Col lg={9} md={12} sm={12}>
           <Card className='shadow'>
             <Card.Header as='h5' className='d-flex justify-content-center mb-3'>
-              Bookings List and informations
+              Bookings List and informations for{' '}
+              {bookingServiceType == 'transportation'
+                ? 'Transport'
+                : bookingServiceType == 'accomodation'
+                ? 'Stays'
+                : 'Tours'}
             </Card.Header>
             {isBookingListLoading ? (
               <Loader />
