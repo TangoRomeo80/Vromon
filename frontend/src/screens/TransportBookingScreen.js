@@ -109,28 +109,38 @@ const TransportBookingScreen = () => {
               },
             })
           )
+          dispatch(
+            createPayment({
+              paymentParties: 'C2B',
+              paymentMethod: 'card',
+              paymentAmount: searchParams.get('amount') * 1,
+              paymentFrom: userInfo._id,
+              paymentForBooking: searchParams.get('bookingId'),
+            })
+          )
         } else if (searchParams.get('paymentMethod') === 'cash') {
           dispatch(
             updateBooking({
               id: searchParams.get('bookingId'),
               bookingData: {
                 paymentStatus: 'partial',
-                paymentAmount: searchParams.get('amount') * 1,
+                paymentAmount: searchParams.get('amount') * 1 * 0.3,
                 paymentMethod: 'cash',
                 bookingStatus: 'booked',
               },
             })
           )
+          dispatch(
+            createPayment({
+              paymentParties: 'C2B',
+              paymentMethod: 'card',
+              paymentAmount: searchParams.get('amount') * 1 * 0.3,
+              paymentFrom: userInfo._id,
+              paymentForBooking: searchParams.get('bookingId'),
+            })
+          )
         }
-        dispatch(
-          createPayment({
-            paymentParties: 'C2B',
-            paymentMethod: 'card',
-            paymentAmount: searchParams.get('amount') * 1,
-            paymentFrom: userInfo._id,
-            paymentForBooking: searchParams.get('bookingId'),
-          })
-        )
+        
         toast.success('Payment Successful, Booking Completed', {
           position: 'top-center',
         })
