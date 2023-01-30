@@ -140,7 +140,20 @@ const BookingDetailsTouristScreen = () => {
   }
 
   const refundBookingHandler = () => {
-    handleShow()
+    if (booking.paymentRefundRequest === 'pending') {
+      toast.warning('Please wait for the refund to be processed.', {
+        position: 'top-center',
+      })
+    } else if (booking.paymentRefundRequest === 'resolved') {
+      toast.warning(
+        'Refund request has been resolved or cancelled. For any other quary, please contact support',
+        {
+          position: 'top-center',
+        }
+      )
+    } else {
+      handleShow()
+    }
   }
 
   const cancelBookingHandler = () => {
