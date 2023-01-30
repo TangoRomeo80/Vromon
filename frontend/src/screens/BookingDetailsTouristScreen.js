@@ -413,7 +413,7 @@ const BookingDetailsTouristScreen = () => {
                           lg={6}
                           md={6}
                           sm={12}
-                          className='d-flex justify-content-start'
+                          className='d-flex justify-content-end'
                         >
                           <Button
                             variant='outline-warning'
