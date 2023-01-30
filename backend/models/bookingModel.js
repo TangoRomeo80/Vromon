@@ -106,8 +106,8 @@ const bookingSchema = new mongoose.Schema(
     },
     paymentRefundRequest: {
       type: String,
-      default: 'resolved',
-      enum: ['resolved', 'pending', 'rejected'],
+      default: 'uninititalized',
+      enum: ['uninititalized', 'resolved', 'pending', 'rejected'],
     },
   },
   {

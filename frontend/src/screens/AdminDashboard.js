@@ -213,7 +213,7 @@ const AdminDashboard = () => {
                     <>
                       {index < 5 && (
                         <LinkContainer
-                          to={`/adminBookingDetails/${booking._id}`}
+                          to={`/adminBookingDetail/${booking._id}`}
                         >
                           <tr key={booking._id} style={{ cursor: 'pointer' }}>
                             <td>{booking.customerInfo.customerName}</td>

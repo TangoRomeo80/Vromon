@@ -133,7 +133,8 @@ const BookingDetailsBusinessScreen = () => {
       createPayment({
         paymentParties: 'V2C',
         paymentMethod: 'card',
-        paymentAmount: bookingPrice,
+        paymentAmount:
+          booking.paymentMethod === 'card' ? bookingPrice : bookingPrice * 0.3,
         paymentForCustomer: customerId,
       })
     )

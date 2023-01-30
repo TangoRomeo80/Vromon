@@ -141,7 +141,7 @@ const BookingDetailsTouristScreen = () => {
 
   const refundBookingHandler = () => {
     if (booking.paymentRefundRequest === 'pending') {
-      toast.warning('Please wait for the refund to be processed.', {
+      toast.warning('Your refund request is under processing, Please wait.', {
         position: 'top-center',
       })
     } else if (booking.paymentRefundRequest === 'resolved') {
@@ -408,12 +408,13 @@ const BookingDetailsTouristScreen = () => {
 
                       {(bookingStatus === 'cancelled' &&
                         paymentStatus === 'paid') ||
-                      paymentStatus === 'partial' ? (
+                      (bookingStatus === 'cancelled' &&
+                        paymentStatus === 'partial') ? (
                         <Col
                           lg={6}
                           md={6}
                           sm={12}
-                          className='d-flex justify-content-end'
+                          className='d-flex justify-content-start'
                         >
                           <Button
                             variant='outline-warning'
