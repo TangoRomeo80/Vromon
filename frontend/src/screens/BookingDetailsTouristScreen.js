@@ -393,8 +393,9 @@ const BookingDetailsTouristScreen = () => {
                         </Col>
                       )}
 
-                      {bookingStatus === 'cancelled' &&
-                      paymentStatus === 'paid' ? (
+                      {(bookingStatus === 'cancelled' &&
+                        paymentStatus === 'paid') ||
+                      paymentStatus === 'partial' ? (
                         <Col
                           lg={6}
                           md={6}
